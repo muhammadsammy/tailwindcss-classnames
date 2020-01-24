@@ -1144,31 +1144,31 @@ export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: bo
 
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
 
-export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => string;
+export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
 export const tw: TTailwind = classnames as any;
 
-export const hover: TPseudoClass = className => `:hover${className}`;
+export const hover: TPseudoClass = className => `:hover${className}` as TTailwindString;
 
-export const focus: TPseudoClass = className => `:focus${className}`;
+export const focus: TPseudoClass = className => `:focus${className}` as TTailwindString;
 
-export const active: TPseudoClass = className => `:active${className}`;
+export const active: TPseudoClass = className => `:active${className}` as TTailwindString;
 
-export const disabled: TPseudoClass = className => `:disabled${className}`;
+export const disabled: TPseudoClass = className => `:disabled${className}` as TTailwindString;
 
-export const visited: TPseudoClass = className => `:visited${className}`;
+export const visited: TPseudoClass = className => `:visited${className}` as TTailwindString;
 
-export const firstChild: TPseudoClass = className => `:first-child${className}`;
+export const firstChild: TPseudoClass = className => `:first-child${className}` as TTailwindString;
 
-export const lastChild: TPseudoClass = className => `:last-child${className}`;
+export const lastChild: TPseudoClass = className => `:last-child${className}` as TTailwindString;
 
-export const oddChild: TPseudoClass = className => `:odd-child${className}`;
+export const oddChild: TPseudoClass = className => `:odd-child${className}` as TTailwindString;
 
-export const evenChild: TPseudoClass = className => `:odd-child${className}`;
+export const evenChild: TPseudoClass = className => `:odd-child${className}` as TTailwindString;
 
-export const groupHover: TPseudoClass = className => `:group-hover${className}`;
+export const groupHover: TPseudoClass = className => `:group-hover${className}` as TTailwindString;
 
-export const focusWithin: TPseudoClass = className => `:focus-within${className}`;
+export const focusWithin: TPseudoClass = className => `:focus-within${className}` as TTailwindString;
 
 export const createCustom = <T extends TClasses>(): {
   tw: TTailwind<T>;
