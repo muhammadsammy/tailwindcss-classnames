@@ -24,7 +24,7 @@ tw('border-none', 'rounded-sm');
 
 The arguments passed to **tw** is typed, which means you get discoverability and ability to search for the supported classes:
 
-![DISCOVER]('https://raw.githubusercontent.com/christianalfoni/tailwindcss-typescript/master/discover.png')
+![DISCOVER](/discover.png)
 
 ## Dynamic classes
 
