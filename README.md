@@ -4,6 +4,14 @@ Typing for Tailwindcss
 
 [TailwindCSS](https://tailwindcss.com/) is a CSS library that has gained a lot of traction. The developer experience is pretty epic and you ensure a low footprint on your css by composing existing classes for most of your css. The problem though is that there is no typing which excludes discoverability in an API that would benefit a lot with discoverability. Imagine not having to look at the docs everytime you can not remember the name of a class, you can just earch right in your code. This is what **tailwindcss-typescript** does.
 
+## The value proposition
+
+TailwindCSS is based on strings and with some nice tooling on top like [TailwindCSS VSCode extension]() you get a pretty descent experience. That said, there are limitations to strings as well. When using **tailwindcss-typescript** you will get additional power in the form of:
+
+- **Validation of classnames**: You can not write the wrong classname, cause the API only allows you to insert valid classnames
+- **Functional approach**: Since we are working in Typescript we get more freedom in using functional powers like composition, event dynamic composition
+- **Defining by variables**: Even though it is nice to write TailwindCSS inline with your elements, it is not as scalable as moving these definitions outside of the component definition. The challenge though is that tools like the VSCode extension does not understand these variables
+
 ## Install
 
 Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up **TailwindCSS**. Now do:
