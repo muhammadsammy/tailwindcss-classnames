@@ -1,0 +1,68 @@
+{
+  "name": "tailwindcss-typescript",
+  "version": "1.0.0",
+  "description": "Boilerplate for TypeScript libraries",
+  "author": "Christian Alfoni <christianalfoni@gmail.com>",
+  "license": "MIT",
+  "repository": "git+https://github.com/christianalfoni/tailwindcss-typescript.git",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "browser": "dist/bundle.js",
+  "types": "dist/bundle.d.ts",
+  "scripts": {
+    "build": "npm run build:lib & npm run build:umd",
+    "build:lib": "tsc --outDir lib --module commonjs",
+    "build:es": "tsc --outDir es --module es2015",
+    "build:umd": "npm run build:es && rollup --config && dts-bundle --name dist/bundle --main es --outputAsModuleFolder",
+    "clean": "rimraf dist es lib coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "tslint --project tsconfig.json --format stylish",
+    "format": "prettier '**/*.{md,js,jsx,json,ts,tsx}' --write",
+    "test": "jest --env=jsdom --coverage",
+    "test:watch": "jest --env=jsdom --watch --updateSnapshot",
+    "prepublishOnly": "npm run build",
+    "prebuild": "npm run clean",
+    "postbuild": "rimraf {lib,es}/**/__tests__ {lib,es}/**/*.{spec,test}.{js,d.ts,js.map}",
+    "posttest": "npm run typecheck && npm run lint",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
+  },
+  "keywords": [
+    "typescript",
+    "lib",
+    "library",
+    "boilerplate"
+  ],
+  "files": [
+    "lib",
+    "es",
+    "dist"
+  ],
+  "dependencies": {
+    "@types/node": "^8.0.0",
+    "tslib": "^1.9.3",
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.9",
+    "@types/jest": "^23.0.0",
+    "dts-bundle": "^0.7.2",
+    "jest": "^23.0.0",
+    "pascal-case": "^2.0.1",
+    "prettier": "^1.13.7",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.66.6",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-builtins": "^2.1.0",
+    "rollup-plugin-node-globals": "^1.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.1",
+    "rollup-plugin-terser": "^3.0.0",
+    "semver": "^6.3.0",
+    "ts-jest": "~23.10.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-plugin-prettier": "^2.0.0",
+    "typescript": "^3.1.4"
+  }
+}
