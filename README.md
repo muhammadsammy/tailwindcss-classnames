@@ -40,7 +40,7 @@ tw('border-none', 'rounded-sm'), {
 
 ## Composing classes
 
-Since we are using **classnames** you can also add your classes dynamically:
+Even though **tw** just returns a string, it is a special typed string that you can compose into other definitions.
 
 ```js
 import { tw } from 'tailwindcss-typescript';
