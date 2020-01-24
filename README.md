@@ -24,7 +24,7 @@ tw('border-none', 'rounded-sm');
 
 The arguments passed to **tw** is typed, which means you get discoverability and ability to search for the supported classes:
 
-IMAGE!!!
+[DISCOVER]('./discover.png')
 
 ## Dynamic classes
 
