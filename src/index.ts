@@ -1144,4 +1144,54 @@ export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: bo
 
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
 
+export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => string;
+
 export const tw: TTailwind = classnames as any;
+
+export const hover: TPseudoClass = className => `:hover${className}`;
+
+export const focus: TPseudoClass = className => `:focus${className}`;
+
+export const active: TPseudoClass = className => `:active${className}`;
+
+export const disabled: TPseudoClass = className => `:disabled${className}`;
+
+export const visited: TPseudoClass = className => `:visited${className}`;
+
+export const firstChild: TPseudoClass = className => `:first-child${className}`;
+
+export const lastChild: TPseudoClass = className => `:last-child${className}`;
+
+export const oddChild: TPseudoClass = className => `:odd-child${className}`;
+
+export const evenChild: TPseudoClass = className => `:odd-child${className}`;
+
+export const groupHover: TPseudoClass = className => `:group-hover${className}`;
+
+export const focusWithin: TPseudoClass = className => `:focus-within${className}`;
+
+export const createCustom = <T extends TClasses>(): {
+  tw: TTailwind<T>;
+  hover: TPseudoClass<T>;
+  active: TPseudoClass<T>;
+  disabled: TPseudoClass<T>;
+  visited: TPseudoClass<T>;
+  firstChild: TPseudoClass<T>;
+  lastChild: TPseudoClass<T>;
+  oddChild: TPseudoClass<T>;
+  evenChild: TPseudoClass<T>;
+  groupHover: TPseudoClass<T>;
+  focusWithin: TPseudoClass<T>;
+} => ({
+  tw,
+  hover,
+  active,
+  disabled,
+  visited,
+  firstChild,
+  lastChild,
+  oddChild,
+  evenChild,
+  groupHover,
+  focusWithin,
+});

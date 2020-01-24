@@ -46,6 +46,16 @@ tw('border-none', 'rounded-sm'), {
 })
 ```
 
+## Pseudo selectors
+
+Since we are in a functional world we use functions to define our pseudo selectors:
+
+```js
+import { tw, hover } from 'tailwindcss-typescript';
+
+tw('bg-gray-500', hover('bg-blue-500'));
+```
+
 ## Composing classes
 
 Even though **tw** just returns a string, it is a special typed string that you can compose into other definitions.
@@ -96,18 +106,34 @@ export const App: React.FC<{ disabled }> = ({ disabled }) => {
 
 ## Custom typing
 
-By default you have all the classes available as types, though you mightnot use all of them. You can customize your own by:
+By default you have all the classes available as types, though you might not use all of them. You can customize your own by:
 
 ```ts
-import { TTailwind, tw, TBackgroundColor, TBackgroundSize } from 'tailwindcss-typescript';
+import { createCustom, TBackgroundColor, TBackgroundSize } from 'tailwindcss-typescript';
 
-export const myTw: TTailwind<TBackgroundColor | TBackgroundSize> = (...args) => tw(...args);
+type Classes = TBackgroundColor | TBackgroundSize;
+
+const {
+  tw,
+  hover,
+  active,
+  disabled,
+  visited,
+  firstChild,
+  lastChild,
+  oddChild,
+  evenChild,
+  groupHover,
+  focusWithin,
+} = createCustom<Classes>();
+
+export { tw, hover, active, disabled, visited, firstChild, lastChild, oddChild, evenChild, groupHover, focusWithin };
 ```
 
 You can also base it on the groups of functionality:
 
 ```ts
-import { TTailwind, tw, TBackgrounds, TBorders } from 'tailwindcss-typescript';
+import { TBackgrounds, TBorders } from 'tailwindcss-typescript';
 
-export const myTw: TTailwind<TBackgrounds | TBorders> = tw;
+type Classes = TBackgrounds | TBorders;
 ```

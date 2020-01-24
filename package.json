@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-typescript",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Boilerplate for TypeScript libraries",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "license": "MIT",
