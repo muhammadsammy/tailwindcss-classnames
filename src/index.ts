@@ -1150,6 +1150,14 @@ export const classnames: TTailwind = classnamesLib as any;
 
 export const hover: TPseudoClass = className => `hover:${className}` as TTailwindString;
 
+export const sm: TPseudoClass = className => `sm:${className}` as TTailwindString;
+
+export const md: TPseudoClass = className => `md:${className}` as TTailwindString;
+
+export const lg: TPseudoClass = className => `lg:${className}` as TTailwindString;
+
+export const xl: TPseudoClass = className => `xl:${className}` as TTailwindString;
+
 export const focus: TPseudoClass = className => `focus:${className}` as TTailwindString;
 
 export const active: TPseudoClass = className => `active:${className}` as TTailwindString;
@@ -1173,6 +1181,10 @@ export const focusWithin: TPseudoClass = className => `focus-within:${className}
 export const createCustom = <T extends TClasses>(): {
   classnames: TTailwind<T>;
   hover: TPseudoClass<T>;
+  sm: TPseudoClass<T>;
+  md: TPseudoClass<T>;
+  lg: TPseudoClass<T>;
+  xl: TPseudoClass<T>;
   active: TPseudoClass<T>;
   disabled: TPseudoClass<T>;
   visited: TPseudoClass<T>;
@@ -1185,6 +1197,10 @@ export const createCustom = <T extends TClasses>(): {
 } => ({
   classnames,
   hover,
+  sm,
+  md,
+  lg,
+  xl,
   active,
   disabled,
   visited,
