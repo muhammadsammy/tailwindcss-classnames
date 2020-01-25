@@ -43,11 +43,11 @@ The arguments passed to **classnames** is typed, which means you get discoverabi
 Since we are using **classnames** you can also add your classes dynamically:
 
 ```js
-import { classnames } from 'tailwindcss-classnames'
+import { classnames } from 'tailwindcss-classnames';
 
-classnames('border-none', 'rounded-sm'), {
+classnames('border-none', 'rounded-sm', {
   ['bg-gray-200']: true,
-})
+});
 ```
 
 ## Pseudo selectors
