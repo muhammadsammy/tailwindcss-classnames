@@ -29,9 +29,9 @@
   },
   "keywords": [
     "typescript",
-    "lib",
-    "library",
-    "boilerplate"
+    "tailwindcss",
+    "tailwind",
+    "classnames"
   ],
   "files": [
     "lib",
