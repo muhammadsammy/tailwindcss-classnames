@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classnamesLib from 'classnames';
 
 export type TUtility = 'mx-auto';
 
@@ -1146,7 +1146,7 @@ export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>
 
 export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
-export const tw: TTailwind = classnames as any;
+export const classnames: TTailwind = classnamesLib as any;
 
 export const hover: TPseudoClass = className => `hover:${className}` as TTailwindString;
 
@@ -1171,7 +1171,7 @@ export const groupHover: TPseudoClass = className => `group-hover:${className}` 
 export const focusWithin: TPseudoClass = className => `focus-within:${className}` as TTailwindString;
 
 export const createCustom = <T extends TClasses>(): {
-  tw: TTailwind<T>;
+  classnames: TTailwind<T>;
   hover: TPseudoClass<T>;
   active: TPseudoClass<T>;
   disabled: TPseudoClass<T>;
@@ -1183,7 +1183,7 @@ export const createCustom = <T extends TClasses>(): {
   groupHover: TPseudoClass<T>;
   focusWithin: TPseudoClass<T>;
 } => ({
-  tw,
+  classnames,
   hover,
   active,
   disabled,
