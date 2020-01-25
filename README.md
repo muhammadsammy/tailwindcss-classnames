@@ -14,6 +14,8 @@ TailwindCSS is based on strings and with some nice tooling on top like [Tailwind
 
 You can not get this experience using pure TailwindCSS and the VSCode extension, but you do get it with **tailwindcss-classnames**.
 
+[![Edit tailwindcss-classnames](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/elegant-lederberg-sih5r?fontsize=14&hidenavigation=1&theme=dark)
+
 ## Install
 
 Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up **TailwindCSS**. Now do:
