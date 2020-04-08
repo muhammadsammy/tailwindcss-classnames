@@ -502,7 +502,20 @@ export type TBorderWidth =
   | 'border-l'
   | 'border-t-0'
   | 'border-r-0'
-  | 'border-b-0';
+  | 'border-b-0'
+  | 'border-l-0'
+  | 'border-t-2'
+  | 'border-r-2'
+  | 'border-b-2'
+  | 'border-l-2'
+  | 'border-t-4'
+  | 'border-r-4'
+  | 'border-b-4'
+  | 'border-l-4'
+  | 'border-t-8'
+  | 'border-r-8'
+  | 'border-b-8'
+  | 'border-l-8';
 
 export type TBorderRadius =
   | 'rounded-none'
