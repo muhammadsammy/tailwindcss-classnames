@@ -44,7 +44,9 @@ export type TOverflow =
   | 'overflow-x-visible'
   | 'overflow-y-visible'
   | 'overflow-x-scroll'
-  | 'overflow-y-scroll';
+  | 'overflow-y-scroll'
+  | 'scrolling-touch'
+  | 'scrolling-auto';
 
 export type TPosition = 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
 
