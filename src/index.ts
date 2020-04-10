@@ -1392,6 +1392,8 @@ export type TTables = TBorderCollapse | TTableLayout;
 
 export type TBoxShadow =
   | 'shadow'
+  | 'shadow-xs'
+  | 'shadow-sm'
   | 'shadow-md'
   | 'shadow-lg'
   | 'shadow-xl'
