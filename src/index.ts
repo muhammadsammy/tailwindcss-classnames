@@ -19,6 +19,8 @@ export type TContainer = 'container';
 
 export type TFloat = 'float-right' | 'float-left' | 'float-none' | 'clearfix';
 
+export type TClear = 'clear-left' | 'clear-right' | 'clear-both' | 'clear-none';
+
 export type TObjectFit = 'object-contain' | 'object-cover' | 'object-fill' | 'object-none' | 'object-scale-down';
 
 export type TObjectPosition =
@@ -75,6 +77,7 @@ export type TLayout =
   | TDisplay
   | TContainer
   | TFloat
+  | TClear
   | TObjectFit
   | TObjectPosition
   | TOverflow
