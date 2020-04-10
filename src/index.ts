@@ -49,12 +49,19 @@ export type TPosition = 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
 export type TTopRightBottomLeft =
   | 'inset-0'
   | 'inset-y-0'
+  | 'inset-x-0'
   | 'inset-x-y'
   | 'top-0'
   | 'right-0'
   | 'bottom-0'
   | 'left-0'
-  | 'inset-auto';
+  | 'inset-auto'
+  | 'inset-y-auto'
+  | 'inset-x-auto'
+  | 'top-auto'
+  | 'bottom-auto'
+  | 'left-auto'
+  | 'right-auto';
 
 export type TVisibility = 'visible' | 'invisible';
 
