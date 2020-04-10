@@ -2,6 +2,8 @@ import classnamesLib from 'classnames';
 
 export type TUtility = 'mx-auto';
 
+export type TBoxSizing = 'box-border' | 'box-content';
+
 export type TDisplay =
   | 'block'
   | 'inline-block'
@@ -79,6 +81,7 @@ export type TVisibility = 'visible' | 'invisible';
 export type TZIndex = 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50' | 'z-auto';
 
 export type TLayout =
+  | TBoxSizing
   | TDisplay
   | TContainer
   | TFloat
