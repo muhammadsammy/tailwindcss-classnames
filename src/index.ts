@@ -1267,6 +1267,29 @@ export type TOpacity = 'opacity-100' | 'opacity-75' | 'opacity-50' | 'opacity-25
 
 export type TEffects = TBoxShadow | TOpacity;
 
+export type TTransitionProperty =
+  | 'transition-none'
+  | 'transition-all'
+  | 'transition'
+  | 'transition-colors'
+  | 'transition-opacity'
+  | 'transition-shadow'
+  | 'transition-transform';
+
+export type TTransitionDuration =
+  | 'duration-75'
+  | 'duration-100'
+  | 'duration-150'
+  | 'duration-200'
+  | 'duration-300'
+  | 'duration-500'
+  | 'duration-700'
+  | 'duration-1000';
+
+export type TTransitionTimingFunction = 'ease-linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
+
+export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction;
+
 export type TAppearance = 'appearance-none';
 
 export type TCursor =
@@ -1309,6 +1332,7 @@ export type TClasses =
   | TSizing
   | TTables
   | TEffects
+  | TTransitions
   | TInteractivity
   | TAccessibility;
 
