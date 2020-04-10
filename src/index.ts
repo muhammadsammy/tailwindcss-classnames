@@ -8,10 +8,17 @@ export type TDisplay =
   | 'inline'
   | 'flex'
   | 'inline-flex'
+  | 'grid'
   | 'table'
-  | 'table-row'
+  | 'hidden'
+  | 'table-caption'
   | 'table-cell'
-  | 'hidden';
+  | 'table-column'
+  | 'table-column-group'
+  | 'table-footer-group'
+  | 'table-header-group'
+  | 'table-row-group'
+  | 'table-row';
 
 export type TContainer = 'container';
 
