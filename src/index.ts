@@ -2,6 +2,8 @@ import classnamesLib from 'classnames';
 
 export type TUtility = 'mx-auto';
 
+export type TBoxSizing = 'box-border' | 'box-content';
+
 export type TDisplay =
   | 'block'
   | 'inline-block'
@@ -18,6 +20,8 @@ export type TDisplay =
 export type TContainer = 'container';
 
 export type TFloat = 'float-right' | 'float-left' | 'float-none' | 'clearfix';
+
+export type TClear = 'clear-left' | 'clear-right' | 'clear-both' | 'clear-none';
 
 export type TObjectFit = 'object-contain' | 'object-cover' | 'object-fill' | 'object-none' | 'object-scale-down';
 
@@ -44,28 +48,39 @@ export type TOverflow =
   | 'overflow-x-visible'
   | 'overflow-y-visible'
   | 'overflow-x-scroll'
-  | 'overflow-y-scroll';
+  | 'overflow-y-scroll'
+  | 'scrolling-touch'
+  | 'scrolling-auto';
 
 export type TPosition = 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
 
 export type TTopRightBottomLeft =
   | 'inset-0'
   | 'inset-y-0'
+  | 'inset-x-0'
   | 'inset-x-y'
   | 'top-0'
   | 'right-0'
   | 'bottom-0'
   | 'left-0'
-  | 'inset-auto';
+  | 'inset-auto'
+  | 'inset-y-auto'
+  | 'inset-x-auto'
+  | 'top-auto'
+  | 'bottom-auto'
+  | 'left-auto'
+  | 'right-auto';
 
 export type TVisibility = 'visible' | 'invisible';
 
 export type TZIndex = 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50' | 'z-auto';
 
 export type TLayout =
+  | TBoxSizing
   | TDisplay
   | TContainer
   | TFloat
+  | TClear
   | TObjectFit
   | TObjectPosition
   | TOverflow
@@ -117,7 +132,15 @@ export type TLineHeight =
   | 'leading-snug'
   | 'leading-normal'
   | 'leading-relaxed'
-  | 'leading-loose';
+  | 'leading-loose'
+  | 'leading-3'
+  | 'leading-4'
+  | 'leading-5'
+  | 'leading-6'
+  | 'leading-7'
+  | 'leading-8'
+  | 'leading-9'
+  | 'leading-10';
 
 export type TListStyleType = 'line-none' | 'list-disc' | 'list-decimal';
 
@@ -131,7 +154,92 @@ export type TPlaceholderColor =
   | 'placeholder-gray-200'
   | 'placeholder-gray-300'
   | 'placeholder-gray-400'
-  | 'placeholder-gray-500';
+  | 'placeholder-gray-500'
+  | 'placeholder-gray-600'
+  | 'placeholder-gray-700'
+  | 'placeholder-gray-800'
+  | 'placeholder-gray-900'
+  | 'placeholder-red-100'
+  | 'placeholder-red-200'
+  | 'placeholder-red-300'
+  | 'placeholder-red-400'
+  | 'placeholder-red-500'
+  | 'placeholder-red-600'
+  | 'placeholder-red-700'
+  | 'placeholder-red-800'
+  | 'placeholder-red-900'
+  | 'placeholder-orange-100'
+  | 'placeholder-orange-200'
+  | 'placeholder-orange-300'
+  | 'placeholder-orange-400'
+  | 'placeholder-orange-500'
+  | 'placeholder-orange-600'
+  | 'placeholder-orange-700'
+  | 'placeholder-orange-800'
+  | 'placeholder-orange-900'
+  | 'placeholder-yellow-100'
+  | 'placeholder-yellow-200'
+  | 'placeholder-yellow-300'
+  | 'placeholder-yellow-400'
+  | 'placeholder-yellow-500'
+  | 'placeholder-yellow-600'
+  | 'placeholder-yellow-700'
+  | 'placeholder-yellow-800'
+  | 'placeholder-yellow-900'
+  | 'placeholder-green-100'
+  | 'placeholder-green-200'
+  | 'placeholder-green-300'
+  | 'placeholder-green-400'
+  | 'placeholder-green-500'
+  | 'placeholder-green-600'
+  | 'placeholder-green-700'
+  | 'placeholder-green-800'
+  | 'placeholder-green-900'
+  | 'placeholder-teal-100'
+  | 'placeholder-teal-200'
+  | 'placeholder-teal-300'
+  | 'placeholder-teal-400'
+  | 'placeholder-teal-500'
+  | 'placeholder-teal-600'
+  | 'placeholder-teal-700'
+  | 'placeholder-teal-800'
+  | 'placeholder-teal-900'
+  | 'placeholder-blue-100'
+  | 'placeholder-blue-200'
+  | 'placeholder-blue-300'
+  | 'placeholder-blue-400'
+  | 'placeholder-blue-500'
+  | 'placeholder-blue-600'
+  | 'placeholder-blue-700'
+  | 'placeholder-blue-800'
+  | 'placeholder-blue-900'
+  | 'placeholder-indigo-100'
+  | 'placeholder-indigo-200'
+  | 'placeholder-indigo-300'
+  | 'placeholder-indigo-400'
+  | 'placeholder-indigo-500'
+  | 'placeholder-indigo-600'
+  | 'placeholder-indigo-700'
+  | 'placeholder-indigo-800'
+  | 'placeholder-indigo-900'
+  | 'placeholder-purple-100'
+  | 'placeholder-purple-200'
+  | 'placeholder-purple-300'
+  | 'placeholder-purple-400'
+  | 'placeholder-purple-500'
+  | 'placeholder-purple-600'
+  | 'placeholder-purple-700'
+  | 'placeholder-purple-800'
+  | 'placeholder-purple-900'
+  | 'placeholder-pink-100'
+  | 'placeholder-pink-200'
+  | 'placeholder-pink-300'
+  | 'placeholder-pink-400'
+  | 'placeholder-pink-500'
+  | 'placeholder-pink-600'
+  | 'placeholder-pink-700'
+  | 'placeholder-pink-800'
+  | 'placeholder-pink-900';
 
 export type TTextAlign = 'text-left' | 'text-center' | 'text-right' | 'text-justify';
 
@@ -504,19 +612,76 @@ export type TBorderWidth =
   | 'border-l'
   | 'border-t-0'
   | 'border-r-0'
-  | 'border-b-0';
+  | 'border-b-0'
+  | 'border-l-0'
+  | 'border-t-2'
+  | 'border-r-2'
+  | 'border-b-2'
+  | 'border-l-2'
+  | 'border-t-4'
+  | 'border-r-4'
+  | 'border-b-4'
+  | 'border-l-4'
+  | 'border-t-8'
+  | 'border-r-8'
+  | 'border-b-8'
+  | 'border-l-8';
 
 export type TBorderRadius =
   | 'rounded-none'
   | 'rounded-sm'
   | 'rounded'
+  | 'rounded-md'
   | 'rounded-lg'
   | 'rounded-full'
   | 'rounded-t-none'
   | 'rounded-r-none'
   | 'rounded-b-none'
   | 'rounded-l-none'
-  | 'rounded-t-sm';
+  | 'rounded-t-sm'
+  | 'rounded-r-sm'
+  | 'rounded-b-sm'
+  | 'rounded-l-sm'
+  | 'rounded-t'
+  | 'rounded-r'
+  | 'rounded-b'
+  | 'rounded-l'
+  | 'rounded-t-md'
+  | 'rounded-r-md'
+  | 'rounded-b-md'
+  | 'rounded-l-md'
+  | 'rounded-t-lg'
+  | 'rounded-r-lg'
+  | 'rounded-b-lg'
+  | 'rounded-l-lg'
+  | 'rounded-t-full'
+  | 'rounded-r-full'
+  | 'rounded-b-full'
+  | 'rounded-l-full'
+  | 'rounded-tl-none'
+  | 'rounded-tr-none'
+  | 'rounded-br-none'
+  | 'rounded-bl-none'
+  | 'rounded-tl-sm'
+  | 'rounded-tr-sm'
+  | 'rounded-br-sm'
+  | 'rounded-bl-sm'
+  | 'rounded-tl'
+  | 'rounded-tr'
+  | 'rounded-br'
+  | 'rounded-bl'
+  | 'rounded-tl-md'
+  | 'rounded-tr-md'
+  | 'rounded-br-md'
+  | 'rounded-bl-md'
+  | 'rounded-tl-lg'
+  | 'rounded-tr-lg'
+  | 'rounded-br-lg'
+  | 'rounded-bl-lg'
+  | 'rounded-tl-full'
+  | 'rounded-tr-full'
+  | 'rounded-br-full'
+  | 'rounded-bl-full';
 
 export type TBorders = TBorderColor | TBorderStyle | TBorderWidth | TBorderRadius;
 
@@ -1242,6 +1407,8 @@ export type TTables = TBorderCollapse | TTableLayout;
 
 export type TBoxShadow =
   | 'shadow'
+  | 'shadow-xs'
+  | 'shadow-sm'
   | 'shadow-md'
   | 'shadow-lg'
   | 'shadow-xl'
@@ -1253,6 +1420,29 @@ export type TBoxShadow =
 export type TOpacity = 'opacity-100' | 'opacity-75' | 'opacity-50' | 'opacity-25' | 'opacity-0';
 
 export type TEffects = TBoxShadow | TOpacity;
+
+export type TTransitionProperty =
+  | 'transition-none'
+  | 'transition-all'
+  | 'transition'
+  | 'transition-colors'
+  | 'transition-opacity'
+  | 'transition-shadow'
+  | 'transition-transform';
+
+export type TTransitionDuration =
+  | 'duration-75'
+  | 'duration-100'
+  | 'duration-150'
+  | 'duration-200'
+  | 'duration-300'
+  | 'duration-500'
+  | 'duration-700'
+  | 'duration-1000';
+
+export type TTransitionTimingFunction = 'ease-linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
+
+export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction;
 
 export type TAppearance = 'appearance-none';
 
@@ -1297,6 +1487,7 @@ export type TClasses =
   | TSizing
   | TTables
   | TEffects
+  | TTransitions
   | TInteractivity
   | TAccessibility;
 
