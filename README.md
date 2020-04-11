@@ -100,7 +100,7 @@ import * as styles from './styles';
 export const App: React.FC<{ disabled }> = ({ disabled }) => {
   return (
     <form className={styles.form}>
-      <button type="submit" className={styled.submitButton(disabled)}>
+      <button type="submit" className={styles.submitButton(disabled)}>
         Submit
       </button>
       <button className={styles.alertButton}>Cancel</button>
