@@ -1625,7 +1625,9 @@ export type TFill = 'fill-current';
 
 export type TStroke = 'stroke-current';
 
-export type TSvg = TFill | TStroke;
+export type TStrokeWidth = 'stroke-0' | 'stroke-1' | 'stroke- 2';
+
+export type TSvg = TFill | TStroke | TStrokeWidth;
 
 export type TScreenReaders = 'sr-only' | 'not-sr-only';
 
