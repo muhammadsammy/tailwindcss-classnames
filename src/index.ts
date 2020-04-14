@@ -1587,7 +1587,18 @@ export type TSkew =
   | '-skew-y-6'
   | '-skew-y-12';
 
-export type TTransforms = TScale | TRotate | TTranslate | TSkew;
+export type TTransformOrigin =
+  | 'origin-center'
+  | 'origin-top'
+  | 'origin-top-right'
+  | 'origin-right'
+  | 'origin-bottom-right'
+  | 'origin-bottom'
+  | 'origin-bottom-left'
+  | 'origin-left'
+  | 'origin-top-left';
+
+export type TTransforms = TScale | TRotate | TTranslate | TSkew | TTransformOrigin;
 
 export type TAppearance = 'appearance-none';
 
