@@ -1476,7 +1476,16 @@ export type TScale =
   | 'scale-y-125'
   | 'scale-y-150';
 
-export type TTransforms = TScale;
+export type TRotate =
+  | 'rotate-0'
+  | 'rotate-45'
+  | 'rotate-90'
+  | 'rotate-180'
+  | '-rotate-180'
+  | '-rotate-90'
+  | '-rotate-45';
+
+export type TTransforms = TScale | TRotate;
 
 export type TAppearance = 'appearance-none';
 
