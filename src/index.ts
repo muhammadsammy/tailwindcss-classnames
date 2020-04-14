@@ -1569,7 +1569,25 @@ export type TTranslate =
   | 'translate-y-1/2'
   | 'translate-y-full';
 
-export type TTransforms = TScale | TRotate | TTranslate;
+export type TSkew =
+  | 'skew-x-0'
+  | 'skew-x-3'
+  | 'skew-x-6'
+  | 'skew-x-12'
+  | '-skew-x-0'
+  | '-skew-x-3'
+  | '-skew-x-6'
+  | '-skew-x-12'
+  | 'skew-y-0'
+  | 'skew-y-3'
+  | 'skew-y-6'
+  | 'skew-y-12'
+  | '-skew-y-0'
+  | '-skew-y-3'
+  | '-skew-y-6'
+  | '-skew-y-12';
+
+export type TTransforms = TScale | TRotate | TTranslate | TSkew;
 
 export type TAppearance = 'appearance-none';
 
