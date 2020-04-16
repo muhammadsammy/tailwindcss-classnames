@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-classnames",
-  "version": "1.1.4",
+  "version": "1.1.5-alpha.0",
   "description": "Functional typed classnames for TailwindCSS",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "contributors": [
@@ -10,6 +10,9 @@
   "license": "MIT",
   "repository": "git+https://github.com/themsammy/tailwindcss-classnames.git",
   "main": "lib/index.js",
+  "bin": {
+    "tailwindcss-classnames": "lib/cli.js"
+  },
   "module": "es/index.js",
   "browser": "dist/bundle.js",
   "types": "dist/bundle.d.ts",
@@ -22,7 +25,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "tslint --project tsconfig.json --format stylish",
     "format": "prettier '**/*.{md,js,jsx,json,ts,tsx}' --write",
-    "test": "jest --env=jsdom --coverage",
+    "test": "jest --env=jsdom --coverage --passWithNoTests",
     "test:watch": "jest --env=jsdom --watch --updateSnapshot",
     "prepublishOnly": "npm run build",
     "prebuild": "npm run clean",
@@ -43,26 +46,30 @@
     "dist"
   ],
   "dependencies": {
-    "@types/node": "^8.0.0",
-    "tslib": "^1.9.3",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "inquirer": "^7.1.0",
+    "lodash.isempty": "^4.4.0",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
+    "@types/inquirer": "^6.5.0",
     "@types/jest": "^23.0.0",
+    "@types/lodash.isempty": "^4.4.6",
+    "@types/node": "^13.11.1",
     "dts-bundle": "^0.7.2",
-    "jest": "^23.0.0",
+    "jest": "^25.3.0",
     "pascal-case": "^2.0.1",
     "prettier": "^1.13.7",
     "rimraf": "^2.6.1",
-    "rollup": "^0.66.6",
-    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup": "^2.6.1",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-builtins": "^2.1.0",
     "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.4.1",
-    "rollup-plugin-terser": "^3.0.0",
-    "semver": "^6.3.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "semver": "^7.3.2",
     "ts-jest": "~23.10.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.13.0",
