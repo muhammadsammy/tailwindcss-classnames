@@ -28,6 +28,8 @@ inquirer
       let borderColors: Array<string> = [];
       let textColors: Array<string> = [];
 
+      const prefix = isEmpty(TAILWIND_CONFIG?.prefix) ? '' : TAILWIND_CONFIG?.prefix;
+
       // prettier-ignore
       const themeColors = isEmpty(TAILWIND_CONFIG?.theme?.colors)
         ? defaultColors
@@ -42,20 +44,21 @@ inquirer
         if (colorVal instanceof Object) {
           const colorVariants = Object.keys(colorVal);
           colorVariants.map(variant => {
-            backgroundColors.push(`bg-${color}-${variant}`);
-            placeholderColors.push(`placeholder-${color}-${variant}`);
-            borderColors.push(`border-${color}-${variant}`);
-            textColors.push(`text-${color}-${variant}`);
+            backgroundColors.push(`${prefix}bg-${color}-${variant}`);
+            placeholderColors.push(`${prefix}placeholder-${color}-${variant}`);
+            borderColors.push(`${prefix}border-${color}-${variant}`);
+            textColors.push(`${prefix}text-${color}-${variant}`);
           });
         } else {
-          backgroundColors.push(`bg-${color}`);
-          placeholderColors.push(`placeholder-${color}`);
-          borderColors.push(`border-${color}`);
-          textColors.push(`text-${color}`);
+          backgroundColors.push(`${prefix}bg-${color}`);
+          placeholderColors.push(`${prefix}placeholder-${color}`);
+          borderColors.push(`${prefix}border-${color}`);
+          textColors.push(`${prefix}text-${color}`);
         }
       }
 
       const result = baseTemplateString
+        .replace(/_PREFIX_/g, prefix)
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))
