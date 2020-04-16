@@ -2,6 +2,13 @@ export function generateTypes(arr: string[]) {
   return '\n | ' + arr.map(n => `"${n}"`).join('\n | ');
 }
 
+export const defaultScreens = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+};
+
 export const defaultColors = {
   transparent: 'transparent',
 
@@ -1412,13 +1419,7 @@ export const classnames: TTailwind = classnamesLib as any;
 
 export const hover: TPseudoClass = className => ('_PREFIX_hover_SEPARATOR_' + className) as TTailwindString;
 
-export const sm: TPseudoClass = className => ('_PREFIX_sm_SEPARATOR_' + className) as TTailwindString;
-
-export const md: TPseudoClass = className => ('_PREFIX_md_SEPARATOR_' + className) as TTailwindString;
-
-export const lg: TPseudoClass = className => ('_PREFIX_lg_SEPARATOR_' + className) as TTailwindString;
-
-export const xl: TPseudoClass = className => ('_PREFIX_xl_SEPARATOR_' + className) as TTailwindString;
+BREAKPOINT_EXPORT_STATEMENTS
 
 export const focus: TPseudoClass = className => ('_PREFIX_focus_SEPARATOR_' + className) as TTailwindString;
 
@@ -1428,7 +1429,7 @@ export const disabled: TPseudoClass = className => ('_PREFIX_disabled_SEPARATOR_
 
 export const visited: TPseudoClass = className => ('_PREFIX_visited_SEPARATOR_' + className) as TTailwindString;
 
-export const firstChild: TPseudoClass = className => ('_PREFIX_first-child_SEPARATOR_' + className) as TTailwindString_SEPARATOR_
+export const firstChild: TPseudoClass = className => ('_PREFIX_first-child_SEPARATOR_' + className) as TTailwindString;
 
 export const lastChild: TPseudoClass = className => ('_PREFIX_last-child_SEPARATOR_' + className) as TTailwindString;
 
@@ -1443,10 +1444,7 @@ export const focusWithin: TPseudoClass = className => ('_PREFIX_focus-within_SEP
 export const createCustom = <T extends TClasses>(): {
   classnames: TTailwind<T>;
   hover: TPseudoClass<T>;
-  sm: TPseudoClass<T>;
-  md: TPseudoClass<T>;
-  lg: TPseudoClass<T>;
-  xl: TPseudoClass<T>;
+  BREAKPOINTS_CREATE_CUSTOM_PARAMS
   active: TPseudoClass<T>;
   disabled: TPseudoClass<T>;
   visited: TPseudoClass<T>;
@@ -1459,10 +1457,7 @@ export const createCustom = <T extends TClasses>(): {
 } => ({
   classnames,
   hover,
-  sm,
-  md,
-  lg,
-  xl,
+  BREAKPOINTS_CREATE_CUSTOM_RETURNS
   active,
   disabled,
   visited,

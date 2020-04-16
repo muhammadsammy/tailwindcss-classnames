@@ -1,6 +1,6 @@
 import fs from 'fs';
 import inquirer from 'inquirer';
-import { baseTemplateString, generateTypes, defaultColors } from './utils';
+import { baseTemplateString, generateTypes, defaultColors, defaultScreens } from './utils';
 import isEmpty from 'lodash.isempty';
 
 inquirer
@@ -58,9 +58,34 @@ inquirer
         }
       }
 
+      const themeBreakpoints = isEmpty(TAILWIND_CONFIG?.theme?.screens)
+        ? defaultScreens
+        : TAILWIND_CONFIG?.theme?.screens;
+      const extendedThemeBreakpoints = TAILWIND_CONFIG?.theme?.extend?.screens;
+      const breakpoints = extendedThemeBreakpoints
+        ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
+        : themeBreakpoints;
+
+      console.log(breakpoints);
+
+      let breakpointExportStatements: Array<string> = [];
+      let breakpointCreateCustomParams: Array<string> = [];
+      let breakpointCreateCustomReturns: Array<string> = [];
+
+      Object.keys(breakpoints).map(breakpoint => {
+        breakpointExportStatements.push(
+          `export const ${breakpoint}: TPseudoClass = className => ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;`,
+        );
+        breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
+        breakpointCreateCustomReturns.push(`${breakpoint},`);
+      });
+
       const result = baseTemplateString
         .replace(/_PREFIX_/g, prefix)
         .replace(/_SEPARATOR_/g, separator)
+        .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
+        .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
+        .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))
