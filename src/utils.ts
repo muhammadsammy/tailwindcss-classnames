@@ -1410,35 +1410,35 @@ export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTai
 
 export const classnames: TTailwind = classnamesLib as any;
 
-export const hover: TPseudoClass = className => ('_PREFIX_hover:' + className) as TTailwindString;
+export const hover: TPseudoClass = className => ('_PREFIX_hover_SEPARATOR_' + className) as TTailwindString;
 
-export const sm: TPseudoClass = className => ('_PREFIX_sm:' + className) as TTailwindString;
+export const sm: TPseudoClass = className => ('_PREFIX_sm_SEPARATOR_' + className) as TTailwindString;
 
-export const md: TPseudoClass = className => ('_PREFIX_md:' + className) as TTailwindString;
+export const md: TPseudoClass = className => ('_PREFIX_md_SEPARATOR_' + className) as TTailwindString;
 
-export const lg: TPseudoClass = className => ('_PREFIX_lg:' + className) as TTailwindString;
+export const lg: TPseudoClass = className => ('_PREFIX_lg_SEPARATOR_' + className) as TTailwindString;
 
-export const xl: TPseudoClass = className => ('_PREFIX_xl:' + className) as TTailwindString;
+export const xl: TPseudoClass = className => ('_PREFIX_xl_SEPARATOR_' + className) as TTailwindString;
 
-export const focus: TPseudoClass = className => ('_PREFIX_focus:' + className) as TTailwindString;
+export const focus: TPseudoClass = className => ('_PREFIX_focus_SEPARATOR_' + className) as TTailwindString;
 
-export const active: TPseudoClass = className => ('_PREFIX_active:' + className) as TTailwindString;
+export const active: TPseudoClass = className => ('_PREFIX_active_SEPARATOR_' + className) as TTailwindString;
 
-export const disabled: TPseudoClass = className => ('_PREFIX_disabled:' + className) as TTailwindString;
+export const disabled: TPseudoClass = className => ('_PREFIX_disabled_SEPARATOR_' + className) as TTailwindString;
 
-export const visited: TPseudoClass = className => ('_PREFIX_visited:' + className) as TTailwindString;
+export const visited: TPseudoClass = className => ('_PREFIX_visited_SEPARATOR_' + className) as TTailwindString;
 
-export const firstChild: TPseudoClass = className => ('_PREFIX_first-child:' + className) as TTailwindString;
+export const firstChild: TPseudoClass = className => ('_PREFIX_first-child_SEPARATOR_' + className) as TTailwindString_SEPARATOR_
 
-export const lastChild: TPseudoClass = className => ('_PREFIX_last-child:' + className) as TTailwindString;
+export const lastChild: TPseudoClass = className => ('_PREFIX_last-child_SEPARATOR_' + className) as TTailwindString;
 
-export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child:' + className) as TTailwindString;
+export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
 
-export const evenChild: TPseudoClass = className => ('_PREFIX_odd-child:' + className) as TTailwindString;
+export const evenChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
 
-export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover:' + className) as TTailwindString;
+export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
 
-export const focusWithin: TPseudoClass = className => ('_PREFIX_focus-within:' + className) as TTailwindString;
+export const focusWithin: TPseudoClass = className => ('_PREFIX_focus-within_SEPARATOR_' + className) as TTailwindString;
 
 export const createCustom = <T extends TClasses>(): {
   classnames: TTailwind<T>;

@@ -29,6 +29,7 @@ inquirer
       let textColors: Array<string> = [];
 
       const prefix = isEmpty(TAILWIND_CONFIG?.prefix) ? '' : TAILWIND_CONFIG?.prefix;
+      const separator = isEmpty(TAILWIND_CONFIG?.separator) ? ':' : TAILWIND_CONFIG?.separator;
 
       // prettier-ignore
       const themeColors = isEmpty(TAILWIND_CONFIG?.theme?.colors)
@@ -59,6 +60,7 @@ inquirer
 
       const result = baseTemplateString
         .replace(/_PREFIX_/g, prefix)
+        .replace(/_SEPARATOR_/g, separator)
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))
