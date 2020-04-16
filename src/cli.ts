@@ -25,8 +25,9 @@ inquirer
   .then(answers => {
     fs.readFile(`./${answers.configFilename}`, { encoding: 'utf-8' }, (err, data) => {
       if (err) throw err;
+      //@ts-ignore
+      const TAILWIND_CONFIG = eval(data.theme);
 
-      const TAILWIND_CONFIG = eval(data);
       let backgroundColors: Array<string> = [];
       let placeholderColors: Array<string> = [];
       let borderColors: Array<string> = [];
