@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* tslint:disable */
 
 import fs from 'fs';
