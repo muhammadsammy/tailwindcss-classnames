@@ -28,9 +28,12 @@ inquirer
       let borderColors: Array<string> = [];
       let textColors: Array<string> = [];
 
-      const themeColors = isEmpty(TAILWIND_CONFIG?.theme?.colors) ? defaultColors : TAILWIND_CONFIG?.theme?.colors;
-
-      const colors = themeColors;
+      // prettier-ignore
+      const themeColors = isEmpty(TAILWIND_CONFIG?.theme?.colors)
+        ? defaultColors
+        : TAILWIND_CONFIG?.theme?.colors;
+      const extendedThemeColors = TAILWIND_CONFIG?.theme?.extend?.colors;
+      const colors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
 
       const colorsKeys = Object.keys(colors);
       for (let i = 0; i < colorsKeys.length; i += 1) {
