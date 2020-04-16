@@ -70,8 +70,6 @@ inquirer
         ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
         : themeBreakpoints;
 
-      console.log(breakpoints);
-
       let breakpointExportStatements: Array<string> = [];
       let breakpointCreateCustomParams: Array<string> = [];
       let breakpointCreateCustomReturns: Array<string> = [];
