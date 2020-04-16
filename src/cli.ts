@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 import fs from 'fs';
 import inquirer from 'inquirer';
 import { baseTemplateString, generateTypes, defaultColors, defaultScreens } from './utils';

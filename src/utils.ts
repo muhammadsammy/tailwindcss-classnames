@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 export function generateTypes(arr: string[]) {
   return '\n | ' + arr.map(n => `"${n}"`).join('\n | ');
 }
