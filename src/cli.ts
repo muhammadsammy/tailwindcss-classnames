@@ -1,7 +1,7 @@
 import fs from 'fs';
 import inquirer from 'inquirer';
-import { baseTemplateString } from './utils';
-import { generateTypes } from './utils';
+import { baseTemplateString, generateTypes, defaultColors } from './utils';
+import isEmpty from 'lodash.isempty';
 
 inquirer
   .prompt([
@@ -28,9 +28,11 @@ inquirer
       let borderColors: Array<string> = [];
       let textColors: Array<string> = [];
 
-      const { colors } = TAILWIND_CONFIG.theme;
-      const colorsKeys = Object.keys(colors);
+      const themeColors = isEmpty(TAILWIND_CONFIG?.theme?.colors) ? defaultColors : TAILWIND_CONFIG?.theme?.colors;
 
+      const colors = themeColors;
+
+      const colorsKeys = Object.keys(colors);
       for (let i = 0; i < colorsKeys.length; i += 1) {
         const color = colorsKeys[i];
         const colorVal = colors[color];
@@ -58,7 +60,7 @@ inquirer
 
       fs.writeFile(`${answers.outputFilename}`, result, 'utf8', err => {
         if (err) {
-          return console.log(err);
+          throw err;
         }
       });
     });

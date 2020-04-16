@@ -48,12 +48,14 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "inquirer": "^7.1.0",
+    "lodash.isempty": "^4.4.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
     "@types/inquirer": "^6.5.0",
     "@types/jest": "^23.0.0",
+    "@types/lodash.isempty": "^4.4.6",
     "@types/node": "^13.11.1",
     "dts-bundle": "^0.7.2",
     "jest": "^25.3.0",
