@@ -1405,6 +1405,7 @@ export type TClasses =
   | TSizing
   | TTables
   | TEffects
+  | TTransforms
   | TTransitions
   | TInteractivity
   | TAccessibility;
