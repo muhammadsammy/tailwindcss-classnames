@@ -28,6 +28,8 @@ inquirer
         console.error(err);
       }
 
+      data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
+
       const CONFIG = eval(data);
       const THEME_CONFIG = CONFIG.theme;
       const PREFIX_CONFIG = CONFIG.prefix;
