@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* tslint:disable: prefer-template */
 
 export function generateTypes(arr: string[]) {
   return '\n | ' + arr.map(n => `"${n}"`).join('\n | ');
