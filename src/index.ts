@@ -1684,7 +1684,7 @@ export const lastChild: TPseudoClass = className => `last-child:${className}` as
 
 export const oddChild: TPseudoClass = className => `odd-child:${className}` as TTailwindString;
 
-export const evenChild: TPseudoClass = className => `odd-child:${className}` as TTailwindString;
+export const evenChild: TPseudoClass = className => `even-child:${className}` as TTailwindString;
 
 export const groupHover: TPseudoClass = className => `group-hover:${className}` as TTailwindString;
 

@@ -1438,7 +1438,7 @@ export const lastChild: TPseudoClass = className => ('_PREFIX_last-child_SEPARAT
 
 export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
 
-export const evenChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
+export const evenChild: TPseudoClass = className => ('_PREFIX_even-child_SEPARATOR_' + className) as TTailwindString;
 
 export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
 
