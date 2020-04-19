@@ -1,7 +1,7 @@
 /* tslint:disable: prefer-template */
 
 export function generateTypes(arr: string[]) {
-  return '\n | ' + arr.map(n => `"${n}"`).join('\n | ');
+  return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
 }
 
 export const defaultScreens = {
@@ -300,11 +300,11 @@ export type TListStyleType = '_PREFIX_line-none' | '_PREFIX_list-disc' | '_PREFI
 
 export type TListStylePosition = '_PREFIX_list-inside' | '_PREFIX_list-outside';
 
-export type TPlaceholderColor = PLACEHOLDER_COLORS;
+export type TPlaceholderColor =PLACEHOLDER_COLORS;
 
 export type TTextAlign = '_PREFIX_text-left' | '_PREFIX_text-center' | '_PREFIX_text-right' | '_PREFIX_text-justify';
 
-export type TTextColor = TEXT_COLORS
+export type TTextColor =TEXT_COLORS;
 
 export type TTextDecoration = '_PREFIX_underline' | '_PREFIX_line-through' | '_PREFIX_no-underline';
 
@@ -348,7 +348,7 @@ export type TTypography =
 
 export type TBackgroundAttachment = '_PREFIX_bg-fixed' | '_PREFIX_bg-local' | '_PREFIX_bg-scroll';
 
-export type TBackgroundColor = BACKGROUND_COLORS
+export type TBackgroundColor =BACKGROUND_COLORS;
 
 export type TBackgroundPosition =
   | '_PREFIX_bg-bottom'
@@ -378,7 +378,7 @@ export type TBackgrounds =
   | TBackgroundRepeat
   | TBackgroundSize;
 
-export type TBorderColor = BORDER_COLORS
+export type TBorderColor =BORDER_COLORS;
 
 export type TBorderStyle = '_PREFIX_border-solid' | '_PREFIX_border-dashed' | '_PREFIX_border-dotted' | '_PREFIX_border-double' | '_PREFIX_border-none';
 
