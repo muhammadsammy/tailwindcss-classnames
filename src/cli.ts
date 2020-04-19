@@ -104,12 +104,16 @@ inquirer
         marginSpacings.push(`${prefix}m${side}-auto`);
       });
 
-      Object.keys(allSpacings).map(spacing => {
+      Object.keys(allSpacings).map((spacing, i) => {
         widthSpacings.push(`${prefix}w-${spacing}`);
         heightSpacings.push(`${prefix}h-${spacing}`);
         sides.map(side => {
           paddingSpacings.push(`${prefix}p${side}-${spacing}`);
           marginSpacings.push(`${prefix}m${side}-${spacing}`);
+          if (parseInt(spacing, 10) !== 0 && Object.values(allSpacings)[i] !== 0) {
+            paddingSpacings.push(`${prefix}-p${side}-${spacing}`);
+            marginSpacings.push(`${prefix}-m${side}-${spacing}`);
+          }
         });
       });
 
