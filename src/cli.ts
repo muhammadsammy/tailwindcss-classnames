@@ -99,6 +99,11 @@ inquirer
 
       const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
+      sides.map(side => {
+        paddingSpacings.push(`${prefix}p${side}-auto`);
+        marginSpacings.push(`${prefix}m${side}-auto`);
+      });
+
       Object.keys(allSpacings).map(spacing => {
         widthSpacings.push(`${prefix}w-${spacing}`);
         heightSpacings.push(`${prefix}h-${spacing}`);
