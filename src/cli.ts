@@ -93,11 +93,13 @@ inquirer
       const allSpacings = extendedThemeSpacings ? { ...themeSpacings, ...extendedThemeSpacings } : themeSpacings;
 
       const paddingSpacings: string[] = [];
+      const marginSpacings: string[] = [];
       const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
       Object.keys(allSpacings).map(spacing => {
         sides.map(side => {
           paddingSpacings.push(`${prefix}p${side}-${spacing}`);
+          marginSpacings.push(`${prefix}m${side}-${spacing}`);
         });
       });
 
@@ -108,6 +110,7 @@ inquirer
         .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
         .replace(/PADDINGS/g, generateTypes(paddingSpacings))
+        .replace(/MARGINS/g, generateTypes(marginSpacings))
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))
