@@ -88,12 +88,26 @@ inquirer
         breakpointCreateCustomReturns.push(`${breakpoint},`);
       });
 
+      const themeSpacings = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
+      const extendedThemeSpacings = THEME_CONFIG?.extend?.spacing;
+      const allSpacings = extendedThemeSpacings ? { ...themeSpacings, ...extendedThemeSpacings } : themeSpacings;
+
+      const paddingSpacings: string[] = [];
+      const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
+
+      Object.keys(allSpacings).map(spacing => {
+        sides.map(side => {
+          paddingSpacings.push(`${prefix}p${side}-${spacing}`);
+        });
+      });
+
       const result = baseTemplateString
         .replace(/_PREFIX_/g, prefix)
         .replace(/_SEPARATOR_/g, separator)
         .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
+        .replace(/PADDINGS/g, generateTypes(paddingSpacings))
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))

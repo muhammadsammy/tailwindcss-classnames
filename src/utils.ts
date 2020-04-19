@@ -129,6 +129,28 @@ export const defaultColors = {
   },
 };
 
+export const defaultSpacing = {
+  px: '1px',
+  '0': '0',
+  '1': '0.25rem',
+  '2': '0.5rem',
+  '3': '0.75rem',
+  '4': '1rem',
+  '5': '1.25rem',
+  '6': '1.5rem',
+  '8': '2rem',
+  '10': '2.5rem',
+  '12': '3rem',
+  '16': '4rem',
+  '20': '5rem',
+  '24': '6rem',
+  '32': '8rem',
+  '40': '10rem',
+  '48': '12rem',
+  '56': '14rem',
+  '64': '16rem',
+};
+
 export const baseTemplateString = `
 import classnamesLib from 'classnames';
 
@@ -651,140 +673,7 @@ export type TGridGap =
 
 export type TGridAutoFlow = '_PREFIX_grid-flow-row' | '_PREFIX_grid-flow-col' | '_PREFIX_grid-flow-row-dense' | '_PREFIX_grid-flow-col-dense';
 
-export type TPadding =
-  | '_PREFIX_p-0'
-  | '_PREFIX_p-1'
-  | '_PREFIX_p-2'
-  | '_PREFIX_p-3'
-  | '_PREFIX_p-4'
-  | '_PREFIX_p-5'
-  | '_PREFIX_p-6'
-  | '_PREFIX_p-8'
-  | '_PREFIX_p-10'
-  | '_PREFIX_p-12'
-  | '_PREFIX_p-16'
-  | '_PREFIX_p-20'
-  | '_PREFIX_p-24'
-  | '_PREFIX_p-32'
-  | '_PREFIX_p-40'
-  | '_PREFIX_p-48'
-  | '_PREFIX_p-56'
-  | '_PREFIX_p-64'
-  | '_PREFIX_p-px'
-  | '_PREFIX_py-0'
-  | '_PREFIX_py-1'
-  | '_PREFIX_py-2'
-  | '_PREFIX_py-3'
-  | '_PREFIX_py-4'
-  | '_PREFIX_py-5'
-  | '_PREFIX_py-6'
-  | '_PREFIX_py-8'
-  | '_PREFIX_py-10'
-  | '_PREFIX_py-12'
-  | '_PREFIX_py-16'
-  | '_PREFIX_py-20'
-  | '_PREFIX_py-24'
-  | '_PREFIX_py-32'
-  | '_PREFIX_py-40'
-  | '_PREFIX_py-48'
-  | '_PREFIX_py-56'
-  | '_PREFIX_py-64'
-  | '_PREFIX_py-px'
-  | '_PREFIX_px-0'
-  | '_PREFIX_px-1'
-  | '_PREFIX_px-2'
-  | '_PREFIX_px-3'
-  | '_PREFIX_px-4'
-  | '_PREFIX_px-5'
-  | '_PREFIX_px-6'
-  | '_PREFIX_px-8'
-  | '_PREFIX_px-10'
-  | '_PREFIX_px-12'
-  | '_PREFIX_px-16'
-  | '_PREFIX_px-20'
-  | '_PREFIX_px-24'
-  | '_PREFIX_px-32'
-  | '_PREFIX_px-40'
-  | '_PREFIX_px-48'
-  | '_PREFIX_px-56'
-  | '_PREFIX_px-64'
-  | '_PREFIX_px-px'
-  | '_PREFIX_pt-0'
-  | '_PREFIX_pt-1'
-  | '_PREFIX_pt-2'
-  | '_PREFIX_pt-3'
-  | '_PREFIX_pt-4'
-  | '_PREFIX_pt-5'
-  | '_PREFIX_pt-6'
-  | '_PREFIX_pt-8'
-  | '_PREFIX_pt-10'
-  | '_PREFIX_pt-12'
-  | '_PREFIX_pt-16'
-  | '_PREFIX_pt-20'
-  | '_PREFIX_pt-24'
-  | '_PREFIX_pt-32'
-  | '_PREFIX_pt-40'
-  | '_PREFIX_pt-48'
-  | '_PREFIX_pt-56'
-  | '_PREFIX_pt-64'
-  | '_PREFIX_pt-px'
-  | '_PREFIX_pr-0'
-  | '_PREFIX_pr-1'
-  | '_PREFIX_pr-2'
-  | '_PREFIX_pr-3'
-  | '_PREFIX_pr-4'
-  | '_PREFIX_pr-5'
-  | '_PREFIX_pr-6'
-  | '_PREFIX_pr-8'
-  | '_PREFIX_pr-10'
-  | '_PREFIX_pr-12'
-  | '_PREFIX_pr-16'
-  | '_PREFIX_pr-20'
-  | '_PREFIX_pr-24'
-  | '_PREFIX_pr-32'
-  | '_PREFIX_pr-40'
-  | '_PREFIX_pr-48'
-  | '_PREFIX_pr-56'
-  | '_PREFIX_pr-64'
-  | '_PREFIX_pr-px'
-  | '_PREFIX_pb-0'
-  | '_PREFIX_pb-1'
-  | '_PREFIX_pb-2'
-  | '_PREFIX_pb-3'
-  | '_PREFIX_pb-4'
-  | '_PREFIX_pb-5'
-  | '_PREFIX_pb-6'
-  | '_PREFIX_pb-8'
-  | '_PREFIX_pb-10'
-  | '_PREFIX_pb-12'
-  | '_PREFIX_pb-16'
-  | '_PREFIX_pb-20'
-  | '_PREFIX_pb-24'
-  | '_PREFIX_pb-32'
-  | '_PREFIX_pb-40'
-  | '_PREFIX_pb-48'
-  | '_PREFIX_pb-56'
-  | '_PREFIX_pb-64'
-  | '_PREFIX_pb-px'
-  | '_PREFIX_pb-0'
-  | '_PREFIX_pl-1'
-  | '_PREFIX_pl-2'
-  | '_PREFIX_pl-3'
-  | '_PREFIX_pl-4'
-  | '_PREFIX_pl-5'
-  | '_PREFIX_pl-6'
-  | '_PREFIX_pl-8'
-  | '_PREFIX_pl-10'
-  | '_PREFIX_pl-12'
-  | '_PREFIX_pl-16'
-  | '_PREFIX_pl-20'
-  | '_PREFIX_pl-24'
-  | '_PREFIX_pl-32'
-  | '_PREFIX_pl-40'
-  | '_PREFIX_pl-48'
-  | '_PREFIX_pl-56'
-  | '_PREFIX_pl-64'
-  | '_PREFIX_pl-px';
+export type TPadding =PADDINGS;
 
 export type TMargin =
   | '_PREFIX_m-0'
