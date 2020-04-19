@@ -5,7 +5,7 @@ import fs from 'fs';
 import inquirer from 'inquirer';
 import isEmpty from 'lodash.isempty';
 
-import { baseTemplateString, defaultColors, defaultScreens, generateTypes } from './utils';
+import { baseTemplateString, defaultColors, defaultScreens, defaultSpacing, generateTypes } from './utils';
 
 inquirer
   .prompt([
@@ -94,9 +94,14 @@ inquirer
 
       const paddingSpacings: string[] = [];
       const marginSpacings: string[] = [];
+      const widthSpacings: string[] = [];
+      const heightSpacings: string[] = [];
+
       const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
       Object.keys(allSpacings).map(spacing => {
+        widthSpacings.push(`${prefix}w-${spacing}`);
+        heightSpacings.push(`${prefix}h-${spacing}`);
         sides.map(side => {
           paddingSpacings.push(`${prefix}p${side}-${spacing}`);
           marginSpacings.push(`${prefix}m${side}-${spacing}`);
@@ -111,6 +116,8 @@ inquirer
         .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
         .replace(/PADDINGS/g, generateTypes(paddingSpacings))
         .replace(/MARGINS/g, generateTypes(marginSpacings))
+        .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
+        .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))

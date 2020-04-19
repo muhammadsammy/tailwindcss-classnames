@@ -679,28 +679,8 @@ export type TMargin =MARGINS;
 
 export type TSpacing = TPadding | TMargin;
 
-export type TWidth =
-  | '_PREFIX_w-0'
-  | '_PREFIX_w-1'
-  | '_PREFIX_w-2'
-  | '_PREFIX_w-3'
-  | '_PREFIX_w-4'
-  | '_PREFIX_w-5'
-  | '_PREFIX_w-6'
-  | '_PREFIX_w-7'
-  | '_PREFIX_w-8'
-  | '_PREFIX_w-10'
-  | '_PREFIX_w-12'
-  | '_PREFIX_w-16'
-  | '_PREFIX_w-20'
-  | '_PREFIX_w-24'
-  | '_PREFIX_w-32'
-  | '_PREFIX_w-40'
-  | '_PREFIX_w-48'
-  | '_PREFIX_w-56'
-  | '_PREFIX_w-64'
+export type TWidth =WIDTH_SPACINGS
   | '_PREFIX_w-auto'
-  | '_PREFIX_w-px'
   | '_PREFIX_w-1/2'
   | '_PREFIX_w-1/3'
   | '_PREFIX_w-2/3'
@@ -745,27 +725,8 @@ export type TMaxWidth =
   | '_PREFIX_max-w-6xl'
   | '_PREFIX_max-w-full';
 
-export type THeight =
-  | '_PREFIX_h-0'
-  | '_PREFIX_h-1'
-  | '_PREFIX_h-2'
-  | '_PREFIX_h-3'
-  | '_PREFIX_h-4'
-  | '_PREFIX_h-5'
-  | '_PREFIX_h-6'
-  | '_PREFIX_h-8'
-  | '_PREFIX_h-10'
-  | '_PREFIX_h-12'
-  | '_PREFIX_h-16'
-  | '_PREFIX_h-20'
-  | '_PREFIX_h-24'
-  | '_PREFIX_h-32'
-  | '_PREFIX_h-40'
-  | '_PREFIX_h-48'
-  | '_PREFIX_h-56'
-  | '_PREFIX_h-64'
+export type THeight =HEIGHT_SPACINGS
   | '_PREFIX_h-auto'
-  | '_PREFIX_h-px'
   | '_PREFIX_h-full'
   | '_PREFIX_h-screen';
 
