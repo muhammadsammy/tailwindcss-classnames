@@ -79,6 +79,7 @@ inquirer
       const breakpointExportStatements: string[] = [];
       const breakpointCreateCustomParams: string[] = [];
       const breakpointCreateCustomReturns: string[] = [];
+      const maxWidthByBreakpoints: string[] = [];
 
       Object.keys(breakpoints).map((breakpoint: string) => {
         breakpointExportStatements.push(
@@ -86,6 +87,7 @@ inquirer
         );
         breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
         breakpointCreateCustomReturns.push(`${breakpoint},`);
+        maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
       });
 
       const themeSpacings = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
@@ -120,6 +122,7 @@ inquirer
       const result = baseTemplateString
         .replace(/_PREFIX_/g, prefix)
         .replace(/_SEPARATOR_/g, separator)
+        .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(maxWidthByBreakpoints))
         .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))

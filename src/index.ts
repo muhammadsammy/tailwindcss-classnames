@@ -1367,7 +1367,12 @@ export type TMaxWidth =
   | 'max-w-4xl'
   | 'max-w-5xl'
   | 'max-w-6xl'
-  | 'max-w-full';
+  | 'max-w-full'
+  | 'max-w-screen-sm'
+  | 'max-w-screen-md'
+  | 'max-w-screen-lg'
+  | 'max-w-screen-xl'
+  | 'max-w-none';
 
 export type THeight =
   | 'h-0'

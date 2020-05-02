@@ -712,7 +712,7 @@ export type TWidth =WIDTH_SPACINGS
 
 export type TMinWidth = '_PREFIX_min-w-0' | '_PREFIX_min-w-full';
 
-export type TMaxWidth =
+export type TMaxWidth =MAX_WIDTH_BY_BREAKPOINTS
   | '_PREFIX_max-w-xs'
   | '_PREFIX_max-w-sm'
   | '_PREFIX_max-w-md'
@@ -723,6 +723,7 @@ export type TMaxWidth =
   | '_PREFIX_max-w-4xl'
   | '_PREFIX_max-w-5xl'
   | '_PREFIX_max-w-6xl'
+  | '_PREFIX_max-w-none'
   | '_PREFIX_max-w-full';
 
 export type THeight =HEIGHT_SPACINGS
