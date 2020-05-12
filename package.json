@@ -8,7 +8,7 @@
     "Christian Alfoni <christianalfoni@gmail.com>"
   ],
   "license": "MIT",
-  "repository": "git+https://github.com/themsammy/tailwindcss-classnames.git",
+  "repository": "git+https://github.com/muhammadsammy/tailwindcss-classnames.git",
   "main": "lib/index.js",
   "bin": {
     "tailwindcss-classnames": "lib/cli.js"
