@@ -170,21 +170,20 @@ export const buttonClasses = {
 The default types exported from this package are tailwindcss default ones.
 But if you modified some classes in your tailwind config file, you can use the CLI tool to create a file with generated types for these classes.
 
-### Use per project:
+### CLI arguments:
+
+- -c --config The name of TailwindCSS config file.
+- -o --output _(Optional)_ The name of generated file
 
 Add it in your package.json scripts:
 
 ```json
 "scripts": {
-  "generate" : "tailwindcss-classnames"
+  "generate-types" : "tailwindcss-classnames --config tailwind.config.js"
 }
 ```
 
 or simply run `npx tailwindcss-classnames`
-
-### Install globally:
-
-just `npm i -g tailwindcss-classnames` and run the command where the config file is located.
 
 ## Custom typing
 

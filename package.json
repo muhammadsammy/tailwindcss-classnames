@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-classnames",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Functional typed classnames for TailwindCSS",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "contributors": [
@@ -21,7 +21,7 @@
     "build:lib": "tsc --outDir lib --module commonjs",
     "build:es": "tsc --outDir es --module es2015",
     "build:umd": "npm run build:es && rollup --config && dts-bundle --name dist/bundle --main es --outputAsModuleFolder",
-    "clean": "rimraf dist es lib coverage",
+    "clean": "rimraf dist es lib coverage tailwindcss-classnames.ts",
     "typecheck": "tsc --noEmit",
     "lint": "tslint --project tsconfig.json --format stylish",
     "format": "prettier '**/*.{md,js,jsx,json,ts,tsx}' --write",
@@ -47,6 +47,7 @@
   ],
   "dependencies": {
     "classnames": "^2.2.6",
+    "commander": "^5.1.0",
     "inquirer": "^7.1.0",
     "lodash.isempty": "^4.4.0",
     "tslib": "^1.9.3"
