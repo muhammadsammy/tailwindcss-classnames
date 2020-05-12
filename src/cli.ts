@@ -57,10 +57,15 @@ inquirer
         if (colorVal instanceof Object) {
           const colorVariants = Object.keys(colorVal);
           colorVariants.map((variant: string) => {
-            backgroundColors.push(`${prefix}bg-${colorKey}-${variant}`);
-            placeholderColors.push(`${prefix}placeholder-${colorKey}-${variant}`);
-            borderColors.push(`${prefix}border-${colorKey}-${variant}`);
-            textColors.push(`${prefix}text-${colorKey}-${variant}`);
+            if (variant === 'default') {
+              variant = '';
+            } else {
+              variant = `-${variant}`;
+            }
+            backgroundColors.push(`${prefix}bg-${colorKey}${variant}`);
+            placeholderColors.push(`${prefix}placeholder-${colorKey}${variant}`);
+            borderColors.push(`${prefix}border-${colorKey}${variant}`);
+            textColors.push(`${prefix}text-${colorKey}${variant}`);
           });
         } else {
           backgroundColors.push(`${prefix}bg-${colorKey}`);
