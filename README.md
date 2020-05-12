@@ -109,6 +109,83 @@ export const App: React.FC<{ disabled }> = ({ disabled }) => {
 };
 ```
 
+Custom button component example:
+
+<!-- prettier-ignore -->
+```tsx
+import React from "react"
+import {
+  classnames as tw,
+  hover,
+  TTailwindString,
+} from "../tailwindcss-classnames"
+
+type Props = {
+  type: "button" | "submit" | "reset"
+  className?: TTailwindString | string
+  variant?: "minimal" | "default" | "primary" | "outline"
+}
+
+export const Button: React.FunctionComponent<Props &
+  React.ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
+  const {type, children, className, variant = "default", onClick} = props
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${buttonClasses[variant]} ${className}`}
+    >
+      {children}
+    </button>
+  )
+}
+
+const baseClasses = tw("rounded", "py-2", "px-4", "font-semibold")
+export const buttonClasses = {
+  default: tw(
+    baseClasses,
+    hover("bg-gray-100"),
+    "text-gray-700",
+    "border",
+    "bg-gray-200",
+    "border-gray-300"
+  ),
+  primary: tw(baseClasses, hover("bg-blue-500"), "bg-blue-600", "text-white"),
+  outline: tw(
+    baseClasses,
+    hover("bg-blue-500"),
+    hover("text-white"),
+    hover("border-transparent"),
+    "bg-transparent",
+    "text-blue-700",
+    "border",
+    "border-blue-500"
+  ),
+  minimal: tw(baseClasses, hover("bg-gray-200"), "bg-transparent"),
+}
+```
+
+## Generating types from tailwind config
+
+The default types exported from this package are tailwindcss default ones.
+But if you modified some classes in your tailwind config file, you can use the CLI tool to create a file with generated types for these classes.
+
+### Use per project:
+
+Add it in your package.json scripts:
+
+```json
+"scripts": {
+  "generate" : "tailwindcss-classnames"
+}
+```
+
+or simply run `npx tailwindcss-classnames`
+
+### Install globally:
+
+just `npm i -g tailwindcss-classnames` and run the command where the config file is located.
+
 ## Custom typing
 
 By default you have all the classes available as types, though you might not use all of them. You can customize your own by:

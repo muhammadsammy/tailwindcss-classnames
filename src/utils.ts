@@ -1,5 +1,7 @@
+/* tslint:disable: prefer-template */
+
 export function generateTypes(arr: string[]) {
-  return '\n | ' + arr.map(n => `"${n}"`).join('\n | ');
+  return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
 }
 
 export const defaultScreens = {
@@ -125,6 +127,28 @@ export const defaultColors = {
     800: '#97266d',
     900: '#702459',
   },
+};
+
+export const defaultSpacing = {
+  px: '1px',
+  '0': '0',
+  '1': '0.25rem',
+  '2': '0.5rem',
+  '3': '0.75rem',
+  '4': '1rem',
+  '5': '1.25rem',
+  '6': '1.5rem',
+  '8': '2rem',
+  '10': '2.5rem',
+  '12': '3rem',
+  '16': '4rem',
+  '20': '5rem',
+  '24': '6rem',
+  '32': '8rem',
+  '40': '10rem',
+  '48': '12rem',
+  '56': '14rem',
+  '64': '16rem',
 };
 
 export const baseTemplateString = `
@@ -276,11 +300,11 @@ export type TListStyleType = '_PREFIX_line-none' | '_PREFIX_list-disc' | '_PREFI
 
 export type TListStylePosition = '_PREFIX_list-inside' | '_PREFIX_list-outside';
 
-export type TPlaceholderColor = PLACEHOLDER_COLORS;
+export type TPlaceholderColor =PLACEHOLDER_COLORS;
 
 export type TTextAlign = '_PREFIX_text-left' | '_PREFIX_text-center' | '_PREFIX_text-right' | '_PREFIX_text-justify';
 
-export type TTextColor = TEXT_COLORS
+export type TTextColor =TEXT_COLORS;
 
 export type TTextDecoration = '_PREFIX_underline' | '_PREFIX_line-through' | '_PREFIX_no-underline';
 
@@ -324,7 +348,7 @@ export type TTypography =
 
 export type TBackgroundAttachment = '_PREFIX_bg-fixed' | '_PREFIX_bg-local' | '_PREFIX_bg-scroll';
 
-export type TBackgroundColor = BACKGROUND_COLORS
+export type TBackgroundColor =BACKGROUND_COLORS;
 
 export type TBackgroundPosition =
   | '_PREFIX_bg-bottom'
@@ -354,7 +378,7 @@ export type TBackgrounds =
   | TBackgroundRepeat
   | TBackgroundSize;
 
-export type TBorderColor = BORDER_COLORS
+export type TBorderColor =BORDER_COLORS;
 
 export type TBorderStyle = '_PREFIX_border-solid' | '_PREFIX_border-dashed' | '_PREFIX_border-dotted' | '_PREFIX_border-double' | '_PREFIX_border-none';
 
@@ -649,440 +673,14 @@ export type TGridGap =
 
 export type TGridAutoFlow = '_PREFIX_grid-flow-row' | '_PREFIX_grid-flow-col' | '_PREFIX_grid-flow-row-dense' | '_PREFIX_grid-flow-col-dense';
 
-export type TPadding =
-  | '_PREFIX_p-0'
-  | '_PREFIX_p-1'
-  | '_PREFIX_p-2'
-  | '_PREFIX_p-3'
-  | '_PREFIX_p-4'
-  | '_PREFIX_p-5'
-  | '_PREFIX_p-6'
-  | '_PREFIX_p-8'
-  | '_PREFIX_p-10'
-  | '_PREFIX_p-12'
-  | '_PREFIX_p-16'
-  | '_PREFIX_p-20'
-  | '_PREFIX_p-24'
-  | '_PREFIX_p-32'
-  | '_PREFIX_p-40'
-  | '_PREFIX_p-48'
-  | '_PREFIX_p-56'
-  | '_PREFIX_p-64'
-  | '_PREFIX_p-px'
-  | '_PREFIX_py-0'
-  | '_PREFIX_py-1'
-  | '_PREFIX_py-2'
-  | '_PREFIX_py-3'
-  | '_PREFIX_py-4'
-  | '_PREFIX_py-5'
-  | '_PREFIX_py-6'
-  | '_PREFIX_py-8'
-  | '_PREFIX_py-10'
-  | '_PREFIX_py-12'
-  | '_PREFIX_py-16'
-  | '_PREFIX_py-20'
-  | '_PREFIX_py-24'
-  | '_PREFIX_py-32'
-  | '_PREFIX_py-40'
-  | '_PREFIX_py-48'
-  | '_PREFIX_py-56'
-  | '_PREFIX_py-64'
-  | '_PREFIX_py-px'
-  | '_PREFIX_px-0'
-  | '_PREFIX_px-1'
-  | '_PREFIX_px-2'
-  | '_PREFIX_px-3'
-  | '_PREFIX_px-4'
-  | '_PREFIX_px-5'
-  | '_PREFIX_px-6'
-  | '_PREFIX_px-8'
-  | '_PREFIX_px-10'
-  | '_PREFIX_px-12'
-  | '_PREFIX_px-16'
-  | '_PREFIX_px-20'
-  | '_PREFIX_px-24'
-  | '_PREFIX_px-32'
-  | '_PREFIX_px-40'
-  | '_PREFIX_px-48'
-  | '_PREFIX_px-56'
-  | '_PREFIX_px-64'
-  | '_PREFIX_px-px'
-  | '_PREFIX_pt-0'
-  | '_PREFIX_pt-1'
-  | '_PREFIX_pt-2'
-  | '_PREFIX_pt-3'
-  | '_PREFIX_pt-4'
-  | '_PREFIX_pt-5'
-  | '_PREFIX_pt-6'
-  | '_PREFIX_pt-8'
-  | '_PREFIX_pt-10'
-  | '_PREFIX_pt-12'
-  | '_PREFIX_pt-16'
-  | '_PREFIX_pt-20'
-  | '_PREFIX_pt-24'
-  | '_PREFIX_pt-32'
-  | '_PREFIX_pt-40'
-  | '_PREFIX_pt-48'
-  | '_PREFIX_pt-56'
-  | '_PREFIX_pt-64'
-  | '_PREFIX_pt-px'
-  | '_PREFIX_pr-0'
-  | '_PREFIX_pr-1'
-  | '_PREFIX_pr-2'
-  | '_PREFIX_pr-3'
-  | '_PREFIX_pr-4'
-  | '_PREFIX_pr-5'
-  | '_PREFIX_pr-6'
-  | '_PREFIX_pr-8'
-  | '_PREFIX_pr-10'
-  | '_PREFIX_pr-12'
-  | '_PREFIX_pr-16'
-  | '_PREFIX_pr-20'
-  | '_PREFIX_pr-24'
-  | '_PREFIX_pr-32'
-  | '_PREFIX_pr-40'
-  | '_PREFIX_pr-48'
-  | '_PREFIX_pr-56'
-  | '_PREFIX_pr-64'
-  | '_PREFIX_pr-px'
-  | '_PREFIX_pb-0'
-  | '_PREFIX_pb-1'
-  | '_PREFIX_pb-2'
-  | '_PREFIX_pb-3'
-  | '_PREFIX_pb-4'
-  | '_PREFIX_pb-5'
-  | '_PREFIX_pb-6'
-  | '_PREFIX_pb-8'
-  | '_PREFIX_pb-10'
-  | '_PREFIX_pb-12'
-  | '_PREFIX_pb-16'
-  | '_PREFIX_pb-20'
-  | '_PREFIX_pb-24'
-  | '_PREFIX_pb-32'
-  | '_PREFIX_pb-40'
-  | '_PREFIX_pb-48'
-  | '_PREFIX_pb-56'
-  | '_PREFIX_pb-64'
-  | '_PREFIX_pb-px'
-  | '_PREFIX_pb-0'
-  | '_PREFIX_pl-1'
-  | '_PREFIX_pl-2'
-  | '_PREFIX_pl-3'
-  | '_PREFIX_pl-4'
-  | '_PREFIX_pl-5'
-  | '_PREFIX_pl-6'
-  | '_PREFIX_pl-8'
-  | '_PREFIX_pl-10'
-  | '_PREFIX_pl-12'
-  | '_PREFIX_pl-16'
-  | '_PREFIX_pl-20'
-  | '_PREFIX_pl-24'
-  | '_PREFIX_pl-32'
-  | '_PREFIX_pl-40'
-  | '_PREFIX_pl-48'
-  | '_PREFIX_pl-56'
-  | '_PREFIX_pl-64'
-  | '_PREFIX_pl-px';
+export type TPadding =PADDINGS;
 
-export type TMargin =
-  | '_PREFIX_m-0'
-  | '_PREFIX_m-1'
-  | '_PREFIX_m-2'
-  | '_PREFIX_m-3'
-  | '_PREFIX_m-4'
-  | '_PREFIX_m-5'
-  | '_PREFIX_m-6'
-  | '_PREFIX_m-8'
-  | '_PREFIX_m-10'
-  | '_PREFIX_m-12'
-  | '_PREFIX_m-16'
-  | '_PREFIX_m-20'
-  | '_PREFIX_m-24'
-  | '_PREFIX_m-32'
-  | '_PREFIX_m-40'
-  | '_PREFIX_m-48'
-  | '_PREFIX_m-56'
-  | '_PREFIX_m-64'
-  | '_PREFIX_m-auto'
-  | '_PREFIX_m-px'
-  | '_PREFIX_-m-0'
-  | '_PREFIX_-m-1'
-  | '_PREFIX_-m-2'
-  | '_PREFIX_-m-3'
-  | '_PREFIX_-m-4'
-  | '_PREFIX_-m-5'
-  | '_PREFIX_-m-6'
-  | '_PREFIX_-m-8'
-  | '_PREFIX_-m-10'
-  | '_PREFIX_-m-12'
-  | '_PREFIX_-m-16'
-  | '_PREFIX_-m-20'
-  | '_PREFIX_-m-24'
-  | '_PREFIX_-m-32'
-  | '_PREFIX_-m-40'
-  | '_PREFIX_-m-48'
-  | '_PREFIX_-m-56'
-  | '_PREFIX_-m-64'
-  | '_PREFIX_-m-px'
-  | '_PREFIX_my-0'
-  | '_PREFIX_my-1'
-  | '_PREFIX_my-2'
-  | '_PREFIX_my-3'
-  | '_PREFIX_my-4'
-  | '_PREFIX_my-5'
-  | '_PREFIX_my-6'
-  | '_PREFIX_my-8'
-  | '_PREFIX_my-10'
-  | '_PREFIX_my-12'
-  | '_PREFIX_my-16'
-  | '_PREFIX_my-20'
-  | '_PREFIX_my-24'
-  | '_PREFIX_my-32'
-  | '_PREFIX_my-40'
-  | '_PREFIX_my-48'
-  | '_PREFIX_my-56'
-  | '_PREFIX_my-64'
-  | '_PREFIX_my-auto'
-  | '_PREFIX_my-px'
-  | '_PREFIX_-my-0'
-  | '_PREFIX_-my-1'
-  | '_PREFIX_-my-2'
-  | '_PREFIX_-my-3'
-  | '_PREFIX_-my-4'
-  | '_PREFIX_-my-5'
-  | '_PREFIX_-my-6'
-  | '_PREFIX_-my-8'
-  | '_PREFIX_-my-10'
-  | '_PREFIX_-my-12'
-  | '_PREFIX_-my-16'
-  | '_PREFIX_-my-20'
-  | '_PREFIX_-my-24'
-  | '_PREFIX_-my-32'
-  | '_PREFIX_-my-40'
-  | '_PREFIX_-my-48'
-  | '_PREFIX_-my-56'
-  | '_PREFIX_-my-64'
-  | '_PREFIX_-my-px'
-  | '_PREFIX_mx-0'
-  | '_PREFIX_mx-1'
-  | '_PREFIX_mx-2'
-  | '_PREFIX_mx-3'
-  | '_PREFIX_mx-4'
-  | '_PREFIX_mx-5'
-  | '_PREFIX_mx-6'
-  | '_PREFIX_mx-8'
-  | '_PREFIX_mx-10'
-  | '_PREFIX_mx-12'
-  | '_PREFIX_mx-16'
-  | '_PREFIX_mx-20'
-  | '_PREFIX_mx-24'
-  | '_PREFIX_mx-32'
-  | '_PREFIX_mx-40'
-  | '_PREFIX_mx-48'
-  | '_PREFIX_mx-56'
-  | '_PREFIX_mx-64'
-  | '_PREFIX_mx-auto'
-  | '_PREFIX_mx-px'
-  | '_PREFIX_-mx-0'
-  | '_PREFIX_-mx-1'
-  | '_PREFIX_-mx-2'
-  | '_PREFIX_-mx-3'
-  | '_PREFIX_-mx-4'
-  | '_PREFIX_-mx-5'
-  | '_PREFIX_-mx-6'
-  | '_PREFIX_-mx-8'
-  | '_PREFIX_-mx-10'
-  | '_PREFIX_-mx-12'
-  | '_PREFIX_-mx-16'
-  | '_PREFIX_-mx-20'
-  | '_PREFIX_-mx-24'
-  | '_PREFIX_-mx-32'
-  | '_PREFIX_-mx-40'
-  | '_PREFIX_-mx-48'
-  | '_PREFIX_-mx-56'
-  | '_PREFIX_-mx-64'
-  | '_PREFIX_-mx-px'
-  | '_PREFIX_mt-0'
-  | '_PREFIX_mt-1'
-  | '_PREFIX_mt-2'
-  | '_PREFIX_mt-3'
-  | '_PREFIX_mt-4'
-  | '_PREFIX_mt-5'
-  | '_PREFIX_mt-6'
-  | '_PREFIX_mt-8'
-  | '_PREFIX_mt-10'
-  | '_PREFIX_mt-12'
-  | '_PREFIX_mt-16'
-  | '_PREFIX_mt-20'
-  | '_PREFIX_mt-24'
-  | '_PREFIX_mt-32'
-  | '_PREFIX_mt-40'
-  | '_PREFIX_mt-48'
-  | '_PREFIX_mt-56'
-  | '_PREFIX_mt-64'
-  | '_PREFIX_mt-auto'
-  | '_PREFIX_mt-px'
-  | '_PREFIX_-mt-0'
-  | '_PREFIX_-mt-1'
-  | '_PREFIX_-mt-2'
-  | '_PREFIX_-mt-3'
-  | '_PREFIX_-mt-4'
-  | '_PREFIX_-mt-5'
-  | '_PREFIX_-mt-6'
-  | '_PREFIX_-mt-8'
-  | '_PREFIX_-mt-10'
-  | '_PREFIX_-mt-12'
-  | '_PREFIX_-mt-16'
-  | '_PREFIX_-mt-20'
-  | '_PREFIX_-mt-24'
-  | '_PREFIX_-mt-32'
-  | '_PREFIX_-mt-40'
-  | '_PREFIX_-mt-48'
-  | '_PREFIX_-mt-56'
-  | '_PREFIX_-mt-64'
-  | '_PREFIX_-mt-px'
-  | '_PREFIX_mr-0'
-  | '_PREFIX_mr-1'
-  | '_PREFIX_mr-2'
-  | '_PREFIX_mr-3'
-  | '_PREFIX_mr-4'
-  | '_PREFIX_mr-5'
-  | '_PREFIX_mr-6'
-  | '_PREFIX_mr-8'
-  | '_PREFIX_mr-10'
-  | '_PREFIX_mr-12'
-  | '_PREFIX_mr-16'
-  | '_PREFIX_mr-20'
-  | '_PREFIX_mr-24'
-  | '_PREFIX_mr-32'
-  | '_PREFIX_mr-40'
-  | '_PREFIX_mr-48'
-  | '_PREFIX_mr-56'
-  | '_PREFIX_mr-64'
-  | '_PREFIX_mr-auto'
-  | '_PREFIX_mr-px'
-  | '_PREFIX_-mr-0'
-  | '_PREFIX_-mr-1'
-  | '_PREFIX_-mr-2'
-  | '_PREFIX_-mr-3'
-  | '_PREFIX_-mr-4'
-  | '_PREFIX_-mr-5'
-  | '_PREFIX_-mr-6'
-  | '_PREFIX_-mr-8'
-  | '_PREFIX_-mr-10'
-  | '_PREFIX_-mr-12'
-  | '_PREFIX_-mr-16'
-  | '_PREFIX_-mr-20'
-  | '_PREFIX_-mr-24'
-  | '_PREFIX_-mr-32'
-  | '_PREFIX_-mr-40'
-  | '_PREFIX_-mr-48'
-  | '_PREFIX_-mr-56'
-  | '_PREFIX_-mr-64'
-  | '_PREFIX_-mr-px'
-  | '_PREFIX_mb-0'
-  | '_PREFIX_mb-1'
-  | '_PREFIX_mb-2'
-  | '_PREFIX_mb-3'
-  | '_PREFIX_mb-4'
-  | '_PREFIX_mb-5'
-  | '_PREFIX_mb-6'
-  | '_PREFIX_mb-8'
-  | '_PREFIX_mb-10'
-  | '_PREFIX_mb-12'
-  | '_PREFIX_mb-16'
-  | '_PREFIX_mb-20'
-  | '_PREFIX_mb-24'
-  | '_PREFIX_mb-32'
-  | '_PREFIX_mb-40'
-  | '_PREFIX_mb-48'
-  | '_PREFIX_mb-56'
-  | '_PREFIX_mb-64'
-  | '_PREFIX_mb-auto'
-  | '_PREFIX_mb-px'
-  | '_PREFIX_-mb-0'
-  | '_PREFIX_-mb-1'
-  | '_PREFIX_-mb-2'
-  | '_PREFIX_-mb-3'
-  | '_PREFIX_-mb-4'
-  | '_PREFIX_-mb-5'
-  | '_PREFIX_-mb-6'
-  | '_PREFIX_-mb-8'
-  | '_PREFIX_-mb-10'
-  | '_PREFIX_-mb-12'
-  | '_PREFIX_-mb-16'
-  | '_PREFIX_-mb-20'
-  | '_PREFIX_-mb-24'
-  | '_PREFIX_-mb-32'
-  | '_PREFIX_-mb-40'
-  | '_PREFIX_-mb-48'
-  | '_PREFIX_-mb-56'
-  | '_PREFIX_-mb-64'
-  | '_PREFIX_-mb-px'
-  | '_PREFIX_ml-0'
-  | '_PREFIX_ml-1'
-  | '_PREFIX_ml-2'
-  | '_PREFIX_ml-3'
-  | '_PREFIX_ml-4'
-  | '_PREFIX_ml-5'
-  | '_PREFIX_ml-6'
-  | '_PREFIX_ml-8'
-  | '_PREFIX_ml-10'
-  | '_PREFIX_ml-12'
-  | '_PREFIX_ml-16'
-  | '_PREFIX_ml-20'
-  | '_PREFIX_ml-24'
-  | '_PREFIX_ml-32'
-  | '_PREFIX_ml-40'
-  | '_PREFIX_ml-48'
-  | '_PREFIX_ml-56'
-  | '_PREFIX_ml-64'
-  | '_PREFIX_ml-auto'
-  | '_PREFIX_ml-px'
-  | '_PREFIX_-ml-0'
-  | '_PREFIX_-ml-1'
-  | '_PREFIX_-ml-2'
-  | '_PREFIX_-ml-3'
-  | '_PREFIX_-ml-4'
-  | '_PREFIX_-ml-5'
-  | '_PREFIX_-ml-6'
-  | '_PREFIX_-ml-8'
-  | '_PREFIX_-ml-10'
-  | '_PREFIX_-ml-12'
-  | '_PREFIX_-ml-16'
-  | '_PREFIX_-ml-20'
-  | '_PREFIX_-ml-24'
-  | '_PREFIX_-ml-32'
-  | '_PREFIX_-ml-40'
-  | '_PREFIX_-ml-48'
-  | '_PREFIX_-ml-56'
-  | '_PREFIX_-ml-64'
-  | '_PREFIX_-ml-px';
+export type TMargin =MARGINS;
 
 export type TSpacing = TPadding | TMargin;
 
-export type TWidth =
-  | '_PREFIX_w-0'
-  | '_PREFIX_w-1'
-  | '_PREFIX_w-2'
-  | '_PREFIX_w-3'
-  | '_PREFIX_w-4'
-  | '_PREFIX_w-5'
-  | '_PREFIX_w-6'
-  | '_PREFIX_w-7'
-  | '_PREFIX_w-8'
-  | '_PREFIX_w-10'
-  | '_PREFIX_w-12'
-  | '_PREFIX_w-16'
-  | '_PREFIX_w-20'
-  | '_PREFIX_w-24'
-  | '_PREFIX_w-32'
-  | '_PREFIX_w-40'
-  | '_PREFIX_w-48'
-  | '_PREFIX_w-56'
-  | '_PREFIX_w-64'
+export type TWidth =WIDTH_SPACINGS
   | '_PREFIX_w-auto'
-  | '_PREFIX_w-px'
   | '_PREFIX_w-1/2'
   | '_PREFIX_w-1/3'
   | '_PREFIX_w-2/3'
@@ -1114,7 +712,7 @@ export type TWidth =
 
 export type TMinWidth = '_PREFIX_min-w-0' | '_PREFIX_min-w-full';
 
-export type TMaxWidth =
+export type TMaxWidth =MAX_WIDTH_BY_BREAKPOINTS
   | '_PREFIX_max-w-xs'
   | '_PREFIX_max-w-sm'
   | '_PREFIX_max-w-md'
@@ -1125,29 +723,11 @@ export type TMaxWidth =
   | '_PREFIX_max-w-4xl'
   | '_PREFIX_max-w-5xl'
   | '_PREFIX_max-w-6xl'
+  | '_PREFIX_max-w-none'
   | '_PREFIX_max-w-full';
 
-export type THeight =
-  | '_PREFIX_h-0'
-  | '_PREFIX_h-1'
-  | '_PREFIX_h-2'
-  | '_PREFIX_h-3'
-  | '_PREFIX_h-4'
-  | '_PREFIX_h-5'
-  | '_PREFIX_h-6'
-  | '_PREFIX_h-8'
-  | '_PREFIX_h-10'
-  | '_PREFIX_h-12'
-  | '_PREFIX_h-16'
-  | '_PREFIX_h-20'
-  | '_PREFIX_h-24'
-  | '_PREFIX_h-32'
-  | '_PREFIX_h-40'
-  | '_PREFIX_h-48'
-  | '_PREFIX_h-56'
-  | '_PREFIX_h-64'
+export type THeight =HEIGHT_SPACINGS
   | '_PREFIX_h-auto'
-  | '_PREFIX_h-px'
   | '_PREFIX_h-full'
   | '_PREFIX_h-screen';
 
@@ -1403,6 +983,7 @@ export type TClasses =
   | TSizing
   | TTables
   | TEffects
+  | TTransforms
   | TTransitions
   | TInteractivity
   | TAccessibility;
@@ -1435,7 +1016,7 @@ export const lastChild: TPseudoClass = className => ('_PREFIX_last-child_SEPARAT
 
 export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
 
-export const evenChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
+export const evenChild: TPseudoClass = className => ('_PREFIX_even-child_SEPARATOR_' + className) as TTailwindString;
 
 export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
 

@@ -1367,7 +1367,12 @@ export type TMaxWidth =
   | 'max-w-4xl'
   | 'max-w-5xl'
   | 'max-w-6xl'
-  | 'max-w-full';
+  | 'max-w-full'
+  | 'max-w-screen-sm'
+  | 'max-w-screen-md'
+  | 'max-w-screen-lg'
+  | 'max-w-screen-xl'
+  | 'max-w-none';
 
 export type THeight =
   | 'h-0'
@@ -1645,6 +1650,7 @@ export type TClasses =
   | TSizing
   | TTables
   | TEffects
+  | TTransforms
   | TTransitions
   | TInteractivity
   | TAccessibility;
@@ -1683,7 +1689,7 @@ export const lastChild: TPseudoClass = className => `last-child:${className}` as
 
 export const oddChild: TPseudoClass = className => `odd-child:${className}` as TTailwindString;
 
-export const evenChild: TPseudoClass = className => `odd-child:${className}` as TTailwindString;
+export const evenChild: TPseudoClass = className => `even-child:${className}` as TTailwindString;
 
 export const groupHover: TPseudoClass = className => `group-hover:${className}` as TTailwindString;
 

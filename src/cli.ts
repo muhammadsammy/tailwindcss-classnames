@@ -1,7 +1,11 @@
+#!/usr/bin/env node
+
+/* tslint:disable:no-eval no-console */
 import fs from 'fs';
 import inquirer from 'inquirer';
-import { baseTemplateString, generateTypes, defaultColors, defaultScreens } from './utils';
 import isEmpty from 'lodash.isempty';
+
+import { baseTemplateString, defaultColors, defaultScreens, defaultSpacing, generateTypes } from './utils';
 
 inquirer
   .prompt([
@@ -19,89 +23,134 @@ inquirer
     },
   ])
   .then(answers => {
-    fs.readFile(`./${answers.configFilename}`, { encoding: 'utf-8' }, (err, data) => {
-      if (err) throw err;
+    fs.readFile(`./${answers.configFilename}`, { encoding: 'utf-8' }, (err, data: any) => {
+      if (err) {
+        console.error(err);
+      }
 
-      const TAILWIND_CONFIG = eval(data);
-      let backgroundColors: Array<string> = [];
-      let placeholderColors: Array<string> = [];
-      let borderColors: Array<string> = [];
-      let textColors: Array<string> = [];
+      data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
 
-      const prefix = isEmpty(TAILWIND_CONFIG?.prefix) ? '' : TAILWIND_CONFIG?.prefix;
-      const separator = isEmpty(TAILWIND_CONFIG?.separator) ? ':' : TAILWIND_CONFIG?.separator;
+      const CONFIG = eval(data);
+      const THEME_CONFIG = CONFIG.theme;
+      const PREFIX_CONFIG = CONFIG.prefix;
+      const SEPARATOR_CONFIG = CONFIG.separator;
 
-      // prettier-ignore
-      const themeColors = isEmpty(TAILWIND_CONFIG?.theme?.colors)
-        ? defaultColors
-        : TAILWIND_CONFIG?.theme?.colors;
-      const extendedThemeColors = TAILWIND_CONFIG?.theme?.extend?.colors;
-      const colors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
+      const prefix = isEmpty(PREFIX_CONFIG) ? '' : PREFIX_CONFIG;
+      const separator = isEmpty(SEPARATOR_CONFIG) ? ':' : SEPARATOR_CONFIG;
+      const themeColors = isEmpty(THEME_CONFIG?.colors) ? defaultColors : THEME_CONFIG?.colors;
+      const extendedThemeColors = THEME_CONFIG?.extend?.colors;
+      const AllColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
 
-      const colorsKeys = Object.keys(colors);
-      for (let i = 0; i < colorsKeys.length; i += 1) {
-        const color = colorsKeys[i];
-        const colorVal = colors[color];
+      const backgroundColors: string[] = [];
+      const placeholderColors: string[] = [];
+      const borderColors: string[] = [];
+      const textColors: string[] = [];
+      // theme: {
+      //   colors: {
+      //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
+      //   }
+      // }
+      const colors = Object.keys(AllColors);
+      for (let i = 0; i < colors.length; i += 1) {
+        const colorKey = colors[i];
+        const colorVal = AllColors[colorKey];
         if (colorVal instanceof Object) {
           const colorVariants = Object.keys(colorVal);
-          colorVariants.map(variant => {
-            backgroundColors.push(`${prefix}bg-${color}-${variant}`);
-            placeholderColors.push(`${prefix}placeholder-${color}-${variant}`);
-            borderColors.push(`${prefix}border-${color}-${variant}`);
-            textColors.push(`${prefix}text-${color}-${variant}`);
+          colorVariants.map((variant: string) => {
+            if (variant === 'default') {
+              variant = '';
+            } else {
+              variant = `-${variant}`;
+            }
+            backgroundColors.push(`${prefix}bg-${colorKey}${variant}`);
+            placeholderColors.push(`${prefix}placeholder-${colorKey}${variant}`);
+            borderColors.push(`${prefix}border-${colorKey}${variant}`);
+            textColors.push(`${prefix}text-${colorKey}${variant}`);
           });
         } else {
-          backgroundColors.push(`${prefix}bg-${color}`);
-          placeholderColors.push(`${prefix}placeholder-${color}`);
-          borderColors.push(`${prefix}border-${color}`);
-          textColors.push(`${prefix}text-${color}`);
+          backgroundColors.push(`${prefix}bg-${colorKey}`);
+          placeholderColors.push(`${prefix}placeholder-${colorKey}`);
+          borderColors.push(`${prefix}border-${colorKey}`);
+          textColors.push(`${prefix}text-${colorKey}`);
         }
       }
 
-      const themeBreakpoints = isEmpty(TAILWIND_CONFIG?.theme?.screens)
-        ? defaultScreens
-        : TAILWIND_CONFIG?.theme?.screens;
-      const extendedThemeBreakpoints = TAILWIND_CONFIG?.theme?.extend?.screens;
+      const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
+      const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
       const breakpoints = extendedThemeBreakpoints
         ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
         : themeBreakpoints;
 
-      console.log(breakpoints);
+      const breakpointExportStatements: string[] = [];
+      const breakpointCreateCustomParams: string[] = [];
+      const breakpointCreateCustomReturns: string[] = [];
+      const maxWidthByBreakpoints: string[] = [];
 
-      let breakpointExportStatements: Array<string> = [];
-      let breakpointCreateCustomParams: Array<string> = [];
-      let breakpointCreateCustomReturns: Array<string> = [];
-
-      Object.keys(breakpoints).map(breakpoint => {
+      Object.keys(breakpoints).map((breakpoint: string) => {
         breakpointExportStatements.push(
           `export const ${breakpoint}: TPseudoClass = className => ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;`,
         );
         breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
         breakpointCreateCustomReturns.push(`${breakpoint},`);
+        maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
+      });
+
+      const themeSpacings = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
+      const extendedThemeSpacings = THEME_CONFIG?.extend?.spacing;
+      const allSpacings = extendedThemeSpacings ? { ...themeSpacings, ...extendedThemeSpacings } : themeSpacings;
+
+      const paddingSpacings: string[] = [];
+      const marginSpacings: string[] = [];
+      const widthSpacings: string[] = [];
+      const heightSpacings: string[] = [];
+
+      const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
+
+      sides.map(side => {
+        paddingSpacings.push(`${prefix}p${side}-auto`);
+        marginSpacings.push(`${prefix}m${side}-auto`);
+      });
+
+      Object.keys(allSpacings).map((spacing, i) => {
+        widthSpacings.push(`${prefix}w-${spacing}`);
+        heightSpacings.push(`${prefix}h-${spacing}`);
+        sides.map(side => {
+          paddingSpacings.push(`${prefix}p${side}-${spacing}`);
+          marginSpacings.push(`${prefix}m${side}-${spacing}`);
+          if (parseInt(spacing, 10) !== 0 && Object.values(allSpacings)[i] !== 0) {
+            paddingSpacings.push(`${prefix}-p${side}-${spacing}`);
+            marginSpacings.push(`${prefix}-m${side}-${spacing}`);
+          }
+        });
       });
 
       const result = baseTemplateString
         .replace(/_PREFIX_/g, prefix)
         .replace(/_SEPARATOR_/g, separator)
+        .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(maxWidthByBreakpoints))
         .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
         .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
+        .replace(/PADDINGS/g, generateTypes(paddingSpacings))
+        .replace(/MARGINS/g, generateTypes(marginSpacings))
+        .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
+        .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
         .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
         .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
         .replace(/BORDER_COLORS/g, generateTypes(borderColors))
         .replace(/TEXT_COLORS/g, generateTypes(textColors));
 
-      fs.writeFile(`${answers.outputFilename}`, result, 'utf8', err => {
-        if (err) {
-          throw err;
+      fs.writeFile(`${answers.outputFilename}`, result, 'utf8', error => {
+        if (error) {
+          console.error(error);
         }
       });
     });
   })
   .catch(error => {
     if (error.isTtyError) {
-      console.log("Prompt couldn't be rendered in the current environment");
+      console.error("Prompt couldn't be rendered in the current environment");
     } else {
-      console.log('Something went wrong with the prompt');
+      console.error('Something went wrong with the prompt');
     }
   });

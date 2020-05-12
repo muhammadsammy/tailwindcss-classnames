@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-classnames",
-  "version": "1.1.4",
+  "version": "1.2.2",
   "description": "Functional typed classnames for TailwindCSS",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "contributors": [
@@ -25,7 +25,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "tslint --project tsconfig.json --format stylish",
     "format": "prettier '**/*.{md,js,jsx,json,ts,tsx}' --write",
-    "test": "jest --env=jsdom --coverage",
+    "test": "jest --env=jsdom --coverage --passWithNoTests",
     "test:watch": "jest --env=jsdom --watch --updateSnapshot",
     "prepublishOnly": "npm run build",
     "prebuild": "npm run clean",
