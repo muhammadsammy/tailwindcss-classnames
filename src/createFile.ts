@@ -2,7 +2,14 @@
 
 import fs from 'fs';
 import isEmpty from 'lodash.isempty';
-import { baseTemplateString, defaultColors, defaultScreens, defaultSpacing, generateTypes } from './utils';
+import {
+  baseTemplateString,
+  defaultColors,
+  defaultScreens,
+  defaultSpacing,
+  defaultVariants,
+  generateTypes,
+} from './utils';
 
 interface IOptions {
   configFilename: string;
@@ -106,6 +113,16 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
         }
       });
     });
+
+    // theme: {
+    //   variants: {
+    //     variantClassKey: ['responsive', 'hover', 'focus'],
+    //   }
+    // }
+
+    const themeVariantsObj = isEmpty(THEME_CONFIG?.variants) ? defaultVariants : THEME_CONFIG?.variants;
+    const variantsClassKeys = Object.keys(themeVariantsObj);
+    const variantsClassValues: string[][] = Object.values(themeVariantsObj);
 
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
