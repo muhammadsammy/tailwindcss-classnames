@@ -19,13 +19,6 @@
     "no-string-throw": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
-    "ordered-imports": [
-      true,
-      {
-        "grouped-imports": true,
-        "named-imports-order": "lowercase-last"
-      }
-    ],
     "prefer-const": true,
     "prefer-for-of": false,
     "prefer-function-over-method": true,
