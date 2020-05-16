@@ -151,6 +151,14 @@ export const defaultSpacing = {
   '64': '16rem',
 };
 
+export const defaultOpacities = {
+  '0': '0',
+  '25': '0.25',
+  '50': '0.5',
+  '75': '0.75',
+  '100': '1',
+};
+
 export const baseTemplateString = `
 import classnamesLib from 'classnames';
 
@@ -755,9 +763,11 @@ export type TBoxShadow =
   | '_PREFIX_shadow-outline'
   | '_PREFIX_shadow-none';
 
-export type TOpacity = '_PREFIX_opacity-100' | '_PREFIX_opacity-75' | '_PREFIX_opacity-50' | '_PREFIX_opacity-25' | '_PREFIX_opacity-0';
+export type TOpacity =OPACITIES;
 
-export type TEffects = TBoxShadow | TOpacity;
+export type TTextOpacity =TEXT_OPACITIES;
+
+export type TEffects = TBoxShadow | TOpacity | TTextOpacity;
 
 export type TTransitionProperty =
   | '_PREFIX_transition-none'
