@@ -5,6 +5,7 @@ import isEmpty from 'lodash.isempty';
 import {
   baseTemplateString,
   defaultColors,
+  defaultOpacities,
   defaultScreens,
   defaultSpacing,
   defaultVariants,
@@ -64,6 +65,18 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
         textColors.push(`${prefix}text-${colorKey}`);
       }
     }
+
+    const themeOpacities = isEmpty(THEME_CONFIG?.opacity) ? defaultOpacities : THEME_CONFIG?.opacity;
+    const extendedThemeOpacities = THEME_CONFIG?.extend?.opacity;
+    const allOpacities = extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
+    const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
+
+    const themeTextOpacities = isEmpty(THEME_CONFIG?.textOpacity) ? allOpacities : THEME_CONFIG?.textOpacity;
+    const extendedThemeTextOpacities = THEME_CONFIG?.extend?.textOpacity;
+    const allTextOpacities = extendedThemeTextOpacities
+      ? { ...themeTextOpacities, ...extendedThemeTextOpacities }
+      : themeTextOpacities;
+    const textOpacities = Object.keys(allTextOpacities).map(opacity => `${prefix}text-opacity-${opacity}`);
 
     const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
     const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
@@ -138,7 +151,9 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
-      .replace(/TEXT_COLORS/g, generateTypes(textColors));
+      .replace(/TEXT_COLORS/g, generateTypes(textColors))
+      .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
+      .replace(/OPACITIES/g, generateTypes(opacities));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {
