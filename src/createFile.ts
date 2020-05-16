@@ -70,6 +70,11 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const allOpacities = extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
     const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
 
+    const themeTextOpacities = isEmpty(THEME_CONFIG?.textOpacity) ? allOpacities : THEME_CONFIG?.textOpacity;
+    const extendedThemeTextOpacities = THEME_CONFIG?.extend?.textOpacity;
+    const allTextOpacities = extendedThemeTextOpacities ? { ...themeTextOpacities, ...extendedThemeTextOpacities } : themeTextOpacities;
+    const textOpacities = Object.keys(allTextOpacities).map(opacity => `${prefix}text-opacity-${opacity}`);
+
     const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
     const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
     const breakpoints = extendedThemeBreakpoints
@@ -134,6 +139,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
       .replace(/TEXT_COLORS/g, generateTypes(textColors))
+      .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
       .replace(/OPACITIES/g, generateTypes(opacities));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {

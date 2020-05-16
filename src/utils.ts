@@ -765,7 +765,9 @@ export type TBoxShadow =
 
 export type TOpacity =OPACITIES;
 
-export type TEffects = TBoxShadow | TOpacity;
+export type TTextOpacity =TEXT_OPACITIES;
+
+export type TEffects = TBoxShadow | TOpacity | TTextOpacity;
 
 export type TTransitionProperty =
   | '_PREFIX_transition-none'
