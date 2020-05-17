@@ -1079,6 +1079,8 @@ export type TScreenReaders = '_PREFIX_sr-only' | '_PREFIX_not-sr-only';
 
 export type TAccessibility = TSvg | TScreenReaders;
 
+export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
+
 export type TClasses =
   | TUtility
   | TLayout
@@ -1094,7 +1096,8 @@ export type TClasses =
   | TTransforms
   | TTransitions
   | TInteractivity
-  | TAccessibility;
+  | TAccessibility
+  | TPseudoClasses;
 
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
@@ -1105,7 +1108,4 @@ export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>
 export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
 export const classnames: TTailwind = classnamesLib as any;
-
-__PSEUDO_CLASS_VARIANTS__
-
 `;

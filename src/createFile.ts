@@ -1,5 +1,6 @@
 import fs from 'fs';
 import isEmpty from 'lodash.isempty';
+import { AllClasses } from './classes/all';
 import {
   baseTemplateString,
   defaultColors,
@@ -76,26 +77,6 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       : themeTextOpacities;
     const textOpacities = Object.keys(allTextOpacities).map(opacity => `${prefix}text-opacity-${opacity}`);
 
-    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
-    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
-    const breakpoints = extendedThemeBreakpoints
-      ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
-      : themeBreakpoints;
-
-    const breakpointExportStatements: string[] = [];
-    const breakpointCreateCustomParams: string[] = [];
-    const breakpointCreateCustomReturns: string[] = [];
-    const maxWidthByBreakpoints: string[] = [];
-
-    Object.keys(breakpoints).map((breakpoint: string) => {
-      breakpointExportStatements.push(
-        `export const ${breakpoint}: TPseudoClass = className => ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;`,
-      );
-      breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
-      breakpointCreateCustomReturns.push(`${breakpoint},`);
-      maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
-    });
-
     const themeSpacings = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
     const extendedThemeSpacings = THEME_CONFIG?.extend?.spacing;
     const allSpacings = extendedThemeSpacings ? { ...themeSpacings, ...extendedThemeSpacings } : themeSpacings;
@@ -125,23 +106,45 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       });
     });
 
+    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
+    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
+    const breakpoints = Object.keys(
+      extendedThemeBreakpoints ? { ...themeBreakpoints, ...extendedThemeBreakpoints } : themeBreakpoints,
+    );
+
+    const maxWidthByBreakpoints: string[] = [];
+
+    breakpoints.map((breakpoint: string) => {
+      maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
+    });
+
     // theme: {
     //   variants: {
-    //     variantClassKey: ['responsive', 'hover', 'focus'],
+    //     variantsObjKey: variantsObjValue => ['responsive', 'hover', 'focus'],
     //   }
     // }
 
     const themeVariantsObj = isEmpty(THEME_CONFIG?.variants) ? defaultVariants : THEME_CONFIG?.variants;
-    const variantsClassKeys = Object.keys(themeVariantsObj);
-    const variantsClassValues: string[][] = Object.values(themeVariantsObj);
+    const variantsObjKeys = Object.keys(themeVariantsObj);
+    const variantsObjValues: string[][] = Object.values(themeVariantsObj);
+
+    const pseudoClasses: string[] = [];
+
+    variantsObjKeys.map((key, i) => {
+      const classes = AllClasses[key];
+      const variants = variantsObjValues[i];
+
+      classes?.map(c => {
+        variants.map(variant => {
+          pseudoClasses.push(prefix + variant + separator + c);
+        });
+      });
+    });
 
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(maxWidthByBreakpoints))
-      .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
-      .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
-      .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
       .replace(/PADDINGS/g, generateTypes(paddingSpacings))
       .replace(/MARGINS/g, generateTypes(marginSpacings))
       .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
@@ -151,7 +154,8 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
       .replace(/TEXT_COLORS/g, generateTypes(textColors))
       .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
-      .replace(/OPACITIES/g, generateTypes(opacities));
+      .replace(/OPACITIES/g, generateTypes(opacities))
+      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {
