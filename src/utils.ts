@@ -321,6 +321,8 @@ export type TListStylePosition = '_PREFIX_list-inside' | '_PREFIX_list-outside';
 
 export type TPlaceholderColor =PLACEHOLDER_COLORS;
 
+export type TPlaceholderOpacity =PLACERHOLDER_OPACITIES;
+
 export type TTextAlign = '_PREFIX_text-left' | '_PREFIX_text-center' | '_PREFIX_text-right' | '_PREFIX_text-justify';
 
 export type TTextColor =TEXT_COLORS;
@@ -346,6 +348,8 @@ export type TWhitespace =
 
 export type TWordBreak = '_PREFIX_break-normal' | '_PREFIX_break-words' | '_PREFIX_break-all' | '_PREFIX_truncate';
 
+export type TTextOpacity =TEXT_OPACITIES;
+
 export type TTypography =
   | TFontFamily
   | TFontSize
@@ -357,13 +361,15 @@ export type TTypography =
   | TListStyleType
   | TListStylePosition
   | TPlaceholderColor
+  | TPlaceholderOpacity
   | TTextAlign
   | TTextColor
   | TTextDecoration
   | TTextTransform
   | TVerticalAlign
   | TWhitespace
-  | TWordBreak;
+  | TWordBreak
+  | TTextOpacity;
 
 export type TBackgroundAttachment = '_PREFIX_bg-fixed' | '_PREFIX_bg-local' | '_PREFIX_bg-scroll';
 
@@ -390,12 +396,15 @@ export type TBackgroundRepeat =
 
 export type TBackgroundSize = '_PREFIX_bg-auto' | '_PREFIX_bg-cover' | '_PREFIX_bg-contain';
 
+export type TBackgroundOpacity =BACKGROUND_OPACITIES;
+
 export type TBackgrounds =
   | TBackgroundAttachment
   | TBackgroundColor
   | TBackgroundPosition
   | TBackgroundRepeat
-  | TBackgroundSize;
+  | TBackgroundSize
+  | TBackgroundOpacity;
 
 export type TBorderColor =BORDER_COLORS;
 
@@ -484,7 +493,9 @@ export type TBorderRadius =
   | '_PREFIX_rounded-br-full'
   | '_PREFIX_rounded-bl-full';
 
-export type TBorders = TBorderColor | TBorderStyle | TBorderWidth | TBorderRadius;
+export type TBorderOpacity =BORDER_OPACITIES;
+
+export type TBorders = TBorderColor | TBorderStyle | TBorderWidth | TBorderRadius | TBorderOpacity;
 
 export type TFlexDirection = '_PREFIX_flex-row' | '_PREFIX_flex-row-reverse' | '_PREFIX_flex-col' | '_PREFIX_flex-col-reverse';
 
@@ -696,7 +707,9 @@ export type TPadding =PADDINGS;
 
 export type TMargin =MARGINS;
 
-export type TSpacing = TPadding | TMargin;
+export type TSpaceBetween =SPACE_BETWEEN;
+
+export type TSpacing = TPadding | TMargin | TSpaceBetween;
 
 export type TWidth =WIDTH_SPACINGS
   | '_PREFIX_w-auto'
@@ -776,19 +789,9 @@ export type TBoxShadow =
 
 export type TOpacity =OPACITIES;
 
-export type TBackgroundOpacity =BACKGROUND_OPACITIES;
-
-export type TTextOpacity =TEXT_OPACITIES;
-
-export type TBorderOpacity =BORDER_OPACITIES;
-
 export type TDivideOpacity =DIVIDE_OPACITIES;
 
-export type TPlaceholderOpacity =PLACERHOLDER_OPACITIES;
-
-export type TOpacityEffects = TOpacity | TTextOpacity | TBackgroundOpacity | TBorderOpacity | TDivideOpacity | TPlaceholderOpacity;
-
-export type TEffects = TBoxShadow | TOpacityEffects;
+export type TEffects = TBoxShadow | TOpacity;
 
 export type TTransitionProperty =
   | '_PREFIX_transition-none'

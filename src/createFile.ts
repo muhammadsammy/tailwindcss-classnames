@@ -109,6 +109,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const marginSpacings: string[] = [];
     const widthSpacings: string[] = [];
     const heightSpacings: string[] = [];
+    const spaceBetweenSpacings: string[] = [`${prefix}space-x-reverse`, `${prefix}space-y-reverse`];
 
     const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
@@ -128,6 +129,12 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           marginSpacings.push(`${prefix}-m${side}-${spacing}`);
         }
       });
+
+      ['', '-'].map(spaceBetweenPrefix => {
+        ['x', 'y'].map(axis => {
+          spaceBetweenSpacings.push(`${prefix}${spaceBetweenPrefix}space-${axis}-${spacing}`);
+        });
+      });
     });
 
     const result = baseTemplateString
@@ -141,6 +148,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/MARGINS/g, generateTypes(marginSpacings))
       .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
+      .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweenSpacings))
       .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
