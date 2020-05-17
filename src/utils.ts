@@ -848,7 +848,11 @@ export type TTransitionDelay =
   | '_PREFIX_delay-700'
   | '_PREFIX_delay-1000';
 
-export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction;
+export type TTransitions = 
+  | TTransitionProperty
+  | TTransitionDuration
+  | TTransitionTimingFunction
+  | TTransitionDelay;
 
 export type TScale =
   | '_PREFIX_scale-0'
@@ -1087,6 +1091,8 @@ export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR
 export const evenChild: TPseudoClass = className => ('_PREFIX_even-child_SEPARATOR_' + className) as TTailwindString;
 
 export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
+
+export const groupFocus: TPseudoClass = className => ('_PREFIX_group-focus_SEPARATOR_' + className) as TTailwindString;
 
 export const focusWithin: TPseudoClass = className => ('_PREFIX_focus-within_SEPARATOR_' + className) as TTailwindString;
 
