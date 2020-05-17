@@ -1,6 +1,6 @@
-export const boxSizing = ['box-border', 'box-content'];
+const boxSizing = ['box-border', 'box-content'];
 
-export const display = [
+const display = [
   'block',
   'inline-block',
   'inline',
@@ -14,15 +14,15 @@ export const display = [
   'hidden',
 ];
 
-export const container = ['container'];
+const container = ['container'];
 
-export const float = ['float-right', 'float-left', 'float-none', 'clearfix'];
+const float = ['float-right', 'float-left', 'float-none', 'clearfix'];
 
-export const clear = ['clear-left', 'clear-right', 'clear-both', 'clear-none'];
+const clear = ['clear-left', 'clear-right', 'clear-both', 'clear-none'];
 
-export const objectFit = ['object-contain', 'object-cover', 'object-fill', 'object-none', 'object-scale-down'];
+const objectFit = ['object-contain', 'object-cover', 'object-fill', 'object-none', 'object-scale-down'];
 
-export const objectPosition = [
+const objectPosition = [
   'object-bottom',
   'object-center',
   'object-left',
@@ -34,7 +34,7 @@ export const objectPosition = [
   'object-top',
 ];
 
-export const overflow = [
+const overflow = [
   'overflow-auto',
   'overflow-hidden',
   'overflow-visible',
@@ -51,9 +51,9 @@ export const overflow = [
   'scrolling-auto',
 ];
 
-export const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
+const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
-export const topRightBottomLeft = [
+const topRightBottomLeft = [
   'inset-0',
   'inset-y-0',
   'inset-x-0',
@@ -71,9 +71,9 @@ export const topRightBottomLeft = [
   'right-auto',
 ];
 
-export const visibility = ['visible', 'invisible'];
+const visibility = ['visible', 'invisible'];
 
-export const zIndex = ['z-0', 'z-10', 'z-20', 'z-30', 'z-40', 'z-50', 'z-auto'];
+const zIndex = ['z-0', 'z-10', 'z-20', 'z-30', 'z-40', 'z-50', 'z-auto'];
 
 export const Layout = {
   display,

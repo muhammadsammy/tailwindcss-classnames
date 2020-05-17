@@ -1,4 +1,4 @@
-export const padding = [
+const padding = [
   'p-0',
   'p-1',
   'p-2',
@@ -134,7 +134,7 @@ export const padding = [
   'pl-px',
 ];
 
-export const margin = [
+const margin = [
   'm-0',
   'm-1',
   'm-2',

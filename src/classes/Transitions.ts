@@ -1,4 +1,4 @@
-export const transitionProperty = [
+const transitionProperty = [
   'transition-none',
   'transition-all',
   'transition',
@@ -8,7 +8,7 @@ export const transitionProperty = [
   'transition-transform',
 ];
 
-export const transitionDuration = [
+const transitionDuration = [
   'duration-75',
   'duration-100',
   'duration-150',
@@ -19,7 +19,7 @@ export const transitionDuration = [
   'duration-1000',
 ];
 
-export const transitionTimingFunction = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out'];
+const transitionTimingFunction = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out'];
 
 export const Transitions = {
   transitionProperty,

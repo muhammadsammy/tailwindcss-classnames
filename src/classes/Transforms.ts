@@ -1,4 +1,4 @@
-export const scale = [
+const scale = [
   'scale-0',
   'scale-50',
   'scale-75',
@@ -31,9 +31,9 @@ export const scale = [
   'scale-y-150',
 ];
 
-export const rotate = ['rotate-0', 'rotate-45', 'rotate-90', 'rotate-180', '-rotate-180', '-rotate-90', '-rotate-45'];
+const rotate = ['rotate-0', 'rotate-45', 'rotate-90', 'rotate-180', '-rotate-180', '-rotate-90', '-rotate-45'];
 
-export const translate = [
+const translate = [
   'translate-x-0',
   'translate-x-1',
   'translate-x-2',
@@ -118,7 +118,7 @@ export const translate = [
   'translate-y-full',
 ];
 
-export const skew = [
+const skew = [
   'skew-x-0',
   'skew-x-3',
   'skew-x-6',
@@ -137,7 +137,7 @@ export const skew = [
   '-skew-y-12',
 ];
 
-export const transformOrigin = [
+const transformOrigin = [
   'origin-center',
   'origin-top',
   'origin-top-right',

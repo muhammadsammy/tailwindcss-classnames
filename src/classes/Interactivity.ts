@@ -1,6 +1,6 @@
-export const appearance = ['appearance-none'];
+const appearance = ['appearance-none'];
 
-export const cursor = [
+const cursor = [
   'cursor-auto',
   'cursor-default',
   'cursor-pointer',
@@ -10,13 +10,13 @@ export const cursor = [
   'cursor-not-allowed',
 ];
 
-export const outline = ['outline-none'];
+const outline = ['outline-none'];
 
-export const pointerEvents = ['pointer-events-none', 'pointer-events-auto'];
+const pointerEvents = ['pointer-events-none', 'pointer-events-auto'];
 
-export const resize = ['resize-none', 'resize', 'resize-y', 'resize-x'];
+const resize = ['resize-none', 'resize', 'resize-y', 'resize-x'];
 
-export const userSelect = ['select-none', 'select-text', 'select-all', 'select-auto'];
+const userSelect = ['select-none', 'select-text', 'select-all', 'select-auto'];
 
 export const Interactivity = {
   appearance,

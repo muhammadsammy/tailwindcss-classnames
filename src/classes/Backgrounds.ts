@@ -1,6 +1,6 @@
-export const backgroundAttachment = ['bg-fixed', 'bg-local', 'bg-scroll'];
+const backgroundAttachment = ['bg-fixed', 'bg-local', 'bg-scroll'];
 
-export const backgroundColor = [
+const backgroundColor = [
   'bg-transparent',
   'bg-black',
   'bg-white',
@@ -96,7 +96,7 @@ export const backgroundColor = [
   'bg-pink-900',
 ];
 
-export const backgroundPosition = [
+const backgroundPosition = [
   'bg-bottom',
   'bg-center',
   'bg-left',
@@ -108,7 +108,7 @@ export const backgroundPosition = [
   'bg-top',
 ];
 
-export const backgroundRepeat = [
+const backgroundRepeat = [
   'bg-repeat',
   'bg-no-repeat',
   'bg-repeat-x',
@@ -117,7 +117,7 @@ export const backgroundRepeat = [
   'bg-repeat-space',
 ];
 
-export const backgroundSize = ['bg-auto', 'bg-cover', 'bg-contain'];
+const backgroundSize = ['bg-auto', 'bg-cover', 'bg-contain'];
 
 export const Backgrounds = {
   backgroundAttachment,

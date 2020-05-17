@@ -1,6 +1,6 @@
-//ODO: border opacities
+// ODO: border opacities
 
-export const borderColor = [
+const borderColor = [
   'border-transparent',
   'border-black',
   'border-white',
@@ -96,9 +96,9 @@ export const borderColor = [
   'border-pink-900',
 ];
 
-export const borderStyle = ['border-solid', 'border-dashed', 'border-dotted', 'border-double', 'border-none'];
+const borderStyle = ['border-solid', 'border-dashed', 'border-dotted', 'border-double', 'border-none'];
 
-export const borderWidth = [
+const borderWidth = [
   'border',
   'border-0',
   'border-2',
@@ -126,7 +126,7 @@ export const borderWidth = [
   'border-l-8',
 ];
 
-export const borderRadius = [
+const borderRadius = [
   'rounded-none',
   'rounded-sm',
   'rounded',

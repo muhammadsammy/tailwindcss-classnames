@@ -1,4 +1,4 @@
-export const boxShadow = [
+const boxShadow = [
   'shadow',
   'shadow-xs',
   'shadow-sm',
@@ -11,7 +11,7 @@ export const boxShadow = [
   'shadow-none',
 ];
 
-export const opacity = ['opacity-100', 'opacity-75', 'opacity-50', 'opacity-25', 'opacity-0'];
+const opacity = ['opacity-100', 'opacity-75', 'opacity-50', 'opacity-25', 'opacity-0'];
 
 export const Effects = {
   boxShadow,

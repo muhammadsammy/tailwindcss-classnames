@@ -1,4 +1,4 @@
-export const width = [
+const width = [
   'w-0',
   'w-1',
   'w-2',
@@ -50,9 +50,9 @@ export const width = [
   'w-screen',
 ];
 
-export const minWidth = ['min-w-0', 'min-w-full'];
+const minWidth = ['min-w-0', 'min-w-full'];
 
-export const maxWidth = [
+const maxWidth = [
   'max-w-xs',
   'max-w-sm',
   'max-w-md',
@@ -71,7 +71,7 @@ export const maxWidth = [
   'max-w-none',
 ];
 
-export const height = [
+const height = [
   'h-0',
   'h-1',
   'h-2',
@@ -96,9 +96,9 @@ export const height = [
   'h-screen',
 ];
 
-export const minHeight = ['min-h-0', 'min-h-full', 'min-h-screen'];
+const minHeight = ['min-h-0', 'min-h-full', 'min-h-screen'];
 
-export const maxHeight = ['max-h-full', 'max-h-screen'];
+const maxHeight = ['max-h-full', 'max-h-screen'];
 
 export const Sizing = {
   width,

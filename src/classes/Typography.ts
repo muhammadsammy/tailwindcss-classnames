@@ -1,6 +1,6 @@
-export const fontFamily = ['font-sans', 'font-serif', 'font-mono'];
+const fontFamily = ['font-sans', 'font-serif', 'font-mono'];
 
-export const fontSize = [
+const fontSize = [
   'text-xs',
   'text-sm',
   'text-base',
@@ -13,11 +13,11 @@ export const fontSize = [
   'text-6xl',
 ];
 
-export const fontSmoothing = ['antialiased', 'subpixel-antialiased'];
+const fontSmoothing = ['antialiased', 'subpixel-antialiased'];
 
-export const fontStyle = ['italic', 'non-italic'];
+const fontStyle = ['italic', 'non-italic'];
 
-export const fontWeight = [
+const fontWeight = [
   'font-hairline',
   'font-thin',
   'font-light',
@@ -29,7 +29,7 @@ export const fontWeight = [
   'font-black',
 ];
 
-export const letterSpacing = [
+const letterSpacing = [
   'tracking-tighter',
   'tracking-tight',
   'tracking-normal',
@@ -38,7 +38,7 @@ export const letterSpacing = [
   'tricking-widest',
 ];
 
-export const lineHeight = [
+const lineHeight = [
   'leading-none',
   'leading-tight',
   'leading-snug',
@@ -55,11 +55,11 @@ export const lineHeight = [
   'leading-10',
 ];
 
-export const listStyleconst = ['line-none', 'list-disc', 'list-decimal'];
+const listStyleconst = ['line-none', 'list-disc', 'list-decimal'];
 
-export const listStylePosition = ['list-inside', 'list-outside'];
+const listStylePosition = ['list-inside', 'list-outside'];
 
-export const placeholderColor = [
+const placeholderColor = [
   'placeholder-transparent',
   'placeholder-black',
   'placeholder-white',
@@ -155,9 +155,9 @@ export const placeholderColor = [
   'placeholder-pink-900',
 ];
 
-export const textAlign = ['text-left', 'text-center', 'text-right', 'text-justify'];
+const textAlign = ['text-left', 'text-center', 'text-right', 'text-justify'];
 
-export const textColor = [
+const textColor = [
   'text-transparent',
   'text-black',
   'text-white',
@@ -253,11 +253,11 @@ export const textColor = [
   'text-pink-900',
 ];
 
-export const textDecoration = ['underline', 'line-through', 'no-underline'];
+const textDecoration = ['underline', 'line-through', 'no-underline'];
 
-export const textTransform = ['uppercase', 'lowercase', 'capitalize', 'normal-case'];
+const textTransform = ['uppercase', 'lowercase', 'capitalize', 'normal-case'];
 
-export const verticalAlign = [
+const verticalAlign = [
   'align-baseline',
   'align-top',
   'align-middle',
@@ -266,7 +266,7 @@ export const verticalAlign = [
   'align-text-bottom',
 ];
 
-export const whitespace = [
+const whitespace = [
   'whitespace-normal',
   'whitespace-no-wrap',
   'whitespace-pre',
@@ -274,7 +274,7 @@ export const whitespace = [
   'whitespace-pre-wrap',
 ];
 
-export const wordBreak = ['break-normal', 'break-words', 'break-all', 'truncate'];
+const wordBreak = ['break-normal', 'break-words', 'break-all', 'truncate'];
 
 export const Typography = {
   fontFamily,

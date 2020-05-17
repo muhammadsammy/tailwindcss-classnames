@@ -1,4 +1,4 @@
-export const gridTemplateColumns = [
+const gridTemplateColumns = [
   'grid-cols-1',
   'grid-cols-2',
   'grid-cols-3',
@@ -14,7 +14,7 @@ export const gridTemplateColumns = [
   'grid-cols-none',
 ];
 
-export const gridColumnStartEnd = [
+const gridColumnStartEnd = [
   'col-auto',
   'col-span-1',
   'col-span-2',
@@ -56,7 +56,7 @@ export const gridColumnStartEnd = [
   'col-end-auto',
 ];
 
-export const gridTemplateRows = [
+const gridTemplateRows = [
   'grid-rows-1',
   'grid-rows-2',
   'grid-rows-3',
@@ -66,7 +66,7 @@ export const gridTemplateRows = [
   'grid-rows-none',
 ];
 
-export const gridRowStartEnd = [
+const gridRowStartEnd = [
   'row-auto',
   'row-span-1',
   'row-span-2',
@@ -92,7 +92,7 @@ export const gridRowStartEnd = [
   'row-end-auto',
 ];
 
-export const gridGap = [
+const gridGap = [
   'gap-0',
   'gap-1',
   'gap-2',
@@ -152,7 +152,7 @@ export const gridGap = [
   'col-gap-px',
 ];
 
-export const gridAutoFlow = ['grid-flow-row', 'grid-flow-col', 'grid-flow-row-dense', 'grid-flow-col-dense'];
+const gridAutoFlow = ['grid-flow-row', 'grid-flow-col', 'grid-flow-row-dense', 'grid-flow-col-dense'];
 
 export const Grid = {
   gridTemplateColumns,
