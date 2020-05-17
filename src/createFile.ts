@@ -1,5 +1,3 @@
-/* tslint:disable:no-eval no-console */
-
 import fs from 'fs';
 import isEmpty from 'lodash.isempty';
 import {

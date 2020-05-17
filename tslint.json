@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-plugin-prettier"],
   "rules": {
+    "no-eval": false,
     "no-console": false,
     "arrow-return-shorthand": [true],
     "class-name": true,
