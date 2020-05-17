@@ -135,6 +135,8 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       const classes = AllClasses[key];
       const variants = variantsObjValues[i];
 
+      // TODO: check for other missing classes
+
       if (key === 'accessibility') {
         Accessibility.screenReaders.map(c => {
           variants.map(variant => {
@@ -144,7 +146,13 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       } else {
         classes?.map(c => {
           variants.map(variant => {
-            pseudoClasses.push(prefix + variant + separator + c);
+            if (variant === 'responsive') {
+              breakpoints.map(breakpointVariant => {
+                pseudoClasses.push(prefix + breakpointVariant + separator + c);
+              });
+            } else {
+              pseudoClasses.push(prefix + variant + separator + c);
+            }
           });
         });
       }
