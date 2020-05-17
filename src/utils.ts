@@ -495,7 +495,33 @@ export type TBorderRadius =
 
 export type TBorderOpacity =BORDER_OPACITIES;
 
-export type TBorders = TBorderColor | TBorderStyle | TBorderWidth | TBorderRadius | TBorderOpacity;
+export type TDivideWidth =
+  | '_PREFIX_divide-x'
+  | '_PREFIX_divide-x-0'
+  | '_PREFIX_divide-x-2'
+  | '_PREFIX_divide-x-4'
+  | '_PREFIX_divide-x-8'
+  | '_PREFIX_divide-y'
+  | '_PREFIX_divide-y-0'
+  | '_PREFIX_divide-y-2'
+  | '_PREFIX_divide-y-4'
+  | '_PREFIX_divide-y-8'
+  | '_PREFIX_divide-x-reverse'
+  | '_PREFIX_divide-y-reverse';
+
+export type TDivideColor =DIVIDE_COLORS;
+
+export type TDivideOpacity =DIVIDE_OPACITIES;
+
+export type TBorders = 
+  | TBorderColor
+  | TBorderStyle
+  | TBorderWidth
+  | TBorderRadius
+  | TBorderOpacity
+  | TDivideWidth
+  | TDivideColor
+  | TDivideOpacity;
 
 export type TFlexDirection = '_PREFIX_flex-row' | '_PREFIX_flex-row-reverse' | '_PREFIX_flex-col' | '_PREFIX_flex-col-reverse';
 
@@ -788,8 +814,6 @@ export type TBoxShadow =
   | '_PREFIX_shadow-none';
 
 export type TOpacity =OPACITIES;
-
-export type TDivideOpacity =DIVIDE_OPACITIES;
 
 export type TEffects = TBoxShadow | TOpacity;
 

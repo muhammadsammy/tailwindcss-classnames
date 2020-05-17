@@ -40,6 +40,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const placeholderColors: string[] = [];
     const borderColors: string[] = [];
     const textColors: string[] = [];
+    const divideColors: string[] = [];
     // theme: {
     //   colors: {
     //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
@@ -57,12 +58,14 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           placeholderColors.push(`${prefix}placeholder-${colorKey}${variant}`);
           borderColors.push(`${prefix}border-${colorKey}${variant}`);
           textColors.push(`${prefix}text-${colorKey}${variant}`);
+          divideColors.push(`${prefix}divide-${colorKey}${variant}`);
         });
       } else {
         backgroundColors.push(`${prefix}bg-${colorKey}`);
         placeholderColors.push(`${prefix}placeholder-${colorKey}`);
         borderColors.push(`${prefix}border-${colorKey}`);
         textColors.push(`${prefix}text-${colorKey}`);
+        divideColors.push(`${prefix}divide-${colorKey}`);
       }
     }
 
@@ -153,6 +156,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
       .replace(/TEXT_COLORS/g, generateTypes(textColors))
+      .replace(/DIVIDE_COLORS/g, generateTypes(divideColors))
       .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities))
       .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
       .replace(/BORDER_OPACITIES/g, generateTypes(borderOpacities))
