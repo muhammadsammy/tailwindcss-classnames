@@ -838,6 +838,16 @@ export type TTransitionDuration =
 
 export type TTransitionTimingFunction = '_PREFIX_ease-linear' | '_PREFIX_ease-in' | '_PREFIX_ease-out' | '_PREFIX_ease-in-out';
 
+export type TTransitionDelay =
+  | '_PREFIX_delay-75'
+  | '_PREFIX_delay-100'
+  | '_PREFIX_delay-150'
+  | '_PREFIX_delay-200'
+  | '_PREFIX_delay-300'
+  | '_PREFIX_delay-500'
+  | '_PREFIX_delay-700'
+  | '_PREFIX_delay-1000';
+
 export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction;
 
 export type TScale =
