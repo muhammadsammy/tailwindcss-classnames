@@ -410,7 +410,7 @@ export const margin = [
   '-ml-px',
 ];
 
-export const TSpacing = {
+export const Spacing = {
   padding,
   margin,
 };

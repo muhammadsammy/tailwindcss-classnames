@@ -34,7 +34,7 @@ export const order = [
   'order-12',
 ];
 
-export const flexBox = {
+export const FlexBox = {
   flexDirection,
   flexWrap,
   alignItems,
