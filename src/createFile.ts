@@ -1,5 +1,6 @@
 import fs from 'fs';
 import isEmpty from 'lodash.isempty';
+import { Accessibility } from './classes/Accessibility';
 import { AllClasses } from './classes/all';
 import {
   baseTemplateString,
@@ -134,11 +135,19 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       const classes = AllClasses[key];
       const variants = variantsObjValues[i];
 
-      classes?.map(c => {
-        variants.map(variant => {
-          pseudoClasses.push(prefix + variant + separator + c);
+      if (key === 'accessibility') {
+        Accessibility.screenReaders.map(c => {
+          variants.map(variant => {
+            pseudoClasses.push(prefix + variant + separator + c);
+          });
         });
-      });
+      } else {
+        classes?.map(c => {
+          variants.map(variant => {
+            pseudoClasses.push(prefix + variant + separator + c);
+          });
+        });
+      }
     });
 
     const result = baseTemplateString
