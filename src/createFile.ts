@@ -9,6 +9,7 @@ import {
   defaultSpacing,
   defaultOpacities,
   generateTypes,
+  generateOpacities,
 } from './utils';
 
 interface IOptions {
@@ -70,10 +71,15 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const allOpacities = extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
     const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
 
-    const themeTextOpacities = isEmpty(THEME_CONFIG?.textOpacity) ? allOpacities : THEME_CONFIG?.textOpacity;
-    const extendedThemeTextOpacities = THEME_CONFIG?.extend?.textOpacity;
-    const allTextOpacities = extendedThemeTextOpacities ? { ...themeTextOpacities, ...extendedThemeTextOpacities } : themeTextOpacities;
-    const textOpacities = Object.keys(allTextOpacities).map(opacity => `${prefix}text-opacity-${opacity}`);
+    const getOpacity = (themePropertyName: string, outputNamePrefix: string) => {
+      const opacities = generateOpacities(allOpacities, THEME_CONFIG, themePropertyName);
+      return Object.keys(opacities).map(opacity => `${prefix}${outputNamePrefix}-opacity-${opacity}`);
+    };
+    const textOpacities = getOpacity('textOpacity', 'text');
+    const backgroundOpacities = getOpacity('backgroundOpacity', 'bg');
+    const borderOpacities = getOpacity('borderOpacity', 'border');
+    const divideOpacities = getOpacity('divideOpacity', 'divide');
+    const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
     const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
     const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
@@ -139,7 +145,11 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
       .replace(/TEXT_COLORS/g, generateTypes(textColors))
+      .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities))
       .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
+      .replace(/BORDER_OPACITIES/g, generateTypes(borderOpacities))
+      .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities))
+      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities))
       .replace(/OPACITIES/g, generateTypes(opacities));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {

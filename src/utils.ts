@@ -1,7 +1,18 @@
 /* tslint:disable: prefer-template */
+import isEmpty from 'lodash.isempty';
 
 export function generateTypes(arr: string[]) {
   return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
+}
+
+export function generateOpacities(
+  defaultOpacities: { [key: string]: string },
+  theme: { [key: string]: any },
+  property: string,
+): { [key: string]: string } {
+  const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
+  const extendedThemeOpacities = theme.extend?.[property];
+  return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
 }
 
 export const defaultScreens = {
@@ -765,9 +776,19 @@ export type TBoxShadow =
 
 export type TOpacity =OPACITIES;
 
+export type TBackgroundOpacity =BACKGROUND_OPACITIES;
+
 export type TTextOpacity =TEXT_OPACITIES;
 
-export type TEffects = TBoxShadow | TOpacity | TTextOpacity;
+export type TBorderOpacity =BORDER_OPACITIES;
+
+export type TDivideOpacity =DIVIDE_OPACITIES;
+
+export type TPlaceholderOpacity =PLACERHOLDER_OPACITIES;
+
+export type TOpacityEffects = TOpacity | TTextOpacity | TBackgroundOpacity | TBorderOpacity | TDivideOpacity | TPlaceholderOpacity;
+
+export type TEffects = TBoxShadow | TOpacityEffects;
 
 export type TTransitionProperty =
   | '_PREFIX_transition-none'
