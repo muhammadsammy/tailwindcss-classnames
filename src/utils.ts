@@ -262,8 +262,6 @@ export const defaultOpacities = {
 export const baseTemplateString = `
 import classnamesLib from 'classnames';
 
-export type TUtility = '_PREFIX_mx-auto';
-
 export type TBoxSizing = '_PREFIX_box-border' | '_PREFIX_box-content';
 
 export type TDisplay =

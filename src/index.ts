@@ -1,7 +1,5 @@
 import classnamesLib from 'classnames';
 
-export type TUtility = 'mx-auto';
-
 export type TBoxSizing = 'box-border' | 'box-content';
 
 export type TDisplay =
