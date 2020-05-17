@@ -14,7 +14,9 @@ import { Transforms } from './Transforms';
 import { Transitions } from './Transitions';
 import { Typography } from './Typography';
 
-export const AllClasses = {
+export const AllClasses: {
+  [key: string]: string[];
+} = {
   ...Accessibility,
   ...Backgrounds,
   ...Borders,
