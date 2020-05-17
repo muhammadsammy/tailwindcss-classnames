@@ -1637,7 +1637,6 @@ export type TScreenReaders = 'sr-only' | 'not-sr-only';
 export type TAccessibility = TSvg | TScreenReaders;
 
 export type TClasses =
-  | TUtility
   | TLayout
   | TTypography
   | TBackgrounds
