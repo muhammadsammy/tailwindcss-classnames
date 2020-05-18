@@ -75,8 +75,8 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
 
     const getOpacity = (themePropertyName: string, outputNamePrefix: string) => {
-      const opacities = generateOpacities(allOpacities, THEME_CONFIG, themePropertyName);
-      return Object.keys(opacities).map(opacity => `${prefix}${outputNamePrefix}-opacity-${opacity}`);
+      const generatedOpacities = generateOpacities(allOpacities, THEME_CONFIG, themePropertyName);
+      return Object.keys(generatedOpacities).map(opacity => `${prefix}${outputNamePrefix}-opacity-${opacity}`);
     };
     const textOpacities = getOpacity('textOpacity', 'text');
     const backgroundOpacities = getOpacity('backgroundOpacity', 'bg');
