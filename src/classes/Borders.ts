@@ -1,5 +1,3 @@
-// ODO: border opacities
-
 const borderColor = [
   'border-transparent',
   'border-black',
@@ -94,6 +92,14 @@ const borderColor = [
   'border-pink-700',
   'border-pink-800',
   'border-pink-900',
+];
+
+const borderOpacity = [
+  'border-opacity-0',
+  'border-opacity-25',
+  'border-opacity-50',
+  'border-opacity-75',
+  'border-opacity-100',
 ];
 
 const borderStyle = ['border-solid', 'border-dashed', 'border-dotted', 'border-double', 'border-none'];
@@ -305,6 +311,7 @@ const divideColor = [
 
 export const Borders = {
   borderColor,
+  borderOpacity,
   borderStyle,
   borderWidth,
   borderRadius,
