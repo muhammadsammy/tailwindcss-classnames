@@ -198,10 +198,19 @@ const devideWidth = [
   'divide-y-reverse',
 ];
 
+const divideOpacity = [
+  'divide-opacity-0',
+  'divide-opacity-25',
+  'divide-opacity-50',
+  'divide-opacity-75',
+  'divide-opacity-100',
+];
+
 export const Borders = {
   borderColor,
   borderStyle,
   borderWidth,
   borderRadius,
   devideWidth,
+  divideOpacity,
 };
