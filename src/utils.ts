@@ -259,8 +259,7 @@ export const defaultOpacities = {
   '100': '1',
 };
 
-export const baseTemplateString = `
-import classnamesLib from 'classnames';
+export const baseTemplateString = `import classnamesLib from 'classnames';
 
 export type TBoxSizing = '_PREFIX_box-border' | '_PREFIX_box-content';
 
