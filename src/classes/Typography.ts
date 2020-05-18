@@ -155,6 +155,14 @@ const placeholderColor = [
   'placeholder-pink-900',
 ];
 
+const placeholderOpacity = [
+  'placeholder-opacity-0',
+  'placeholder-opacity-25',
+  'placeholder-opacity-50',
+  'placeholder-opacity-75',
+  'placeholder-opacity-100',
+]
+
 const textAlign = ['text-left', 'text-center', 'text-right', 'text-justify'];
 
 const textColor = [
@@ -287,6 +295,7 @@ export const Typography = {
   listStyleType,
   listStylePosition,
   placeholderColor,
+  placeholderOpacity,
   textAlign,
   textColor,
   textDecoration,
