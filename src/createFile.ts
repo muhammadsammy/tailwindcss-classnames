@@ -9,6 +9,7 @@ import {
   defaultSpacing,
   defaultOpacities,
   generateTypes,
+  generateOpacities,
 } from './utils';
 
 interface IOptions {
@@ -39,6 +40,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const placeholderColors: string[] = [];
     const borderColors: string[] = [];
     const textColors: string[] = [];
+    const divideColors: string[] = [];
     // theme: {
     //   colors: {
     //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
@@ -56,12 +58,14 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           placeholderColors.push(`${prefix}placeholder-${colorKey}${variant}`);
           borderColors.push(`${prefix}border-${colorKey}${variant}`);
           textColors.push(`${prefix}text-${colorKey}${variant}`);
+          divideColors.push(`${prefix}divide-${colorKey}${variant}`);
         });
       } else {
         backgroundColors.push(`${prefix}bg-${colorKey}`);
         placeholderColors.push(`${prefix}placeholder-${colorKey}`);
         borderColors.push(`${prefix}border-${colorKey}`);
         textColors.push(`${prefix}text-${colorKey}`);
+        divideColors.push(`${prefix}divide-${colorKey}`);
       }
     }
 
@@ -70,10 +74,15 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const allOpacities = extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
     const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
 
-    const themeTextOpacities = isEmpty(THEME_CONFIG?.textOpacity) ? allOpacities : THEME_CONFIG?.textOpacity;
-    const extendedThemeTextOpacities = THEME_CONFIG?.extend?.textOpacity;
-    const allTextOpacities = extendedThemeTextOpacities ? { ...themeTextOpacities, ...extendedThemeTextOpacities } : themeTextOpacities;
-    const textOpacities = Object.keys(allTextOpacities).map(opacity => `${prefix}text-opacity-${opacity}`);
+    const getOpacity = (themePropertyName: string, outputNamePrefix: string) => {
+      const generatedOpacities = generateOpacities(allOpacities, THEME_CONFIG, themePropertyName);
+      return Object.keys(generatedOpacities).map(opacity => `${prefix}${outputNamePrefix}-opacity-${opacity}`);
+    };
+    const textOpacities = getOpacity('textOpacity', 'text');
+    const backgroundOpacities = getOpacity('backgroundOpacity', 'bg');
+    const borderOpacities = getOpacity('borderOpacity', 'border');
+    const divideOpacities = getOpacity('divideOpacity', 'divide');
+    const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
     const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
     const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
@@ -103,6 +112,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const marginSpacings: string[] = [];
     const widthSpacings: string[] = [];
     const heightSpacings: string[] = [];
+    const spaceBetweenSpacings: string[] = [`${prefix}space-x-reverse`, `${prefix}space-y-reverse`];
 
     const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
@@ -122,6 +132,12 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           marginSpacings.push(`${prefix}-m${side}-${spacing}`);
         }
       });
+
+      ['', '-'].map(spaceBetweenPrefix => {
+        ['x', 'y'].map(axis => {
+          spaceBetweenSpacings.push(`${prefix}${spaceBetweenPrefix}space-${axis}-${spacing}`);
+        });
+      });
     });
 
     const result = baseTemplateString
@@ -135,11 +151,17 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/MARGINS/g, generateTypes(marginSpacings))
       .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
+      .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweenSpacings))
       .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
       .replace(/TEXT_COLORS/g, generateTypes(textColors))
+      .replace(/DIVIDE_COLORS/g, generateTypes(divideColors))
+      .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities))
       .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
+      .replace(/BORDER_OPACITIES/g, generateTypes(borderOpacities))
+      .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities))
+      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities))
       .replace(/OPACITIES/g, generateTypes(opacities));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {

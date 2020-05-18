@@ -1,7 +1,18 @@
 /* tslint:disable: prefer-template */
+import isEmpty from 'lodash.isempty';
 
 export function generateTypes(arr: string[]) {
   return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
+}
+
+export function generateOpacities(
+  defaultOpacities: { [key: string]: string },
+  theme: { [key: string]: any },
+  property: string,
+): { [key: string]: string } {
+  const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
+  const extendedThemeOpacities = theme.extend?.[property];
+  return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
 }
 
 export const defaultScreens = {
@@ -310,6 +321,8 @@ export type TListStylePosition = '_PREFIX_list-inside' | '_PREFIX_list-outside';
 
 export type TPlaceholderColor =PLACEHOLDER_COLORS;
 
+export type TPlaceholderOpacity =PLACERHOLDER_OPACITIES;
+
 export type TTextAlign = '_PREFIX_text-left' | '_PREFIX_text-center' | '_PREFIX_text-right' | '_PREFIX_text-justify';
 
 export type TTextColor =TEXT_COLORS;
@@ -335,6 +348,8 @@ export type TWhitespace =
 
 export type TWordBreak = '_PREFIX_break-normal' | '_PREFIX_break-words' | '_PREFIX_break-all' | '_PREFIX_truncate';
 
+export type TTextOpacity =TEXT_OPACITIES;
+
 export type TTypography =
   | TFontFamily
   | TFontSize
@@ -346,13 +361,15 @@ export type TTypography =
   | TListStyleType
   | TListStylePosition
   | TPlaceholderColor
+  | TPlaceholderOpacity
   | TTextAlign
   | TTextColor
   | TTextDecoration
   | TTextTransform
   | TVerticalAlign
   | TWhitespace
-  | TWordBreak;
+  | TWordBreak
+  | TTextOpacity;
 
 export type TBackgroundAttachment = '_PREFIX_bg-fixed' | '_PREFIX_bg-local' | '_PREFIX_bg-scroll';
 
@@ -379,12 +396,15 @@ export type TBackgroundRepeat =
 
 export type TBackgroundSize = '_PREFIX_bg-auto' | '_PREFIX_bg-cover' | '_PREFIX_bg-contain';
 
+export type TBackgroundOpacity =BACKGROUND_OPACITIES;
+
 export type TBackgrounds =
   | TBackgroundAttachment
   | TBackgroundColor
   | TBackgroundPosition
   | TBackgroundRepeat
-  | TBackgroundSize;
+  | TBackgroundSize
+  | TBackgroundOpacity;
 
 export type TBorderColor =BORDER_COLORS;
 
@@ -473,7 +493,35 @@ export type TBorderRadius =
   | '_PREFIX_rounded-br-full'
   | '_PREFIX_rounded-bl-full';
 
-export type TBorders = TBorderColor | TBorderStyle | TBorderWidth | TBorderRadius;
+export type TBorderOpacity =BORDER_OPACITIES;
+
+export type TDivideWidth =
+  | '_PREFIX_divide-x'
+  | '_PREFIX_divide-x-0'
+  | '_PREFIX_divide-x-2'
+  | '_PREFIX_divide-x-4'
+  | '_PREFIX_divide-x-8'
+  | '_PREFIX_divide-y'
+  | '_PREFIX_divide-y-0'
+  | '_PREFIX_divide-y-2'
+  | '_PREFIX_divide-y-4'
+  | '_PREFIX_divide-y-8'
+  | '_PREFIX_divide-x-reverse'
+  | '_PREFIX_divide-y-reverse';
+
+export type TDivideColor =DIVIDE_COLORS;
+
+export type TDivideOpacity =DIVIDE_OPACITIES;
+
+export type TBorders = 
+  | TBorderColor
+  | TBorderStyle
+  | TBorderWidth
+  | TBorderRadius
+  | TBorderOpacity
+  | TDivideWidth
+  | TDivideColor
+  | TDivideOpacity;
 
 export type TFlexDirection = '_PREFIX_flex-row' | '_PREFIX_flex-row-reverse' | '_PREFIX_flex-col' | '_PREFIX_flex-col-reverse';
 
@@ -685,7 +733,9 @@ export type TPadding =PADDINGS;
 
 export type TMargin =MARGINS;
 
-export type TSpacing = TPadding | TMargin;
+export type TSpaceBetween =SPACE_BETWEEN;
+
+export type TSpacing = TPadding | TMargin | TSpaceBetween;
 
 export type TWidth =WIDTH_SPACINGS
   | '_PREFIX_w-auto'
@@ -765,9 +815,7 @@ export type TBoxShadow =
 
 export type TOpacity =OPACITIES;
 
-export type TTextOpacity =TEXT_OPACITIES;
-
-export type TEffects = TBoxShadow | TOpacity | TTextOpacity;
+export type TEffects = TBoxShadow | TOpacity;
 
 export type TTransitionProperty =
   | '_PREFIX_transition-none'
@@ -790,7 +838,21 @@ export type TTransitionDuration =
 
 export type TTransitionTimingFunction = '_PREFIX_ease-linear' | '_PREFIX_ease-in' | '_PREFIX_ease-out' | '_PREFIX_ease-in-out';
 
-export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction;
+export type TTransitionDelay =
+  | '_PREFIX_delay-75'
+  | '_PREFIX_delay-100'
+  | '_PREFIX_delay-150'
+  | '_PREFIX_delay-200'
+  | '_PREFIX_delay-300'
+  | '_PREFIX_delay-500'
+  | '_PREFIX_delay-700'
+  | '_PREFIX_delay-1000';
+
+export type TTransitions = 
+  | TTransitionProperty
+  | TTransitionDuration
+  | TTransitionTimingFunction
+  | TTransitionDelay;
 
 export type TScale =
   | '_PREFIX_scale-0'
@@ -1029,6 +1091,8 @@ export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR
 export const evenChild: TPseudoClass = className => ('_PREFIX_even-child_SEPARATOR_' + className) as TTailwindString;
 
 export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
+
+export const groupFocus: TPseudoClass = className => ('_PREFIX_group-focus_SEPARATOR_' + className) as TTailwindString;
 
 export const focusWithin: TPseudoClass = className => ('_PREFIX_focus-within_SEPARATOR_' + className) as TTailwindString;
 
