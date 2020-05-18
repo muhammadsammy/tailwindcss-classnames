@@ -141,7 +141,13 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       if (key === 'accessibility') {
         Accessibility.screenReaders.map(accessibilityClass => {
           variants.map(variant => {
-            pseudoClasses.push(prefix + variant + separator + accessibilityClass);
+            if (variant === 'responsive') {
+              breakpoints.map(breakpointVariant => {
+                pseudoClasses.push(prefix + breakpointVariant + separator + accessibilityClass);
+              });
+            } else {
+              pseudoClasses.push(prefix + variant + separator + accessibilityClass);
+            }
           });
         });
       } else if (key === 'transform') {
