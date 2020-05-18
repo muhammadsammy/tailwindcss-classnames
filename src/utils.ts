@@ -1082,7 +1082,6 @@ export type TAccessibility = TSvg | TScreenReaders;
 export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
 
 export type TClasses =
-  | TUtility
   | TLayout
   | TTypography
   | TBackgrounds
