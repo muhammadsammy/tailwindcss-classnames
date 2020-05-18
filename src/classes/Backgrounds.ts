@@ -96,6 +96,8 @@ const backgroundColor = [
   'bg-pink-900',
 ];
 
+const backgroundOpacity = ['bg-opacity-0', 'bg-opacity-25', 'bg-opacity-50', 'bg-opacity-75', 'bg-opacity-100'];
+
 const backgroundPosition = [
   'bg-bottom',
   'bg-center',
@@ -122,6 +124,7 @@ const backgroundSize = ['bg-auto', 'bg-cover', 'bg-contain'];
 export const Backgrounds = {
   backgroundAttachment,
   backgroundColor,
+  backgroundOpacity,
   backgroundPosition,
   backgroundRepeat,
   backgroundSize,
