@@ -55,7 +55,7 @@ const lineHeight = [
   'leading-10',
 ];
 
-const listStyleconst = ['line-none', 'list-disc', 'list-decimal'];
+const listStyleType = ['line-none', 'list-disc', 'list-decimal'];
 
 const listStylePosition = ['list-inside', 'list-outside'];
 
@@ -284,7 +284,7 @@ export const Typography = {
   fontWeight,
   letterSpacing,
   lineHeight,
-  listStyleconst,
+  listStyleType,
   listStylePosition,
   placeholderColor,
   textAlign,
