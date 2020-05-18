@@ -513,7 +513,7 @@ export type TDivideColor =DIVIDE_COLORS;
 
 export type TDivideOpacity =DIVIDE_OPACITIES;
 
-export type TBorders = 
+export type TBorders =
   | TBorderColor
   | TBorderStyle
   | TBorderWidth
@@ -848,7 +848,7 @@ export type TTransitionDelay =
   | '_PREFIX_delay-700'
   | '_PREFIX_delay-1000';
 
-export type TTransitions = 
+export type TTransitions =
   | TTransitionProperty
   | TTransitionDuration
   | TTransitionTimingFunction
