@@ -136,8 +136,6 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       const classes = AllClasses[key];
       const variants = variantsObjValues[i];
 
-      // TODO: add other missing classes: devides, opacities
-
       if (key === 'accessibility') {
         Accessibility.screenReaders.map(accessibilityClass => {
           variants.map(variant => {
