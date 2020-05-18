@@ -161,7 +161,7 @@ const placeholderOpacity = [
   'placeholder-opacity-50',
   'placeholder-opacity-75',
   'placeholder-opacity-100',
-]
+];
 
 const textAlign = ['text-left', 'text-center', 'text-right', 'text-justify'];
 
@@ -263,6 +263,8 @@ const textColor = [
 
 const textDecoration = ['underline', 'line-through', 'no-underline'];
 
+const textOpacity = ['text-opacity-0', 'text-opacity-25', 'text-opacity-50', 'text-opacity-75', 'text-opacity-100'];
+
 const textTransform = ['uppercase', 'lowercase', 'capitalize', 'normal-case'];
 
 const verticalAlign = [
@@ -299,6 +301,7 @@ export const Typography = {
   textAlign,
   textColor,
   textDecoration,
+  textOpacity,
   textTransform,
   verticalAlign,
   whitespace,
