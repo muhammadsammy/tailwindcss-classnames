@@ -2,6 +2,7 @@ import fs from 'fs';
 import isEmpty from 'lodash.isempty';
 import { Accessibility } from './classes/Accessibility';
 import { AllClasses } from './classes/all';
+import { allTransformClasses, Transforms } from './classes/Transforms';
 import {
   baseTemplateString,
   defaultColors,
@@ -125,7 +126,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     //   }
     // }
 
-    const themeVariantsObj = isEmpty(THEME_CONFIG?.variants) ? defaultVariants : THEME_CONFIG?.variants;
+    const themeVariantsObj = isEmpty(CONFIG?.variants) ? defaultVariants : CONFIG?.variants;
     const variantsObjKeys = Object.keys(themeVariantsObj);
     const variantsObjValues: string[][] = Object.values(themeVariantsObj);
 
@@ -138,11 +139,39 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       // TODO: check for other missing classes
 
       if (key === 'accessibility') {
-        Accessibility.screenReaders.map(c => {
+        Accessibility.screenReaders.map(accessibilityClass => {
           variants.map(variant => {
-            pseudoClasses.push(prefix + variant + separator + c);
+            pseudoClasses.push(prefix + variant + separator + accessibilityClass);
           });
         });
+      } else if (key === 'transform') {
+        const configHasOtherTransforms: boolean = variantsObjKeys.some(k => Object.keys(Transforms).indexOf(k) >= 0);
+        if (configHasOtherTransforms) {
+          const transformsNotInConfig = Object.keys(Transforms).filter(el => !variantsObjKeys.includes(el));
+          transformsNotInConfig.map(t => {
+            variants.map(variant => {
+              if (variant === 'responsive') {
+                breakpoints.map(breakpointVariant => {
+                  pseudoClasses.push(prefix + breakpointVariant + separator + t);
+                });
+              } else {
+                pseudoClasses.push(prefix + variant + separator + t);
+              }
+            });
+          });
+        } else {
+          allTransformClasses.map(transformClass => {
+            variants.map(variant => {
+              if (variant === 'responsive') {
+                breakpoints.map(breakpointVariant => {
+                  pseudoClasses.push(prefix + variant + separator + transformClass);
+                });
+              } else {
+                pseudoClasses.push(prefix + variant + separator + transformClass);
+              }
+            });
+          });
+        }
       } else {
         classes?.map(c => {
           variants.map(variant => {

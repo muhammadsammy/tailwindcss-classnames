@@ -156,3 +156,5 @@ export const Transforms = {
   skew,
   transformOrigin,
 };
+
+export const allTransformClasses = [...scale, ...rotate, ...translate, ...skew, ...transformOrigin];
