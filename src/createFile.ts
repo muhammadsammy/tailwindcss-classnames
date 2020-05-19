@@ -38,52 +38,23 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const extendedThemeColors = THEME_CONFIG?.extend?.colors;
     const AllConfigColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
 
-    const backgroundColors: string[] = [];
-    const placeholderColors: string[] = [];
-    const borderColors: string[] = [];
-    const textColors: string[] = [];
-    const divideColors: string[] = [];
-
     // theme: {
     //   colors: {
     //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
     //   }
     // }
-    const getBackgroundColors = () => {
+    const getClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
       const colorVals = Object.values(AllConfigColors);
       return Object.keys(AllConfigColors).flatMap((colorKey, i) => {
         const colorVal = colorVals[i];
         if (colorVal instanceof Object) {
           return Object.keys(colorVal).map(
-            colorValue => `bg-${colorKey}-${colorValue === 'default' ? '' : colorValue}`,
+            colorValue => `${classPayload}-${colorKey}-${colorValue === 'default' ? '' : colorValue}`,
           );
         }
-        return `bg-${colorKey}`;
+        return `${classPayload}-${colorKey}`;
       });
     };
-
-    const colors = Object.keys(AllConfigColors);
-    for (let i = 0; i < colors.length; i += 1) {
-      const colorKey = colors[i];
-      const colorVal = AllConfigColors[colorKey];
-      if (colorVal instanceof Object) {
-        const colorValues = Object.keys(colorVal);
-        colorValues.map((colorValue: string) => {
-          colorValue = colorValue === 'default' ? '' : `-${colorValue}`;
-          // backgroundColors.push(`bg-${colorKey}${colorValue}`);
-          placeholderColors.push(`${prefix}placeholder-${colorKey}${colorValue}`);
-          borderColors.push(`${prefix}border-${colorKey}${colorValue}`);
-          textColors.push(`${prefix}text-${colorKey}${colorValue}`);
-          divideColors.push(`${prefix}divide-${colorKey}${colorValue}`);
-        });
-      } else {
-        // backgroundColors.push(`bg-${colorKey}`);
-        placeholderColors.push(`${prefix}placeholder-${colorKey}`);
-        borderColors.push(`${prefix}border-${colorKey}`);
-        textColors.push(`${prefix}text-${colorKey}`);
-        divideColors.push(`${prefix}divide-${colorKey}`);
-      }
-    }
 
     const themeOpacities = isEmpty(THEME_CONFIG?.opacity) ? defaultOpacities : THEME_CONFIG?.opacity;
     const extendedThemeOpacities = THEME_CONFIG?.extend?.opacity;
@@ -194,7 +165,19 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           }
           break;
         case 'backgroundColor':
-          classesOfCategoryKey = getBackgroundColors();
+          classesOfCategoryKey = getClassesWithColors('bg');
+          break;
+        case 'placeholderColor':
+          classesOfCategoryKey = getClassesWithColors('placeholder');
+          break;
+        case 'borderColor':
+          classesOfCategoryKey = getClassesWithColors('border');
+          break;
+        case 'textColor':
+          classesOfCategoryKey = getClassesWithColors('text');
+          break;
+        case 'divideColor':
+          classesOfCategoryKey = getClassesWithColors('divide');
           break;
         default:
           classesOfCategoryKey = AllClasses[key];
@@ -223,11 +206,11 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
       .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweenSpacings))
-      .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors, prefix))
-      .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
-      .replace(/BORDER_COLORS/g, generateTypes(borderColors))
-      .replace(/TEXT_COLORS/g, generateTypes(textColors))
-      .replace(/DIVIDE_COLORS/g, generateTypes(divideColors))
+      .replace(/BACKGROUND_COLORS/g, generateTypes(getClassesWithColors('bg'), prefix))
+      .replace(/PLACEHOLDER_COLORS/g, generateTypes(getClassesWithColors('placeholder'), prefix))
+      .replace(/BORDER_COLORS/g, generateTypes(getClassesWithColors('border'), prefix))
+      .replace(/TEXT_COLORS/g, generateTypes(getClassesWithColors('text'), prefix))
+      .replace(/DIVIDE_COLORS/g, generateTypes(getClassesWithColors('divide'), prefix))
       .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities))
       .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses))
