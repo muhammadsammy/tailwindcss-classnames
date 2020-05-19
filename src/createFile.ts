@@ -1,8 +1,18 @@
-/* tslint:disable:no-eval no-console */
-
 import fs from 'fs';
 import isEmpty from 'lodash.isempty';
-import { baseTemplateString, defaultColors, defaultScreens, defaultSpacing, generateTypes } from './utils';
+import { Accessibility } from './classes/Accessibility';
+import { AllClasses } from './classes/all';
+import { allTransformClasses, Transforms } from './classes/Transforms';
+import {
+  baseTemplateString,
+  defaultColors,
+  defaultOpacities,
+  defaultScreens,
+  defaultSpacing,
+  defaultVariants,
+  generateTypes,
+  generateOpacities,
+} from './utils';
 
 interface IOptions {
   configFilename: string;
@@ -32,6 +42,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const placeholderColors: string[] = [];
     const borderColors: string[] = [];
     const textColors: string[] = [];
+    const divideColors: string[] = [];
     // theme: {
     //   colors: {
     //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
@@ -49,34 +60,31 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           placeholderColors.push(`${prefix}placeholder-${colorKey}${variant}`);
           borderColors.push(`${prefix}border-${colorKey}${variant}`);
           textColors.push(`${prefix}text-${colorKey}${variant}`);
+          divideColors.push(`${prefix}divide-${colorKey}${variant}`);
         });
       } else {
         backgroundColors.push(`${prefix}bg-${colorKey}`);
         placeholderColors.push(`${prefix}placeholder-${colorKey}`);
         borderColors.push(`${prefix}border-${colorKey}`);
         textColors.push(`${prefix}text-${colorKey}`);
+        divideColors.push(`${prefix}divide-${colorKey}`);
       }
     }
 
-    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
-    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
-    const breakpoints = extendedThemeBreakpoints
-      ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
-      : themeBreakpoints;
+    const themeOpacities = isEmpty(THEME_CONFIG?.opacity) ? defaultOpacities : THEME_CONFIG?.opacity;
+    const extendedThemeOpacities = THEME_CONFIG?.extend?.opacity;
+    const allOpacities = extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
+    const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
 
-    const breakpointExportStatements: string[] = [];
-    const breakpointCreateCustomParams: string[] = [];
-    const breakpointCreateCustomReturns: string[] = [];
-    const maxWidthByBreakpoints: string[] = [];
-
-    Object.keys(breakpoints).map((breakpoint: string) => {
-      breakpointExportStatements.push(
-        `export const ${breakpoint}: TPseudoClass = className => ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;`,
-      );
-      breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
-      breakpointCreateCustomReturns.push(`${breakpoint},`);
-      maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
-    });
+    const getOpacity = (themePropertyName: string, outputNamePrefix: string) => {
+      const generatedOpacities = generateOpacities(allOpacities, THEME_CONFIG, themePropertyName);
+      return Object.keys(generatedOpacities).map(opacity => `${prefix}${outputNamePrefix}-opacity-${opacity}`);
+    };
+    const textOpacities = getOpacity('textOpacity', 'text');
+    const backgroundOpacities = getOpacity('backgroundOpacity', 'bg');
+    const borderOpacities = getOpacity('borderOpacity', 'border');
+    const divideOpacities = getOpacity('divideOpacity', 'divide');
+    const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
     const themeSpacings = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
     const extendedThemeSpacings = THEME_CONFIG?.extend?.spacing;
@@ -86,6 +94,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const marginSpacings: string[] = [];
     const widthSpacings: string[] = [];
     const heightSpacings: string[] = [];
+    const spaceBetweenSpacings: string[] = [`${prefix}space-x-reverse`, `${prefix}space-y-reverse`];
 
     const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
@@ -105,23 +114,110 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           marginSpacings.push(`${prefix}-m${side}-${spacing}`);
         }
       });
+
+      ['', '-'].map(spaceBetweenPrefix => {
+        ['x', 'y'].map(axis => {
+          spaceBetweenSpacings.push(`${prefix}${spaceBetweenPrefix}space-${axis}-${spacing}`);
+        });
+      });
+    });
+
+    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
+    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
+    const breakpoints = Object.keys(
+      extendedThemeBreakpoints ? { ...themeBreakpoints, ...extendedThemeBreakpoints } : themeBreakpoints,
+    );
+
+    const maxWidthByBreakpoints: string[] = [];
+
+    breakpoints.map((breakpoint: string) => {
+      maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
+    });
+
+    // theme: {
+    //   variants: {
+    //     variantsObjKey: variantsObjValue => ['responsive', 'hover', 'focus'],
+    //   }
+    // }
+    const themeVariantsObj = isEmpty(CONFIG?.variants) ? defaultVariants : CONFIG?.variants;
+    const variantsObjKeys = Object.keys(themeVariantsObj);
+    const variantsObjValues: string[][] = Object.values(themeVariantsObj);
+
+    const pseudoClasses: string[] = [];
+
+    variantsObjKeys.map((key, i) => {
+      let classesOfCategoryKey: string[];
+      const variants = variantsObjValues[i];
+
+      switch (key) {
+        case 'gap':
+          classesOfCategoryKey = AllClasses.gridGap;
+          break;
+        case 'inset':
+          classesOfCategoryKey = AllClasses.topRightBottomLeft;
+          break;
+        case 'accessibility':
+          classesOfCategoryKey = AllClasses.screenReaders;
+          break;
+        case 'transform':
+          classesOfCategoryKey = [];
+          const configHasOtherTransforms: boolean = variantsObjKeys.some(k => Object.keys(Transforms).indexOf(k) >= 0);
+          if (configHasOtherTransforms) {
+            const transformsNotInConfig = Object.keys(Transforms).filter(el => !variantsObjKeys.includes(el));
+            transformsNotInConfig.map(transformClass => {
+              variants.map(variant => {
+                if (variant === 'responsive') {
+                  breakpoints.map(breakpointVariant => {
+                    pseudoClasses.push(prefix + breakpointVariant + separator + transformClass);
+                  });
+                } else {
+                  pseudoClasses.push(prefix + variant + separator + transformClass);
+                }
+              });
+            });
+          } else {
+            classesOfCategoryKey = allTransformClasses;
+          }
+          break;
+        default:
+          classesOfCategoryKey = AllClasses[key];
+          break;
+      }
+
+      classesOfCategoryKey.map(c => {
+        variants.map(variant => {
+          if (variant === 'responsive') {
+            breakpoints.map(breakpointVariant => {
+              pseudoClasses.push(prefix + breakpointVariant + separator + c);
+            });
+          } else {
+            pseudoClasses.push(prefix + variant + separator + c);
+          }
+        });
+      });
     });
 
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(maxWidthByBreakpoints))
-      .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
-      .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n  '))
-      .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n  '))
       .replace(/PADDINGS/g, generateTypes(paddingSpacings))
       .replace(/MARGINS/g, generateTypes(marginSpacings))
       .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
+      .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweenSpacings))
       .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
-      .replace(/TEXT_COLORS/g, generateTypes(textColors));
+      .replace(/TEXT_COLORS/g, generateTypes(textColors))
+      .replace(/DIVIDE_COLORS/g, generateTypes(divideColors))
+      .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities))
+      .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
+      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses))
+      .replace(/BORDER_OPACITIES/g, generateTypes(borderOpacities))
+      .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities))
+      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities))
+      .replace(/OPACITIES/g, generateTypes(opacities));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {

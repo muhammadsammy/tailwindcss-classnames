@@ -1,7 +1,18 @@
 /* tslint:disable: prefer-template */
+import isEmpty from 'lodash.isempty';
 
 export function generateTypes(arr: string[]) {
   return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
+}
+
+export function generateOpacities(
+  defaultOpacities: { [key: string]: string },
+  theme: { [key: string]: any },
+  property: string,
+): { [key: string]: string } {
+  const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
+  const extendedThemeOpacities = theme.extend?.[property];
+  return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
 }
 
 export const defaultScreens = {
@@ -151,10 +162,115 @@ export const defaultSpacing = {
   '64': '16rem',
 };
 
-export const baseTemplateString = `
-import classnamesLib from 'classnames';
+export const defaultVariants = {
+  accessibility: ['responsive', 'focus'],
+  alignContent: ['responsive'],
+  alignItems: ['responsive'],
+  alignSelf: ['responsive'],
+  appearance: ['responsive'],
+  backgroundAttachment: ['responsive'],
+  backgroundColor: ['responsive', 'hover', 'focus'],
+  backgroundOpacity: ['responsive', 'hover', 'focus'],
+  backgroundPosition: ['responsive'],
+  backgroundRepeat: ['responsive'],
+  backgroundSize: ['responsive'],
+  borderCollapse: ['responsive'],
+  borderColor: ['responsive', 'hover', 'focus'],
+  borderOpacity: ['responsive', 'hover', 'focus'],
+  borderRadius: ['responsive'],
+  borderStyle: ['responsive'],
+  borderWidth: ['responsive'],
+  boxShadow: ['responsive', 'hover', 'focus'],
+  boxSizing: ['responsive'],
+  cursor: ['responsive'],
+  display: ['responsive'],
+  divideColor: ['responsive'],
+  divideOpacity: ['responsive'],
+  divideWidth: ['responsive'],
+  fill: ['responsive'],
+  flex: ['responsive'],
+  flexDirection: ['responsive'],
+  flexGrow: ['responsive'],
+  flexShrink: ['responsive'],
+  flexWrap: ['responsive'],
+  float: ['responsive'],
+  clear: ['responsive'],
+  fontFamily: ['responsive'],
+  fontSize: ['responsive'],
+  fontSmoothing: ['responsive'],
+  fontStyle: ['responsive'],
+  fontWeight: ['responsive', 'hover', 'focus'],
+  height: ['responsive'],
+  inset: ['responsive'],
+  justifyContent: ['responsive'],
+  letterSpacing: ['responsive'],
+  lineHeight: ['responsive'],
+  listStylePosition: ['responsive'],
+  listStyleType: ['responsive'],
+  margin: ['responsive'],
+  maxHeight: ['responsive'],
+  maxWidth: ['responsive'],
+  minHeight: ['responsive'],
+  minWidth: ['responsive'],
+  objectFit: ['responsive'],
+  objectPosition: ['responsive'],
+  opacity: ['responsive', 'hover', 'focus'],
+  order: ['responsive'],
+  outline: ['responsive', 'focus'],
+  overflow: ['responsive'],
+  padding: ['responsive'],
+  placeholderColor: ['responsive', 'focus'],
+  placeholderOpacity: ['responsive', 'focus'],
+  pointerEvents: ['responsive'],
+  position: ['responsive'],
+  resize: ['responsive'],
+  space: ['responsive'],
+  stroke: ['responsive'],
+  strokeWidth: ['responsive'],
+  tableLayout: ['responsive'],
+  textAlign: ['responsive'],
+  textColor: ['responsive', 'hover', 'focus'],
+  textOpacity: ['responsive', 'hover', 'focus'],
+  textDecoration: ['responsive', 'hover', 'focus'],
+  textTransform: ['responsive'],
+  userSelect: ['responsive'],
+  verticalAlign: ['responsive'],
+  visibility: ['responsive'],
+  whitespace: ['responsive'],
+  width: ['responsive'],
+  wordBreak: ['responsive'],
+  zIndex: ['responsive'],
+  gap: ['responsive'],
+  gridAutoFlow: ['responsive'],
+  gridTemplateColumns: ['responsive'],
+  gridColumn: ['responsive'],
+  gridColumnStart: ['responsive'],
+  gridColumnEnd: ['responsive'],
+  gridTemplateRows: ['responsive'],
+  gridRow: ['responsive'],
+  gridRowStart: ['responsive'],
+  gridRowEnd: ['responsive'],
+  transform: ['responsive'],
+  transformOrigin: ['responsive'],
+  scale: ['responsive', 'hover', 'focus'],
+  rotate: ['responsive', 'hover', 'focus'],
+  translate: ['responsive', 'hover', 'focus'],
+  skew: ['responsive', 'hover', 'focus'],
+  transitionProperty: ['responsive'],
+  transitionTimingFunction: ['responsive'],
+  transitionDuration: ['responsive'],
+  transitionDelay: ['responsive'],
+};
 
-export type TUtility = '_PREFIX_mx-auto';
+export const defaultOpacities = {
+  '0': '0',
+  '25': '0.25',
+  '50': '0.5',
+  '75': '0.75',
+  '100': '1',
+};
+
+export const baseTemplateString = `import classnamesLib from 'classnames';
 
 export type TBoxSizing = '_PREFIX_box-border' | '_PREFIX_box-content';
 
@@ -302,6 +418,8 @@ export type TListStylePosition = '_PREFIX_list-inside' | '_PREFIX_list-outside';
 
 export type TPlaceholderColor =PLACEHOLDER_COLORS;
 
+export type TPlaceholderOpacity =PLACERHOLDER_OPACITIES;
+
 export type TTextAlign = '_PREFIX_text-left' | '_PREFIX_text-center' | '_PREFIX_text-right' | '_PREFIX_text-justify';
 
 export type TTextColor =TEXT_COLORS;
@@ -327,6 +445,8 @@ export type TWhitespace =
 
 export type TWordBreak = '_PREFIX_break-normal' | '_PREFIX_break-words' | '_PREFIX_break-all' | '_PREFIX_truncate';
 
+export type TTextOpacity =TEXT_OPACITIES;
+
 export type TTypography =
   | TFontFamily
   | TFontSize
@@ -338,13 +458,15 @@ export type TTypography =
   | TListStyleType
   | TListStylePosition
   | TPlaceholderColor
+  | TPlaceholderOpacity
   | TTextAlign
   | TTextColor
   | TTextDecoration
   | TTextTransform
   | TVerticalAlign
   | TWhitespace
-  | TWordBreak;
+  | TWordBreak
+  | TTextOpacity;
 
 export type TBackgroundAttachment = '_PREFIX_bg-fixed' | '_PREFIX_bg-local' | '_PREFIX_bg-scroll';
 
@@ -371,12 +493,15 @@ export type TBackgroundRepeat =
 
 export type TBackgroundSize = '_PREFIX_bg-auto' | '_PREFIX_bg-cover' | '_PREFIX_bg-contain';
 
+export type TBackgroundOpacity =BACKGROUND_OPACITIES;
+
 export type TBackgrounds =
   | TBackgroundAttachment
   | TBackgroundColor
   | TBackgroundPosition
   | TBackgroundRepeat
-  | TBackgroundSize;
+  | TBackgroundSize
+  | TBackgroundOpacity;
 
 export type TBorderColor =BORDER_COLORS;
 
@@ -465,7 +590,35 @@ export type TBorderRadius =
   | '_PREFIX_rounded-br-full'
   | '_PREFIX_rounded-bl-full';
 
-export type TBorders = TBorderColor | TBorderStyle | TBorderWidth | TBorderRadius;
+export type TBorderOpacity =BORDER_OPACITIES;
+
+export type TDivideWidth =
+  | '_PREFIX_divide-x'
+  | '_PREFIX_divide-x-0'
+  | '_PREFIX_divide-x-2'
+  | '_PREFIX_divide-x-4'
+  | '_PREFIX_divide-x-8'
+  | '_PREFIX_divide-y'
+  | '_PREFIX_divide-y-0'
+  | '_PREFIX_divide-y-2'
+  | '_PREFIX_divide-y-4'
+  | '_PREFIX_divide-y-8'
+  | '_PREFIX_divide-x-reverse'
+  | '_PREFIX_divide-y-reverse';
+
+export type TDivideColor =DIVIDE_COLORS;
+
+export type TDivideOpacity =DIVIDE_OPACITIES;
+
+export type TBorders =
+  | TBorderColor
+  | TBorderStyle
+  | TBorderWidth
+  | TBorderRadius
+  | TBorderOpacity
+  | TDivideWidth
+  | TDivideColor
+  | TDivideOpacity;
 
 export type TFlexDirection = '_PREFIX_flex-row' | '_PREFIX_flex-row-reverse' | '_PREFIX_flex-col' | '_PREFIX_flex-col-reverse';
 
@@ -677,7 +830,9 @@ export type TPadding =PADDINGS;
 
 export type TMargin =MARGINS;
 
-export type TSpacing = TPadding | TMargin;
+export type TSpaceBetween =SPACE_BETWEEN;
+
+export type TSpacing = TPadding | TMargin | TSpaceBetween;
 
 export type TWidth =WIDTH_SPACINGS
   | '_PREFIX_w-auto'
@@ -755,7 +910,7 @@ export type TBoxShadow =
   | '_PREFIX_shadow-outline'
   | '_PREFIX_shadow-none';
 
-export type TOpacity = '_PREFIX_opacity-100' | '_PREFIX_opacity-75' | '_PREFIX_opacity-50' | '_PREFIX_opacity-25' | '_PREFIX_opacity-0';
+export type TOpacity =OPACITIES;
 
 export type TEffects = TBoxShadow | TOpacity;
 
@@ -780,7 +935,21 @@ export type TTransitionDuration =
 
 export type TTransitionTimingFunction = '_PREFIX_ease-linear' | '_PREFIX_ease-in' | '_PREFIX_ease-out' | '_PREFIX_ease-in-out';
 
-export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction;
+export type TTransitionDelay =
+  | '_PREFIX_delay-75'
+  | '_PREFIX_delay-100'
+  | '_PREFIX_delay-150'
+  | '_PREFIX_delay-200'
+  | '_PREFIX_delay-300'
+  | '_PREFIX_delay-500'
+  | '_PREFIX_delay-700'
+  | '_PREFIX_delay-1000';
+
+export type TTransitions =
+  | TTransitionProperty
+  | TTransitionDuration
+  | TTransitionTimingFunction
+  | TTransitionDelay;
 
 export type TScale =
   | '_PREFIX_scale-0'
@@ -971,8 +1140,9 @@ export type TScreenReaders = '_PREFIX_sr-only' | '_PREFIX_not-sr-only';
 
 export type TAccessibility = TSvg | TScreenReaders;
 
+export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
+
 export type TClasses =
-  | TUtility
   | TLayout
   | TTypography
   | TBackgrounds
@@ -986,7 +1156,8 @@ export type TClasses =
   | TTransforms
   | TTransitions
   | TInteractivity
-  | TAccessibility;
+  | TAccessibility
+  | TPseudoClasses;
 
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
@@ -994,60 +1165,5 @@ export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: bo
 
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
 
-export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
-
 export const classnames: TTailwind = classnamesLib as any;
-
-export const hover: TPseudoClass = className => ('_PREFIX_hover_SEPARATOR_' + className) as TTailwindString;
-
-BREAKPOINT_EXPORT_STATEMENTS
-
-export const focus: TPseudoClass = className => ('_PREFIX_focus_SEPARATOR_' + className) as TTailwindString;
-
-export const active: TPseudoClass = className => ('_PREFIX_active_SEPARATOR_' + className) as TTailwindString;
-
-export const disabled: TPseudoClass = className => ('_PREFIX_disabled_SEPARATOR_' + className) as TTailwindString;
-
-export const visited: TPseudoClass = className => ('_PREFIX_visited_SEPARATOR_' + className) as TTailwindString;
-
-export const firstChild: TPseudoClass = className => ('_PREFIX_first-child_SEPARATOR_' + className) as TTailwindString;
-
-export const lastChild: TPseudoClass = className => ('_PREFIX_last-child_SEPARATOR_' + className) as TTailwindString;
-
-export const oddChild: TPseudoClass = className => ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
-
-export const evenChild: TPseudoClass = className => ('_PREFIX_even-child_SEPARATOR_' + className) as TTailwindString;
-
-export const groupHover: TPseudoClass = className => ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
-
-export const focusWithin: TPseudoClass = className => ('_PREFIX_focus-within_SEPARATOR_' + className) as TTailwindString;
-
-export const createCustom = <T extends TClasses>(): {
-  classnames: TTailwind<T>;
-  hover: TPseudoClass<T>;
-  BREAKPOINTS_CREATE_CUSTOM_PARAMS
-  active: TPseudoClass<T>;
-  disabled: TPseudoClass<T>;
-  visited: TPseudoClass<T>;
-  firstChild: TPseudoClass<T>;
-  lastChild: TPseudoClass<T>;
-  oddChild: TPseudoClass<T>;
-  evenChild: TPseudoClass<T>;
-  groupHover: TPseudoClass<T>;
-  focusWithin: TPseudoClass<T>;
-} => ({
-  classnames,
-  hover,
-  BREAKPOINTS_CREATE_CUSTOM_RETURNS
-  active,
-  disabled,
-  visited,
-  firstChild,
-  lastChild,
-  oddChild,
-  evenChild,
-  groupHover,
-  focusWithin,
-});
-
 `;

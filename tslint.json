@@ -1,6 +1,8 @@
 {
   "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-plugin-prettier"],
   "rules": {
+    "no-eval": false,
+    "no-console": false,
     "arrow-return-shorthand": [true],
     "class-name": true,
     "encoding": true,
@@ -19,13 +21,7 @@
     "no-string-throw": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
-    "ordered-imports": [
-      true,
-      {
-        "grouped-imports": true,
-        "named-imports-order": "lowercase-last"
-      }
-    ],
+    "ordered-imports": false,
     "prefer-const": true,
     "prefer-for-of": false,
     "prefer-function-over-method": true,
