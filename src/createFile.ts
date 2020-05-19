@@ -11,14 +11,15 @@ import {
   defaultVariants,
   generateTypes,
   generateOpacities,
+  PseudoclassVariantKey,
 } from './utils';
 
-interface IOptions {
+interface Options {
   configFilename: string;
   outputFilename: string;
 }
 
-export function createFileWithGeneratedTypes({ configFilename, outputFilename }: IOptions) {
+export function createFileWithGeneratedTypes({ configFilename, outputFilename }: Options) {
   fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data: any) => {
     if (err) {
       console.error(err);
@@ -131,7 +132,8 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     const pseudoClasses: string[] = [];
 
-    variantsObjKeys.map((key, i) => {
+    variantsObjKeys.map((k, i) => {
+      const key = k as PseudoclassVariantKey;
       let classesOfCategoryKey: string[];
       const variants = variantsObjValues[i];
 
