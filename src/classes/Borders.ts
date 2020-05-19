@@ -189,7 +189,7 @@ const borderRadius = [
   'rounded-bl-full',
 ];
 
-const devideWidth = [
+const divideWidth = [
   'divide-x-0',
   'divide-x-2',
   'divide-x-4',
@@ -315,7 +315,7 @@ export const Borders = {
   borderStyle,
   borderWidth,
   borderRadius,
-  devideWidth,
+  divideWidth,
   divideOpacity,
   divideColor,
 };
