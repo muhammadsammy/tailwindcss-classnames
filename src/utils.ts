@@ -1,8 +1,8 @@
 /* tslint:disable: prefer-template */
 import isEmpty from 'lodash.isempty';
 
-export function generateTypes(arr: string[]) {
-  return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
+export function generateTypes(arr: string[], prefix?: string) {
+  return '\n  | ' + arr.map(n => (prefix ? `'${prefix}${n}'` : `'${n}'`)).join('\n  | ');
 }
 
 export function generateOpacities(

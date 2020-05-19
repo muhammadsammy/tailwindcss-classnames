@@ -1,6 +1,5 @@
 import fs from 'fs';
 import isEmpty from 'lodash.isempty';
-import { Accessibility } from './classes/Accessibility';
 import { AllClasses } from './classes/all';
 import { allTransformClasses, Transforms } from './classes/Transforms';
 import {
@@ -34,36 +33,51 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     const prefix = isEmpty(PREFIX_CONFIG) ? '' : PREFIX_CONFIG;
     const separator = isEmpty(SEPARATOR_CONFIG) ? ':' : SEPARATOR_CONFIG;
+
     const themeColors = isEmpty(THEME_CONFIG?.colors) ? defaultColors : THEME_CONFIG?.colors;
     const extendedThemeColors = THEME_CONFIG?.extend?.colors;
-    const AllColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
+    const AllConfigColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
 
     const backgroundColors: string[] = [];
     const placeholderColors: string[] = [];
     const borderColors: string[] = [];
     const textColors: string[] = [];
     const divideColors: string[] = [];
+
     // theme: {
     //   colors: {
     //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
     //   }
     // }
-    const colors = Object.keys(AllColors);
+    const getBackgroundColors = () => {
+      const colorVals = Object.values(AllConfigColors);
+      return Object.keys(AllConfigColors).flatMap((colorKey, i) => {
+        const colorVal = colorVals[i];
+        if (colorVal instanceof Object) {
+          return Object.keys(colorVal).map(
+            colorValue => `bg-${colorKey}-${colorValue === 'default' ? '' : colorValue}`,
+          );
+        }
+        return `bg-${colorKey}`;
+      });
+    };
+
+    const colors = Object.keys(AllConfigColors);
     for (let i = 0; i < colors.length; i += 1) {
       const colorKey = colors[i];
-      const colorVal = AllColors[colorKey];
+      const colorVal = AllConfigColors[colorKey];
       if (colorVal instanceof Object) {
-        const colorVariants = Object.keys(colorVal);
-        colorVariants.map((variant: string) => {
-          variant = variant === 'default' ? '' : `-${variant}`;
-          backgroundColors.push(`${prefix}bg-${colorKey}${variant}`);
-          placeholderColors.push(`${prefix}placeholder-${colorKey}${variant}`);
-          borderColors.push(`${prefix}border-${colorKey}${variant}`);
-          textColors.push(`${prefix}text-${colorKey}${variant}`);
-          divideColors.push(`${prefix}divide-${colorKey}${variant}`);
+        const colorValues = Object.keys(colorVal);
+        colorValues.map((colorValue: string) => {
+          colorValue = colorValue === 'default' ? '' : `-${colorValue}`;
+          // backgroundColors.push(`bg-${colorKey}${colorValue}`);
+          placeholderColors.push(`${prefix}placeholder-${colorKey}${colorValue}`);
+          borderColors.push(`${prefix}border-${colorKey}${colorValue}`);
+          textColors.push(`${prefix}text-${colorKey}${colorValue}`);
+          divideColors.push(`${prefix}divide-${colorKey}${colorValue}`);
         });
       } else {
-        backgroundColors.push(`${prefix}bg-${colorKey}`);
+        // backgroundColors.push(`bg-${colorKey}`);
         placeholderColors.push(`${prefix}placeholder-${colorKey}`);
         borderColors.push(`${prefix}border-${colorKey}`);
         textColors.push(`${prefix}text-${colorKey}`);
@@ -179,6 +193,9 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
             classesOfCategoryKey = allTransformClasses;
           }
           break;
+        case 'backgroundColor':
+          classesOfCategoryKey = getBackgroundColors();
+          break;
         default:
           classesOfCategoryKey = AllClasses[key];
           break;
@@ -206,7 +223,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
       .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweenSpacings))
-      .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors))
+      .replace(/BACKGROUND_COLORS/g, generateTypes(backgroundColors, prefix))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(placeholderColors))
       .replace(/BORDER_COLORS/g, generateTypes(borderColors))
       .replace(/TEXT_COLORS/g, generateTypes(textColors))
