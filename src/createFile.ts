@@ -72,38 +72,38 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const divideOpacities = getOpacity('divideOpacity', 'divide');
     const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
-    const themeSpacings = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
-    const extendedThemeSpacings = THEME_CONFIG?.extend?.spacing;
-    const allSpacings = extendedThemeSpacings ? { ...themeSpacings, ...extendedThemeSpacings } : themeSpacings;
+    const themeSpacing = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
+    const extendedThemeSpacing = THEME_CONFIG?.extend?.spacing;
+    const allConfigSpacing = extendedThemeSpacing ? { ...themeSpacing, ...extendedThemeSpacing } : themeSpacing;
 
-    const paddingSpacings: string[] = [];
-    const marginSpacings: string[] = [];
-    const widthSpacings: string[] = [];
-    const heightSpacings: string[] = [];
-    const spaceBetweenSpacings: string[] = [`${prefix}space-x-reverse`, `${prefix}space-y-reverse`];
+    const paddings: string[] = [];
+    const margins: string[] = [];
+    const widths: string[] = [];
+    const heights: string[] = [];
+    const spaceBetweens: string[] = [`space-x-reverse`, `space-y-reverse`];
 
     const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
 
     sides.map(side => {
-      paddingSpacings.push(`${prefix}p${side}-auto`);
-      marginSpacings.push(`${prefix}m${side}-auto`);
+      paddings.push(`p${side}-auto`);
+      margins.push(`m${side}-auto`);
     });
 
-    Object.keys(allSpacings).map((spacing, i) => {
-      widthSpacings.push(`${prefix}w-${spacing}`);
-      heightSpacings.push(`${prefix}h-${spacing}`);
+    Object.keys(allConfigSpacing).map((spacing, i) => {
+      widths.push(`w-${spacing}`);
+      heights.push(`h-${spacing}`);
       sides.map(side => {
-        paddingSpacings.push(`${prefix}p${side}-${spacing}`);
-        marginSpacings.push(`${prefix}m${side}-${spacing}`);
-        if (parseInt(spacing, 10) !== 0 && Object.values(allSpacings)[i] !== 0) {
-          paddingSpacings.push(`${prefix}-p${side}-${spacing}`);
-          marginSpacings.push(`${prefix}-m${side}-${spacing}`);
+        paddings.push(`p${side}-${spacing}`);
+        margins.push(`m${side}-${spacing}`);
+        if (parseInt(spacing, 10) !== 0 && Object.values(allConfigSpacing)[i] !== 0) {
+          paddings.push(`-p${side}-${spacing}`);
+          margins.push(`-m${side}-${spacing}`);
         }
       });
 
       ['', '-'].map(spaceBetweenPrefix => {
         ['x', 'y'].map(axis => {
-          spaceBetweenSpacings.push(`${prefix}${spaceBetweenPrefix}space-${axis}-${spacing}`);
+          spaceBetweens.push(`${spaceBetweenPrefix}space-${axis}-${spacing}`);
         });
       });
     });
@@ -220,11 +220,11 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(maxWidthByBreakpoints))
-      .replace(/PADDINGS/g, generateTypes(paddingSpacings))
-      .replace(/MARGINS/g, generateTypes(marginSpacings))
-      .replace(/WIDTH_SPACINGS/g, generateTypes(widthSpacings))
-      .replace(/HEIGHT_SPACINGS/g, generateTypes(heightSpacings))
-      .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweenSpacings))
+      .replace(/PADDINGS/g, generateTypes(paddings, prefix))
+      .replace(/MARGINS/g, generateTypes(margins, prefix))
+      .replace(/WIDTH_SPACINGS/g, generateTypes(widths, prefix))
+      .replace(/HEIGHT_SPACINGS/g, generateTypes(heights, prefix))
+      .replace(/SPACE_BETWEEN/g, generateTypes(spaceBetweens, prefix))
       .replace(/BACKGROUND_COLORS/g, generateTypes(getClassesWithColors('bg'), prefix))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(getClassesWithColors('placeholder'), prefix))
       .replace(/BORDER_COLORS/g, generateTypes(getClassesWithColors('border'), prefix))
