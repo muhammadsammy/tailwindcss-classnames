@@ -72,14 +72,9 @@ const gridTemplateRows = [
   'grid-rows-none',
 ];
 
-const gridRowStartEnd = [
-  'row-auto',
-  'row-span-1',
-  'row-span-2',
-  'row-span-3',
-  'row-span-4',
-  'row-span-5',
-  'row-span-6',
+const gridRow = ['row-auto', 'row-span-1', 'row-span-2', 'row-span-3', 'row-span-4', 'row-span-5', 'row-span-6'];
+
+const gridRowStart = [
   'row-start-1',
   'row-start-2',
   'row-start-3',
@@ -88,6 +83,9 @@ const gridRowStartEnd = [
   'row-start-6',
   'row-start-7',
   'row-start-auto',
+];
+
+const gridRowEnd = [
   'row-end-1',
   'row-end-2',
   'row-end-3',
@@ -166,7 +164,9 @@ export const Grid = {
   gridColumnStart,
   gridColumnEnd,
   gridTemplateRows,
-  gridRowStartEnd,
+  gridRow,
+  gridRowStart,
+  gridRowEnd,
   gridGap,
   gridAutoFlow,
 };
