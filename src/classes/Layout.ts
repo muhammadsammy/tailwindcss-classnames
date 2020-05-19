@@ -57,7 +57,6 @@ const topRightBottomLeft = [
   'inset-0',
   'inset-y-0',
   'inset-x-0',
-  'inset-x-y',
   'top-0',
   'right-0',
   'bottom-0',
