@@ -1165,7 +1165,5 @@ export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: bo
 
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
 
-export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
-
 export const classnames: TTailwind = classnamesLib as any;
 `;
