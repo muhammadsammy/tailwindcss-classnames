@@ -139,7 +139,6 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     //     variantsObjKey: variantsObjValue => ['responsive', 'hover', 'focus'],
     //   }
     // }
-
     const themeVariantsObj = isEmpty(CONFIG?.variants) ? defaultVariants : CONFIG?.variants;
     const variantsObjKeys = Object.keys(themeVariantsObj);
     const variantsObjValues: string[][] = Object.values(themeVariantsObj);
@@ -147,62 +146,55 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const pseudoClasses: string[] = [];
 
     variantsObjKeys.map((key, i) => {
-      const classes = AllClasses[key];
+      let classesOfCategoryKey: string[];
       const variants = variantsObjValues[i];
 
-      if (key === 'accessibility') {
-        Accessibility.screenReaders.map(accessibilityClass => {
-          variants.map(variant => {
-            if (variant === 'responsive') {
-              breakpoints.map(breakpointVariant => {
-                pseudoClasses.push(prefix + breakpointVariant + separator + accessibilityClass);
-              });
-            } else {
-              pseudoClasses.push(prefix + variant + separator + accessibilityClass);
-            }
-          });
-        });
-      } else if (key === 'transform') {
-        const configHasOtherTransforms: boolean = variantsObjKeys.some(k => Object.keys(Transforms).indexOf(k) >= 0);
-        if (configHasOtherTransforms) {
-          const transformsNotInConfig = Object.keys(Transforms).filter(el => !variantsObjKeys.includes(el));
-          transformsNotInConfig.map(t => {
-            variants.map(variant => {
-              if (variant === 'responsive') {
-                breakpoints.map(breakpointVariant => {
-                  pseudoClasses.push(prefix + breakpointVariant + separator + t);
-                });
-              } else {
-                pseudoClasses.push(prefix + variant + separator + t);
-              }
-            });
-          });
-        } else {
-          allTransformClasses.map(transformClass => {
-            variants.map(variant => {
-              if (variant === 'responsive') {
-                breakpoints.map(breakpointVariant => {
+      switch (key) {
+        case 'gap':
+          classesOfCategoryKey = AllClasses.gridGap;
+          break;
+        case 'inset':
+          classesOfCategoryKey = AllClasses.topRightBottomLeft;
+          break;
+        case 'accessibility':
+          classesOfCategoryKey = AllClasses.screenReaders;
+          break;
+        case 'transform':
+          classesOfCategoryKey = [];
+          const configHasOtherTransforms: boolean = variantsObjKeys.some(k => Object.keys(Transforms).indexOf(k) >= 0);
+          if (configHasOtherTransforms) {
+            const transformsNotInConfig = Object.keys(Transforms).filter(el => !variantsObjKeys.includes(el));
+            transformsNotInConfig.map(transformClass => {
+              variants.map(variant => {
+                if (variant === 'responsive') {
+                  breakpoints.map(breakpointVariant => {
+                    pseudoClasses.push(prefix + breakpointVariant + separator + transformClass);
+                  });
+                } else {
                   pseudoClasses.push(prefix + variant + separator + transformClass);
-                });
-              } else {
-                pseudoClasses.push(prefix + variant + separator + transformClass);
-              }
-            });
-          });
-        }
-      } else {
-        classes?.map(c => {
-          variants.map(variant => {
-            if (variant === 'responsive') {
-              breakpoints.map(breakpointVariant => {
-                pseudoClasses.push(prefix + breakpointVariant + separator + c);
+                }
               });
-            } else {
-              pseudoClasses.push(prefix + variant + separator + c);
-            }
-          });
-        });
+            });
+          } else {
+            classesOfCategoryKey = allTransformClasses;
+          }
+          break;
+        default:
+          classesOfCategoryKey = AllClasses[key];
+          break;
       }
+
+      classesOfCategoryKey.map(c => {
+        variants.map(variant => {
+          if (variant === 'responsive') {
+            breakpoints.map(breakpointVariant => {
+              pseudoClasses.push(prefix + breakpointVariant + separator + c);
+            });
+          } else {
+            pseudoClasses.push(prefix + variant + separator + c);
+          }
+        });
+      });
     });
 
     const result = baseTemplateString
