@@ -40,7 +40,8 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     // theme: {
     //   colors: {
-    //     colorkey: colorVal ( "#fff" | {light: "#fff", lighter: "#f0f0f0",...} )
+    //     colorkey: colorVal => "#fff"
+    //     colorKey2: colorVal2 => {light: "#fff", lighter: "#f0f0f0", default: "#fff", ...}
     //   }
     // }
     const getClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
@@ -49,7 +50,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
         const colorVal = colorVals[i];
         if (colorVal instanceof Object) {
           return Object.keys(colorVal).map(
-            colorValue => `${classPayload}-${colorKey}-${colorValue === 'default' ? '' : colorValue}`,
+            colorValue => `${classPayload}-${colorKey}${colorValue === 'default' ? '' : `-${colorValue}`}`,
           );
         }
         return `${classPayload}-${colorKey}`;
