@@ -198,6 +198,21 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
         case 'placeholderOpacity':
           classesOfCategoryKey = placeholderOpacities;
           break;
+        case 'width':
+          classesOfCategoryKey = widths;
+          break;
+        case 'height':
+          classesOfCategoryKey = heights;
+          break;
+        case 'margin':
+          classesOfCategoryKey = margins;
+          break;
+        case 'padding':
+          classesOfCategoryKey = paddings;
+          break;
+        case 'space':
+          classesOfCategoryKey = spaceBetweens;
+          break;
         default:
           classesOfCategoryKey = AllClasses[key];
           break;
