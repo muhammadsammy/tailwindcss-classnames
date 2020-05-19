@@ -60,11 +60,11 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const themeOpacities = isEmpty(THEME_CONFIG?.opacity) ? defaultOpacities : THEME_CONFIG?.opacity;
     const extendedThemeOpacities = THEME_CONFIG?.extend?.opacity;
     const allOpacities = extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
-    const opacities = Object.keys(allOpacities).map(opacity => `${prefix}opacity-${opacity}`);
+    const opacities = Object.keys(allOpacities).map(opacity => `opacity-${opacity}`);
 
     const getOpacity = (themePropertyName: string, outputNamePrefix: string) => {
       const generatedOpacities = generateOpacities(allOpacities, THEME_CONFIG, themePropertyName);
-      return Object.keys(generatedOpacities).map(opacity => `${prefix}${outputNamePrefix}-opacity-${opacity}`);
+      return Object.keys(generatedOpacities).map(opacity => `${outputNamePrefix}-opacity-${opacity}`);
     };
     const textOpacities = getOpacity('textOpacity', 'text');
     const backgroundOpacities = getOpacity('backgroundOpacity', 'bg');
@@ -180,6 +180,24 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
         case 'divideColor':
           classesOfCategoryKey = getClassesWithColors('divide');
           break;
+        case 'textOpacity':
+          classesOfCategoryKey = opacities;
+          break;
+        case 'textOpacity':
+          classesOfCategoryKey = textOpacities;
+          break;
+        case 'backgroundOpacity':
+          classesOfCategoryKey = backgroundOpacities;
+          break;
+        case 'borderOpacity':
+          classesOfCategoryKey = borderOpacities;
+          break;
+        case 'divideOpacity':
+          classesOfCategoryKey = divideOpacities;
+          break;
+        case 'placeholderOpacity':
+          classesOfCategoryKey = placeholderOpacities;
+          break;
         default:
           classesOfCategoryKey = AllClasses[key];
           break;
@@ -212,13 +230,13 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/BORDER_COLORS/g, generateTypes(getClassesWithColors('border'), prefix))
       .replace(/TEXT_COLORS/g, generateTypes(getClassesWithColors('text'), prefix))
       .replace(/DIVIDE_COLORS/g, generateTypes(getClassesWithColors('divide'), prefix))
-      .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities))
-      .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities))
-      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses))
-      .replace(/BORDER_OPACITIES/g, generateTypes(borderOpacities))
-      .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities))
-      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities))
-      .replace(/OPACITIES/g, generateTypes(opacities));
+      .replace(/BACKGROUND_OPACITIES/g, generateTypes(backgroundOpacities, prefix))
+      .replace(/TEXT_OPACITIES/g, generateTypes(textOpacities, prefix))
+      .replace(/BORDER_OPACITIES/g, generateTypes(borderOpacities, prefix))
+      .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities, prefix))
+      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities, prefix))
+      .replace(/OPACITIES/g, generateTypes(opacities, prefix))
+      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {
