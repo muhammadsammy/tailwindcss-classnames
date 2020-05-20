@@ -6,11 +6,11 @@ export function generateTypes(arr: string[], prefix?: string) {
 }
 
 export function generateOpacities(
-  defaultOpacities: { [key: string]: string },
+  defaultOpacitiesObj: { [key: string]: string },
   theme: { [key: string]: any },
   property: string,
 ): { [key: string]: string } {
-  const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
+  const themeOpacities = isEmpty(theme[property]) ? defaultOpacitiesObj : theme[property];
   const extendedThemeOpacities = theme.extend?.[property];
   return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
 }

@@ -157,7 +157,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           break;
         case 'transform':
           classesOfCategoryKey = [];
-          const configHasOtherTransforms: boolean = variantsObjKeys.some(k => Object.keys(Transforms).indexOf(k) >= 0);
+          const configHasOtherTransforms: boolean = variantsObjKeys.some(v => Object.keys(Transforms).indexOf(v) >= 0);
           if (configHasOtherTransforms) {
             const transformsNotInConfig = Object.keys(Transforms).filter(el => !variantsObjKeys.includes(el));
             transformsNotInConfig.map(transformClass => {
