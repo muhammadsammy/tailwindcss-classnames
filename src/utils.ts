@@ -933,36 +933,7 @@ export type TSpaceBetween =SPACE_BETWEEN;
 
 export type TSpacing = TPadding | TMargin | TSpaceBetween;
 
-export type TWidth =WIDTH_SPACINGS
-  | '_PREFIX_w-auto'
-  | '_PREFIX_w-1/2'
-  | '_PREFIX_w-1/3'
-  | '_PREFIX_w-2/3'
-  | '_PREFIX_w-1/4'
-  | '_PREFIX_w-2/4'
-  | '_PREFIX_w-3/4'
-  | '_PREFIX_w-1/5'
-  | '_PREFIX_w-2/5'
-  | '_PREFIX_w-3/5'
-  | '_PREFIX_w-4/5'
-  | '_PREFIX_w-1/6'
-  | '_PREFIX_w-2/6'
-  | '_PREFIX_w-3/6'
-  | '_PREFIX_w-4/6'
-  | '_PREFIX_w-5/6'
-  | '_PREFIX_w-1/12'
-  | '_PREFIX_w-2/12'
-  | '_PREFIX_w-3/12'
-  | '_PREFIX_w-4/12'
-  | '_PREFIX_w-5/12'
-  | '_PREFIX_w-6/12'
-  | '_PREFIX_w-7/12'
-  | '_PREFIX_w-8/12'
-  | '_PREFIX_w-9/12'
-  | '_PREFIX_w-10/12'
-  | '_PREFIX_w-11/12'
-  | '_PREFIX_w-full'
-  | '_PREFIX_w-screen';
+export type TWidth =WIDTH_SPACINGS;
 
 export type TMinWidth = '_PREFIX_min-w-0' | '_PREFIX_min-w-full';
 
@@ -980,10 +951,7 @@ export type TMaxWidth =MAX_WIDTH_BY_BREAKPOINTS
   | '_PREFIX_max-w-none'
   | '_PREFIX_max-w-full';
 
-export type THeight =HEIGHT_SPACINGS
-  | '_PREFIX_h-auto'
-  | '_PREFIX_h-full'
-  | '_PREFIX_h-screen';
+export type THeight =HEIGHT_SPACINGS;
 
 export type TMinHeight = '_PREFIX_min-h-0' | '_PREFIX_min-h-full' | '_PREFIX_min-h-screen';
 
