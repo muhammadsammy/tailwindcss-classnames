@@ -60,6 +60,8 @@ import { classnames, hover } from 'tailwindcss-classnames';
 classnames('bg-gray-500', hover('bg-blue-500'));
 ```
 
+**Note: these methods are deprecated and will be removed. Use regular tailwindcss classes as `hover:bg-blue-500` insead. See [#13](https://github.com/muhammadsammy/tailwindcss-classnames/issues/13) for more details**
+
 ## Composing classes
 
 Even though **classnames** just returns a string, it is a special typed string that you can compose into other definitions.
@@ -114,54 +116,71 @@ Custom button component example:
 <!-- prettier-ignore -->
 ```tsx
 import React from "react"
-import {
-  classnames as tw,
-  hover,
-  TTailwindString,
-} from "../tailwindcss-classnames"
+import {tw, TTailwindString} from "../tailwindcss-classnames"
 
 type Props = {
   type: "button" | "submit" | "reset"
   className?: TTailwindString | string
-  variant?: "minimal" | "default" | "primary" | "outline"
+  variant?: "minimal" | "default" | "primary" | "outline" | "danger"
 }
 
 export const Button: React.FunctionComponent<Props &
   React.ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
   const {type, children, className, variant = "default", onClick} = props
+  const {disabled} = props
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`${buttonClasses[variant]} ${className}`}
+      disabled={disabled}
+      className={`${className} ${
+        disabled ? buttonClasses.disabled : buttonClasses[variant]
+      }`}
     >
       {children}
     </button>
   )
 }
 
-const baseClasses = tw("rounded", "py-2", "px-4", "font-semibold")
+const baseClasses = tw(
+  "rounded",
+  "py-2",
+  "px-4",
+  "font-semibold",
+  "flex",
+  "items-center",
+  "justify-center"
+)
+
 export const buttonClasses = {
   default: tw(
     baseClasses,
-    hover("bg-gray-100"),
+    "hover:bg-gray-100",
     "text-gray-700",
     "border",
     "bg-gray-200",
     "border-gray-300"
   ),
-  primary: tw(baseClasses, hover("bg-blue-500"), "bg-blue-600", "text-white"),
+  primary: tw(baseClasses, "hover:bg-blue-500", "bg-blue-600", "text-white"),
+  danger: tw(baseClasses, "hover:bg-red-600", "bg-red-700", "text-white"),
   outline: tw(
     baseClasses,
-    hover("bg-blue-500"),
-    hover("text-white"),
-    hover("border-transparent"),
+    "hover:bg-blue-500",
+    "hover:text-white",
+    "hover:border-transparent",
     "bg-transparent",
-    "text-blue-700",
+    "text-blue-500",
     "border",
     "border-blue-500"
   ),
-  minimal: tw(baseClasses, hover("bg-gray-200"), "bg-transparent"),
+  minimal: tw(baseClasses, "hover:bg-gray-200", "bg-transparent"),
+  disabled: tw(
+    baseClasses,
+    "cursor-not-allowed",
+    "border",
+    "bg-gray-300",
+    "text-gray-500"
+  ),
 }
 ```
 
@@ -179,7 +198,7 @@ Add it in your package.json scripts:
 
 ```json
 "scripts": {
-  "generate-types" : "tailwindcss-classnames --config tailwind.config.js"
+  "generate-types": "tailwindcss-classnames --config tailwind.config.js"
 }
 ```
 

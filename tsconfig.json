@@ -4,7 +4,7 @@
     "module": "commonjs",
     "rootDir": "src",
     "outDir": ".code",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "es2019"],
     "moduleResolution": "node",
     "importHelpers": true,
     "declaration": true,

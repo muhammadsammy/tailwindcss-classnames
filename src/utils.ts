@@ -1,19 +1,118 @@
 /* tslint:disable: prefer-template */
 import isEmpty from 'lodash.isempty';
 
-export function generateTypes(arr: string[]) {
-  return '\n  | ' + arr.map(n => `'${n}'`).join('\n  | ');
+export function generateTypes(arr: string[], prefix?: string) {
+  return '\n  | ' + arr.map(n => (prefix ? `'${prefix}${n}'` : `'${n}'`)).join('\n  | ');
 }
 
 export function generateOpacities(
-  defaultOpacities: { [key: string]: string },
+  defaultOpacitiesObj: { [key: string]: string },
   theme: { [key: string]: any },
   property: string,
 ): { [key: string]: string } {
-  const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
+  const themeOpacities = isEmpty(theme[property]) ? defaultOpacitiesObj : theme[property];
   const extendedThemeOpacities = theme.extend?.[property];
   return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
 }
+
+export type PseudoclassVariantKey =
+  | 'accessibility'
+  | 'alignContent'
+  | 'alignItems'
+  | 'alignSelf'
+  | 'appearance'
+  | 'backgroundAttachment'
+  | 'backgroundColor'
+  | 'backgroundOpacity'
+  | 'backgroundPosition'
+  | 'backgroundRepeat'
+  | 'backgroundSize'
+  | 'borderCollapse'
+  | 'borderColor'
+  | 'borderOpacity'
+  | 'borderRadius'
+  | 'borderStyle'
+  | 'borderWidth'
+  | 'boxShadow'
+  | 'boxSizing'
+  | 'cursor'
+  | 'display'
+  | 'divideColor'
+  | 'divideOpacity'
+  | 'divideWidth'
+  | 'fill'
+  | 'flex'
+  | 'flexDirection'
+  | 'flexGrow'
+  | 'flexShrink'
+  | 'flexWrap'
+  | 'float'
+  | 'clear'
+  | 'fontFamily'
+  | 'fontSize'
+  | 'fontSmoothing'
+  | 'fontStyle'
+  | 'fontWeight'
+  | 'height'
+  | 'inset'
+  | 'justifyContent'
+  | 'letterSpacing'
+  | 'lineHeight'
+  | 'listStylePosition'
+  | 'listStyleType'
+  | 'margin'
+  | 'maxHeight'
+  | 'maxWidth'
+  | 'minHeight'
+  | 'minWidth'
+  | 'objectFit'
+  | 'objectPosition'
+  | 'opacity'
+  | 'order'
+  | 'outline'
+  | 'overflow'
+  | 'padding'
+  | 'placeholderColor'
+  | 'placeholderOpacity'
+  | 'pointerEvents'
+  | 'position'
+  | 'resize'
+  | 'space'
+  | 'stroke'
+  | 'strokeWidth'
+  | 'tableLayout'
+  | 'textAlign'
+  | 'textColor'
+  | 'textOpacity'
+  | 'textDecoration'
+  | 'textTransform'
+  | 'userSelect'
+  | 'verticalAlign'
+  | 'visibility'
+  | 'whitespace'
+  | 'width'
+  | 'wordBreak'
+  | 'zIndex'
+  | 'gap'
+  | 'gridAutoFlow'
+  | 'gridTemplateColumns'
+  | 'gridColumn'
+  | 'gridColumnStart'
+  | 'gridColumnEnd'
+  | 'gridTemplateRows'
+  | 'gridRow'
+  | 'gridRowStart'
+  | 'gridRowEnd'
+  | 'transform'
+  | 'transformOrigin'
+  | 'scale'
+  | 'rotate'
+  | 'translate'
+  | 'skew'
+  | 'transitionProperty'
+  | 'transitionTimingFunction'
+  | 'transitionDuration'
+  | 'transitionDelay';
 
 export const defaultScreens = {
   sm: '640px',
@@ -162,6 +261,106 @@ export const defaultSpacing = {
   '64': '16rem',
 };
 
+export const defaultVariants = {
+  accessibility: ['responsive', 'focus'],
+  alignContent: ['responsive'],
+  alignItems: ['responsive'],
+  alignSelf: ['responsive'],
+  appearance: ['responsive'],
+  backgroundAttachment: ['responsive'],
+  backgroundColor: ['responsive', 'hover', 'focus'],
+  backgroundOpacity: ['responsive', 'hover', 'focus'],
+  backgroundPosition: ['responsive'],
+  backgroundRepeat: ['responsive'],
+  backgroundSize: ['responsive'],
+  borderCollapse: ['responsive'],
+  borderColor: ['responsive', 'hover', 'focus'],
+  borderOpacity: ['responsive', 'hover', 'focus'],
+  borderRadius: ['responsive'],
+  borderStyle: ['responsive'],
+  borderWidth: ['responsive'],
+  boxShadow: ['responsive', 'hover', 'focus'],
+  boxSizing: ['responsive'],
+  cursor: ['responsive'],
+  display: ['responsive'],
+  divideColor: ['responsive'],
+  divideOpacity: ['responsive'],
+  divideWidth: ['responsive'],
+  fill: ['responsive'],
+  flex: ['responsive'],
+  flexDirection: ['responsive'],
+  flexGrow: ['responsive'],
+  flexShrink: ['responsive'],
+  flexWrap: ['responsive'],
+  float: ['responsive'],
+  clear: ['responsive'],
+  fontFamily: ['responsive'],
+  fontSize: ['responsive'],
+  fontSmoothing: ['responsive'],
+  fontStyle: ['responsive'],
+  fontWeight: ['responsive', 'hover', 'focus'],
+  height: ['responsive'],
+  inset: ['responsive'],
+  justifyContent: ['responsive'],
+  letterSpacing: ['responsive'],
+  lineHeight: ['responsive'],
+  listStylePosition: ['responsive'],
+  listStyleType: ['responsive'],
+  margin: ['responsive'],
+  maxHeight: ['responsive'],
+  maxWidth: ['responsive'],
+  minHeight: ['responsive'],
+  minWidth: ['responsive'],
+  objectFit: ['responsive'],
+  objectPosition: ['responsive'],
+  opacity: ['responsive', 'hover', 'focus'],
+  order: ['responsive'],
+  outline: ['responsive', 'focus'],
+  overflow: ['responsive'],
+  padding: ['responsive'],
+  placeholderColor: ['responsive', 'focus'],
+  placeholderOpacity: ['responsive', 'focus'],
+  pointerEvents: ['responsive'],
+  position: ['responsive'],
+  resize: ['responsive'],
+  space: ['responsive'],
+  stroke: ['responsive'],
+  strokeWidth: ['responsive'],
+  tableLayout: ['responsive'],
+  textAlign: ['responsive'],
+  textColor: ['responsive', 'hover', 'focus'],
+  textOpacity: ['responsive', 'hover', 'focus'],
+  textDecoration: ['responsive', 'hover', 'focus'],
+  textTransform: ['responsive'],
+  userSelect: ['responsive'],
+  verticalAlign: ['responsive'],
+  visibility: ['responsive'],
+  whitespace: ['responsive'],
+  width: ['responsive'],
+  wordBreak: ['responsive'],
+  zIndex: ['responsive'],
+  gap: ['responsive'],
+  gridAutoFlow: ['responsive'],
+  gridTemplateColumns: ['responsive'],
+  gridColumn: ['responsive'],
+  gridColumnStart: ['responsive'],
+  gridColumnEnd: ['responsive'],
+  gridTemplateRows: ['responsive'],
+  gridRow: ['responsive'],
+  gridRowStart: ['responsive'],
+  gridRowEnd: ['responsive'],
+  transform: ['responsive'],
+  transformOrigin: ['responsive'],
+  scale: ['responsive', 'hover', 'focus'],
+  rotate: ['responsive', 'hover', 'focus'],
+  translate: ['responsive', 'hover', 'focus'],
+  skew: ['responsive', 'hover', 'focus'],
+  transitionProperty: ['responsive'],
+  transitionTimingFunction: ['responsive'],
+  transitionDuration: ['responsive'],
+  transitionDelay: ['responsive'],
+};
+
 export const defaultOpacities = {
   '0': '0',
   '25': '0.25',
@@ -170,10 +369,7 @@ export const defaultOpacities = {
   '100': '1',
 };
 
-export const baseTemplateString = `
-import classnamesLib from 'classnames';
-
-export type TUtility = '_PREFIX_mx-auto';
+export const baseTemplateString = `import classnamesLib from 'classnames';
 
 export type TBoxSizing = '_PREFIX_box-border' | '_PREFIX_box-content';
 
@@ -737,36 +933,7 @@ export type TSpaceBetween =SPACE_BETWEEN;
 
 export type TSpacing = TPadding | TMargin | TSpaceBetween;
 
-export type TWidth =WIDTH_SPACINGS
-  | '_PREFIX_w-auto'
-  | '_PREFIX_w-1/2'
-  | '_PREFIX_w-1/3'
-  | '_PREFIX_w-2/3'
-  | '_PREFIX_w-1/4'
-  | '_PREFIX_w-2/4'
-  | '_PREFIX_w-3/4'
-  | '_PREFIX_w-1/5'
-  | '_PREFIX_w-2/5'
-  | '_PREFIX_w-3/5'
-  | '_PREFIX_w-4/5'
-  | '_PREFIX_w-1/6'
-  | '_PREFIX_w-2/6'
-  | '_PREFIX_w-3/6'
-  | '_PREFIX_w-4/6'
-  | '_PREFIX_w-5/6'
-  | '_PREFIX_w-1/12'
-  | '_PREFIX_w-2/12'
-  | '_PREFIX_w-3/12'
-  | '_PREFIX_w-4/12'
-  | '_PREFIX_w-5/12'
-  | '_PREFIX_w-6/12'
-  | '_PREFIX_w-7/12'
-  | '_PREFIX_w-8/12'
-  | '_PREFIX_w-9/12'
-  | '_PREFIX_w-10/12'
-  | '_PREFIX_w-11/12'
-  | '_PREFIX_w-full'
-  | '_PREFIX_w-screen';
+export type TWidth =WIDTH_SPACINGS;
 
 export type TMinWidth = '_PREFIX_min-w-0' | '_PREFIX_min-w-full';
 
@@ -784,10 +951,7 @@ export type TMaxWidth =MAX_WIDTH_BY_BREAKPOINTS
   | '_PREFIX_max-w-none'
   | '_PREFIX_max-w-full';
 
-export type THeight =HEIGHT_SPACINGS
-  | '_PREFIX_h-auto'
-  | '_PREFIX_h-full'
-  | '_PREFIX_h-screen';
+export type THeight =HEIGHT_SPACINGS;
 
 export type TMinHeight = '_PREFIX_min-h-0' | '_PREFIX_min-h-full' | '_PREFIX_min-h-screen';
 
@@ -1043,8 +1207,9 @@ export type TScreenReaders = '_PREFIX_sr-only' | '_PREFIX_not-sr-only';
 
 export type TAccessibility = TSvg | TScreenReaders;
 
+export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
+
 export type TClasses =
-  | TUtility
   | TLayout
   | TTypography
   | TBackgrounds
@@ -1058,15 +1223,14 @@ export type TClasses =
   | TTransforms
   | TTransitions
   | TInteractivity
-  | TAccessibility;
+  | TAccessibility
+  | TPseudoClasses;
 
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
 export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: boolean } | TTailwindString;
 
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
-
-export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
 export const classnames: TTailwind = classnamesLib as any;
 
