@@ -1226,6 +1226,8 @@ export type TClasses =
   | TAccessibility
   | TPseudoClasses;
 
+export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
+
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
 export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: boolean } | TTailwindString;
@@ -1233,6 +1235,8 @@ export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: bo
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
 
 export const classnames: TTailwind = classnamesLib as any;
+
+export const tw = classnames;
 
 export const hover: TPseudoClass = className => {
   console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
