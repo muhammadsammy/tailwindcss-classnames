@@ -97,7 +97,10 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     Object.keys(breakpoints).map((breakpoint: string) => {
       breakpointExportStatements.push(
-        `export const ${breakpoint}: TPseudoClass = className => ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;`,
+        `export const ${breakpoint}: TPseudoClass = className => {
+          console.warn("Calling ${breakpoint}() pseudoselector method is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13")
+          return ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;
+        }`,
       );
       breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
       breakpointCreateCustomReturns.push(`${breakpoint},`);
