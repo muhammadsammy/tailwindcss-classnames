@@ -73,6 +73,28 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const divideOpacities = getOpacity('divideOpacity', 'divide');
     const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
+    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
+    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
+    const breakpoints = extendedThemeBreakpoints
+      ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
+      : themeBreakpoints;
+
+    const breakpointExportStatements: string[] = [];
+    const breakpointCreateCustomParams: string[] = [];
+    const breakpointCreateCustomReturns: string[] = [];
+    const maxWidthByBreakpoints: string[] = [];
+
+    Object.keys(breakpoints).map((breakpoint: string) => {
+      breakpointExportStatements.push(
+        `export const ${breakpoint}: TPseudoClass = className => {
+          console.warn("Calling ${breakpoint}() pseudoselector method is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13")
+          return ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;
+        }`,
+      );
+      breakpointCreateCustomParams.push(`${breakpoint}: TPseudoClass<T>;`);
+      breakpointCreateCustomReturns.push(`${breakpoint},`);
+      maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
+    });
     const themeSpacing = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
     const extendedThemeSpacing = THEME_CONFIG?.extend?.spacing;
     const allConfigSpacing = extendedThemeSpacing ? { ...themeSpacing, ...extendedThemeSpacing } : themeSpacing;
@@ -117,14 +139,6 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       });
     });
 
-    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
-    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
-    const breakpoints = Object.keys(
-      extendedThemeBreakpoints ? { ...themeBreakpoints, ...extendedThemeBreakpoints } : themeBreakpoints,
-    );
-
-    const maxWidthByBreakpoints: string[] = [];
-
     breakpoints.map((breakpoint: string) => {
       maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
     });
@@ -163,7 +177,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
             transformsNotInConfig.map(transformClass => {
               variants.map(variant => {
                 if (variant === 'responsive') {
-                  breakpoints.map(breakpointVariant => {
+                  breakpoints.map((breakpointVariant: string) => {
                     pseudoClasses.push(prefix + breakpointVariant + separator + transformClass);
                   });
                 } else {
@@ -231,7 +245,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       classesOfCategoryKey.map(c => {
         variants.map(variant => {
           if (variant === 'responsive') {
-            breakpoints.map(breakpointVariant => {
+            breakpoints.map((breakpointVariant: string) => {
               pseudoClasses.push(prefix + breakpointVariant + separator + c);
             });
           } else {
@@ -261,6 +275,9 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities, prefix))
       .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities, prefix))
       .replace(/OPACITIES/g, generateTypes(opacities, prefix))
+      .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, generateTypes(breakpointExportStatements))
+      .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, generateTypes(breakpointCreateCustomParams))
+      .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, generateTypes(breakpointCreateCustomReturns))
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {

@@ -1233,4 +1233,95 @@ export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: bo
 export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
 
 export const classnames: TTailwind = classnamesLib as any;
+
+export const hover: TPseudoClass = className => {
+  console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_hover_SEPARATOR_' + className) as TTailwindString;
+}
+
+BREAKPOINT_EXPORT_STATEMENTS
+
+export const focus: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_focus_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const active: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_active_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const disabled: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_disabled_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const visited: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_visited_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const firstChild: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_first-child_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const lastChild: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_last-child_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const oddChild: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_odd-child_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const evenChild: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_even-child_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const groupHover: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_group-hover_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const groupFocus: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_group-focus_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const focusWithin: TPseudoClass = className => {
+console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
+  return ('_PREFIX_focus-within_SEPARATOR_' + className) as TTailwindString;
+}
+
+export const createCustom = <T extends TClasses>(): {
+  classnames: TTailwind<T>;
+  hover: TPseudoClass<T>;
+  BREAKPOINTS_CREATE_CUSTOM_PARAMS
+  active: TPseudoClass<T>;
+  disabled: TPseudoClass<T>;
+  visited: TPseudoClass<T>;
+  firstChild: TPseudoClass<T>;
+  lastChild: TPseudoClass<T>;
+  oddChild: TPseudoClass<T>;
+  evenChild: TPseudoClass<T>;
+  groupHover: TPseudoClass<T>;
+  focusWithin: TPseudoClass<T>;
+} => ({
+  classnames,
+  hover,
+  BREAKPOINTS_CREATE_CUSTOM_RETURNS
+  active,
+  disabled,
+  visited,
+  firstChild,
+  lastChild,
+  oddChild,
+  evenChild,
+  groupHover,
+  focusWithin,
+});
+
 `;
