@@ -75,16 +75,17 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
     const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
-    const breakpoints = extendedThemeBreakpoints
+    const allConfigBreakpoints = extendedThemeBreakpoints
       ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
       : themeBreakpoints;
+    const breakpoints = Object.keys(allConfigBreakpoints);
 
     const breakpointExportStatements: string[] = [];
     const breakpointCreateCustomParams: string[] = [];
     const breakpointCreateCustomReturns: string[] = [];
     const maxWidthByBreakpoints: string[] = [];
 
-    Object.keys(breakpoints).map((breakpoint: string) => {
+    breakpoints.map((breakpoint: string) => {
       breakpointExportStatements.push(
         `export const ${breakpoint}: TPseudoClass = className => {
           console.warn("Calling ${breakpoint}() pseudoselector method is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13")
@@ -275,9 +276,9 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/DIVIDE_OPACITIES/g, generateTypes(divideOpacities, prefix))
       .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(placeholderOpacities, prefix))
       .replace(/OPACITIES/g, generateTypes(opacities, prefix))
-      .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, generateTypes(breakpointExportStatements))
-      .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, generateTypes(breakpointCreateCustomParams))
-      .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, generateTypes(breakpointCreateCustomReturns))
+      .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointExportStatements.join('\n\n'))
+      .replace(/BREAKPOINTS_CREATE_CUSTOM_PARAMS/g, breakpointCreateCustomParams.join('\n'))
+      .replace(/BREAKPOINTS_CREATE_CUSTOM_RETURNS/g, breakpointCreateCustomReturns.join('\n'))
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(pseudoClasses));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
