@@ -149,16 +149,23 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     //     variantsObjKey: variantsObjValue => ['responsive', 'hover', 'focus'],
     //   }
     // }
-    const themeVariantsObj = isEmpty(CONFIG?.variants) ? defaultVariants : CONFIG?.variants;
-    const variantsObjKeys = Object.keys(themeVariantsObj);
-    const variantsObjValues: string[][] = Object.values(themeVariantsObj);
+    const themeVariants = isEmpty(CONFIG?.variants) ? defaultVariants : CONFIG?.variants;
+    Object.keys(themeVariants).map(key => {
+      if (Object.keys(defaultVariants).includes(key)) {
+        delete defaultVariants[key];
+      }
+    });
+    const allPseudoClassVariants: { [key: string]: string[] } = {
+      ...defaultVariants,
+      ...themeVariants,
+    };
 
     const pseudoClasses: string[] = [];
 
-    variantsObjKeys.map((k, i) => {
+    Object.keys(allPseudoClassVariants).map((k, i) => {
       const key = k as PseudoclassVariantKey;
       let classesOfCategoryKey: string[];
-      const variants = variantsObjValues[i];
+      const variants = Object.values(allPseudoClassVariants)[i];
 
       switch (key) {
         case 'gap':
@@ -172,9 +179,13 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           break;
         case 'transform':
           classesOfCategoryKey = [];
-          const configHasOtherTransforms: boolean = variantsObjKeys.some(v => Object.keys(Transforms).indexOf(v) >= 0);
+          const configHasOtherTransforms: boolean = Object.keys(allPseudoClassVariants).some(
+            v => Object.keys(Transforms).indexOf(v) >= 0,
+          );
           if (configHasOtherTransforms) {
-            const transformsNotInConfig = Object.keys(Transforms).filter(el => !variantsObjKeys.includes(el));
+            const transformsNotInConfig = Object.keys(Transforms).filter(
+              el => !Object.keys(allPseudoClassVariants).includes(el),
+            );
             transformsNotInConfig.map(transformClass => {
               variants.map(variant => {
                 if (variant === 'responsive') {

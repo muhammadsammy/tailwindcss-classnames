@@ -261,7 +261,7 @@ export const defaultSpacing = {
   '64': '16rem',
 };
 
-export const defaultVariants = {
+export const defaultVariants: { [key: string]: string[] } = {
   accessibility: ['responsive', 'focus'],
   alignContent: ['responsive'],
   alignItems: ['responsive'],
