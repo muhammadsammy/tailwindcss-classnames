@@ -26,6 +26,13 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const prefix = configScanner.prefix;
     const separator = configScanner.separator;
 
+    const breakpointsExportStatements = configScanner.getThemeBreakpoints().map(breakpoint => {
+      return `export const ${breakpoint}: TPseudoClass = className => {
+    console.warn("Calling ${breakpoint}() pseudoselector method is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13")
+  return ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;
+}`;
+    });
+
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
@@ -64,6 +71,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
         generateTypes(classesGenerator.getGeneratedClassesWithOpacities().placeholderOpacities, prefix),
       )
       .replace(/OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().opacities, prefix))
+      .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointsExportStatements.join('\n\n'))
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()));
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
