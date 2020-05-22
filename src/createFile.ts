@@ -71,12 +71,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const divideOpacities = getOpacity('divideOpacity', 'divide');
     const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
-    const themeBreakpoints = isEmpty(THEME_CONFIG?.screens) ? defaultScreens : THEME_CONFIG?.screens;
-    const extendedThemeBreakpoints = THEME_CONFIG?.extend?.screens;
-    const allConfigBreakpoints = extendedThemeBreakpoints
-      ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
-      : themeBreakpoints;
-    const breakpoints = Object.keys(allConfigBreakpoints);
+    const breakpoints: string[] = themeScanner.getThemeBreakpoints();
 
     const breakpointExportStatements: string[] = [];
     const breakpointCreateCustomParams: string[] = [];
