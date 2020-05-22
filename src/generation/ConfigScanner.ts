@@ -1,11 +1,11 @@
 import isEmpty from 'lodash.isempty';
-import { defaultColors, defaultScreens, defaultSpacing, defaultVariants } from '../utils';
+import { defaultColors, defaultScreens, defaultSpacing, defaultVariants, defaultOpacities } from '../utils';
 
 export class ConfigScanner {
   public readonly prefix: any;
   public readonly separator: any;
+  public readonly themeConfig: any;
   private readonly variantsConfig: any;
-  private readonly themeConfig: any;
 
   constructor(tailwindConfig: any) {
     this.variantsConfig = tailwindConfig?.variants;
@@ -27,6 +27,12 @@ export class ConfigScanner {
       ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
       : themeBreakpoints;
     return Object.keys(allConfigBreakpoints);
+  };
+
+  public getThemeOpacities = () => {
+    const themeOpacities = isEmpty(this.themeConfig?.opacity) ? defaultOpacities : this.themeConfig?.opacity;
+    const extendedThemeOpacities = this.themeConfig?.extend?.opacity;
+    return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
   };
 
   public getThemeSpacing = () => {
