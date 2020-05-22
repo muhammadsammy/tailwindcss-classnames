@@ -261,7 +261,7 @@ export const defaultSpacing = {
   '64': '16rem',
 };
 
-export const defaultVariants = {
+export const defaultVariants: { [key: string]: string[] } = {
   accessibility: ['responsive', 'focus'],
   alignContent: ['responsive'],
   alignItems: ['responsive'],
@@ -1174,7 +1174,7 @@ export type TTransformOrigin =
   | '_PREFIX_origin-left'
   | '_PREFIX_origin-top-left';
 
-export type TTransforms = TScale | TRotate | TTranslate | TSkew | TTransformOrigin;
+export type TTransforms = '_PREFIX_transform' | TScale | TRotate | TTranslate | TSkew | TTransformOrigin;
 
 export type TAppearance = '_PREFIX_appearance-none';
 
