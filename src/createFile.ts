@@ -136,28 +136,14 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
     });
 
-    // theme: {
-    //   variants: {
-    //     variantsObjKey: variantsObjValue => ['responsive', 'hover', 'focus'],
-    //   }
-    // }
-    const themeVariants = isEmpty(tailwindConfig?.variants) ? defaultVariants : tailwindConfig?.variants;
-    Object.keys(themeVariants).map(key => {
-      if (Object.keys(defaultVariants).includes(key)) {
-        delete defaultVariants[key];
-      }
-    });
-    const allPseudoClassVariants: { [key: string]: string[] } = {
-      ...defaultVariants,
-      ...themeVariants,
-    };
-
     const pseudoClasses: string[] = [];
 
-    Object.keys(allPseudoClassVariants).map((k, i) => {
+    const { classesCategories, classesVariants } = themeScanner.getPseudoclassVariants();
+
+    classesCategories.map((k, i) => {
       const key = k as PseudoclassVariantKey;
       let classesOfCategoryKey: string[];
-      const variants = Object.values(allPseudoClassVariants)[i];
+      const variants = classesVariants[i];
 
       switch (key) {
         case 'gap':
@@ -171,13 +157,11 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
           break;
         case 'transform':
           classesOfCategoryKey = [];
-          const configHasOtherTransforms: boolean = Object.keys(allPseudoClassVariants).some(
+          const configHasOtherTransforms: boolean = classesCategories.some(
             v => Object.keys(Transforms).indexOf(v) >= 0,
           );
           if (configHasOtherTransforms) {
-            const transformsNotInConfig = Object.keys(Transforms).filter(
-              el => !Object.keys(allPseudoClassVariants).includes(el),
-            );
+            const transformsNotInConfig = Object.keys(Transforms).filter(el => !classesCategories.includes(el));
             transformsNotInConfig.map(transformClass => {
               variants.map(variant => {
                 if (variant === 'responsive') {

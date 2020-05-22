@@ -1,10 +1,12 @@
 import isEmpty from 'lodash.isempty';
-import { defaultColors, defaultScreens, defaultSpacing } from '../utils';
+import { defaultColors, defaultScreens, defaultSpacing, defaultVariants } from '../utils';
 
 export class ThemeScanner {
+  private readonly tailwindConfig: any;
   private readonly themeConfig: any;
 
   constructor(tailwindConfig: any) {
+    this.tailwindConfig = tailwindConfig;
     this.themeConfig = tailwindConfig.theme;
   }
 
@@ -31,6 +33,24 @@ export class ThemeScanner {
     return {
       spacingKeys: Object.keys(allConfigSpacing),
       spacingValues: Object.values(allConfigSpacing),
+    };
+  };
+
+  getPseudoclassVariants = () => {
+    const themeVariants = isEmpty(this.tailwindConfig?.variants) ? defaultVariants : this.tailwindConfig?.variants;
+    Object.keys(themeVariants).map(key => {
+      if (Object.keys(defaultVariants).includes(key)) {
+        delete defaultVariants[key];
+      }
+    });
+    const allPseudoClassVariants: { [key: string]: string[] } = {
+      ...defaultVariants,
+      ...themeVariants,
+    };
+
+    return {
+      classesCategories: Object.keys(allPseudoClassVariants),
+      classesVariants: Object.values(allPseudoClassVariants),
     };
   };
 }
