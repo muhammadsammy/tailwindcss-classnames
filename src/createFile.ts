@@ -4,7 +4,6 @@ import { AllClasses } from './classes/all';
 import { allTransformClasses, Transforms } from './classes/Transforms';
 import {
   baseTemplateString,
-  defaultColors,
   defaultOpacities,
   defaultScreens,
   defaultSpacing,
@@ -13,6 +12,7 @@ import {
   generateOpacities,
   PseudoclassVariantKey,
 } from './utils';
+import { ThemeScanner } from './generation/ThemeScanner';
 
 interface Options {
   configFilename: string;
@@ -27,17 +27,14 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
 
-    const CONFIG = eval(data);
-    const THEME_CONFIG = CONFIG.theme;
-    const PREFIX_CONFIG = CONFIG.prefix;
-    const SEPARATOR_CONFIG = CONFIG.separator;
+    const tailwindConfig = eval(data);
 
-    const prefix = isEmpty(PREFIX_CONFIG) ? '' : PREFIX_CONFIG;
-    const separator = isEmpty(SEPARATOR_CONFIG) ? ':' : SEPARATOR_CONFIG;
+    const prefix = isEmpty(tailwindConfig.prefix) ? '' : tailwindConfig.prefix;
+    const separator = isEmpty(tailwindConfig.separator) ? ':' : tailwindConfig.separator;
 
-    const themeColors = isEmpty(THEME_CONFIG?.colors) ? defaultColors : THEME_CONFIG?.colors;
-    const extendedThemeColors = THEME_CONFIG?.extend?.colors;
-    const AllConfigColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
+    const themeScanner = new ThemeScanner(tailwindConfig);
+
+    const THEME_CONFIG = tailwindConfig?.theme;
 
     // theme: {
     //   colors: {
@@ -46,8 +43,9 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     //   }
     // }
     const getClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
-      const colorVals = Object.values(AllConfigColors);
-      return Object.keys(AllConfigColors).flatMap((colorKey, i) => {
+      const configColors = themeScanner.getThemeColors();
+      const colorVals = Object.values(configColors);
+      return Object.keys(configColors).flatMap((colorKey, i) => {
         const colorVal = colorVals[i];
         if (colorVal instanceof Object) {
           return Object.keys(colorVal).map(
@@ -149,7 +147,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     //     variantsObjKey: variantsObjValue => ['responsive', 'hover', 'focus'],
     //   }
     // }
-    const themeVariants = isEmpty(CONFIG?.variants) ? defaultVariants : CONFIG?.variants;
+    const themeVariants = isEmpty(tailwindConfig?.variants) ? defaultVariants : tailwindConfig?.variants;
     Object.keys(themeVariants).map(key => {
       if (Object.keys(defaultVariants).includes(key)) {
         delete defaultVariants[key];
