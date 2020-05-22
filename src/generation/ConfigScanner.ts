@@ -1,7 +1,7 @@
 import isEmpty from 'lodash.isempty';
 import { defaultColors, defaultScreens, defaultSpacing, defaultVariants } from '../utils';
 
-export class ThemeScanner {
+export class ConfigScanner {
   public readonly prefix: any;
   public readonly separator: any;
   private readonly variantsConfig: any;

@@ -3,7 +3,7 @@ import isEmpty from 'lodash.isempty';
 import { AllClasses } from './classes/all';
 import { allTransformClasses, Transforms } from './classes/Transforms';
 import { baseTemplateString, defaultOpacities, generateTypes, generateOpacities, PseudoclassVariantKey } from './utils';
-import { ThemeScanner } from './generation/ThemeScanner';
+import { ConfigScanner } from './generation/ConfigScanner';
 
 interface Options {
   configFilename: string;
@@ -20,10 +20,10 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     const tailwindConfig = eval(data);
 
-    const themeScanner = new ThemeScanner(eval(data));
+    const configScanner = new ConfigScanner(eval(data));
 
-    const prefix = themeScanner.prefix;
-    const separator = themeScanner.separator;
+    const prefix = configScanner.prefix;
+    const separator = configScanner.separator;
 
     const THEME_CONFIG = tailwindConfig?.theme;
 
@@ -34,7 +34,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     //   }
     // }
     const getClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
-      const configColors = themeScanner.getThemeColors();
+      const configColors = configScanner.getThemeColors();
       const colorVals = Object.values(configColors);
       return Object.keys(configColors).flatMap((colorKey, i) => {
         const colorVal = colorVals[i];
@@ -62,7 +62,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
     const divideOpacities = getOpacity('divideOpacity', 'divide');
     const placeholderOpacities = getOpacity('placeholderOpacity', 'placeholder');
 
-    const breakpoints: string[] = themeScanner.getThemeBreakpoints();
+    const breakpoints: string[] = configScanner.getThemeBreakpoints();
 
     const breakpointExportStatements: string[] = [];
     const breakpointCreateCustomParams: string[] = [];
@@ -102,7 +102,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       '7/12', '8/12', '9/12', '10/12', '11/12', 'auto', 'full', 'screen'
     ].map(spacing => widths.push(`w-${spacing}`));
 
-    const { spacingKeys, spacingValues } = themeScanner.getThemeSpacing();
+    const { spacingKeys, spacingValues } = configScanner.getThemeSpacing();
 
     spacingKeys.map((spacing, i) => {
       widths.push(`w-${spacing}`);
@@ -129,7 +129,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     const pseudoClasses: string[] = [];
 
-    const { classesCategories, classesVariants } = themeScanner.getPseudoclassVariants();
+    const { classesCategories, classesVariants } = configScanner.getPseudoclassVariants();
 
     classesCategories.map((k, i) => {
       const key = k as PseudoclassVariantKey;
