@@ -2,21 +2,25 @@ import isEmpty from 'lodash.isempty';
 import { defaultColors, defaultScreens, defaultSpacing, defaultVariants } from '../utils';
 
 export class ThemeScanner {
-  private readonly tailwindConfig: any;
+  public readonly prefix: any;
+  public readonly separator: any;
+  private readonly variantsConfig: any;
   private readonly themeConfig: any;
 
   constructor(tailwindConfig: any) {
-    this.tailwindConfig = tailwindConfig;
-    this.themeConfig = tailwindConfig.theme;
+    this.variantsConfig = tailwindConfig?.variants;
+    this.themeConfig = tailwindConfig?.theme;
+    this.prefix = isEmpty(tailwindConfig.prefix) ? '' : tailwindConfig.prefix;
+    this.separator = isEmpty(tailwindConfig.separator) ? ':' : tailwindConfig.separator;
   }
 
-  getThemeColors = () => {
+  public getThemeColors = () => {
     const themeColors = isEmpty(this.themeConfig?.colors) ? defaultColors : this.themeConfig?.colors;
     const extendedThemeColors = this.themeConfig?.extend?.colors;
     return extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
   };
 
-  getThemeBreakpoints = () => {
+  public getThemeBreakpoints = () => {
     const themeBreakpoints = isEmpty(this.themeConfig?.screens) ? defaultScreens : this.themeConfig?.screens;
     const extendedThemeBreakpoints = this.themeConfig?.extend?.screens;
     const allConfigBreakpoints = extendedThemeBreakpoints
@@ -25,7 +29,7 @@ export class ThemeScanner {
     return Object.keys(allConfigBreakpoints);
   };
 
-  getThemeSpacing = () => {
+  public getThemeSpacing = () => {
     const themeSpacing = isEmpty(this.themeConfig?.spacing) ? defaultSpacing : this.themeConfig?.spacing;
     const extendedThemeSpacing = this.themeConfig?.extend?.spacing;
     const allConfigSpacing = extendedThemeSpacing ? { ...themeSpacing, ...extendedThemeSpacing } : themeSpacing;
@@ -36,8 +40,8 @@ export class ThemeScanner {
     };
   };
 
-  getPseudoclassVariants = () => {
-    const themeVariants = isEmpty(this.tailwindConfig?.variants) ? defaultVariants : this.tailwindConfig?.variants;
+  public getPseudoclassVariants = () => {
+    const themeVariants = isEmpty(this.variantsConfig) ? defaultVariants : this.variantsConfig;
     Object.keys(themeVariants).map(key => {
       if (Object.keys(defaultVariants).includes(key)) {
         delete defaultVariants[key];

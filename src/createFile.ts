@@ -2,16 +2,7 @@ import fs from 'fs';
 import isEmpty from 'lodash.isempty';
 import { AllClasses } from './classes/all';
 import { allTransformClasses, Transforms } from './classes/Transforms';
-import {
-  baseTemplateString,
-  defaultOpacities,
-  defaultScreens,
-  defaultSpacing,
-  defaultVariants,
-  generateTypes,
-  generateOpacities,
-  PseudoclassVariantKey,
-} from './utils';
+import { baseTemplateString, defaultOpacities, generateTypes, generateOpacities, PseudoclassVariantKey } from './utils';
 import { ThemeScanner } from './generation/ThemeScanner';
 
 interface Options {
@@ -29,10 +20,10 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 
     const tailwindConfig = eval(data);
 
-    const prefix = isEmpty(tailwindConfig.prefix) ? '' : tailwindConfig.prefix;
-    const separator = isEmpty(tailwindConfig.separator) ? ':' : tailwindConfig.separator;
+    const themeScanner = new ThemeScanner(eval(data));
 
-    const themeScanner = new ThemeScanner(tailwindConfig);
+    const prefix = themeScanner.prefix;
+    const separator = themeScanner.separator;
 
     const THEME_CONFIG = tailwindConfig?.theme;
 
