@@ -1,5 +1,5 @@
 import isEmpty from 'lodash.isempty';
-import { defaultColors, defaultScreens } from '../utils';
+import { defaultColors, defaultScreens, defaultSpacing } from '../utils';
 
 export class ThemeScanner {
   private readonly themeConfig: any;
@@ -21,5 +21,16 @@ export class ThemeScanner {
       ? { ...themeBreakpoints, ...extendedThemeBreakpoints }
       : themeBreakpoints;
     return Object.keys(allConfigBreakpoints);
+  };
+
+  getThemeSpacing = () => {
+    const themeSpacing = isEmpty(this.themeConfig?.spacing) ? defaultSpacing : this.themeConfig?.spacing;
+    const extendedThemeSpacing = this.themeConfig?.extend?.spacing;
+    const allConfigSpacing = extendedThemeSpacing ? { ...themeSpacing, ...extendedThemeSpacing } : themeSpacing;
+
+    return {
+      spacingKeys: Object.keys(allConfigSpacing),
+      spacingValues: Object.values(allConfigSpacing),
+    };
   };
 }

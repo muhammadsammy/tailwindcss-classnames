@@ -89,9 +89,6 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       breakpointCreateCustomReturns.push(`${breakpoint},`);
       maxWidthByBreakpoints.push(`${prefix}max-w-screen-${breakpoint}`);
     });
-    const themeSpacing = isEmpty(THEME_CONFIG?.spacing) ? defaultSpacing : THEME_CONFIG?.spacing;
-    const extendedThemeSpacing = THEME_CONFIG?.extend?.spacing;
-    const allConfigSpacing = extendedThemeSpacing ? { ...themeSpacing, ...extendedThemeSpacing } : themeSpacing;
 
     const paddings: string[] = [];
     const margins: string[] = [];
@@ -114,13 +111,15 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       '7/12', '8/12', '9/12', '10/12', '11/12', 'auto', 'full', 'screen'
     ].map(spacing => widths.push(`w-${spacing}`));
 
-    Object.keys(allConfigSpacing).map((spacing, i) => {
+    const { spacingKeys, spacingValues } = themeScanner.getThemeSpacing();
+
+    spacingKeys.map((spacing, i) => {
       widths.push(`w-${spacing}`);
       heights.push(`h-${spacing}`);
       sides.map(side => {
         paddings.push(`p${side}-${spacing}`);
         margins.push(`m${side}-${spacing}`);
-        if (parseInt(spacing, 10) !== 0 && Object.values(allConfigSpacing)[i] !== 0) {
+        if (parseInt(spacing, 10) !== 0 && spacingValues[i] !== 0) {
           paddings.push(`-p${side}-${spacing}`);
           margins.push(`-m${side}-${spacing}`);
         }
