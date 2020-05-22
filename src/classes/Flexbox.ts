@@ -8,7 +8,14 @@ const alignContent = ['content-start', 'content-center', 'content-end', 'content
 
 const alignSelf = ['self-auto', 'self-start', 'self-center', 'self-end', 'self-stretch'];
 
-const justifyContent = ['justify-start', 'justify-center', 'justify-end', 'justify-between', 'justify-around'];
+const justifyContent = [
+  'justify-start',
+  'justify-center',
+  'justify-end',
+  'justify-between',
+  'justify-around',
+  'justify-evenly',
+];
 
 const flex = ['flex-initial', 'flex-1', 'flex-auto', 'flex-none'];
 

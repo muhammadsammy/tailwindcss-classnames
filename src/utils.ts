@@ -731,7 +731,7 @@ export type TAlignContent = '_PREFIX_content-start' | '_PREFIX_content-center' |
 
 export type TAlignSelf = '_PREFIX_self-auto' | '_PREFIX_self-start' | '_PREFIX_self-center' | '_PREFIX_self-end' | '_PREFIX_self-stretch';
 
-export type TJustifyContent = '_PREFIX_justify-start' | '_PREFIX_justify-center' | '_PREFIX_justify-end' | '_PREFIX_justify-between' | '_PREFIX_justify-around';
+export type TJustifyContent = '_PREFIX_justify-start' | '_PREFIX_justify-center' | '_PREFIX_justify-end' | '_PREFIX_justify-between' | '_PREFIX_justify-around' | '_PREFIX_justify-evenly';
 
 export type TFlex = '_PREFIX_flex-initial' | '_PREFIX_flex-1' | '_PREFIX_flex-auto' | '_PREFIX_flex-none';
 
