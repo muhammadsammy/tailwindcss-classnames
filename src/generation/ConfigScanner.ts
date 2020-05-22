@@ -17,7 +17,12 @@ export class ConfigScanner {
   public getThemeColors = () => {
     const themeColors = isEmpty(this.themeConfig?.colors) ? defaultColors : this.themeConfig?.colors;
     const extendedThemeColors = this.themeConfig?.extend?.colors;
-    return extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
+    const allConfigColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
+    type ColorShades = string[] | Array<{ [key: string]: string }>;
+    return {
+      colorsNames: Object.keys(allConfigColors),
+      colorsShades: Object.values(allConfigColors) as ColorShades,
+    };
   };
 
   public getThemeBreakpoints = () => {

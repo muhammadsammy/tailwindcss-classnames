@@ -18,16 +18,15 @@ export class ClassesGenerator {
   //   }
   // }
   public getGeneratedClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
-    const configColors = this.configScanner.getThemeColors();
-    const colorVals = Object.values(configColors);
-    return Object.keys(configColors).flatMap((colorKey, i) => {
-      const colorVal = colorVals[i];
-      if (colorVal instanceof Object) {
-        return Object.keys(colorVal).map(
-          colorValue => `${classPayload}-${colorKey}${colorValue === 'default' ? '' : `-${colorValue}`}`,
+    const { colorsNames, colorsShades } = this.configScanner.getThemeColors();
+    return colorsNames.flatMap((colorName, i) => {
+      const colorShade = colorsShades[i];
+      if (colorShade instanceof Object) {
+        return Object.keys(colorShade).map(
+          shadeValue => `${classPayload}-${colorName}${shadeValue === 'default' ? '' : `-${shadeValue}`}`,
         );
       }
-      return `${classPayload}-${colorKey}`;
+      return `${classPayload}-${colorName}`;
     });
   };
 
