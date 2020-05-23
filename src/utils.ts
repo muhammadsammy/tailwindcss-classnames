@@ -1301,33 +1301,4 @@ export const focusWithin: TPseudoClass = className => {
 console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");
   return ('_PREFIX_focus-within_SEPARATOR_' + className) as TTailwindString;
 }
-
-export const createCustom = <T extends TClasses>(): {
-  classnames: TTailwind<T>;
-  hover: TPseudoClass<T>;
-  BREAKPOINTS_CREATE_CUSTOM_PARAMS
-  active: TPseudoClass<T>;
-  disabled: TPseudoClass<T>;
-  visited: TPseudoClass<T>;
-  firstChild: TPseudoClass<T>;
-  lastChild: TPseudoClass<T>;
-  oddChild: TPseudoClass<T>;
-  evenChild: TPseudoClass<T>;
-  groupHover: TPseudoClass<T>;
-  focusWithin: TPseudoClass<T>;
-} => ({
-  classnames,
-  hover,
-  BREAKPOINTS_CREATE_CUSTOM_RETURNS
-  active,
-  disabled,
-  visited,
-  firstChild,
-  lastChild,
-  oddChild,
-  evenChild,
-  groupHover,
-  focusWithin,
-});
-
 `;
