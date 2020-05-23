@@ -1,5 +1,4 @@
 import { ConfigScanner } from './ConfigScanner';
-import isEmpty from 'lodash.isempty';
 import { generateOpacities, PseudoclassVariantKey } from '../utils';
 import { AllClasses } from '../classes/all';
 import { Transforms, allTransformClasses } from '../classes/Transforms';
@@ -11,12 +10,6 @@ export class ClassesGenerator {
     this.configScanner = new ConfigScanner(tailwindConfig);
   }
 
-  // theme: {
-  //   colors: {
-  //     colorkey: colorVal => "#fff"
-  //     colorKey2: colorVal2 => {light: "#fff", lighter: "#f0f0f0", default: "#fff", ...}
-  //   }
-  // }
   public getGeneratedClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
     const { colorsNames, colorsShades } = this.configScanner.getThemeColors();
     return colorsNames.flatMap((colorName, i) => {

@@ -1,8 +1,5 @@
 import fs from 'fs';
-import isEmpty from 'lodash.isempty';
-import { AllClasses } from './classes/all';
-import { allTransformClasses, Transforms } from './classes/Transforms';
-import { baseTemplateString, defaultOpacities, generateTypes, generateOpacities, PseudoclassVariantKey } from './utils';
+import { baseTemplateString, generateTypes } from './utils';
 import { ConfigScanner } from './generation/ConfigScanner';
 import { ClassesGenerator } from './generation/ClassesGenerator';
 
@@ -33,6 +30,7 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
 }`;
     });
 
+    // prettier-ignore
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
@@ -43,33 +41,15 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/HEIGHT_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().heights, prefix))
       .replace(/SPACE_BETWEEN/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().spaceBetweens, prefix))
       .replace(/BACKGROUND_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('bg'), prefix))
-      .replace(
-        /PLACEHOLDER_COLORS/g,
-        generateTypes(classesGenerator.getGeneratedClassesWithColors('placeholder'), prefix),
-      )
+      .replace(/PLACEHOLDER_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('placeholder'), prefix))
       .replace(/BORDER_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('border'), prefix))
       .replace(/TEXT_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('text'), prefix))
       .replace(/DIVIDE_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('divide'), prefix))
-      .replace(
-        /BACKGROUND_OPACITIES/g,
-        generateTypes(classesGenerator.getGeneratedClassesWithOpacities().backgroundOpacities, prefix),
-      )
-      .replace(
-        /TEXT_OPACITIES/g,
-        generateTypes(classesGenerator.getGeneratedClassesWithOpacities().textOpacities, prefix),
-      )
-      .replace(
-        /BORDER_OPACITIES/g,
-        generateTypes(classesGenerator.getGeneratedClassesWithOpacities().borderOpacities, prefix),
-      )
-      .replace(
-        /DIVIDE_OPACITIES/g,
-        generateTypes(classesGenerator.getGeneratedClassesWithOpacities().divideOpacities, prefix),
-      )
-      .replace(
-        /PLACERHOLDER_OPACITIES/g,
-        generateTypes(classesGenerator.getGeneratedClassesWithOpacities().placeholderOpacities, prefix),
-      )
+      .replace(/BACKGROUND_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().backgroundOpacities, prefix))
+      .replace(/TEXT_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().textOpacities, prefix))
+      .replace(/BORDER_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().borderOpacities, prefix))
+      .replace(/DIVIDE_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().divideOpacities, prefix))
+      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().placeholderOpacities, prefix))
       .replace(/OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().opacities, prefix))
       .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointsExportStatements.join('\n\n'))
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()));
