@@ -9,7 +9,7 @@
     "interface-name": [false],
     "interface-over-type-literal": true,
     "max-classes-per-file": false,
-    "member-access": [true, "no-public"],
+    "member-access": [true],
     "no-bitwise": false,
     "no-boolean-literal-compare": true,
     "no-duplicate-imports": true,
