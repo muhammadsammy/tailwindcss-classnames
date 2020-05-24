@@ -51,7 +51,7 @@ export class ConfigScanner {
     };
   };
 
-  public getPseudoclassVariants = () => {
+  public getPseudoClassVariants = () => {
     const themeVariants = isEmpty(this.variantsConfig) ? defaultVariants : this.variantsConfig;
     Object.keys(themeVariants).map(key => {
       if (Object.keys(defaultVariants).includes(key)) {
