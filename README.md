@@ -184,15 +184,17 @@ export const buttonClasses = {
 }
 ```
 
-## Generating types from tailwind config
+## Using the CLI to generate custom types from your tailwind config and external types
 
 The default types exported from this package are tailwindcss default ones.
-But if you modified some classes in your tailwind config file, you can use the CLI tool to create a file with generated types for these classes.
+But if you modified some classes in your tailwind config file or want to add external custom classes, you can use the CLI tool to do this.
 
-### CLI arguments:
+### CLI arguments for tailwind config:
 
-- -c --config The name of TailwindCSS config file.
-- -o --output _(Optional)_ The name of generated file
+- -c --config The name or relative path of TailwindCSS config file.
+- -o --output _(Optional)_ The name or relative path of generated file
+- -f --classesFile _(Optional)_ The name or relative path of the file with the custom types
+- -t --typeName _(Optional)_ The name of the type exported from file containing the custom classes
 
 Add it in your package.json scripts:
 
@@ -203,49 +205,3 @@ Add it in your package.json scripts:
 ```
 
 or simply run `npx tailwindcss-classnames`
-
-## Custom typing
-
-By default you have all the classes available as types, though you might not use all of them. You can customize your own by:
-
-```ts
-import { createCustom, TBackgroundColor, TBackgroundSize } from 'tailwindcss-classnames';
-
-type Classes = TBackgroundColor | TBackgroundSize;
-
-const {
-  classnames,
-  hover,
-  active,
-  disabled,
-  visited,
-  firstChild,
-  lastChild,
-  oddChild,
-  evenChild,
-  groupHover,
-  focusWithin,
-} = createCustom<Classes>();
-
-export {
-  classnames,
-  hover,
-  active,
-  disabled,
-  visited,
-  firstChild,
-  lastChild,
-  oddChild,
-  evenChild,
-  groupHover,
-  focusWithin,
-};
-```
-
-You can also base it on the groups of functionality:
-
-```ts
-import { TBackgrounds, TBorders } from 'tailwindcss-classnames';
-
-type Classes = TBackgrounds | TBorders;
-```

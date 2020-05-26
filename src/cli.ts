@@ -5,9 +5,9 @@ import inquirer from 'inquirer';
 import { createFileWithGeneratedTypes } from './createFile';
 
 commander
-  .option('-c, --config <config>', 'Name or path of the TailwindCSS config file')
-  .option('-o, --output <output>', 'Name or path of the file with the generated types', 'tailwindcss-classnames.ts')
-  .option('-f, --classesFile <classesFile>', 'Name or path of the file with the custom types', 'none')
+  .option('-c, --config <config>', 'Name or relative path of the TailwindCSS config file')
+  .option('-o, --output <output>', 'Name or relative path of the generated types file', 'tailwindcss-classnames.ts')
+  .option('-f, --classesFile <classesFile>', 'Name or relative path of the file with the custom types', 'none')
   .option('-t, --typeName <typeName>', 'Name of the type exported from file containing the custom classes', 'none')
   .action(({ config, output, classesFile, typeName }) => {
     if (config) {
