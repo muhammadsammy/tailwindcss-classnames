@@ -373,6 +373,8 @@ export const baseTemplateString = `/* eslint-disable */
 /* tslint:disable */
 import classnamesLib from 'classnames';
 
+T_CUSTOM_CLASSES_IMPORT_STATEMENT
+
 export type TBoxSizing = '_PREFIX_box-border' | '_PREFIX_box-content';
 
 export type TDisplay =
@@ -1226,9 +1228,8 @@ export type TClasses =
   | TTransitions
   | TInteractivity
   | TAccessibility
+  IMPORTED_T_CUSTOM_CLASSES
   | TPseudoClasses;
-
-export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
@@ -1239,6 +1240,13 @@ export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>
 export const classnames: TTailwind = classnamesLib as any;
 
 export const tw = classnames;
+
+
+/*
+ * Deprecated, TODO: Remove them ***************************************************************************************
+ */
+
+export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
 export const hover: TPseudoClass = className => {
   console.warn("Calling pseudoselectors as methods is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13");

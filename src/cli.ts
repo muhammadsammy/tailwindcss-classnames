@@ -5,13 +5,17 @@ import inquirer from 'inquirer';
 import { createFileWithGeneratedTypes } from './createFile';
 
 commander
-  .option('-c, --config <config>', 'Name of the TailwindCSS config file')
-  .option('-o, --output <output>', 'Name of the file with the generated types', 'tailwindcss-classnames.ts')
-  .action(({ config, output }) => {
+  .option('-c, --config <config>', 'Name or path of the TailwindCSS config file')
+  .option('-o, --output <output>', 'Name or path of the file with the generated types', 'tailwindcss-classnames.ts')
+  .option('-f, --classesFile <classesFile>', 'Name or path of the file with the custom types', 'none')
+  .option('-t, --typeName <typeName>', 'Name of the type exported from file containing the custom classes', 'none')
+  .action(({ config, output, classesFile, typeName }) => {
     if (config) {
       createFileWithGeneratedTypes({
         configFilename: config,
         outputFilename: output,
+        cutomClassesFilename: classesFile,
+        customClassesTypeName: typeName,
       });
     } else {
       inquirer
@@ -28,11 +32,25 @@ commander
             default: 'tailwindcss-classnames.ts',
             message: 'Name of the file with generated types',
           },
+          {
+            name: 'cutomClassesFilename',
+            type: 'input',
+            default: 'none',
+            message: 'Name or path of the file with the custom types',
+          },
+          {
+            name: 'customClassesTypeName',
+            type: 'input',
+            default: 'none',
+            message: 'Name of the type exported from file containing the custom classes',
+          },
         ])
         .then(answers => {
           createFileWithGeneratedTypes({
             configFilename: answers.configFilename,
             outputFilename: answers.outputFilename,
+            cutomClassesFilename: answers.cutomClassesFilename,
+            customClassesTypeName: answers.customClassesTypeName,
           });
         })
         .catch(error => {

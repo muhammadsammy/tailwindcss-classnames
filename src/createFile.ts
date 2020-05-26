@@ -6,9 +6,13 @@ import { ClassesGenerator } from './generation/ClassesGenerator';
 interface Options {
   configFilename: string;
   outputFilename: string;
+  cutomClassesFilename: string | 'none';
+  customClassesTypeName: string | 'none';
 }
 
-export function createFileWithGeneratedTypes({ configFilename, outputFilename }: Options) {
+export function createFileWithGeneratedTypes(options: Options) {
+  const { configFilename, outputFilename, cutomClassesFilename, customClassesTypeName } = options;
+
   fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data: any) => {
     if (err) {
       console.error(err);
@@ -29,6 +33,17 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
   return ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;
 }`;
     });
+
+    const isCustomClassesAdded: boolean =
+      typeof customClassesTypeName !== 'undefined' &&
+      typeof cutomClassesFilename !== 'undefined' &&
+      customClassesTypeName !== 'none' &&
+      cutomClassesFilename !== 'none';
+
+    const importedTCustomClasses = isCustomClassesAdded ? '| TCustomClassesFromExternalFile' : '';
+    const TCustomClassesImportStatement = isCustomClassesAdded
+      ? `import {${customClassesTypeName} as TCustomClassesFromExternalFile} from './${cutomClassesFilename}';`
+      : '';
 
     // prettier-ignore
     const result = baseTemplateString
@@ -52,7 +67,9 @@ export function createFileWithGeneratedTypes({ configFilename, outputFilename }:
       .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().placeholderOpacities, prefix))
       .replace(/OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().opacities, prefix))
       .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointsExportStatements.join('\n\n'))
-      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()));
+      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()))
+      .replace(/IMPORTED_T_CUSTOM_CLASSES/g, importedTCustomClasses)
+      .replace(/T_CUSTOM_CLASSES_IMPORT_STATEMENT/g, TCustomClassesImportStatement);
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {
