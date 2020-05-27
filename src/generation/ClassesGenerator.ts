@@ -1,5 +1,5 @@
 import { ConfigScanner } from './ConfigScanner';
-import { generateOpacities, PseudoclassVariantKey } from '../utils';
+import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses } from '../classes/all';
 import { Transforms, allTransformClasses } from '../classes/Transforms';
 
