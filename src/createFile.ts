@@ -18,6 +18,10 @@ export function createFileWithGeneratedTypes(options: Options) {
       console.error(err);
     }
 
+    const customFormsPluginClassesType = data.includes('@tailwindcss/custom-forms')
+      ? '| TCustomFormsPluginClasses'
+      : '';
+
     data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
 
     const configScanner = new ConfigScanner(eval(data));
@@ -49,6 +53,7 @@ export function createFileWithGeneratedTypes(options: Options) {
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
+      .replace(/CUSTOM_FORMS_PLUGIN_TYPE/g, customFormsPluginClassesType)
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthClasses()))
       .replace(/PADDINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().paddings, prefix))
       .replace(/MARGINS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().margins, prefix))

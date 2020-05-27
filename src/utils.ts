@@ -1213,6 +1213,14 @@ export type TAccessibility = TSvg | TScreenReaders;
 
 export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
 
+export type TCustomFormsPluginClasses =
+  | 'form-input'
+  | 'form-textarea'
+  | 'form-select'
+  | 'form-multiselect'
+  | 'form-checkbox'
+  | 'form-radio'
+
 export type TClasses =
   | TLayout
   | TTypography
@@ -1228,8 +1236,10 @@ export type TClasses =
   | TTransitions
   | TInteractivity
   | TAccessibility
-  IMPORTED_T_CUSTOM_CLASSES
+CUSTOM_FORMS_PLUGIN_TYPE
+IMPORTED_T_CUSTOM_CLASSES
   | TPseudoClasses;
+
 
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
