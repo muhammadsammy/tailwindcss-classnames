@@ -1,7 +1,8 @@
 import fs from 'fs';
-import { baseTemplateString, generateTypes } from './utils';
-import { ConfigScanner } from './generation/ConfigScanner';
-import { ClassesGenerator } from './generation/ClassesGenerator';
+import { generateTypes } from './utils/utils';
+import { baseTemplateString } from './utils/baseTemplateString';
+import { ConfigScanner } from './ConfigScanner';
+import { ClassesGenerator } from './ClassesGenerator';
 
 interface Options {
   configFilename: string;
@@ -19,7 +20,7 @@ export function createFileWithGeneratedTypes(options: Options) {
     }
 
     const customFormsPluginClassesType = data.includes('@tailwindcss/custom-forms')
-      ? '| TCustomFormsPluginClasses'
+      ? '  | TCustomFormsPluginClasses'
       : '';
 
     data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
@@ -44,7 +45,7 @@ export function createFileWithGeneratedTypes(options: Options) {
       customClassesTypeName !== 'none' &&
       cutomClassesFilename !== 'none';
 
-    const importedTCustomClasses = isCustomClassesAdded ? '| TCustomClassesFromExternalFile' : '';
+    const importedTCustomClasses = isCustomClassesAdded ? '  | TCustomClassesFromExternalFile' : '';
     const TCustomClassesImportStatement = isCustomClassesAdded
       ? `import {${customClassesTypeName} as TCustomClassesFromExternalFile} from './${cutomClassesFilename}';`
       : '';

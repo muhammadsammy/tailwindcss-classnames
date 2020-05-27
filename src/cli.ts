@@ -2,7 +2,7 @@
 
 import commander from 'commander';
 import inquirer from 'inquirer';
-import { createFileWithGeneratedTypes } from './createFile';
+import { createFileWithGeneratedTypes } from './generation/createFile';
 
 commander
   .option('-c, --config <config>', 'Name or relative path of the TailwindCSS config file')

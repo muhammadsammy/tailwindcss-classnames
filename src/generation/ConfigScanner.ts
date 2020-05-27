@@ -1,5 +1,5 @@
 import isEmpty from 'lodash.isempty';
-import { defaultColors, defaultScreens, defaultSpacing, defaultVariants, defaultOpacities } from '../utils';
+import { defaultColors, defaultScreens, defaultSpacing, defaultVariants, defaultOpacities } from './utils/utils';
 
 export class ConfigScanner {
   public readonly prefix: any;
