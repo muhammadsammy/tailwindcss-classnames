@@ -100,7 +100,7 @@ export class ClassesGenerator {
 
   public getGeneratedPseudoClasses = () => {
     const pseudoClasses: string[] = [];
-    const { classesCategories, classesVariants } = this.configScanner.getPseudoclassVariants();
+    const { classesCategories, classesVariants } = this.configScanner.getPseudoClassVariants();
 
     classesCategories.map((k, i) => {
       const key = k as PseudoclassVariantKey;
@@ -160,7 +160,7 @@ export class ClassesGenerator {
         case 'divideColor':
           classesOfCategoryKey = this.getGeneratedClassesWithColors('divide');
           break;
-        case 'textOpacity':
+        case 'opacity':
           classesOfCategoryKey = classesWithOpacities.opacities;
           break;
         case 'textOpacity':

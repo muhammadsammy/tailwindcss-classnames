@@ -111,12 +111,28 @@ export const App: React.FC<{ disabled }> = ({ disabled }) => {
 };
 ```
 
-Custom button component example:
+Another custom React button component example:
 
 <!-- prettier-ignore -->
 ```tsx
+// buttonStyles.ts
+
+import {tw} from "../tailwindcss-classnames"
+
+export buttonStyles = {
+  minimal: tw(/* some tailwindcss classes */),
+  default: tw(/* some tailwindcss classes */),
+  primary: tw(/* some tailwindcss classes */),
+  outline: tw(/* some tailwindcss classes */),
+  danger: tw(/* some tailwindcss classes */),
+  disabled: tw(/* some tailwindcss classes */),
+}
+
+// Button.tsx
+
 import React from "react"
 import {tw, TTailwindString} from "../tailwindcss-classnames"
+import {buttonStyles} from "./buttonStyles"
 
 type Props = {
   type: "button" | "submit" | "reset"
@@ -134,65 +150,26 @@ export const Button: React.FunctionComponent<Props &
       onClick={onClick}
       disabled={disabled}
       className={`${className} ${
-        disabled ? buttonClasses.disabled : buttonClasses[variant]
+        disabled ? buttonStyles.disabled : buttonStyles[variant]
       }`}
     >
       {children}
     </button>
   )
 }
-
-const baseClasses = tw(
-  "rounded",
-  "py-2",
-  "px-4",
-  "font-semibold",
-  "flex",
-  "items-center",
-  "justify-center"
-)
-
-export const buttonClasses = {
-  default: tw(
-    baseClasses,
-    "hover:bg-gray-100",
-    "text-gray-700",
-    "border",
-    "bg-gray-200",
-    "border-gray-300"
-  ),
-  primary: tw(baseClasses, "hover:bg-blue-500", "bg-blue-600", "text-white"),
-  danger: tw(baseClasses, "hover:bg-red-600", "bg-red-700", "text-white"),
-  outline: tw(
-    baseClasses,
-    "hover:bg-blue-500",
-    "hover:text-white",
-    "hover:border-transparent",
-    "bg-transparent",
-    "text-blue-500",
-    "border",
-    "border-blue-500"
-  ),
-  minimal: tw(baseClasses, "hover:bg-gray-200", "bg-transparent"),
-  disabled: tw(
-    baseClasses,
-    "cursor-not-allowed",
-    "border",
-    "bg-gray-300",
-    "text-gray-500"
-  ),
-}
 ```
 
-## Generating types from tailwind config
+## Using the CLI to generate custom types from your tailwind config and external types
 
 The default types exported from this package are tailwindcss default ones.
-But if you modified some classes in your tailwind config file, you can use the CLI tool to create a file with generated types for these classes.
+But if you modified some classes in your tailwind config file or want to add external custom classes, you can use the CLI tool to do this.
 
-### CLI arguments:
+### CLI arguments for tailwind config:
 
-- -c --config The name of TailwindCSS config file.
-- -o --output _(Optional)_ The name of generated file
+- -c --config The name or relative path of TailwindCSS config file.
+- -o --output _(Optional)_ The name or relative path of generated file
+- -f --classesFile _(Optional)_ The name or relative path of the file with the custom types
+- -t --typeName _(Optional)_ The name of the type exported from file containing the custom classes
 
 Add it in your package.json scripts:
 
@@ -204,48 +181,19 @@ Add it in your package.json scripts:
 
 or simply run `npx tailwindcss-classnames`
 
-## Custom typing
+**example:**
 
-By default you have all the classes available as types, though you might not use all of them. You can customize your own by:
-
-```ts
-import { createCustom, TBackgroundColor, TBackgroundSize } from 'tailwindcss-classnames';
-
-type Classes = TBackgroundColor | TBackgroundSize;
-
-const {
-  classnames,
-  hover,
-  active,
-  disabled,
-  visited,
-  firstChild,
-  lastChild,
-  oddChild,
-  evenChild,
-  groupHover,
-  focusWithin,
-} = createCustom<Classes>();
-
-export {
-  classnames,
-  hover,
-  active,
-  disabled,
-  visited,
-  firstChild,
-  lastChild,
-  oddChild,
-  evenChild,
-  groupHover,
-  focusWithin,
-};
-```
-
-You can also base it on the groups of functionality:
+If you want to add types from external file named `my-custom-classes.ts`
+containing the following code:
 
 ```ts
-import { TBackgrounds, TBorders } from 'tailwindcss-classnames';
-
-type Classes = TBackgrounds | TBorders;
+export type MyClassesTypes =
+  |"button"
+  | "sidebar"
+  | "navbar"
+  | ...
 ```
+
+You will excute the CLI with the following arguments:
+
+`tailwindcss-classnames --config path/to/tailwind.config.js --classesFile my-custom-classes --typeName MyClassesTypes`
