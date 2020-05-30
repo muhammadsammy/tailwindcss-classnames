@@ -3,7 +3,6 @@ import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses } from '../classes/all';
 import { Transforms, allTransformClasses } from '../classes/Transforms';
 import { TailwindConfig } from './TailwindConfigTypes';
-import { defaultThemeConfig } from './utils/defaultTailwindConfig';
 
 type ClassesWithOpacities = {
   opacities: string[];
@@ -54,11 +53,7 @@ export class ClassesGenerator {
     const allOpacities = this.configScanner.getThemeOpacities();
 
     const getOpacity = (themePropertyName: string, outputNamePrefix: string): string[] => {
-      const generatedOpacities = generateOpacities(
-        defaultThemeConfig.opacity,
-        this.configScanner.themeConfig,
-        themePropertyName,
-      );
+      const generatedOpacities = generateOpacities(allOpacities, this.configScanner.themeConfig, themePropertyName);
       return Object.keys(generatedOpacities).map(opacity => `${outputNamePrefix}-opacity-${opacity}`);
     };
 
