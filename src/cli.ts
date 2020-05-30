@@ -4,12 +4,19 @@ import commander from 'commander';
 import inquirer from 'inquirer';
 import { createFileWithGeneratedTypes } from './generation/createFile';
 
+interface InquirerAnswers {
+  configFilename: string;
+  customClassesTypeName: string | void;
+  cutomClassesFilename: string | void;
+  outputFilename: string | void;
+}
+
 commander
   .option('-c, --config <config>', 'Name or relative path of the TailwindCSS config file')
   .option('-o, --output <output>', 'Name or relative path of the generated types file', 'tailwindcss-classnames.ts')
   .option('-f, --classesFile <classesFile>', 'Name or relative path of the file with the custom types', 'none')
   .option('-t, --typeName <typeName>', 'Name of the type exported from file containing the custom classes', 'none')
-  .action(({ config, output, classesFile, typeName }) => {
+  .action(({ config, output, classesFile, typeName }: { [key: string]: string | void }) => {
     if (config) {
       createFileWithGeneratedTypes({
         configFilename: config,
@@ -45,7 +52,7 @@ commander
             message: 'Name of the type exported from file containing the custom classes',
           },
         ])
-        .then(answers => {
+        .then((answers: InquirerAnswers) => {
           createFileWithGeneratedTypes({
             configFilename: answers.configFilename,
             outputFilename: answers.outputFilename,
@@ -54,6 +61,7 @@ commander
           });
         })
         .catch(error => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           if (error.isTtyError) {
             console.error("Prompt couldn't be rendered in the current environment");
           } else {
