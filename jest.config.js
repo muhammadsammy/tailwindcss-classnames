@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use strict';
 const semver = require('semver');
 
@@ -20,15 +22,12 @@ function getSupportedTypescriptTarget() {
 module.exports = {
   testURL: 'http://localhost',
   preset: 'ts-jest',
-  collectCoverageFrom: [
-    'src/**/*.{t,j}s?(x)',
-    '!src/**/*.d.ts',
-  ],
+  collectCoverageFrom: ['src/**/*.{t,j}s?(x)', '!src/**/*.d.ts'],
   globals: {
     'ts-jest': {
       tsConfig: {
         target: getSupportedTypescriptTarget(),
-      }
-    }
-  }
+      },
+    },
+  },
 };
