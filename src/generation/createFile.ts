@@ -1,25 +1,33 @@
 import fs from 'fs';
-import { baseTemplateString, generateTypes } from './utils';
-import { ConfigScanner } from './generation/ConfigScanner';
-import { ClassesGenerator } from './generation/ClassesGenerator';
+import colors from 'colors';
+import { generateTypes } from './utils/utils';
+import { baseTemplateString } from './utils/baseTemplateString';
+import { ConfigScanner } from './ConfigScanner';
+import { ClassesGenerator } from './ClassesGenerator';
 
 interface Options {
-  configFilename: string;
-  outputFilename: string;
-  cutomClassesFilename: string | 'none';
-  customClassesTypeName: string | 'none';
+  configFilename: string | void;
+  outputFilename: string | void;
+  cutomClassesFilename: string | 'none' | void;
+  customClassesTypeName: string | 'none' | void;
 }
 
-export function createFileWithGeneratedTypes(options: Options) {
+export function createFileWithGeneratedTypes(options: Options): void {
   const { configFilename, outputFilename, cutomClassesFilename, customClassesTypeName } = options;
 
-  fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data: any) => {
+  if (!configFilename) return console.error('tailwindcss config file is not provided'.red);
+  if (!outputFilename) return console.error('Please provide a valid filename to add generated types to it'.red);
+  if (!cutomClassesFilename) return console.error('Please provide the file containing the custom classes'.red);
+  if (!customClassesTypeName) return console.error('Please provide the name of exported custom classes type'.red);
+
+  fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data) => {
     if (err) {
+      console.error(`Error Reading: "./${configFilename}"`.red);
       console.error(err);
     }
 
     const customFormsPluginClassesType = data.includes('@tailwindcss/custom-forms')
-      ? '| TCustomFormsPluginClasses'
+      ? '  | TCustomFormsPluginClasses'
       : '';
 
     data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
@@ -33,7 +41,7 @@ export function createFileWithGeneratedTypes(options: Options) {
 
     const breakpointsExportStatements = configScanner.getThemeBreakpoints().map(breakpoint => {
       return `export const ${breakpoint}: TPseudoClass = className => {
-    console.warn("Calling ${breakpoint}() pseudoselector method is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13")
+  console.warn("Calling ${breakpoint}() pseudoselector method is deprecated. use regular tailwindcss classes instead. See https://github.com/muhammadsammy/tailwindcss-classnames/issues/13")
   return ('${prefix}${breakpoint}${separator}' + className) as TTailwindString;
 }`;
     });
@@ -44,7 +52,7 @@ export function createFileWithGeneratedTypes(options: Options) {
       customClassesTypeName !== 'none' &&
       cutomClassesFilename !== 'none';
 
-    const importedTCustomClasses = isCustomClassesAdded ? '| TCustomClassesFromExternalFile' : '';
+    const importedTCustomClasses = isCustomClassesAdded ? '  | TCustomClassesFromExternalFile' : '';
     const TCustomClassesImportStatement = isCustomClassesAdded
       ? `import {${customClassesTypeName} as TCustomClassesFromExternalFile} from './${cutomClassesFilename}';`
       : '';
@@ -78,7 +86,7 @@ export function createFileWithGeneratedTypes(options: Options) {
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {
-        console.error(error);
+        console.error(colors.red(error.toString()));
       }
     });
   });

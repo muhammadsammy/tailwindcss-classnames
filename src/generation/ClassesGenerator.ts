@@ -1,16 +1,36 @@
 import { ConfigScanner } from './ConfigScanner';
-import { generateOpacities, PseudoclassVariantKey } from '../utils';
+import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses } from '../classes/all';
 import { Transforms, allTransformClasses } from '../classes/Transforms';
+import { TailwindConfig } from './TailwindConfigTypes';
+
+type ClassesWithOpacities = {
+  opacities: string[];
+  textOpacities: string[];
+  backgroundOpacities: string[];
+  borderOpacities: string[];
+  divideOpacities: string[];
+  placeholderOpacities: string[];
+};
+
+type ClassesWithSpacing = {
+  paddings: string[];
+  margins: string[];
+  widths: string[];
+  heights: string[];
+  spaceBetweens: string[];
+};
 
 export class ClassesGenerator {
   private readonly configScanner: ConfigScanner;
 
-  constructor(tailwindConfig: any) {
+  constructor(tailwindConfig: TailwindConfig) {
     this.configScanner = new ConfigScanner(tailwindConfig);
   }
 
-  public getGeneratedClassesWithColors = (classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide') => {
+  public getGeneratedClassesWithColors = (
+    classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide',
+  ): string[] => {
     const { colorsNames, colorsShades } = this.configScanner.getThemeColors();
     return colorsNames.flatMap((colorName, i) => {
       const colorShade = colorsShades[i];
@@ -23,16 +43,16 @@ export class ClassesGenerator {
     });
   };
 
-  public getGeneratedMaxWidthClasses = () => {
+  public getGeneratedMaxWidthClasses = (): string[] => {
     return this.configScanner
       .getThemeBreakpoints()
       .map((breakpoint: string) => `${this.configScanner.prefix}max-w-screen-${breakpoint}`);
   };
 
-  public getGeneratedClassesWithOpacities = () => {
+  public getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
     const allOpacities = this.configScanner.getThemeOpacities();
 
-    const getOpacity = (themePropertyName: string, outputNamePrefix: string) => {
+    const getOpacity = (themePropertyName: string, outputNamePrefix: string): string[] => {
       const generatedOpacities = generateOpacities(allOpacities, this.configScanner.themeConfig, themePropertyName);
       return Object.keys(generatedOpacities).map(opacity => `${outputNamePrefix}-opacity-${opacity}`);
     };
@@ -47,7 +67,7 @@ export class ClassesGenerator {
     };
   };
 
-  public getGeneratedClassesWithSpacing = () => {
+  public getGeneratedClassesWithSpacing = (): ClassesWithSpacing => {
     const paddings: string[] = [];
     const margins: string[] = [];
     const widths: string[] = [];
@@ -76,7 +96,7 @@ export class ClassesGenerator {
       sides.map(side => {
         paddings.push(`p${side}-${spacing}`);
         margins.push(`m${side}-${spacing}`);
-        if (parseInt(spacing, 10) !== 0 && spacingValues[i] !== 0) {
+        if (parseInt(spacing, 10) !== 0 && spacingValues[i] !== '0') {
           paddings.push(`-p${side}-${spacing}`);
           margins.push(`-m${side}-${spacing}`);
         }
@@ -98,7 +118,7 @@ export class ClassesGenerator {
     };
   };
 
-  public getGeneratedPseudoClasses = () => {
+  public getGeneratedPseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];
     const { classesCategories, classesVariants } = this.configScanner.getPseudoClassVariants();
 

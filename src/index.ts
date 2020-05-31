@@ -1660,6 +1660,7 @@ export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>
 
 export type TPseudoClass<T extends TClasses = TClasses> = (className: T) => TTailwindString;
 
+// eslint-disable-next-line
 export const classnames: TTailwind = classnamesLib as any;
 
 export const hover: TPseudoClass = className => `hover:${className}` as TTailwindString;

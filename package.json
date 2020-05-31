@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-classnames",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "Functional typed classnames for TailwindCSS",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "contributors": [
@@ -23,7 +23,7 @@
     "build:umd": "npm run build:es && rollup --config && dts-bundle --name dist/bundle --main es --outputAsModuleFolder",
     "clean": "rimraf dist es lib coverage tailwindcss-classnames.ts",
     "typecheck": "tsc --noEmit",
-    "lint": "tslint --project tsconfig.json --format stylish",
+    "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix && npm run prettier",
     "format": "prettier '**/*.{md,js,jsx,json,ts,tsx}' --write",
     "test": "jest --env=jsdom --coverage --passWithNoTests",
     "test:watch": "jest --env=jsdom --watch --updateSnapshot",
@@ -47,19 +47,29 @@
   ],
   "dependencies": {
     "classnames": "^2.2.6",
+    "colors": "^1.4.0",
     "commander": "^5.1.0",
     "inquirer": "^7.1.0",
     "lodash.isempty": "^4.4.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@types/classnames": "^2.2.9",
     "@types/inquirer": "^6.5.0",
     "@types/jest": "^23.0.0",
     "@types/lodash.isempty": "^4.4.6",
     "@types/node": "^13.11.1",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
     "dts-bundle": "^0.7.2",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
     "jest": "^25.3.0",
+    "lint-staged": "^10.2.7",
     "pascal-case": "^2.0.1",
     "prettier": "^1.13.7",
     "rimraf": "^2.6.1",
@@ -72,9 +82,6 @@
     "rollup-plugin-terser": "^5.3.0",
     "semver": "^7.3.2",
     "ts-jest": "~23.10.0",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.13.0",
-    "tslint-plugin-prettier": "^2.0.0",
     "typescript": "^3.1.4"
   }
 }
