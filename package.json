@@ -47,6 +47,7 @@
   ],
   "dependencies": {
     "classnames": "^2.2.6",
+    "colors": "^1.4.0",
     "commander": "^5.1.0",
     "inquirer": "^7.1.0",
     "lodash.isempty": "^4.4.0",

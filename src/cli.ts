@@ -2,6 +2,7 @@
 
 import commander from 'commander';
 import inquirer from 'inquirer';
+import colors from 'colors';
 import { createFileWithGeneratedTypes } from './generation/createFile';
 
 interface InquirerAnswers {
@@ -63,9 +64,9 @@ commander
         .catch(error => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           if (error.isTtyError) {
-            console.error("Prompt couldn't be rendered in the current environment");
+            console.error(colors.red("Prompt couldn't be rendered in the current environment"));
           } else {
-            console.error('Something went wrong with the prompt');
+            console.error(colors.red('Something went wrong with the prompt'));
           }
         });
     }

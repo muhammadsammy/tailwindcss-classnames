@@ -1,4 +1,5 @@
 import fs from 'fs';
+import colors from 'colors';
 import { generateTypes } from './utils/utils';
 import { baseTemplateString } from './utils/baseTemplateString';
 import { ConfigScanner } from './ConfigScanner';
@@ -14,14 +15,14 @@ interface Options {
 export function createFileWithGeneratedTypes(options: Options): void {
   const { configFilename, outputFilename, cutomClassesFilename, customClassesTypeName } = options;
 
-  if (!configFilename) return console.error('tailwindcss config file is not provided');
-  if (!outputFilename) return console.error('Please provide a valid filename to add generated types to it');
-  if (!cutomClassesFilename) return console.error('Please provide the file containing the custom classes');
-  if (!customClassesTypeName) return console.error('Please provide the name of exported custom classes type');
+  if (!configFilename) return console.error('tailwindcss config file is not provided'.red);
+  if (!outputFilename) return console.error('Please provide a valid filename to add generated types to it'.red);
+  if (!cutomClassesFilename) return console.error('Please provide the file containing the custom classes'.red);
+  if (!customClassesTypeName) return console.error('Please provide the name of exported custom classes type'.red);
 
   fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data) => {
     if (err) {
-      console.error(`Error Reading: "./${configFilename}"`);
+      console.error(`Error Reading: "./${configFilename}"`.red);
       console.error(err);
     }
 
@@ -85,7 +86,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
 
     fs.writeFile(`${outputFilename}`, result, 'utf8', error => {
       if (error) {
-        console.error(error);
+        console.error(colors.red(error.toString()));
       }
     });
   });
