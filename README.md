@@ -159,7 +159,7 @@ export const Button: React.FunctionComponent<Props &
 }
 ```
 
-## Using the CLI to generate custom types from your tailwind config and external types
+## Using the CLI to generate custom types
 
 The default types exported from this package are tailwindcss default ones.
 But if you modified some classes in your tailwind config file or want to add external custom classes, you can use the CLI tool to do this.
