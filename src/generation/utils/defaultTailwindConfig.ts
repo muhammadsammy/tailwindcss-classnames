@@ -6,13 +6,14 @@
 // @ts-nocheck
 export const defaultThemeConfig = {
   screens: {
-    mobile: '640px',
-    tablet: '768px',
-    small_screen_pc: '1024px',
-    wide_screen_pc: '1280px',
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
   },
   colors: {
     transparent: 'transparent',
+    current: 'currentColor',
 
     black: '#000',
     white: '#fff',
@@ -143,7 +144,6 @@ export const defaultThemeConfig = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '26': '7rem',
     '32': '8rem',
     '40': '10rem',
     '48': '12rem',
@@ -151,6 +151,7 @@ export const defaultThemeConfig = {
     '64': '16rem',
   },
   backgroundColor: theme => theme('colors'),
+  backgroundOpacity: theme => theme('opacity'),
   backgroundPosition: {
     bottom: 'bottom',
     center: 'center',
@@ -171,6 +172,7 @@ export const defaultThemeConfig = {
     ...theme('colors'),
     default: theme('colors.gray.300', 'currentColor'),
   }),
+  borderOpacity: theme => theme('opacity'),
   borderRadius: {
     none: '0',
     sm: '0.125rem',
@@ -208,6 +210,9 @@ export const defaultThemeConfig = {
     move: 'move',
     'not-allowed': 'not-allowed',
   },
+  divideColor: theme => theme('borderColor'),
+  divideOpacity: theme => theme('borderOpacity'),
+  divideWidth: theme => theme('borderWidth'),
   fill: {
     current: 'currentColor',
   },
@@ -376,6 +381,11 @@ export const defaultThemeConfig = {
   },
   padding: theme => theme('spacing'),
   placeholderColor: theme => theme('colors'),
+  placeholderOpacity: theme => theme('opacity'),
+  space: (theme, { negative }) => ({
+    ...theme('spacing'),
+    ...negative(theme('spacing')),
+  }),
   stroke: {
     current: 'currentColor',
   },
@@ -385,6 +395,7 @@ export const defaultThemeConfig = {
     '2': '2',
   },
   textColor: theme => theme('colors'),
+  textOpacity: theme => theme('opacity'),
   width: theme => ({
     auto: 'auto',
     ...theme('spacing'),
@@ -592,6 +603,16 @@ export const defaultThemeConfig = {
     'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
   },
   transitionDuration: {
+    '75': '75ms',
+    '100': '100ms',
+    '150': '150ms',
+    '200': '200ms',
+    '300': '300ms',
+    '500': '500ms',
+    '700': '700ms',
+    '1000': '1000ms',
+  },
+  transitionDelay: {
     '75': '75ms',
     '100': '100ms',
     '150': '150ms',
