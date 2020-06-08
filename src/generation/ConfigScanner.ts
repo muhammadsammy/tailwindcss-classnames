@@ -14,11 +14,8 @@ export class ConfigScanner {
     this.prefix = isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this.separator = isEmpty(tailwindConfig.separator) ? ':' : (tailwindConfig.separator as string);
     this.variantsConfig = isEmpty(tailwindConfig.variants)
-      ? defaultVariants
-      : ({
-          ...defaultVariants,
-          ...tailwindConfig.variants,
-        } as IVariantsConfig);
+      ? defaultVariants // Order does matter, defaultVariants will be overridden by themeVariants.
+      : ({ ...defaultVariants, ...tailwindConfig.variants } as IVariantsConfig);
     this.themeConfig = isEmpty(tailwindConfig.theme)
       ? (defaultThemeConfig as IThemeConfig)
       : (tailwindConfig.theme as IThemeConfig);
@@ -80,16 +77,9 @@ export class ConfigScanner {
   };
 
   public getPseudoClassVariants = (): { classesCategories: string[]; classesVariants: string[][] } => {
-    const themeVariants = this.variantsConfig;
-    // Order does matter, defaultVariants items will be overriden by themeVariants.
-    const allPseudoClassVariants: { [key: string]: string[] } = {
-      ...defaultVariants,
-      ...themeVariants,
-    };
-
     return {
-      classesCategories: Object.keys(allPseudoClassVariants),
-      classesVariants: Object.values(allPseudoClassVariants),
+      classesCategories: Object.keys(this.variantsConfig),
+      classesVariants: Object.values(this.variantsConfig),
     };
   };
 }
