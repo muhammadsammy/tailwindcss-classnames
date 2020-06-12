@@ -222,10 +222,10 @@ export class ClassesGenerator {
         variants.map(variant => {
           if (variant === 'responsive') {
             this.configScanner.getThemeBreakpoints().map((breakpointVariant: string) => {
-              pseudoClasses.push(this.configScanner.prefix + breakpointVariant + this.configScanner.separator + c);
+              pseudoClasses.push(breakpointVariant + this.configScanner.separator + this.configScanner.prefix + c);
             });
           } else {
-            pseudoClasses.push(this.configScanner.prefix + variant + this.configScanner.separator + c);
+            pseudoClasses.push(variant + this.configScanner.separator + this.configScanner.prefix + c);
           }
         });
       });
