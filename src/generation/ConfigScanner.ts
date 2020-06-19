@@ -1,8 +1,5 @@
-import { TailwindConfig, IThemeConfig, IVariantsConfig } from './TailwindConfigTypes';
 import { defaultThemeConfig, defaultVariants } from './utils/defaultTailwindConfig';
 import isEmpty from 'lodash.isempty';
-
-type ColorShades = string[] | Array<{ [key: string]: string }>;
 
 export class ConfigScanner {
   public readonly prefix: string;

@@ -1,4 +1,23 @@
-export type TailwindConfig = {
+type ColorShades = string[] | Array<{ [key: string]: string }>;
+
+type ClassesWithOpacities = {
+  opacities: string[];
+  textOpacities: string[];
+  backgroundOpacities: string[];
+  borderOpacities: string[];
+  divideOpacities: string[];
+  placeholderOpacities: string[];
+};
+
+type ClassesWithSpacing = {
+  paddings: string[];
+  margins: string[];
+  widths: string[];
+  heights: string[];
+  spaceBetweens: string[];
+};
+
+type TailwindConfig = {
   prefix?: string;
   important?: boolean;
   separator?: string;
@@ -7,11 +26,11 @@ export type TailwindConfig = {
   // corePlugins?: {};
 };
 
-export interface IVariantsConfig {
+interface IVariantsConfig {
   [key: string]: string[];
 }
 
-export interface IThemeConfig extends IThemeProps {
+interface IThemeConfig extends IThemeProps {
   extend?: IThemeProps;
 }
 

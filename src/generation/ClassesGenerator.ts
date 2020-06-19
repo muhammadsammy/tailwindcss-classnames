@@ -2,24 +2,6 @@ import { ConfigScanner } from './ConfigScanner';
 import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses } from '../classes/all';
 import { Transforms, allTransformClasses } from '../classes/Transforms';
-import { TailwindConfig } from './TailwindConfigTypes';
-
-type ClassesWithOpacities = {
-  opacities: string[];
-  textOpacities: string[];
-  backgroundOpacities: string[];
-  borderOpacities: string[];
-  divideOpacities: string[];
-  placeholderOpacities: string[];
-};
-
-type ClassesWithSpacing = {
-  paddings: string[];
-  margins: string[];
-  widths: string[];
-  heights: string[];
-  spaceBetweens: string[];
-};
 
 export class ClassesGenerator {
   private readonly configScanner: ConfigScanner;
