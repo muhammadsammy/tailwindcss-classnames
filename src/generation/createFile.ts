@@ -8,16 +8,16 @@ import { ClassesGenerator } from './ClassesGenerator';
 interface Options {
   configFilename: string | void;
   outputFilename: string | void;
-  cutomClassesFilename: string | 'none' | void;
+  customClassesFilename: string | 'none' | void;
   customClassesTypeName: string | 'none' | void;
 }
 
 export function createFileWithGeneratedTypes(options: Options): void {
-  const { configFilename, outputFilename, cutomClassesFilename, customClassesTypeName } = options;
+  const { configFilename, outputFilename, customClassesFilename, customClassesTypeName } = options;
 
   if (!configFilename) return console.error('tailwindcss config file is not provided'.red);
   if (!outputFilename) return console.error('Please provide a valid filename to add generated types to it'.red);
-  if (!cutomClassesFilename) return console.error('Please provide the file containing the custom classes'.red);
+  if (!customClassesFilename) return console.error('Please provide the file containing the custom classes'.red);
   if (!customClassesTypeName) return console.error('Please provide the name of exported custom classes type'.red);
 
   fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data) => {
@@ -30,7 +30,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       ? '  | TCustomFormsPluginClasses'
       : '';
 
-    data = data.replace(/('|")?plugins('|")? *: *\[(.*|\n)*?\],?/g, '');
+    data = data.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, '');
 
     const configScanner = new ConfigScanner(eval(data));
 
@@ -48,13 +48,13 @@ export function createFileWithGeneratedTypes(options: Options): void {
 
     const isCustomClassesAdded: boolean =
       typeof customClassesTypeName !== 'undefined' &&
-      typeof cutomClassesFilename !== 'undefined' &&
+      typeof customClassesFilename !== 'undefined' &&
       customClassesTypeName !== 'none' &&
-      cutomClassesFilename !== 'none';
+      customClassesFilename !== 'none';
 
     const importedTCustomClasses = isCustomClassesAdded ? '  | TCustomClassesFromExternalFile' : '';
     const TCustomClassesImportStatement = isCustomClassesAdded
-      ? `import {${customClassesTypeName} as TCustomClassesFromExternalFile} from './${cutomClassesFilename}';`
+      ? `import {${customClassesTypeName} as TCustomClassesFromExternalFile} from './${customClassesFilename}';`
       : '';
 
     // prettier-ignore

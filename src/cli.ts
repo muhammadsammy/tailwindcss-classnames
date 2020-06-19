@@ -22,7 +22,7 @@ commander
       createFileWithGeneratedTypes({
         configFilename: config,
         outputFilename: output,
-        cutomClassesFilename: classesFile,
+        customClassesFilename: classesFile,
         customClassesTypeName: typeName,
       });
     } else {
@@ -57,7 +57,7 @@ commander
           createFileWithGeneratedTypes({
             configFilename: answers.configFilename,
             outputFilename: answers.outputFilename,
-            cutomClassesFilename: answers.cutomClassesFilename,
+            customClassesFilename: answers.cutomClassesFilename,
             customClassesTypeName: answers.customClassesTypeName,
           });
         })
