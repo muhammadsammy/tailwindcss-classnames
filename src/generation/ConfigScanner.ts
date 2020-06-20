@@ -13,9 +13,7 @@ export class ConfigScanner {
     this.variantsConfig = isEmpty(tailwindConfig.variants)
       ? defaultVariants // Order does matter, defaultVariants will be overridden by themeVariants.
       : ({ ...defaultVariants, ...tailwindConfig.variants } as IVariantsConfig);
-    this.themeConfig = isEmpty(tailwindConfig.theme)
-      ? (defaultThemeConfig as IThemeConfig)
-      : (tailwindConfig.theme as IThemeConfig);
+    this.themeConfig = { ...defaultThemeConfig, ...tailwindConfig.theme } as IThemeConfig;
   }
 
   public getThemeColors = (): { colorsNames: string[]; colorsShades: ColorShades } => {
