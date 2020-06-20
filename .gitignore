@@ -93,6 +93,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# IntelliJ based IDEs
+.idea
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
