@@ -46,10 +46,10 @@ interface IThemeProps {
   spacing?: {
     [key: string]: string;
   };
-  backgroundPosition?: {
+  backgroundPosition: {
     [key: string]: string;
   };
-  backgroundSize?: {
+  backgroundSize: {
     [key: string]: string;
   };
 

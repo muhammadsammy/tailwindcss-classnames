@@ -1,14 +1,54 @@
 import { ConfigScanner } from './ConfigScanner';
-import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
-import { AllClasses } from '../classes/all';
-import { Transforms, allTransformClasses } from '../classes/Transforms';
+import { generateOpacities, PseudoclassVariantKey, generateTypes } from './utils/utils';
+import { AllClasses, AllClassesFlat } from '../classes/all';
+import { allTransformClasses, Transforms } from '../classes/Transforms';
+import { IGenerator } from './IGenerator';
+import { Backgrounds } from '../classes/Backgrounds';
 
-export class ClassesGenerator {
+export class ClassesGenerator implements IGenerator {
   private readonly configScanner: ConfigScanner;
+  private allGeneratedClasses: Partial<typeof AllClasses> = {};
 
   constructor(tailwindConfig: TailwindConfig) {
     this.configScanner = new ConfigScanner(tailwindConfig);
   }
+
+  // TODO: add theme.extend
+  public backgrounds = (): string => {
+    const generatedBackgrounds = {
+      ...Backgrounds,
+      backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
+      backgroundColor: this.getGeneratedClassesWithColors('bg'),
+      backgroundPosition: Object.keys(this.configScanner.themeConfig.backgroundPosition),
+      backgroundSize: Object.keys(this.configScanner.themeConfig.backgroundSize),
+    };
+
+    this.allGeneratedClasses.Backgrounds = generatedBackgrounds;
+
+    return `
+export type TBackgroundAttachment = ${generateTypes(
+      generatedBackgrounds.backgroundAttachment,
+      this.configScanner.prefix,
+    )};
+
+export type TBackgroundColor =${generateTypes(generatedBackgrounds.backgroundColor, this.configScanner.prefix)};
+
+export type TBackgroundPosition =${generateTypes(generatedBackgrounds.backgroundPosition, this.configScanner.prefix)};
+
+export type TBackgroundRepeat =${generateTypes(generatedBackgrounds.backgroundRepeat, this.configScanner.prefix)};
+
+export type TBackgroundSize = ${generateTypes(generatedBackgrounds.backgroundSize, this.configScanner.prefix)};
+
+export type TBackgroundOpacity =${generateTypes(generatedBackgrounds.backgroundOpacity, this.configScanner.prefix)};
+
+export type TBackgrounds =
+  | TBackgroundAttachment
+  | TBackgroundColor
+  | TBackgroundPosition
+  | TBackgroundRepeat
+  | TBackgroundSize
+  | TBackgroundOpacity;`;
+  };
 
   public getGeneratedClassesWithColors = (
     classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide',
@@ -113,13 +153,13 @@ export class ClassesGenerator {
 
       switch (key) {
         case 'gap':
-          classesOfCategoryKey = AllClasses.gridGap;
+          classesOfCategoryKey = AllClassesFlat.gridGap;
           break;
         case 'inset':
-          classesOfCategoryKey = AllClasses.topRightBottomLeft;
+          classesOfCategoryKey = AllClassesFlat.topRightBottomLeft;
           break;
         case 'accessibility':
-          classesOfCategoryKey = AllClasses.screenReaders;
+          classesOfCategoryKey = AllClassesFlat.screenReaders;
           break;
         case 'transform':
           classesOfCategoryKey = [];
@@ -196,7 +236,7 @@ export class ClassesGenerator {
           classesOfCategoryKey = classesWithSpacing.spaceBetweens;
           break;
         default:
-          classesOfCategoryKey = AllClasses[key];
+          classesOfCategoryKey = AllClassesFlat[key];
           break;
       }
 

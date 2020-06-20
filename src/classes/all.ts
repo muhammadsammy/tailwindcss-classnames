@@ -14,7 +14,7 @@ import { Transforms } from './Transforms';
 import { Transitions } from './Transitions';
 import { Typography } from './Typography';
 
-export const AllClasses: {
+export const AllClassesFlat: {
   [key: string]: string[];
 } = {
   ...Accessibility,
@@ -32,4 +32,22 @@ export const AllClasses: {
   ...Transforms,
   ...Transitions,
   ...Typography,
+};
+
+export const AllClasses = {
+  Accessibility,
+  Backgrounds,
+  Borders,
+  Effects,
+  FlexBox,
+  Grid,
+  Interactivity,
+  Layout,
+  Sizing,
+  Spacing,
+  SVG,
+  Tables,
+  Transforms,
+  Transitions,
+  Typography,
 };

@@ -200,40 +200,7 @@ export type TTypography =
   | TWordBreak
   | TTextOpacity;
 
-export type TBackgroundAttachment = '_PREFIX_bg-fixed' | '_PREFIX_bg-local' | '_PREFIX_bg-scroll';
-
-export type TBackgroundColor =BACKGROUND_COLORS;
-
-export type TBackgroundPosition =
-  | '_PREFIX_bg-bottom'
-  | '_PREFIX_bg-center'
-  | '_PREFIX_bg-left'
-  | '_PREFIX_bg-left-bottom'
-  | '_PREFIX_bg-left-top'
-  | '_PREFIX_bg-right'
-  | '_PREFIX_bg-right-bottom'
-  | '_PREFIX_bg-right-top'
-  | '_PREFIX_bg-top';
-
-export type TBackgroundRepeat =
-  | '_PREFIX_bg-repeat'
-  | '_PREFIX_bg-no-repeat'
-  | '_PREFIX_bg-repeat-x'
-  | '_PREFIX_bg-repeat-y'
-  | '_PREFIX_bg-repeat-round'
-  | '_PREFIX_bg-repeat-space';
-
-export type TBackgroundSize = '_PREFIX_bg-auto' | '_PREFIX_bg-cover' | '_PREFIX_bg-contain';
-
-export type TBackgroundOpacity =BACKGROUND_OPACITIES;
-
-export type TBackgrounds =
-  | TBackgroundAttachment
-  | TBackgroundColor
-  | TBackgroundPosition
-  | TBackgroundRepeat
-  | TBackgroundSize
-  | TBackgroundOpacity;
+___BACKGROUNDS___
 
 export type TBorderColor =BORDER_COLORS;
 
