@@ -1,5 +1,5 @@
 export interface IGenerator {
-  generate: (...args: any[]) => string;
+  generate: () => string;
 }
 
 export interface IClassesGenerator {

@@ -8,13 +8,10 @@ import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
-  private templateGenerator: ClassesGroupTemplateGenerator;
-
   private allGeneratedClasses: Partial<typeof AllClasses> = {};
 
   constructor(tailwindConfig: TailwindConfig) {
     this.configScanner = new ConfigScanner(tailwindConfig);
-    this.templateGenerator = new ClassesGroupTemplateGenerator();
   }
 
   // TODO: add theme.extend
@@ -29,7 +26,7 @@ export class ClassesGenerator implements IClassesGenerator {
 
     this.allGeneratedClasses.Backgrounds = Backgrounds;
 
-    return this.templateGenerator.generate(Backgrounds, 'Backgrounds', this.configScanner.prefix);
+    return new ClassesGroupTemplateGenerator(Backgrounds, 'Backgrounds', this.configScanner.prefix).generate();
   };
 
   public getGeneratedClassesWithColors = (
