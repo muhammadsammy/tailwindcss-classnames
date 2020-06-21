@@ -121,7 +121,7 @@ const backgroundRepeat = [
 
 const backgroundSize = ['bg-auto', 'bg-cover', 'bg-contain'];
 
-export const Backgrounds = {
+export const defaultBackgrounds = {
   backgroundAttachment,
   backgroundColor,
   backgroundOpacity,

@@ -1,9 +1,9 @@
 import { ConfigScanner } from './ConfigScanner';
-import { generateOpacities, PseudoclassVariantKey, generateTypes } from './utils/utils';
+import { capitalizeFirstLetter, generateOpacities, generateTypes, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses, AllClassesFlat } from '../classes/all';
 import { allTransformClasses, Transforms } from '../classes/Transforms';
 import { IGenerator } from './IGenerator';
-import { Backgrounds } from '../classes/Backgrounds';
+import { defaultBackgrounds } from '../classes/DefaultBackgrounds';
 
 export class ClassesGenerator implements IGenerator {
   private readonly configScanner: ConfigScanner;
@@ -15,39 +15,42 @@ export class ClassesGenerator implements IGenerator {
 
   // TODO: add theme.extend
   public backgrounds = (): string => {
-    const generatedBackgrounds = {
-      ...Backgrounds,
+    const Backgrounds = {
+      ...defaultBackgrounds,
       backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
       backgroundColor: this.getGeneratedClassesWithColors('bg'),
       backgroundPosition: Object.keys(this.configScanner.themeConfig.backgroundPosition),
       backgroundSize: Object.keys(this.configScanner.themeConfig.backgroundSize),
     };
 
-    this.allGeneratedClasses.Backgrounds = generatedBackgrounds;
+    this.allGeneratedClasses.Backgrounds = Backgrounds;
 
-    return `
-export type TBackgroundAttachment = ${generateTypes(
-      generatedBackgrounds.backgroundAttachment,
-      this.configScanner.prefix,
-    )};
+    const generateClassesGroupTemplate = (
+      classesGroup: { [key: string]: string[] },
+      classesGroupName: string,
+    ): string => {
+      const members: string[] = Object.keys(classesGroup);
 
-export type TBackgroundColor =${generateTypes(generatedBackgrounds.backgroundColor, this.configScanner.prefix)};
+      const generateMembersStatements = (): string[] => {
+        return members.map(member => {
+          return `export type T${capitalizeFirstLetter(member)} = ${generateTypes(
+            classesGroup[member],
+            this.configScanner.prefix,
+          )};`;
+        });
+      };
 
-export type TBackgroundPosition =${generateTypes(generatedBackgrounds.backgroundPosition, this.configScanner.prefix)};
+      const generateGroupStatement = (): string => {
+        return `export type T${capitalizeFirstLetter(classesGroupName)} = ${generateTypes(
+          members.map(member => capitalizeFirstLetter(member)),
+          'T',
+        )};`;
+      };
 
-export type TBackgroundRepeat =${generateTypes(generatedBackgrounds.backgroundRepeat, this.configScanner.prefix)};
+      return generateMembersStatements().join('\n\n') + '\n\n' + generateGroupStatement();
+    };
 
-export type TBackgroundSize = ${generateTypes(generatedBackgrounds.backgroundSize, this.configScanner.prefix)};
-
-export type TBackgroundOpacity =${generateTypes(generatedBackgrounds.backgroundOpacity, this.configScanner.prefix)};
-
-export type TBackgrounds =
-  | TBackgroundAttachment
-  | TBackgroundColor
-  | TBackgroundPosition
-  | TBackgroundRepeat
-  | TBackgroundSize
-  | TBackgroundOpacity;`;
+    return generateClassesGroupTemplate(Backgrounds, 'Backgrounds');
   };
 
   public getGeneratedClassesWithColors = (

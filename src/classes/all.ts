@@ -1,5 +1,5 @@
 import { Accessibility } from './Accessibility';
-import { Backgrounds } from './Backgrounds';
+import { defaultBackgrounds } from './DefaultBackgrounds';
 import { Borders } from './Borders';
 import { Effects } from './Effects';
 import { FlexBox } from './Flexbox';
@@ -18,7 +18,7 @@ export const AllClassesFlat: {
   [key: string]: string[];
 } = {
   ...Accessibility,
-  ...Backgrounds,
+  ...defaultBackgrounds,
   ...Borders,
   ...Effects,
   ...FlexBox,
@@ -36,7 +36,7 @@ export const AllClassesFlat: {
 
 export const AllClasses = {
   Accessibility,
-  Backgrounds,
+  Backgrounds: defaultBackgrounds,
   Borders,
   Effects,
   FlexBox,
