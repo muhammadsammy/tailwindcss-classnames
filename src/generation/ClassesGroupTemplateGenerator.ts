@@ -14,10 +14,15 @@ export class ClassesGroupTemplateGenerator implements IGenerator {
     };
 
     const generateGroupStatement = (): string => {
-      return `export type T${capitalizeFirstLetter(classesGroupName)} = ${generateTypes(
-        members.map(member => capitalizeFirstLetter(member)),
-        'T',
-      )};`;
+      return (
+        `export type T${capitalizeFirstLetter(classesGroupName)} =` +
+        '\n  | ' +
+        members
+          .map(member => {
+            return 'T' + capitalizeFirstLetter(member);
+          })
+          .join('\n  | ')
+      );
     };
 
     return generateMembersStatements().join('\n\n') + '\n\n' + generateGroupStatement();
