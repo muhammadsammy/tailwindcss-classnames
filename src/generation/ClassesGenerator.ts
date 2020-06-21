@@ -19,8 +19,8 @@ export class ClassesGenerator implements IGenerator {
       ...defaultBackgrounds,
       backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
       backgroundColor: this.getGeneratedClassesWithColors('bg'),
-      backgroundPosition: Object.keys(this.configScanner.themeConfig.backgroundPosition),
-      backgroundSize: Object.keys(this.configScanner.themeConfig.backgroundSize),
+      backgroundPosition: Object.keys(this.configScanner.themeConfig.backgroundPosition).map(x => 'bg-' + x),
+      backgroundSize: Object.keys(this.configScanner.themeConfig.backgroundSize).map(x => 'bg-' + x),
     };
 
     this.allGeneratedClasses.Backgrounds = Backgrounds;
