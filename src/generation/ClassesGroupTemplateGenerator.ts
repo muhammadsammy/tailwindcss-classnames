@@ -9,9 +9,9 @@ export class ClassesGroupTemplateGenerator implements IGenerator {
   private readonly configPrefix: string;
   private members: string[];
 
-  constructor(classesGroup: ClassesGroup, classesGroupName: string, configPrefix: string) {
-    this.group = classesGroup;
-    this.groupName = classesGroupName;
+  constructor(group: ClassesGroup, groupName: string, configPrefix: string) {
+    this.group = group;
+    this.groupName = groupName;
     this.configPrefix = configPrefix;
     this.members = Object.keys(this.group);
   }
