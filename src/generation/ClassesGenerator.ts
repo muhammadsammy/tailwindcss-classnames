@@ -1,16 +1,20 @@
 import { ConfigScanner } from './ConfigScanner';
-import { capitalizeFirstLetter, generateOpacities, generateTypes, PseudoclassVariantKey } from './utils/utils';
+import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses, AllClassesFlat } from '../classes/all';
 import { allTransformClasses, Transforms } from '../classes/Transforms';
-import { IGenerator } from './IGenerator';
+import { IClassesGenerator } from './IGenerator';
 import { defaultBackgrounds } from '../classes/DefaultBackgrounds';
+import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
 
-export class ClassesGenerator implements IGenerator {
+export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
+  private templateGenerator: ClassesGroupTemplateGenerator;
+
   private allGeneratedClasses: Partial<typeof AllClasses> = {};
 
   constructor(tailwindConfig: TailwindConfig) {
     this.configScanner = new ConfigScanner(tailwindConfig);
+    this.templateGenerator = new ClassesGroupTemplateGenerator();
   }
 
   // TODO: add theme.extend
@@ -25,32 +29,7 @@ export class ClassesGenerator implements IGenerator {
 
     this.allGeneratedClasses.Backgrounds = Backgrounds;
 
-    const generateClassesGroupTemplate = (
-      classesGroup: { [key: string]: string[] },
-      classesGroupName: string,
-    ): string => {
-      const members: string[] = Object.keys(classesGroup);
-
-      const generateMembersStatements = (): string[] => {
-        return members.map(member => {
-          return `export type T${capitalizeFirstLetter(member)} = ${generateTypes(
-            classesGroup[member],
-            this.configScanner.prefix,
-          )};`;
-        });
-      };
-
-      const generateGroupStatement = (): string => {
-        return `export type T${capitalizeFirstLetter(classesGroupName)} = ${generateTypes(
-          members.map(member => capitalizeFirstLetter(member)),
-          'T',
-        )};`;
-      };
-
-      return generateMembersStatements().join('\n\n') + '\n\n' + generateGroupStatement();
-    };
-
-    return generateClassesGroupTemplate(Backgrounds, 'Backgrounds');
+    return this.templateGenerator.generate(Backgrounds, 'Backgrounds', this.configScanner.prefix);
   };
 
   public getGeneratedClassesWithColors = (

@@ -1,4 +1,8 @@
 export interface IGenerator {
+  generate: (...args: any[]) => string;
+}
+
+export interface IClassesGenerator {
   // accessibility: () => void;
   backgrounds: () => void;
   // borders: () => void;
@@ -14,5 +18,5 @@ export interface IGenerator {
   // transforms: () => void;
   // transitions: () => void;
   // typography: () => void;
-  // getAll: () => any;
+  // generate: () => string;
 }
