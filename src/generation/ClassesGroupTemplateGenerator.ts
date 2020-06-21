@@ -16,6 +16,10 @@ export class ClassesGroupTemplateGenerator implements IGenerator {
     this.members = Object.keys(this.group);
   }
 
+  public generate = (): string => {
+    return this.generateMembersStatements().join('\n\n') + '\n\n' + this.generateGroupStatement();
+  };
+
   private generateMembersStatements = (): string[] => {
     return this.members.map(member => {
       return `export type T${capitalizeFirstLetter(member)} = ${generateTypes(this.group[member], this.configPrefix)};`;
@@ -23,18 +27,9 @@ export class ClassesGroupTemplateGenerator implements IGenerator {
   };
 
   private generateGroupStatement = (): string => {
-    return (
-      `export type T${capitalizeFirstLetter(this.groupName)} =` +
-      '\n  | ' +
-      this.members
-        .map(member => {
-          return 'T' + capitalizeFirstLetter(member);
-        })
-        .join('\n  | ')
-    );
-  };
+    const getMembersStatementsReferences = (): string =>
+      this.members.map(member => 'T' + capitalizeFirstLetter(member)).join('\n  | ');
 
-  public generate(): string {
-    return this.generateMembersStatements().join('\n\n') + '\n\n' + this.generateGroupStatement();
-  }
+    return `export type T${capitalizeFirstLetter(this.groupName)} =` + '\n  | ' + getMembersStatementsReferences();
+  };
 }
