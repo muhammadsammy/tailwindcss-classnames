@@ -45,6 +45,8 @@ export class ClassesGenerator implements IClassesGenerator {
         const sides = ['', 't', 'r', 'b', 'l'];
         return sides.map(side => `border${side === '' ? '' : '-' + side}` + (width === 'default' ? '' : `-${width}`));
       }),
+      divideColor: this.getGeneratedClassesWithColors('divide'),
+      divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
     };
 
     this.allGeneratedClasses.Borders = Borders;
