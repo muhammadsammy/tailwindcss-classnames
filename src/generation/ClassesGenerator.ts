@@ -86,16 +86,13 @@ export class ClassesGenerator implements IClassesGenerator {
   public flexBox = (): string => {
     const FlexBox = {
       ...defaultFlexBox,
-      flexGrow: Object.keys(
-        isEmpty(this.configScanner.themeConfig.flexGrow)
-          ? defaultThemeConfig.flexGrow
-          : (this.configScanner.themeConfig.flexGrow as { [key: string]: string }),
-      ).map(value => 'flex-grow' + (value === 'default' ? '' : `-${value}`)),
-      flexShrink: Object.keys(
-        isEmpty(this.configScanner.themeConfig.flexShrink)
-          ? defaultThemeConfig.flexShrink
-          : (this.configScanner.themeConfig.flexShrink as { [key: string]: string }),
-      ).map(value => 'flex-shrink' + (value === 'default' ? '' : `-${value}`)),
+      flexGrow: Object.keys(this.configScanner.themeConfig.flexGrow).map(
+        value => 'flex-grow' + (value === 'default' ? '' : `-${value}`),
+      ),
+      flexShrink: Object.keys(this.configScanner.themeConfig.flexShrink).map(
+        value => 'flex-shrink' + (value === 'default' ? '' : `-${value}`),
+      ),
+      order: Object.keys(this.configScanner.themeConfig.order).map(value => `order-${value}`),
     };
 
     this.allGeneratedClasses.FlexBox = FlexBox;

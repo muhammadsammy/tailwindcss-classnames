@@ -77,10 +77,10 @@ interface IThemeProps {
   flex?: {
     [key: string]: string;
   };
-  flexGrow?: {
+  flexGrow: {
     [key: string]: string;
   };
-  flexShrink?: {
+  flexShrink: {
     [key: string]: string;
   };
   fontFamily?: {
@@ -122,7 +122,7 @@ interface IThemeProps {
   opacity?: {
     [key: string]: string;
   };
-  order?: {
+  order: {
     [key: string]: string;
   };
   padding: any;
