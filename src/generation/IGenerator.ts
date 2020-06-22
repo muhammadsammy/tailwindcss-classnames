@@ -4,8 +4,8 @@ export interface IGenerator {
 
 export interface IClassesGenerator {
   // accessibility: () => void;
-  backgrounds: () => void;
-  // borders: () => void;
+  backgrounds: () => string;
+  borders: () => string;
   // effects: () => void;
   // flexBox: () => void;
   // grid: () => void;

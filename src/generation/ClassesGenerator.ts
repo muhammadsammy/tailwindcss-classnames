@@ -3,8 +3,9 @@ import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses, AllClassesFlat } from '../classes/all';
 import { allTransformClasses, Transforms } from '../classes/Transforms';
 import { IClassesGenerator } from './IGenerator';
-import { defaultBackgrounds } from '../classes/DefaultBackgrounds';
+import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
+import { Borders as defaultBorders } from '../classes/Borders';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
@@ -27,6 +28,18 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Backgrounds = Backgrounds;
 
     return new ClassesGroupTemplateGenerator(Backgrounds, 'Backgrounds', this.configScanner.prefix).generate();
+  };
+
+  public borders = (): string => {
+    const Borders = {
+      ...defaultBorders,
+      borderColor: this.getGeneratedClassesWithColors('border'),
+      borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
+    };
+
+    this.allGeneratedClasses.Borders = Borders;
+
+    return new ClassesGroupTemplateGenerator(Borders, 'Borders', this.configScanner.prefix).generate();
   };
 
   public getGeneratedClassesWithColors = (
