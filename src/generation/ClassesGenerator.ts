@@ -91,6 +91,11 @@ export class ClassesGenerator implements IClassesGenerator {
           ? defaultThemeConfig.flexGrow
           : (this.configScanner.themeConfig.flexGrow as { [key: string]: string }),
       ).map(value => 'flex-grow' + (value === 'default' ? '' : `-${value}`)),
+      flexShrink: Object.keys(
+        isEmpty(this.configScanner.themeConfig.flexShrink)
+          ? defaultThemeConfig.flexShrink
+          : (this.configScanner.themeConfig.flexShrink as { [key: string]: string }),
+      ).map(value => 'flex-shrink' + (value === 'default' ? '' : `-${value}`)),
     };
 
     this.allGeneratedClasses.FlexBox = FlexBox;
