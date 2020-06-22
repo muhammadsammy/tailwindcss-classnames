@@ -9,6 +9,7 @@ import { Borders as defaultBorders } from '../classes/Borders';
 import { Effects as defaultEffects } from '../classes/Effects';
 import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import isEmpty from 'lodash.isempty';
+import { defaultThemeConfig } from './utils/defaultTailwindConfig';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
@@ -83,7 +84,14 @@ export class ClassesGenerator implements IClassesGenerator {
   };
 
   public flexBox = (): string => {
-    const FlexBox = defaultFlexBox;
+    const FlexBox = {
+      ...defaultFlexBox,
+      flexGrow: Object.keys(
+        isEmpty(this.configScanner.themeConfig.flexGrow)
+          ? defaultThemeConfig.flexGrow
+          : (this.configScanner.themeConfig.flexGrow as { [key: string]: string }),
+      ).map(value => 'flex-grow' + (value === 'default' ? '' : `-${value}`)),
+    };
 
     this.allGeneratedClasses.FlexBox = FlexBox;
 
