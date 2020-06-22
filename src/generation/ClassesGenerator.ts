@@ -41,6 +41,10 @@ export class ClassesGenerator implements IClassesGenerator {
           side => `rounded${side === '' ? '' : '-' + side}` + (radius === 'default' ? '' : `-${radius}`),
         );
       }),
+      borderWidth: Object.keys(this.configScanner.themeConfig.borderWidth).flatMap(width => {
+        const sides = ['', 't', 'r', 'b', 'l'];
+        return sides.map(side => `border${side === '' ? '' : '-' + side}` + (width === 'default' ? '' : `-${width}`));
+      }),
     };
 
     this.allGeneratedClasses.Borders = Borders;

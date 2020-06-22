@@ -56,7 +56,7 @@ interface IThemeProps {
   borderRadius: {
     [key: string]: string;
   };
-  borderWidth?: {
+  borderWidth: {
     [key: string]: string;
   };
   boxShadow?: {
