@@ -35,6 +35,12 @@ export class ClassesGenerator implements IClassesGenerator {
       ...defaultBorders,
       borderColor: this.getGeneratedClassesWithColors('border'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
+      borderRadius: Object.keys(this.configScanner.themeConfig.borderRadius).flatMap(radius => {
+        const sides = ['', 't', 'r', 'b', 'l', 'tr', 'tl', 'br', 'bl'];
+        return sides.map(
+          side => `rounded${side === '' ? '' : '-' + side}` + (radius === 'default' ? '' : `-${radius}`),
+        );
+      }),
     };
 
     this.allGeneratedClasses.Borders = Borders;

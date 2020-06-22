@@ -53,7 +53,7 @@ interface IThemeProps {
     [key: string]: string;
   };
 
-  borderRadius?: {
+  borderRadius: {
     [key: string]: string;
   };
   borderWidth?: {
