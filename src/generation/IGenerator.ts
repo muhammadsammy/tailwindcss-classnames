@@ -3,20 +3,20 @@ export interface IGenerator {
 }
 
 export interface IClassesGenerator {
-  // accessibility: () => void;
+  // accessibility: () => string;
   backgrounds: () => string;
   borders: () => string;
   effects: () => string;
-  // flexBox: () => void;
-  // grid: () => void;
-  // interactivity: () => void;
-  // layout: () => void;
-  // sizing: () => void;
-  // spacing: () => void;
-  // SVG: () => void;
-  // tables: () => void;
-  // transforms: () => void;
-  // transitions: () => void;
-  // typography: () => void;
+  flexBox: () => string;
+  // grid: () => string;
+  // interactivity: () => string;
+  // layout: () => string;
+  // sizing: () => string;
+  // spacing: () => string;
+  // SVG: () => string;
+  // tables: () => string;
+  // transforms: () => string;
+  // transitions: () => string;
+  // typography: () => string;
   // generate: () => string;
 }

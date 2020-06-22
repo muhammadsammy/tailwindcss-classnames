@@ -65,6 +65,8 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___BACKGROUNDS___/g, classesGenerator.backgrounds)
       .replace(/___BORDERS___/g, classesGenerator.borders)
       .replace(/___EFFECTS___/g, classesGenerator.effects)
+      .replace(/___FLEXBOX___/g, classesGenerator.flexBox)
+
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthClasses()))
       .replace(/PADDINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().paddings, prefix))
       .replace(/MARGINS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().margins, prefix))

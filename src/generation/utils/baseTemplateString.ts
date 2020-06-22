@@ -204,54 +204,8 @@ ___BACKGROUNDS___
 
 ___BORDERS___
 
+___FLEXBOX___
 
-
-export type TFlexDirection = '_PREFIX_flex-row' | '_PREFIX_flex-row-reverse' | '_PREFIX_flex-col' | '_PREFIX_flex-col-reverse';
-
-export type TFlexWrap = '_PREFIX_flex-no-wrap' | '_PREFIX_flex-wrap' | '_PREFIX_flex-wrap-reverse';
-
-export type TAlignItems = '_PREFIX_items-stretch' | '_PREFIX_items-start' | '_PREFIX_items-center' | '_PREFIX_items-end' | '_PREFIX_items-baseline';
-
-export type TAlignContent = '_PREFIX_content-start' | '_PREFIX_content-center' | '_PREFIX_content-end' | '_PREFIX_content-between' | '_PREFIX_content-around';
-
-export type TAlignSelf = '_PREFIX_self-auto' | '_PREFIX_self-start' | '_PREFIX_self-center' | '_PREFIX_self-end' | '_PREFIX_self-stretch';
-
-export type TJustifyContent = '_PREFIX_justify-start' | '_PREFIX_justify-center' | '_PREFIX_justify-end' | '_PREFIX_justify-between' | '_PREFIX_justify-around' | '_PREFIX_justify-evenly';
-
-export type TFlex = '_PREFIX_flex-initial' | '_PREFIX_flex-1' | '_PREFIX_flex-auto' | '_PREFIX_flex-none';
-
-export type TFlexGrow = '_PREFIX_flex-grow' | '_PREFIX_flex-grow-0';
-
-export type TFlexShrink = '_PREFIX_flex-shrink' | '_PREFIX_flex-shrink-0';
-
-export type TOrder =
-  | '_PREFIX_order-first'
-  | '_PREFIX_order-last'
-  | '_PREFIX_order-none'
-  | '_PREFIX_order-1'
-  | '_PREFIX_order-2'
-  | '_PREFIX_order-3'
-  | '_PREFIX_order-4'
-  | '_PREFIX_order-5'
-  | '_PREFIX_order-6'
-  | '_PREFIX_order-7'
-  | '_PREFIX_order-8'
-  | '_PREFIX_order-9'
-  | '_PREFIX_order-10'
-  | '_PREFIX_order-11'
-  | '_PREFIX_order-12';
-
-export type TFlexBox =
-  | TFlexDirection
-  | TFlexWrap
-  | TAlignItems
-  | TAlignContent
-  | TAlignSelf
-  | TJustifyContent
-  | TFlex
-  | TFlexGrow
-  | TFlexShrink
-  | TOrder;
 
 export type TGrid =
   | TGridTemplateColumns

@@ -7,6 +7,7 @@ import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
 import { Borders as defaultBorders } from '../classes/Borders';
 import { Effects as defaultEffects } from '../classes/Effects';
+import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -78,9 +79,15 @@ export class ClassesGenerator implements IClassesGenerator {
 
     this.allGeneratedClasses.Effects = Effects;
 
-    console.log(Effects);
-
     return new ClassesGroupTemplateGenerator(Effects, 'Effects', this.configScanner.prefix).generate();
+  };
+
+  public flexBox = (): string => {
+    const FlexBox = defaultFlexBox;
+
+    this.allGeneratedClasses.FlexBox = FlexBox;
+
+    return new ClassesGroupTemplateGenerator(FlexBox, 'FlexBox', this.configScanner.prefix).generate();
   };
 
   public getGeneratedClassesWithColors = (
