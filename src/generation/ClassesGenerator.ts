@@ -6,6 +6,7 @@ import { IClassesGenerator } from './IGenerator';
 import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
 import { Borders as defaultBorders } from '../classes/Borders';
+import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
@@ -16,6 +17,7 @@ export class ClassesGenerator implements IClassesGenerator {
   }
 
   // TODO: add theme.extend
+
   public backgrounds = (): string => {
     const Backgrounds = {
       ...defaultBackgrounds,
@@ -47,6 +49,16 @@ export class ClassesGenerator implements IClassesGenerator {
       }),
       divideColor: this.getGeneratedClassesWithColors('divide'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
+      // NOTE: divide width inherits its values from theme.borderWidth by default, but theme.divideWidth overrides it.
+      divideWidth: Object.keys(
+        isEmpty(this.configScanner.themeConfig.divideWidth)
+          ? this.configScanner.themeConfig.borderWidth
+          : (this.configScanner.themeConfig.divideWidth as { [key: string]: string }),
+      )
+        .concat('reverse')
+        .flatMap(width => {
+          return ['x', 'y'].map(axis => `divide-${axis}` + (width === 'default' ? '' : `-${width}`));
+        }),
     };
 
     this.allGeneratedClasses.Borders = Borders;

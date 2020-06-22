@@ -68,6 +68,9 @@ interface IThemeProps {
   cursor?: {
     [key: string]: string;
   };
+  divideWidth?: {
+    [key: string]: string;
+  };
   fill?: {
     [key: string]: string;
   };
