@@ -9,10 +9,10 @@ export interface IClassesGenerator {
   effects: () => string;
   flexBox: () => string;
   // grid: () => string;
+  spacing: () => string;
   // interactivity: () => string;
   // layout: () => string;
   // sizing: () => string;
-  // spacing: () => string;
   // SVG: () => string;
   // tables: () => string;
   // transforms: () => string;

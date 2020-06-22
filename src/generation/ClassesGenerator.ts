@@ -3,13 +3,12 @@ import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
 import { AllClasses, AllClassesFlat } from '../classes/all';
 import { allTransformClasses, Transforms } from '../classes/Transforms';
 import { IClassesGenerator } from './IGenerator';
-import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
+import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { Borders as defaultBorders } from '../classes/Borders';
 import { Effects as defaultEffects } from '../classes/Effects';
 import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import isEmpty from 'lodash.isempty';
-import { defaultThemeConfig } from './utils/defaultTailwindConfig';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
@@ -98,6 +97,18 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.FlexBox = FlexBox;
 
     return new ClassesGroupTemplateGenerator(FlexBox, 'FlexBox', this.configScanner.prefix).generate();
+  };
+
+  public spacing = (): string => {
+    const Spacing = {
+      space: this.getGeneratedClassesWithSpacing().spaceBetweens,
+      padding: this.getGeneratedClassesWithSpacing().paddings,
+      margin: this.getGeneratedClassesWithSpacing().margins,
+    };
+
+    this.allGeneratedClasses.Spacing = Spacing;
+
+    return new ClassesGroupTemplateGenerator(Spacing, 'Spacing', this.configScanner.prefix).generate();
   };
 
   public getGeneratedClassesWithColors = (

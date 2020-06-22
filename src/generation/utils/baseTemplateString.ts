@@ -366,13 +366,7 @@ export type TGridGap =
 
 export type TGridAutoFlow = '_PREFIX_grid-flow-row' | '_PREFIX_grid-flow-col' | '_PREFIX_grid-flow-row-dense' | '_PREFIX_grid-flow-col-dense';
 
-export type TPadding =PADDINGS;
-
-export type TMargin =MARGINS;
-
-export type TSpaceBetween =SPACE_BETWEEN;
-
-export type TSpacing = TPadding | TMargin | TSpaceBetween;
+___SPACING___
 
 export type TWidth =WIDTH_SPACINGS;
 
