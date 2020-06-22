@@ -6,6 +6,7 @@ import { IClassesGenerator } from './IGenerator';
 import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
 import { Borders as defaultBorders } from '../classes/Borders';
+import { Effects as defaultEffects } from '../classes/Effects';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -64,6 +65,22 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Borders = Borders;
 
     return new ClassesGroupTemplateGenerator(Borders, 'Borders', this.configScanner.prefix).generate();
+  };
+
+  public effects = (): string => {
+    const Effects = {
+      ...defaultEffects,
+      boxShadow: Object.keys(this.configScanner.themeConfig.boxShadow).map(shadow => {
+        return `shadow${shadow === 'default' ? '' : '-' + shadow}`;
+      }),
+      opacity: this.getGeneratedClassesWithOpacities().opacities,
+    };
+
+    this.allGeneratedClasses.Effects = Effects;
+
+    console.log(Effects);
+
+    return new ClassesGroupTemplateGenerator(Effects, 'Effects', this.configScanner.prefix).generate();
   };
 
   public getGeneratedClassesWithColors = (

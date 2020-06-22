@@ -204,6 +204,8 @@ ___BACKGROUNDS___
 
 ___BORDERS___
 
+
+
 export type TFlexDirection = '_PREFIX_flex-row' | '_PREFIX_flex-row-reverse' | '_PREFIX_flex-col' | '_PREFIX_flex-col-reverse';
 
 export type TFlexWrap = '_PREFIX_flex-no-wrap' | '_PREFIX_flex-wrap' | '_PREFIX_flex-wrap-reverse';
@@ -450,21 +452,7 @@ export type TTableLayout = '_PREFIX_table-auto' | '_PREFIX_table-fixed';
 
 export type TTables = TBorderCollapse | TTableLayout;
 
-export type TBoxShadow =
-  | '_PREFIX_shadow'
-  | '_PREFIX_shadow-xs'
-  | '_PREFIX_shadow-sm'
-  | '_PREFIX_shadow-md'
-  | '_PREFIX_shadow-lg'
-  | '_PREFIX_shadow-xl'
-  | '_PREFIX_shadow-2xl'
-  | '_PREFIX_shadow-inner'
-  | '_PREFIX_shadow-outline'
-  | '_PREFIX_shadow-none';
-
-export type TOpacity =OPACITIES;
-
-export type TEffects = TBoxShadow | TOpacity;
+___EFFECTS___
 
 export type TTransitionProperty =
   | '_PREFIX_transition-none'

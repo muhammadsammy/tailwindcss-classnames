@@ -6,7 +6,7 @@ export interface IClassesGenerator {
   // accessibility: () => void;
   backgrounds: () => string;
   borders: () => string;
-  // effects: () => void;
+  effects: () => string;
   // flexBox: () => void;
   // grid: () => void;
   // interactivity: () => void;

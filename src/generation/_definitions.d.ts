@@ -59,7 +59,7 @@ interface IThemeProps {
   borderWidth: {
     [key: string]: string;
   };
-  boxShadow?: {
+  boxShadow: {
     [key: string]: string;
   };
   backgroundColor?: any;
