@@ -142,13 +142,13 @@ interface IThemeProps {
   gridTemplateColumns: {
     [key: string]: string;
   };
-  gridColumn?: {
+  gridColumn: {
     [key: string]: string;
   };
-  gridColumnStart?: {
+  gridColumnStart: {
     [key: string]: string;
   };
-  gridColumnEnd?: {
+  gridColumnEnd: {
     [key: string]: string;
   };
   gridTemplateRows?: {
