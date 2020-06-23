@@ -67,6 +67,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___EFFECTS___/g, classesGenerator.effects)
       .replace(/___FLEXBOX___/g, classesGenerator.flexBox)
       .replace(/___SPACING___/g, classesGenerator.spacing)
+      .replace(/___GRID___/g, classesGenerator.grid)
 
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))

@@ -8,7 +8,7 @@ export interface IClassesGenerator {
   borders: () => string;
   effects: () => string;
   flexBox: () => string;
-  // grid: () => string;
+  grid: () => string;
   spacing: () => string;
   // interactivity: () => string;
   // layout: () => string;

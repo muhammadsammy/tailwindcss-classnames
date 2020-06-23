@@ -139,7 +139,7 @@ interface IThemeProps {
     [key: string]: string;
   };
   gap: any;
-  gridTemplateColumns?: {
+  gridTemplateColumns: {
     [key: string]: string;
   };
   gridColumn?: {

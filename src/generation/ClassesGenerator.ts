@@ -8,6 +8,7 @@ import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { Borders as defaultBorders } from '../classes/Borders';
 import { Effects as defaultEffects } from '../classes/Effects';
 import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
+import { Grid as defaultGrid } from '../classes/Grid';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -97,6 +98,19 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.FlexBox = FlexBox;
 
     return new ClassesGroupTemplateGenerator(FlexBox, 'FlexBox', this.configScanner.prefix).generate();
+  };
+
+  public grid = (): string => {
+    const Grid = {
+      ...defaultGrid,
+      gridTemplateColumns: Object.keys(this.configScanner.themeConfig.gridTemplateColumns).map(
+        value => `grid-cols-${value}`,
+      ),
+    };
+
+    this.allGeneratedClasses.Grid = Grid;
+
+    return new ClassesGroupTemplateGenerator(Grid, 'Grid', this.configScanner.prefix).generate();
   };
 
   public spacing = (): string => {
