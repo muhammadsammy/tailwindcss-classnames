@@ -151,7 +151,7 @@ interface IThemeProps {
   gridColumnEnd: {
     [key: string]: string;
   };
-  gridTemplateRows?: {
+  gridTemplateRows: {
     [key: string]: string;
   };
   gridRow?: {
