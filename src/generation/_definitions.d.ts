@@ -154,14 +154,14 @@ interface IThemeProps {
   gridTemplateRows: {
     [key: string]: string;
   };
-  gridRow?: {
+  gridRow: {
     auto: 'auto';
     [key: string]: string;
   };
-  gridRowStart?: {
+  gridRowStart: {
     [key: string]: string;
   };
-  gridRowEnd?: {
+  gridRowEnd: {
     [key: string]: string;
   };
   transformOrigin?: {

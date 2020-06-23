@@ -110,6 +110,9 @@ export class ClassesGenerator implements IClassesGenerator {
       gridColumnStart: Object.keys(this.configScanner.themeConfig.gridColumnStart).map(value => `col-start-${value}`),
       gridColumnEnd: Object.keys(this.configScanner.themeConfig.gridColumnEnd).map(value => `col-end-${value}`),
       gridTemplateRows: Object.keys(this.configScanner.themeConfig.gridTemplateRows).map(value => `grid-rows-${value}`),
+      gridRow: Object.keys(this.configScanner.themeConfig.gridRow).map(value => `row-${value}`),
+      gridRowStart: Object.keys(this.configScanner.themeConfig.gridRowStart).map(value => `row-start-${value}`),
+      gridRowEnd: Object.keys(this.configScanner.themeConfig.gridRowEnd).map(value => `row-end-${value}`),
     };
 
     this.allGeneratedClasses.Grid = Grid;
