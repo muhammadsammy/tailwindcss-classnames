@@ -186,4 +186,7 @@ interface IThemeProps {
   transitionDuration: {
     [key: string]: string;
   };
+  transitionDelay: {
+    [key: string]: string;
+  };
 }
