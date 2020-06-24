@@ -37,10 +37,10 @@ interface IThemeConfig extends IThemeProps {
 // TODO
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface IThemeProps {
-  screens?: {
+  screens: {
     [key: string]: string;
   };
-  colors?: {
+  colors: {
     [key: string]: string | { [key: string]: string };
   };
   spacing: {
@@ -65,16 +65,16 @@ interface IThemeProps {
   backgroundColor?: any;
   borderColor?: any;
   container?: any;
-  cursor?: {
+  cursor: {
     [key: string]: string;
   };
-  divideWidth?: {
+  divideWidth: {
     [key: string]: string;
   };
-  fill?: {
+  fill: {
     [key: string]: string;
   };
-  flex?: {
+  flex: {
     [key: string]: string;
   };
   flexGrow: {
@@ -89,37 +89,37 @@ interface IThemeProps {
   fontSize: {
     [key: string]: string;
   };
-  fontWeight?: {
+  fontWeight: {
     [key: string]: string;
   };
   height: any;
-  inset?: {
+  inset: {
     [key: string]: string;
   };
-  letterSpacing?: {
+  letterSpacing: {
     [key: string]: string;
   };
-  lineHeight?: {
+  lineHeight: {
     [key: string]: string;
   };
-  listStyleType?: {
+  listStyleType: {
     [key: string]: string;
   };
   margin: any;
-  maxHeight?: {
+  maxHeight: {
     [key: string]: string;
   };
   maxWidth: any;
-  minHeight?: {
+  minHeight: {
     [key: string]: string;
   };
-  minWidth?: {
+  minWidth: {
     [key: string]: string;
   };
-  objectPosition?: {
+  objectPosition: {
     [key: string]: string;
   };
-  opacity?: {
+  opacity: {
     [key: string]: string;
   };
   order: {
@@ -127,15 +127,15 @@ interface IThemeProps {
   };
   padding: any;
   placeholderColor: any;
-  stroke?: {
+  stroke: {
     [key: string]: string;
   };
-  strokeWidth?: {
+  strokeWidth: {
     [key: string]: string;
   };
   textColor: any;
   width: any;
-  zIndex?: {
+  zIndex: {
     [key: string]: string;
   };
   gap: any;
@@ -164,26 +164,26 @@ interface IThemeProps {
   gridRowEnd: {
     [key: string]: string;
   };
-  transformOrigin?: {
+  transformOrigin: {
     [key: string]: string;
   };
-  scale?: {
+  scale: {
     [key: string]: string;
   };
-  rotate?: {
+  rotate: {
     [key: string]: string;
   };
   translate: any;
-  skew?: {
+  skew: {
     [key: string]: string;
   };
-  transitionProperty?: {
+  transitionProperty: {
     [key: string]: string;
   };
-  transitionTimingFunction?: {
+  transitionTimingFunction: {
     [key: string]: string;
   };
-  transitionDuration?: {
+  transitionDuration: {
     [key: string]: string;
   };
 }
