@@ -97,6 +97,9 @@ export class ClassesGenerator implements IClassesGenerator {
       transitionProperty: Object.keys(this.configScanner.themeConfig.transitionProperty).map(
         property => 'transition-' + property,
       ),
+      transitionDuration: Object.keys(this.configScanner.themeConfig.transitionDuration).map(
+        duration => 'duration-' + duration,
+      ),
     };
 
     this.allGeneratedClasses.Transitions = Transitions;
