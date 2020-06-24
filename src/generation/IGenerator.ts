@@ -6,6 +6,7 @@ export interface IClassesGenerator {
   // accessibility: () => string;
   backgrounds: () => string;
   borders: () => string;
+  tables: () => string;
   effects: () => string;
   flexBox: () => string;
   grid: () => string;
@@ -14,7 +15,6 @@ export interface IClassesGenerator {
   // layout: () => string;
   // sizing: () => string;
   // SVG: () => string;
-  // tables: () => string;
   // transforms: () => string;
   // transitions: () => string;
   typography: () => string;

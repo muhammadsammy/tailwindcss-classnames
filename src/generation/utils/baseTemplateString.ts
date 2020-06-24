@@ -129,11 +129,7 @@ export type TMaxHeight = '_PREFIX_max-h-full' | '_PREFIX_max-h-screen';
 
 export type TSizing = TWidth | TMinWidth | TMaxWidth | THeight | TMinHeight | TMaxHeight;
 
-export type TBorderCollapse = '_PREFIX_border-collapse' | '_PREFIX_border-separate';
-
-export type TTableLayout = '_PREFIX_table-auto' | '_PREFIX_table-fixed';
-
-export type TTables = TBorderCollapse | TTableLayout;
+___TABLES___
 
 ___EFFECTS___
 

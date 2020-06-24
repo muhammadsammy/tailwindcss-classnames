@@ -6,6 +6,7 @@ import { IClassesGenerator } from './IGenerator';
 import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
 import { Backgrounds as defaultBackgrounds } from '../classes/Backgrounds';
 import { Borders as defaultBorders } from '../classes/Borders';
+import { Tables } from '../classes/Tables';
 import { Effects as defaultEffects } from '../classes/Effects';
 import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import { Grid as defaultGrid } from '../classes/Grid';
@@ -68,6 +69,11 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Borders = Borders;
 
     return new ClassesGroupTemplateGenerator(Borders, 'Borders', this.configScanner.prefix).generate();
+  };
+
+  public tables = (): string => {
+    this.allGeneratedClasses.Tables = Tables;
+    return new ClassesGroupTemplateGenerator(Tables, 'Tables', this.configScanner.prefix).generate();
   };
 
   public effects = (): string => {
