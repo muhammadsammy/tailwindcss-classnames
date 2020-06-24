@@ -153,6 +153,7 @@ export class ClassesGenerator implements IClassesGenerator {
       placeholderColor: this.getGeneratedClassesWithColors('placeholder'),
       placeholderOpacity: this.getGeneratedClassesWithOpacities().placeholderOpacities,
       textColor: this.getGeneratedClassesWithColors('text'),
+      textOpacity: this.getGeneratedClassesWithOpacities().textOpacities,
     };
 
     this.allGeneratedClasses.Typography = Typography;
