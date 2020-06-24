@@ -94,6 +94,9 @@ export class ClassesGenerator implements IClassesGenerator {
   public transitions = (): string => {
     const Transitions = {
       ...defaultTransitions,
+      transitionProperty: Object.keys(this.configScanner.themeConfig.transitionProperty).map(
+        property => 'transition-' + property,
+      ),
     };
 
     this.allGeneratedClasses.Transitions = Transitions;
