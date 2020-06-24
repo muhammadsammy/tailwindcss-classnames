@@ -83,7 +83,7 @@ interface IThemeProps {
   flexShrink: {
     [key: string]: string;
   };
-  fontFamily?: {
+  fontFamily: {
     [key: string]: string[];
   };
   fontSize?: {

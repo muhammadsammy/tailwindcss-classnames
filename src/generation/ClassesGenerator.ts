@@ -144,6 +144,7 @@ export class ClassesGenerator implements IClassesGenerator {
   public typography = (): string => {
     const Typography = {
       ...defaultTypography,
+      fontFamily: Object.keys(this.configScanner.themeConfig.fontFamily).map(value => 'font-' + value),
       textColor: this.getGeneratedClassesWithColors('text'),
     };
 
