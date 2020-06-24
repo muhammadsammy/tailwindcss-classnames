@@ -8,6 +8,7 @@ export interface IClassesGenerator {
   borders: () => string;
   tables: () => string;
   effects: () => string;
+  transitions: () => string;
   flexBox: () => string;
   grid: () => string;
   spacing: () => string;
@@ -16,6 +17,5 @@ export interface IClassesGenerator {
   // sizing: () => string;
   // SVG: () => string;
   // transforms: () => string;
-  // transitions: () => string;
   typography: () => string;
 }

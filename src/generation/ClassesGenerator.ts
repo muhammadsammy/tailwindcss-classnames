@@ -11,6 +11,7 @@ import { Effects as defaultEffects } from '../classes/Effects';
 import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import { Grid as defaultGrid } from '../classes/Grid';
 import { Typography as defaultTypography } from '../classes/Typography';
+import { Transitions as defaultTransitions } from '../classes/Transitions';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -88,6 +89,16 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Effects = Effects;
 
     return new ClassesGroupTemplateGenerator(Effects, 'Effects', this.configScanner.prefix).generate();
+  };
+
+  public transitions = (): string => {
+    const Transitions = {
+      ...defaultTransitions,
+    };
+
+    this.allGeneratedClasses.Transitions = Transitions;
+
+    return new ClassesGroupTemplateGenerator(Transitions, 'Transitions', this.configScanner.prefix).generate();
   };
 
   public flexBox = (): string => {

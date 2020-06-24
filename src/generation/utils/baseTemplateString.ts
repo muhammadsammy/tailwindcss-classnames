@@ -133,42 +133,7 @@ ___TABLES___
 
 ___EFFECTS___
 
-export type TTransitionProperty =
-  | '_PREFIX_transition-none'
-  | '_PREFIX_transition-all'
-  | '_PREFIX_transition'
-  | '_PREFIX_transition-colors'
-  | '_PREFIX_transition-opacity'
-  | '_PREFIX_transition-shadow'
-  | '_PREFIX_transition-transform';
-
-export type TTransitionDuration =
-  | '_PREFIX_duration-75'
-  | '_PREFIX_duration-100'
-  | '_PREFIX_duration-150'
-  | '_PREFIX_duration-200'
-  | '_PREFIX_duration-300'
-  | '_PREFIX_duration-500'
-  | '_PREFIX_duration-700'
-  | '_PREFIX_duration-1000';
-
-export type TTransitionTimingFunction = '_PREFIX_ease-linear' | '_PREFIX_ease-in' | '_PREFIX_ease-out' | '_PREFIX_ease-in-out';
-
-export type TTransitionDelay =
-  | '_PREFIX_delay-75'
-  | '_PREFIX_delay-100'
-  | '_PREFIX_delay-150'
-  | '_PREFIX_delay-200'
-  | '_PREFIX_delay-300'
-  | '_PREFIX_delay-500'
-  | '_PREFIX_delay-700'
-  | '_PREFIX_delay-1000';
-
-export type TTransitions =
-  | TTransitionProperty
-  | TTransitionDuration
-  | TTransitionTimingFunction
-  | TTransitionDelay;
+___TRANSITIONS___
 
 export type TScale =
   | '_PREFIX_scale-0'

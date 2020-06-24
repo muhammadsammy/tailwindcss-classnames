@@ -70,6 +70,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___GRID___/g, classesGenerator.grid)
       .replace(/___TYPOGRAPHY___/g, classesGenerator.typography)
       .replace(/___TABLES___/g, classesGenerator.tables)
+      .replace(/___TRANSITIONS___/g, classesGenerator.transitions)
 
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))
