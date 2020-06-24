@@ -150,6 +150,8 @@ export class ClassesGenerator implements IClassesGenerator {
       letterSpacing: Object.keys(this.configScanner.themeConfig.letterSpacing).map(value => 'tracking-' + value),
       lineHeight: Object.keys(this.configScanner.themeConfig.lineHeight).map(value => 'leading-' + value),
       listStyleType: Object.keys(this.configScanner.themeConfig.listStyleType).map(value => 'list-' + value),
+      placeholderColor: this.getGeneratedClassesWithColors('placeholder'),
+      placeholderOpacity: this.getGeneratedClassesWithOpacities().placeholderOpacities,
       textColor: this.getGeneratedClassesWithColors('text'),
     };
 
