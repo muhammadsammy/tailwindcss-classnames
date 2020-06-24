@@ -86,7 +86,7 @@ interface IThemeProps {
   fontFamily: {
     [key: string]: string[];
   };
-  fontSize?: {
+  fontSize: {
     [key: string]: string;
   };
   fontWeight?: {
