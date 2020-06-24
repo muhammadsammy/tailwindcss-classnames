@@ -9,6 +9,7 @@ import { Borders as defaultBorders } from '../classes/Borders';
 import { Effects as defaultEffects } from '../classes/Effects';
 import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import { Grid as defaultGrid } from '../classes/Grid';
+import { Typography as defaultTypography } from '../classes/Typography';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -138,6 +139,17 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Spacing = Spacing;
 
     return new ClassesGroupTemplateGenerator(Spacing, 'Spacing', this.configScanner.prefix).generate();
+  };
+
+  public typography = (): string => {
+    const Typography = {
+      ...defaultTypography,
+      textColor: this.getGeneratedClassesWithColors('text'),
+    };
+
+    this.allGeneratedClasses.Typography = Typography;
+
+    return new ClassesGroupTemplateGenerator(Typography, 'Typography', this.configScanner.prefix).generate();
   };
 
   public getGeneratedClassesWithColors = (

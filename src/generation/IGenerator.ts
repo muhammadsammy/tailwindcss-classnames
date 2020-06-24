@@ -17,6 +17,5 @@ export interface IClassesGenerator {
   // tables: () => string;
   // transforms: () => string;
   // transitions: () => string;
-  // typography: () => string;
-  // generate: () => string;
+  typography: () => string;
 }

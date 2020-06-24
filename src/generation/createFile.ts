@@ -68,6 +68,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___FLEXBOX___/g, classesGenerator.flexBox)
       .replace(/___SPACING___/g, classesGenerator.spacing)
       .replace(/___GRID___/g, classesGenerator.grid)
+      .replace(/___TYPOGRAPHY___/g, classesGenerator.typography)
 
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))
