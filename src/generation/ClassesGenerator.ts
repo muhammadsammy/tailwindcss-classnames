@@ -147,6 +147,7 @@ export class ClassesGenerator implements IClassesGenerator {
       fontFamily: Object.keys(this.configScanner.themeConfig.fontFamily).map(value => 'font-' + value),
       fontSize: Object.keys(this.configScanner.themeConfig.fontSize).map(size => 'font-' + size),
       fontWeight: Object.keys(this.configScanner.themeConfig.fontWeight).map(weight => 'font-' + weight),
+      letterSpacing: Object.keys(this.configScanner.themeConfig.letterSpacing).map(value => 'tracking-' + value),
       textColor: this.getGeneratedClassesWithColors('text'),
     };
 
