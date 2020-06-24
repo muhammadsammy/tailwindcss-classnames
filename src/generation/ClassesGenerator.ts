@@ -113,6 +113,14 @@ export class ClassesGenerator implements IClassesGenerator {
       gridRow: Object.keys(this.configScanner.themeConfig.gridRow).map(value => `row-${value}`),
       gridRowStart: Object.keys(this.configScanner.themeConfig.gridRowStart).map(value => `row-start-${value}`),
       gridRowEnd: Object.keys(this.configScanner.themeConfig.gridRowEnd).map(value => `row-end-${value}`),
+      gridGap: ['gap-', 'row-gap-', 'col-gap-'].flatMap(x => {
+        return Object.keys(
+          // NOTE: grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
+          isEmpty(this.configScanner.themeConfig.gap)
+            ? this.configScanner.themeConfig.spacing
+            : (this.configScanner.themeConfig.gap as { [key: string]: string }),
+        ).map(gapValue => x + gapValue);
+      }),
     };
 
     this.allGeneratedClasses.Grid = Grid;

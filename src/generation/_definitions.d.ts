@@ -43,7 +43,7 @@ interface IThemeProps {
   colors?: {
     [key: string]: string | { [key: string]: string };
   };
-  spacing?: {
+  spacing: {
     [key: string]: string;
   };
   backgroundPosition: {
