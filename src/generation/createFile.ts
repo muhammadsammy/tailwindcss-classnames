@@ -69,7 +69,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___SPACING___/g, classesGenerator.spacing)
       .replace(/___GRID___/g, classesGenerator.grid)
 
-      .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthClasses()))
+      .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().heights, prefix))
       .replace(/PLACEHOLDER_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('placeholder'), prefix))

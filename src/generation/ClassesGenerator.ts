@@ -155,7 +155,7 @@ export class ClassesGenerator implements IClassesGenerator {
     });
   };
 
-  public getGeneratedMaxWidthClasses = (): string[] => {
+  public getGeneratedMaxWidthByBreakpointsClasses = (): string[] => {
     return this.configScanner
       .getThemeBreakpoints()
       .map((breakpoint: string) => `${this.configScanner.prefix}max-w-screen-${breakpoint}`);
