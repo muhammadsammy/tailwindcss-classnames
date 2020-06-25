@@ -57,7 +57,6 @@ export function createFileWithGeneratedTypes(options: Options): void {
       ? `import {${customClassesTypeName} as TCustomClassesFromExternalFile} from './${customClassesFilename}';`
       : '';
 
-    // prettier-ignore
     const result = baseTemplateString
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
@@ -73,6 +72,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___TRANSITIONS___/g, classesGenerator.transitions)
       .replace(/___TRANSFORMS___/g, classesGenerator.transforms)
       .replace(/___INTERACTIVITY___/g, classesGenerator.interactivity)
+      .replace(/___SVG___/g, classesGenerator.SVG)
 
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))

@@ -14,6 +14,7 @@ import { Typography as defaultTypography } from '../classes/Typography';
 import { Transitions as defaultTransitions } from '../classes/Transitions';
 import { Transforms as defaultTransforms } from '../classes/Transforms';
 import { Interactivity as defaultInteractivity } from '../classes/Interactivity';
+import { SVG as defaultSVG } from '../classes/SVG';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -150,6 +151,19 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Interactivity = Interactivity;
 
     return new ClassesGroupTemplateGenerator(Interactivity, 'Interactivity', this.configScanner.prefix).generate();
+  };
+
+  public SVG = (): string => {
+    const SVG = {
+      ...defaultSVG,
+      fill: Object.keys(this.configScanner.themeConfig.fill).map(value => 'fill-' + value),
+      stroke: Object.keys(this.configScanner.themeConfig.stroke).map(value => 'stroke-' + value),
+      strokeWidth: Object.keys(this.configScanner.themeConfig.strokeWidth).map(value => 'stroke-' + value),
+    };
+
+    this.allGeneratedClasses.SVG = SVG;
+
+    return new ClassesGroupTemplateGenerator(SVG, 'SVG', this.configScanner.prefix).generate();
   };
 
   public flexBox = (): string => {

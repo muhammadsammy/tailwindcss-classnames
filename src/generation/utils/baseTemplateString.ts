@@ -139,13 +139,7 @@ ___TRANSFORMS___
 
 ___INTERACTIVITY___
 
-export type TFill = '_PREFIX_fill-current';
-
-export type TStroke = '_PREFIX_stroke-current';
-
-export type TStrokeWidth = '_PREFIX_stroke-0' | '_PREFIX_stroke-1' | '_PREFIX_stroke- 2';
-
-export type TSvg = TFill | TStroke | TStrokeWidth;
+___SVG___
 
 export type TScreenReaders = '_PREFIX_sr-only' | '_PREFIX_not-sr-only';
 
