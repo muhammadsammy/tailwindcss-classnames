@@ -12,7 +12,7 @@ export interface IClassesGenerator {
   flexBox: () => string;
   grid: () => string;
   spacing: () => string;
-  // interactivity: () => string;
+  interactivity: () => string;
   // layout: () => string;
   // sizing: () => string;
   // SVG: () => string;

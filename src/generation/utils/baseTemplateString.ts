@@ -137,26 +137,7 @@ ___TRANSITIONS___
 
 ___TRANSFORMS___
 
-export type TAppearance = '_PREFIX_appearance-none';
-
-export type TCursor =
-  | '_PREFIX_cursor-auto'
-  | '_PREFIX_cursor-default'
-  | '_PREFIX_cursor-pointer'
-  | '_PREFIX_cursor-wait'
-  | '_PREFIX_cursor-text'
-  | '_PREFIX_cursor-move'
-  | '_PREFIX_cursor-not-allowed';
-
-export type TOutline = '_PREFIX_outline-none';
-
-export type TPointerEvents = '_PREFIX_pointer-events-none' | '_PREFIX_pointer-events-auto';
-
-export type TResize = '_PREFIX_resize-none' | '_PREFIX_resize' | '_PREFIX_resize-y' | '_PREFIX_resize-x';
-
-export type TUserSelect = '_PREFIX_select-none' | '_PREFIX_select-text' | '_PREFIX_select-all' | '_PREFIX_select-auto';
-
-export type TInteractivity = TAppearance | TCursor | TOutline | TPointerEvents | TResize | TUserSelect;
+___INTERACTIVITY___
 
 export type TFill = '_PREFIX_fill-current';
 

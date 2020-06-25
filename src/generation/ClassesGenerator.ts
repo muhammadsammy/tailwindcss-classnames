@@ -13,6 +13,7 @@ import { Grid as defaultGrid } from '../classes/Grid';
 import { Typography as defaultTypography } from '../classes/Typography';
 import { Transitions as defaultTransitions } from '../classes/Transitions';
 import { Transforms as defaultTransforms } from '../classes/Transforms';
+import { Interactivity as defaultInteractivity } from '../classes/Interactivity';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -138,6 +139,17 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Transforms = Transforms;
 
     return new ClassesGroupTemplateGenerator(Transforms, 'Transforms', this.configScanner.prefix).generate();
+  };
+
+  public interactivity = (): string => {
+    const Interactivity = {
+      ...defaultInteractivity,
+      cursor: Object.keys(this.configScanner.themeConfig.cursor).map(x => 'cursor-' + x),
+    };
+
+    this.allGeneratedClasses.Interactivity = Interactivity;
+
+    return new ClassesGroupTemplateGenerator(Interactivity, 'Interactivity', this.configScanner.prefix).generate();
   };
 
   public flexBox = (): string => {
