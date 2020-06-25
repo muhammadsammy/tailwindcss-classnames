@@ -16,6 +16,7 @@ import { Transforms as defaultTransforms } from '../classes/Transforms';
 import { Interactivity as defaultInteractivity } from '../classes/Interactivity';
 import { SVG as defaultSVG } from '../classes/SVG';
 import isEmpty from 'lodash.isempty';
+import { Accessibility } from '../classes/Accessibility';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
@@ -164,6 +165,11 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.SVG = SVG;
 
     return new ClassesGroupTemplateGenerator(SVG, 'SVG', this.configScanner.prefix).generate();
+  };
+
+  public accessibility = (): string => {
+    this.allGeneratedClasses.Accessibility = Accessibility;
+    return new ClassesGroupTemplateGenerator(Accessibility, 'Accessibility', this.configScanner.prefix).generate();
   };
 
   public flexBox = (): string => {

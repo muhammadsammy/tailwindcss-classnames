@@ -61,6 +61,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/_PREFIX_/g, prefix)
       .replace(/_SEPARATOR_/g, separator)
       .replace(/CUSTOM_FORMS_PLUGIN_TYPE/g, customFormsPluginClassesType)
+
       .replace(/___BACKGROUNDS___/g, classesGenerator.backgrounds)
       .replace(/___BORDERS___/g, classesGenerator.borders)
       .replace(/___EFFECTS___/g, classesGenerator.effects)
@@ -73,6 +74,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___TRANSFORMS___/g, classesGenerator.transforms)
       .replace(/___INTERACTIVITY___/g, classesGenerator.interactivity)
       .replace(/___SVG___/g, classesGenerator.SVG)
+      .replace(/___ACCESSIBILITY___/g, classesGenerator.accessibility)
 
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))

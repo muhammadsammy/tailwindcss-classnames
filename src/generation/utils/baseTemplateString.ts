@@ -141,9 +141,7 @@ ___INTERACTIVITY___
 
 ___SVG___
 
-export type TScreenReaders = '_PREFIX_sr-only' | '_PREFIX_not-sr-only';
-
-export type TAccessibility = TSvg | TScreenReaders;
+___ACCESSIBILITY___
 
 export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
 
@@ -169,6 +167,7 @@ export type TClasses =
   | TTransforms
   | TTransitions
   | TInteractivity
+  | TSVG
   | TAccessibility
 CUSTOM_FORMS_PLUGIN_TYPE
 IMPORTED_T_CUSTOM_CLASSES

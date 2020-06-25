@@ -3,7 +3,7 @@ export interface IGenerator {
 }
 
 export interface IClassesGenerator {
-  // accessibility: () => string;
+  accessibility: () => string;
   backgrounds: () => string;
   borders: () => string;
   tables: () => string;
