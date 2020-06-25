@@ -77,12 +77,11 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))
       .replace(/HEIGHT_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().heights, prefix))
-      .replace(/PLACEHOLDER_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('placeholder'), prefix))
-      .replace(/TEXT_COLORS/g, generateTypes(classesGenerator.getGeneratedClassesWithColors('text'), prefix))
-      .replace(/TEXT_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().textOpacities, prefix))
-      .replace(/PLACERHOLDER_OPACITIES/g, generateTypes(classesGenerator.getGeneratedClassesWithOpacities().placeholderOpacities, prefix))
+
       .replace(/BREAKPOINT_EXPORT_STATEMENTS/g, breakpointsExportStatements.join('\n\n'))
+
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()))
+
       .replace(/IMPORTED_T_CUSTOM_CLASSES/g, importedTCustomClasses)
       .replace(/T_CUSTOM_CLASSES_IMPORT_STATEMENT/g, TCustomClassesImportStatement);
 
