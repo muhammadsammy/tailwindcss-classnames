@@ -12,6 +12,7 @@ import { FlexBox as defaultFlexBox } from '../classes/Flexbox';
 import { Grid as defaultGrid } from '../classes/Grid';
 import { Typography as defaultTypography } from '../classes/Typography';
 import { Transitions as defaultTransitions } from '../classes/Transitions';
+import { Transforms as defaultTransforms } from '../classes/Transforms';
 import isEmpty from 'lodash.isempty';
 
 export class ClassesGenerator implements IClassesGenerator {
@@ -109,6 +110,34 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Transitions = Transitions;
 
     return new ClassesGroupTemplateGenerator(Transitions, 'Transitions', this.configScanner.prefix).generate();
+  };
+
+  public transforms = (): string => {
+    const Transforms = {
+      ...defaultTransforms,
+      scale: ['', 'x-', 'y-'].flatMap(x =>
+        Object.keys(this.configScanner.themeConfig.scale).map(value => 'scale-' + x + value),
+      ),
+      rotate: Object.keys(this.configScanner.themeConfig.rotate).map(value => 'rotate-' + value),
+      translate: ['translate-x', '-translate-x', 'translate-y', '-translate-y'].flatMap(x => {
+        return Object.keys(
+          // NOTE: translate gets values from theme.spacing + 50% and 100% variations, but theme.translate overrides it.
+          isEmpty(this.configScanner.themeConfig.translate)
+            ? { ...this.configScanner.themeConfig.spacing, full: '100%', '1/2': '50%' }
+            : (this.configScanner.themeConfig.translate as { [key: string]: string }),
+        ).map(value => x + '-' + value);
+      }),
+      skew: ['x', 'y'].flatMap(side =>
+        Object.keys(this.configScanner.themeConfig.skew).map(value =>
+          value.startsWith('-') ? `-skew-${side}-${value.substring(1)}` : `skew-${side}-${value}`,
+        ),
+      ),
+      transformOrigin: Object.keys(this.configScanner.themeConfig.transformOrigin).map(value => 'origin-' + value),
+    };
+
+    this.allGeneratedClasses.Transforms = Transforms;
+
+    return new ClassesGroupTemplateGenerator(Transforms, 'Transforms', this.configScanner.prefix).generate();
   };
 
   public flexBox = (): string => {
