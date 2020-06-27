@@ -4,35 +4,7 @@ import classnamesLib from 'classnames';
 
 T_CUSTOM_CLASSES_IMPORT_STATEMENT
 
-___LAYOUT___
-
-___TYPOGRAPHY___
-
-___BACKGROUNDS___
-
-___BORDERS___
-
-___FLEXBOX___
-
-___GRID___
-
-___SPACING___
-
-___SIZING___
-
-___TABLES___
-
-___EFFECTS___
-
-___TRANSITIONS___
-
-___TRANSFORMS___
-
-___INTERACTIVITY___
-
-___SVG___
-
-___ACCESSIBILITY___
+___ALL_CLASSES___
 
 export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
 

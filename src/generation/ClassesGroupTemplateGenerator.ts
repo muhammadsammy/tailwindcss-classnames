@@ -30,6 +30,8 @@ export class ClassesGroupTemplateGenerator implements IGenerator {
     const getMembersStatementsReferences = (): string =>
       this.members.map(member => 'T' + capitalizeFirstLetter(member)).join('\n  | ');
 
-    return `export type T${capitalizeFirstLetter(this.groupName)} =` + '\n  | ' + getMembersStatementsReferences();
+    return (
+      `export type T${capitalizeFirstLetter(this.groupName)} =` + '\n  | ' + getMembersStatementsReferences() + '\n'
+    );
   };
 }

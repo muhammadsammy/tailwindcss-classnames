@@ -7,6 +7,9 @@ export class ConfigScanner {
   public readonly themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
+  // TODO: add all theme.extend
+  // FIXME: theme config does not consider function values
+
   constructor(tailwindConfig: TailwindConfig) {
     this.prefix = isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this.separator = isEmpty(tailwindConfig.separator) ? ':' : (tailwindConfig.separator as string);

@@ -55,25 +55,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/_SEPARATOR_/g, separator)
       .replace(/CUSTOM_FORMS_PLUGIN_TYPE/g, customFormsPluginClassesType)
 
-      .replace(/___BACKGROUNDS___/g, classesGenerator.backgrounds)
-      .replace(/___BORDERS___/g, classesGenerator.borders)
-      .replace(/___EFFECTS___/g, classesGenerator.effects)
-      .replace(/___FLEXBOX___/g, classesGenerator.flexBox)
-      .replace(/___SPACING___/g, classesGenerator.spacing)
-      .replace(/___GRID___/g, classesGenerator.grid)
-      .replace(/___TYPOGRAPHY___/g, classesGenerator.typography)
-      .replace(/___TABLES___/g, classesGenerator.tables)
-      .replace(/___TRANSITIONS___/g, classesGenerator.transitions)
-      .replace(/___TRANSFORMS___/g, classesGenerator.transforms)
-      .replace(/___INTERACTIVITY___/g, classesGenerator.interactivity)
-      .replace(/___SVG___/g, classesGenerator.SVG)
-      .replace(/___ACCESSIBILITY___/g, classesGenerator.accessibility)
-      .replace(/___LAYOUT___/g, classesGenerator.layout)
-      .replace(/___SIZING___/g, classesGenerator.sizing)
-
-      .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
-      .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))
-      .replace(/HEIGHT_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().heights, prefix))
+      .replace(/___ALL_CLASSES___/g, classesGenerator.generate())
 
       .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()))
 
