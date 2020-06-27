@@ -75,6 +75,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
       .replace(/___INTERACTIVITY___/g, classesGenerator.interactivity)
       .replace(/___SVG___/g, classesGenerator.SVG)
       .replace(/___ACCESSIBILITY___/g, classesGenerator.accessibility)
+      .replace(/___LAYOUT___/g, classesGenerator.layout)
 
       .replace(/MAX_WIDTH_BY_BREAKPOINTS/g, generateTypes(classesGenerator.getGeneratedMaxWidthByBreakpointsClasses()))
       .replace(/WIDTH_SPACINGS/g, generateTypes(classesGenerator.getGeneratedClassesWithSpacing().widths, prefix))

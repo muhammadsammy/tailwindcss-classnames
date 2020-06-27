@@ -14,9 +14,10 @@ import { Typography as defaultTypography } from '../classes/Typography';
 import { Transitions as defaultTransitions } from '../classes/Transitions';
 import { Transforms as defaultTransforms } from '../classes/Transforms';
 import { Interactivity as defaultInteractivity } from '../classes/Interactivity';
+import { Accessibility } from '../classes/Accessibility';
+import { Layout as defaultLayout } from '../classes/Layout';
 import { SVG as defaultSVG } from '../classes/SVG';
 import isEmpty from 'lodash.isempty';
-import { Accessibility } from '../classes/Accessibility';
 
 export class ClassesGenerator implements IClassesGenerator {
   private readonly configScanner: ConfigScanner;
@@ -27,6 +28,25 @@ export class ClassesGenerator implements IClassesGenerator {
   }
 
   // TODO: add theme.extend
+
+  public layout = (): string => {
+    const Layout = {
+      ...defaultLayout,
+      objectPosition: Object.keys(this.configScanner.themeConfig.objectPosition).map(x => 'object-' + x),
+      topRightBottomLeft: Object.keys(this.configScanner.themeConfig.inset).flatMap(insetValue => {
+        return ['inset', 'inset-x', 'inset-y', 'top', 'right', 'bottom', 'left'].map(side =>
+          insetValue.startsWith('-') ? `-${side}-${insetValue.substring(1)}` : `${side}-${insetValue}`,
+        );
+      }),
+      zIndex: Object.keys(this.configScanner.themeConfig.zIndex).flatMap(zIndexValue =>
+        zIndexValue.startsWith('-') ? `-z-${zIndexValue.substring(1)}` : `z-${zIndexValue}`,
+      ),
+    };
+
+    this.allGeneratedClasses.Layout = Layout;
+
+    return new ClassesGroupTemplateGenerator(Layout, 'Layout', this.configScanner.prefix).generate();
+  };
 
   public backgrounds = (): string => {
     const Backgrounds = {

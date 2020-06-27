@@ -13,7 +13,7 @@ export interface IClassesGenerator {
   grid: () => string;
   spacing: () => string;
   interactivity: () => string;
-  // layout: () => string;
+  layout: () => string;
   // sizing: () => string;
   SVG: () => string;
   transforms: () => string;
