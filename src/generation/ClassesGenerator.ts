@@ -16,6 +16,7 @@ import { Transforms as defaultTransforms } from '../classes/Transforms';
 import { Interactivity as defaultInteractivity } from '../classes/Interactivity';
 import { Accessibility } from '../classes/Accessibility';
 import { Layout as defaultLayout } from '../classes/Layout';
+import { Sizing as defaultSizing } from '../classes/Sizing';
 import { SVG as defaultSVG } from '../classes/SVG';
 import isEmpty from 'lodash.isempty';
 
@@ -247,6 +248,36 @@ export class ClassesGenerator implements IClassesGenerator {
     this.allGeneratedClasses.Spacing = Spacing;
 
     return new ClassesGroupTemplateGenerator(Spacing, 'Spacing', this.configScanner.prefix).generate();
+  };
+
+  public sizing = (): string => {
+    // prettier-ignore
+    const extraWidthSizing = ['full', 'screen', 'auto', '1/2','1/3','2/3','1/4','2/4','3/4','1/5','2/5','3/5','4/5',
+      '1/6','2/6','3/6','4/6', '5/6','1/12','2/12','3/12','4/12','5/12','6/12','7/12','8/12', '9/12','10/12','11/12'];
+    const extraHeightSizing = ['full', 'screen'];
+
+    const Sizing = {
+      ...defaultSizing,
+      // NOTE: width values come from theme.spacing + `extraWidthSizing` by default and theme.width overrides it.
+      // prettier-ignore
+      width: (isEmpty(this.configScanner.themeConfig.width)
+        ? Object.keys(this.configScanner.themeConfig.spacing).concat(extraWidthSizing)
+        : Object.keys(this.configScanner.themeConfig.width as { [key: string]: string })).map(x => 'w-' + x),
+      minWidth: Object.keys(this.configScanner.themeConfig.minWidth).map(x => 'min-w-' + x),
+      maxWidth: Object.keys(this.configScanner.themeConfig.maxWidth).map(x => 'max-w-' + x),
+
+      // NOTE: height values come from theme.spacing + `extraHeightSizing` by default and overridden by theme.height.
+      // prettier-ignore
+      height: (isEmpty(this.configScanner.themeConfig.height)
+        ? Object.keys(this.configScanner.themeConfig.spacing).concat(extraHeightSizing)
+        : Object.keys(this.configScanner.themeConfig.height as { [key: string]: string })).map(x => 'h-' + x),
+      minHeight: Object.keys(this.configScanner.themeConfig.minHeight).map(x => 'min-h-' + x),
+      maxHeight: Object.keys(this.configScanner.themeConfig.maxHeight).map(x => 'max-h-' + x),
+    };
+
+    this.allGeneratedClasses.Sizing = Sizing;
+
+    return new ClassesGroupTemplateGenerator(Sizing, 'Sizing', this.configScanner.prefix).generate();
   };
 
   public typography = (): string => {
