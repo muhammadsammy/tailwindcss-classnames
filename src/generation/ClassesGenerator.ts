@@ -26,7 +26,7 @@ export class ClassesGenerator implements IGenerator {
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
-  private allGeneratedClasses: typeof AllClasses;
+  private allGeneratedClasses: typeof AllClasses & { PseudoClasses: { variants: string[] } };
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
@@ -51,6 +51,9 @@ export class ClassesGenerator implements IGenerator {
       SVG: this.SVG(),
       Transforms: this.transforms(),
       Typography: this.typography(),
+      PseudoClasses: {
+        variants: this.getGeneratedPseudoClasses(),
+      },
     };
   }
 
@@ -353,7 +356,7 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  public getGeneratedPseudoClasses = (): string[] => {
+  private getGeneratedPseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];
     const { classesCategories, classesVariants } = this.configScanner.getPseudoClassVariants();
 

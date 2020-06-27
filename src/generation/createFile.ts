@@ -1,8 +1,6 @@
 import fs from 'fs';
 import colors from 'colors';
-import { generateTypes } from './utils/utils';
 import { baseTemplateString } from './utils/baseTemplateString';
-import { ConfigScanner } from './ConfigScanner';
 import { ClassesGenerator } from './ClassesGenerator';
 
 interface Options {
@@ -32,12 +30,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
 
     data = data.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, '');
 
-    const configScanner = new ConfigScanner(eval(data));
-
     const classesGenerator = new ClassesGenerator(eval(data));
-
-    const prefix = configScanner.prefix;
-    const separator = configScanner.separator;
 
     const isCustomClassesAdded: boolean =
       typeof customClassesTypeName !== 'undefined' &&
@@ -51,13 +44,9 @@ export function createFileWithGeneratedTypes(options: Options): void {
       : '';
 
     const result = baseTemplateString
-      .replace(/_PREFIX_/g, prefix)
-      .replace(/_SEPARATOR_/g, separator)
-      .replace(/CUSTOM_FORMS_PLUGIN_TYPE/g, customFormsPluginClassesType)
-
       .replace(/___ALL_CLASSES___/g, classesGenerator.generate())
 
-      .replace(/PSEUDO_CLASSES_VARIANTS/g, generateTypes(classesGenerator.getGeneratedPseudoClasses()))
+      .replace(/CUSTOM_FORMS_PLUGIN_TYPE/g, customFormsPluginClassesType)
 
       .replace(/IMPORTED_T_CUSTOM_CLASSES/g, importedTCustomClasses)
       .replace(/T_CUSTOM_CLASSES_IMPORT_STATEMENT/g, TCustomClassesImportStatement);

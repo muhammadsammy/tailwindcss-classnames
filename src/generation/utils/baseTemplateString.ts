@@ -6,8 +6,6 @@ T_CUSTOM_CLASSES_IMPORT_STATEMENT
 
 ___ALL_CLASSES___
 
-export type TPseudoClasses =PSEUDO_CLASSES_VARIANTS;
-
 export type TCustomFormsPluginClasses =
   | 'form-input'
   | 'form-textarea'
