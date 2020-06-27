@@ -50,18 +50,6 @@ classnames('border-none', 'rounded-sm', {
 });
 ```
 
-## Pseudo selectors
-
-Since we are in a functional world we use functions to define our pseudo selectors:
-
-```js
-import { classnames, hover } from 'tailwindcss-classnames';
-
-classnames('bg-gray-500', hover('bg-blue-500'));
-```
-
-**Note: these methods are deprecated and will be removed. Use regular tailwindcss classes as `hover:bg-blue-500` insead. See [#13](https://github.com/muhammadsammy/tailwindcss-classnames/issues/13) for more details**
-
 ## Composing classes
 
 Even though **classnames** just returns a string, it is a special typed string that you can compose into other definitions.
