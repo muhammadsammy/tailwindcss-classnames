@@ -15,5 +15,5 @@
     "resolveJsonModule": true,
     "strict": true
   },
-  "exclude": ["node_modules", "dist", "es", "lib"]
+  "exclude": ["node_modules", "dist", "es", "lib", "tailwindcss-classnames.ts"]
 }
