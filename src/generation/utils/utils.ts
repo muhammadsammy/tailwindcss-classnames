@@ -1,5 +1,5 @@
 /* tslint:disable: prefer-template */
-import isEmpty from 'lodash.isempty';
+import _ from 'lodash';
 
 export function capitalizeFirstLetter(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -15,7 +15,7 @@ export function generateOpacities(
   theme: {[key: string]: any},
   property: string,
 ): {[key: string]: string} {
-  const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
+  const themeOpacities = _.isEmpty(theme[property]) ? defaultOpacities : theme[property];
   const extendedThemeOpacities = theme.extend?.[property];
   return extendedThemeOpacities ? {...themeOpacities, ...extendedThemeOpacities} : themeOpacities;
 }

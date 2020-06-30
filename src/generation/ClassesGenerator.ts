@@ -3,7 +3,7 @@ import {generateOpacities, PseudoclassVariantKey} from './utils/utils';
 import {AllClasses as defaultClasses, AllClassesFlat} from './default-classes/all';
 import {allTransformClasses} from './default-classes/Transforms';
 import {IGenerator} from './IGenerator';
-import isEmpty from 'lodash.isempty';
+import _ from 'lodash';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 
 export class ClassesGenerator implements IGenerator {
@@ -105,7 +105,7 @@ export class ClassesGenerator implements IGenerator {
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
       // NOTE: divide width inherits its values from theme.borderWidth by default, but theme.divideWidth overrides it.
       divideWidth: Object.keys(
-        isEmpty(this.theme.divideWidth)
+        _.isEmpty(this.theme.divideWidth)
           ? this.theme.borderWidth
           : (this.theme.divideWidth as {[key: string]: string}),
       )
@@ -158,7 +158,7 @@ export class ClassesGenerator implements IGenerator {
       translate: ['translate-x', '-translate-x', 'translate-y', '-translate-y'].flatMap(x => {
         return Object.keys(
           // NOTE: translate gets values from theme.spacing + 50% and 100% variations, but theme.translate overrides it.
-          isEmpty(this.theme.translate)
+          _.isEmpty(this.theme.translate)
             ? {...this.theme.spacing, full: '100%', '1/2': '50%'}
             : (this.theme.translate as {[key: string]: string}),
         ).map(value => x + '-' + value);
@@ -221,7 +221,7 @@ export class ClassesGenerator implements IGenerator {
       gridGap: ['gap-', 'row-gap-', 'col-gap-'].flatMap(x => {
         // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
         return Object.keys(
-          isEmpty(this.theme.gap)
+          _.isEmpty(this.theme.gap)
             ? this.theme.spacing
             : (this.theme.gap as {[key: string]: string}),
         ).map(gapValue => x + gapValue);
@@ -247,7 +247,7 @@ export class ClassesGenerator implements IGenerator {
       ...defaultClasses.Sizing,
       // NOTE: width values come from theme.spacing + `extraWidthSizing` by default and theme.width overrides it.
       // prettier-ignore
-      width: (isEmpty(this.theme.width)
+      width: (_.isEmpty(this.theme.width)
         ? Object.keys(this.theme.spacing).concat(extraWidthSizing)
         : Object.keys(this.theme.width as { [key: string]: string })).map(x => 'w-' + x),
       minWidth: Object.keys(this.theme.minWidth).map(x => 'min-w-' + x),
@@ -255,7 +255,7 @@ export class ClassesGenerator implements IGenerator {
 
       // NOTE: height values come from theme.spacing + `extraHeightSizing` by default and overridden by theme.height.
       // prettier-ignore
-      height: (isEmpty(this.theme.height)
+      height: (_.isEmpty(this.theme.height)
         ? Object.keys(this.theme.spacing).concat(extraHeightSizing)
         : Object.keys(this.theme.height as { [key: string]: string })).map(x => 'h-' + x),
       minHeight: Object.keys(this.theme.minHeight).map(x => 'min-h-' + x),
