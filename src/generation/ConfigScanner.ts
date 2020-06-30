@@ -2,9 +2,9 @@ import {defaultThemeConfig, defaultVariants} from './utils/defaultTailwindConfig
 import _ from 'lodash';
 
 export class ConfigScanner {
-  public readonly prefix: string;
-  public readonly separator: string;
-  public readonly themeConfig: IThemeConfig;
+  private readonly prefix: string;
+  private readonly separator: string;
+  private readonly themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
   // FIXME: theme config does not consider function values
@@ -25,35 +25,20 @@ export class ConfigScanner {
     ) as IThemeConfig;
   }
 
-  public getThemeColors = (): {colorsNames: string[]; colorsShades: ColorShades} => {
-    return {
-      colorsNames: Object.keys(this.themeConfig),
-      colorsShades: Object.values(this.themeConfig),
-    };
-  };
+  public getPrefix = (): string => this.prefix;
 
-  public getThemeBreakpoints = (): string[] => {
-    return Object.keys(this.themeConfig.screens);
-  };
+  public getSeparator = (): string => this.separator;
 
-  public getThemeOpacities = (): {[key: string]: string} => {
-    return this.themeConfig.opacity;
-  };
+  public getTheme = (): IThemeConfig => this.themeConfig;
 
-  public getThemeSpacing = (): {spacingKeys: string[]; spacingValues: string[]} => {
-    return {
-      spacingKeys: Object.keys(this.themeConfig.spacing),
-      spacingValues: Object.values(this.themeConfig.spacing),
-    };
-  };
+  public getVariants = (): IVariantsConfig => this.variantsConfig;
 
-  public getPseudoClassVariants = (): {
-    classesCategories: string[];
-    classesVariants: string[][];
-  } => {
-    return {
-      classesCategories: Object.keys(this.variantsConfig),
-      classesVariants: Object.values(this.variantsConfig),
-    };
+  public getThemeProperty = (
+    themeProperty: keyof IThemeProps,
+  ): [string[], Array<string | {[key: string]: string}>] => {
+    return [
+      Object.keys(this.themeConfig[themeProperty]),
+      Object.values(this.themeConfig[themeProperty]),
+    ];
   };
 }

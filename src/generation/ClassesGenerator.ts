@@ -15,9 +15,9 @@ export class ClassesGenerator implements IGenerator {
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
-    this.prefix = configScanner.prefix;
-    this.separator = configScanner.separator;
-    this.theme = configScanner.themeConfig;
+    this.prefix = configScanner.getPrefix();
+    this.separator = configScanner.getSeparator();
+    this.theme = configScanner.getTheme();
     this.configScanner = configScanner;
 
     this.allGeneratedClasses = {
@@ -282,10 +282,10 @@ export class ClassesGenerator implements IGenerator {
   private getGeneratedClassesWithColors = (
     classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide',
   ): string[] => {
-    const {colorsNames, colorsShades} = this.configScanner.getThemeColors();
+    const [colorsNames, colorsShades] = this.configScanner.getThemeProperty('colors');
     return colorsNames.flatMap((colorName, i) => {
       const colorShade = colorsShades[i];
-      if (colorShade instanceof Object) {
+      if (typeof colorShade === 'object' && colorShade !== null) {
         return Object.keys(colorShade).map(
           shade => `${classPayload}-${colorName}${shade === 'default' ? '' : `-${shade}`}`,
         );
@@ -295,7 +295,7 @@ export class ClassesGenerator implements IGenerator {
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
-    const allOpacities = this.configScanner.getThemeOpacities();
+    const allOpacities = this.configScanner.getTheme().opacity;
 
     const getOpacity = (themePropertyName: string, outputNamePrefix: string): string[] => {
       const generatedOpacities = generateOpacities(allOpacities, this.theme, themePropertyName);
@@ -335,7 +335,8 @@ export class ClassesGenerator implements IGenerator {
       '2/6', '3/6', '4/6', '5/6', '1/12', '2/12', '3/12', '4/12', '5/12', '6/12',
       '7/12', '8/12', '9/12', '10/12', '11/12', 'auto', 'full', 'screen'
     ].map(spacing => widths.push(`w-${spacing}`));
-    const {spacingKeys, spacingValues} = this.configScanner.getThemeSpacing();
+
+    const [spacingKeys, spacingValues] = this.configScanner.getThemeProperty('spacing');
 
     spacingKeys.map((spacing, i) => {
       widths.push(`w-${spacing}`);
@@ -367,12 +368,15 @@ export class ClassesGenerator implements IGenerator {
 
   private getGeneratedPseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];
-    const {classesCategories, classesVariants} = this.configScanner.getPseudoClassVariants();
+
+    const classesCategories = Object.keys(this.configScanner.getVariants());
+    const classesVariants = Object.values(this.configScanner.getVariants());
 
     classesCategories.map((k, i) => {
       const key = k as PseudoclassVariantKey;
       let classesOfCategoryKey: string[];
       const variants = classesVariants[i];
+
       const classesWithOpacities = this.getGeneratedClassesWithOpacities();
       const classesWithSpacing = this.getGeneratedClassesWithSpacing();
 
@@ -398,7 +402,8 @@ export class ClassesGenerator implements IGenerator {
             transformsNotInConfig.map(transformClass => {
               variants.map(variant => {
                 if (variant === 'responsive') {
-                  this.configScanner.getThemeBreakpoints().map((breakpointVariant: string) => {
+                  const [breakpoints] = this.configScanner.getThemeProperty('screens');
+                  breakpoints.map((breakpointVariant: string) => {
                     pseudoClasses.push(
                       this.prefix + breakpointVariant + this.separator + transformClass,
                     );
@@ -468,7 +473,8 @@ export class ClassesGenerator implements IGenerator {
       classesOfCategoryKey.map(c => {
         variants.map(variant => {
           if (variant === 'responsive') {
-            this.configScanner.getThemeBreakpoints().map((breakpointVariant: string) => {
+            const [breakpoints] = this.configScanner.getThemeProperty('screens');
+            breakpoints.map((breakpointVariant: string) => {
               pseudoClasses.push(breakpointVariant + this.separator + this.prefix + c);
             });
           } else {
