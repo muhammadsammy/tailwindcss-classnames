@@ -26,61 +26,24 @@ export class ConfigScanner {
   }
 
   public getThemeColors = (): {colorsNames: string[]; colorsShades: ColorShades} => {
-    const themeColors = _.isEmpty(this.themeConfig?.colors)
-      ? defaultThemeConfig.colors
-      : (this.themeConfig?.colors as {
-          [key: string]: string | {[key: string]: string};
-        });
-    const extendedThemeColors = this.themeConfig?.extend?.colors;
-    const allConfigColors = extendedThemeColors
-      ? {...themeColors, ...extendedThemeColors}
-      : themeColors;
-
     return {
-      colorsNames: Object.keys(allConfigColors),
-      colorsShades: Object.values(allConfigColors) as ColorShades,
+      colorsNames: Object.keys(this.themeConfig),
+      colorsShades: Object.values(this.themeConfig),
     };
   };
 
   public getThemeBreakpoints = (): string[] => {
-    const themeBreakpoints = _.isEmpty(this.themeConfig?.screens)
-      ? defaultThemeConfig.screens
-      : (this.themeConfig?.screens as {
-          [key: string]: string;
-        });
-    const extendedThemeBreakpoints = this.themeConfig?.extend?.screens;
-    const allConfigBreakpoints = extendedThemeBreakpoints
-      ? {...themeBreakpoints, ...extendedThemeBreakpoints}
-      : themeBreakpoints;
-
-    return Object.keys(allConfigBreakpoints);
+    return Object.keys(this.themeConfig.screens);
   };
 
   public getThemeOpacities = (): {[key: string]: string} => {
-    const themeOpacities = _.isEmpty(this.themeConfig?.opacity)
-      ? defaultThemeConfig.opacity
-      : (this.themeConfig?.opacity as {
-          [key: string]: string;
-        });
-    const extendedThemeOpacities = this.themeConfig?.extend?.opacity;
-
-    return extendedThemeOpacities ? {...themeOpacities, ...extendedThemeOpacities} : themeOpacities;
+    return this.themeConfig.opacity;
   };
 
   public getThemeSpacing = (): {spacingKeys: string[]; spacingValues: string[]} => {
-    const themeSpacing = _.isEmpty(this.themeConfig?.spacing)
-      ? defaultThemeConfig.spacing
-      : (this.themeConfig?.spacing as {
-          [key: string]: string;
-        });
-    const extendedThemeSpacing = this.themeConfig?.extend?.spacing;
-    const allConfigSpacing = extendedThemeSpacing
-      ? {...themeSpacing, ...extendedThemeSpacing}
-      : themeSpacing;
-
     return {
-      spacingKeys: Object.keys(allConfigSpacing),
-      spacingValues: Object.values(allConfigSpacing),
+      spacingKeys: Object.keys(this.themeConfig.spacing),
+      spacingValues: Object.values(this.themeConfig.spacing),
     };
   };
 
