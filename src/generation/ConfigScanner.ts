@@ -1,5 +1,5 @@
 import {defaultThemeConfig, defaultVariants} from './utils/defaultTailwindConfig';
-import isEmpty from 'lodash.isempty';
+import _ from 'lodash';
 
 export class ConfigScanner {
   public readonly prefix: string;
@@ -7,20 +7,26 @@ export class ConfigScanner {
   public readonly themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
-  // TODO: add all theme.extend
   // FIXME: theme config does not consider function values
 
   constructor(tailwindConfig: TailwindConfig) {
-    this.prefix = isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
-    this.separator = isEmpty(tailwindConfig.separator) ? ':' : (tailwindConfig.separator as string);
-    this.variantsConfig = isEmpty(tailwindConfig.variants)
+    this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
+    this.separator = _.isEmpty(tailwindConfig.separator)
+      ? ':'
+      : (tailwindConfig.separator as string);
+    this.variantsConfig = _.isEmpty(tailwindConfig.variants)
       ? defaultVariants // Order does matter, defaultVariants will be overridden by themeVariants.
       : ({...defaultVariants, ...tailwindConfig.variants} as IVariantsConfig);
-    this.themeConfig = {...defaultThemeConfig, ...tailwindConfig.theme} as IThemeConfig;
+
+    this.themeConfig = _.merge(
+      {},
+      {...defaultThemeConfig, ...tailwindConfig.theme},
+      tailwindConfig.theme?.extend,
+    ) as IThemeConfig;
   }
 
   public getThemeColors = (): {colorsNames: string[]; colorsShades: ColorShades} => {
-    const themeColors = isEmpty(this.themeConfig?.colors)
+    const themeColors = _.isEmpty(this.themeConfig?.colors)
       ? defaultThemeConfig.colors
       : (this.themeConfig?.colors as {
           [key: string]: string | {[key: string]: string};
@@ -37,7 +43,7 @@ export class ConfigScanner {
   };
 
   public getThemeBreakpoints = (): string[] => {
-    const themeBreakpoints = isEmpty(this.themeConfig?.screens)
+    const themeBreakpoints = _.isEmpty(this.themeConfig?.screens)
       ? defaultThemeConfig.screens
       : (this.themeConfig?.screens as {
           [key: string]: string;
@@ -51,7 +57,7 @@ export class ConfigScanner {
   };
 
   public getThemeOpacities = (): {[key: string]: string} => {
-    const themeOpacities = isEmpty(this.themeConfig?.opacity)
+    const themeOpacities = _.isEmpty(this.themeConfig?.opacity)
       ? defaultThemeConfig.opacity
       : (this.themeConfig?.opacity as {
           [key: string]: string;
@@ -62,7 +68,7 @@ export class ConfigScanner {
   };
 
   public getThemeSpacing = (): {spacingKeys: string[]; spacingValues: string[]} => {
-    const themeSpacing = isEmpty(this.themeConfig?.spacing)
+    const themeSpacing = _.isEmpty(this.themeConfig?.spacing)
       ? defaultThemeConfig.spacing
       : (this.themeConfig?.spacing as {
           [key: string]: string;
