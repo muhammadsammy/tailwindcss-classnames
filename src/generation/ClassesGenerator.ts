@@ -1,27 +1,9 @@
 import {ConfigScanner} from './ConfigScanner';
 import {generateOpacities, PseudoclassVariantKey} from './utils/utils';
-import {AllClasses, AllClassesFlat} from './default-classes/all';
-import {allTransformClasses, Transforms} from './default-classes/Transforms';
+import {AllClasses as defaultClasses, AllClassesFlat} from './default-classes/all';
+import {allTransformClasses} from './default-classes/Transforms';
 import {IGenerator} from './IGenerator';
-import {Backgrounds as defaultBackgrounds, Backgrounds} from './default-classes/Backgrounds';
-import {Borders as defaultBorders, Borders} from './default-classes/Borders';
-import {Tables} from './default-classes/Tables';
-import {Effects as defaultEffects, Effects} from './default-classes/Effects';
-import {FlexBox as defaultFlexBox, FlexBox} from './default-classes/Flexbox';
-import {Grid as defaultGrid, Grid} from './default-classes/Grid';
-import {Typography as defaultTypography, Typography} from './default-classes/Typography';
-import {Transitions as defaultTransitions, Transitions} from './default-classes/Transitions';
-import {Transforms as defaultTransforms} from './default-classes/Transforms';
-import {
-  Interactivity as defaultInteractivity,
-  Interactivity,
-} from './default-classes/Interactivity';
-import {Accessibility} from './default-classes/Accessibility';
-import {Layout as defaultLayout, Layout} from './default-classes/Layout';
-import {Sizing as defaultSizing, Sizing} from './default-classes/Sizing';
-import {SVG as defaultSVG, SVG} from './default-classes/SVG';
 import isEmpty from 'lodash.isempty';
-import {Spacing} from './default-classes/Spacing';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 
 export class ClassesGenerator implements IGenerator {
@@ -29,7 +11,7 @@ export class ClassesGenerator implements IGenerator {
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
-  private allGeneratedClasses: typeof AllClasses & {PseudoClasses: {variants: string[]}};
+  private allGeneratedClasses: typeof defaultClasses & {PseudoClasses: {variants: string[]}};
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
@@ -73,9 +55,9 @@ export class ClassesGenerator implements IGenerator {
     return allTemplates.join('\n');
   };
 
-  private layout = (): typeof Layout => {
+  private layout = (): typeof defaultClasses.Layout => {
     return {
-      ...defaultLayout,
+      ...defaultClasses.Layout,
       objectPosition: Object.keys(this.theme.objectPosition).map(x => 'object-' + x),
       topRightBottomLeft: Object.keys(this.theme.inset).flatMap(insetValue => {
         return ['inset', 'inset-x', 'inset-y', 'top', 'right', 'bottom', 'left'].map(side =>
@@ -90,9 +72,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private backgrounds = (): typeof Backgrounds => {
+  private backgrounds = (): typeof defaultClasses.Backgrounds => {
     return {
-      ...defaultBackgrounds,
+      ...defaultClasses.Backgrounds,
       backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
       backgroundColor: this.getGeneratedClassesWithColors('bg'),
       backgroundPosition: Object.keys(this.theme.backgroundPosition).map(x => 'bg-' + x),
@@ -100,9 +82,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private borders = (): typeof Borders => {
+  private borders = (): typeof defaultClasses.Borders => {
     return {
-      ...defaultBorders,
+      ...defaultClasses.Borders,
       borderColor: this.getGeneratedClassesWithColors('border'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this.theme.borderRadius).flatMap(radius => {
@@ -136,13 +118,13 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private tables = (): typeof Tables => {
-    return Tables;
+  private tables = (): typeof defaultClasses.Tables => {
+    return defaultClasses.Tables;
   };
 
-  private effects = (): typeof Effects => {
+  private effects = (): typeof defaultClasses.Effects => {
     return {
-      ...defaultEffects,
+      ...defaultClasses.Effects,
       boxShadow: Object.keys(this.theme.boxShadow).map(shadow => {
         return `shadow${shadow === 'default' ? '' : '-' + shadow}`;
       }),
@@ -150,9 +132,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private transitions = (): typeof Transitions => {
+  private transitions = (): typeof defaultClasses.Transitions => {
     return {
-      ...defaultTransitions,
+      ...defaultClasses.Transitions,
       transitionProperty: Object.keys(this.theme.transitionProperty).map(
         property => 'transition-' + property,
       ),
@@ -166,9 +148,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private transforms = (): typeof Transforms => {
+  private transforms = (): typeof defaultClasses.Transforms => {
     return {
-      ...defaultTransforms,
+      ...defaultClasses.Transforms,
       scale: ['', 'x-', 'y-'].flatMap(x =>
         Object.keys(this.theme.scale).map(value => 'scale-' + x + value),
       ),
@@ -190,29 +172,29 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private interactivity = (): typeof Interactivity => {
+  private interactivity = (): typeof defaultClasses.Interactivity => {
     return {
-      ...defaultInteractivity,
+      ...defaultClasses.Interactivity,
       cursor: Object.keys(this.theme.cursor).map(x => 'cursor-' + x),
     };
   };
 
-  private SVG = (): typeof SVG => {
+  private SVG = (): typeof defaultClasses.SVG => {
     return {
-      ...defaultSVG,
+      ...defaultClasses.SVG,
       fill: Object.keys(this.theme.fill).map(value => 'fill-' + value),
       stroke: Object.keys(this.theme.stroke).map(value => 'stroke-' + value),
       strokeWidth: Object.keys(this.theme.strokeWidth).map(value => 'stroke-' + value),
     };
   };
 
-  private accessibility = (): typeof Accessibility => {
-    return Accessibility;
+  private accessibility = (): typeof defaultClasses.Accessibility => {
+    return defaultClasses.Accessibility;
   };
 
-  private flexBox = (): typeof FlexBox => {
+  private flexBox = (): typeof defaultClasses.FlexBox => {
     return {
-      ...defaultFlexBox,
+      ...defaultClasses.FlexBox,
       flexGrow: Object.keys(this.theme.flexGrow).map(
         value => 'flex-grow' + (value === 'default' ? '' : `-${value}`),
       ),
@@ -223,9 +205,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private grid = (): typeof Grid => {
+  private grid = (): typeof defaultClasses.Grid => {
     return {
-      ...defaultGrid,
+      ...defaultClasses.Grid,
       gridTemplateColumns: Object.keys(this.theme.gridTemplateColumns).map(
         value => `grid-cols-${value}`,
       ),
@@ -247,7 +229,7 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private spacing = (): typeof Spacing => {
+  private spacing = (): typeof defaultClasses.Spacing => {
     return {
       space: this.getGeneratedClassesWithSpacing().spaceBetweens,
       padding: this.getGeneratedClassesWithSpacing().paddings,
@@ -255,14 +237,14 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private sizing = (): typeof Sizing => {
+  private sizing = (): typeof defaultClasses.Sizing => {
     // prettier-ignore
     const extraWidthSizing = ['full', 'screen', 'auto', '1/2','1/3','2/3','1/4','2/4','3/4','1/5','2/5','3/5','4/5',
       '1/6','2/6','3/6','4/6', '5/6','1/12','2/12','3/12','4/12','5/12','6/12','7/12','8/12', '9/12','10/12','11/12'];
     const extraHeightSizing = ['full', 'screen'];
 
     return {
-      ...defaultSizing,
+      ...defaultClasses.Sizing,
       // NOTE: width values come from theme.spacing + `extraWidthSizing` by default and theme.width overrides it.
       // prettier-ignore
       width: (isEmpty(this.theme.width)
@@ -281,9 +263,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private typography = (): typeof Typography => {
+  private typography = (): typeof defaultClasses.Typography => {
     return {
-      ...defaultTypography,
+      ...defaultClasses.Typography,
       fontFamily: Object.keys(this.theme.fontFamily).map(value => 'font-' + value),
       fontSize: Object.keys(this.theme.fontSize).map(size => 'font-' + size),
       fontWeight: Object.keys(this.theme.fontWeight).map(weight => 'font-' + weight),
@@ -396,21 +378,21 @@ export class ClassesGenerator implements IGenerator {
 
       switch (key) {
         case 'gap':
-          classesOfCategoryKey = AllClassesFlat.gridGap;
+          classesOfCategoryKey = defaultClasses.Grid.gridGap;
           break;
         case 'inset':
-          classesOfCategoryKey = AllClassesFlat.topRightBottomLeft;
+          classesOfCategoryKey = defaultClasses.Layout.topRightBottomLeft;
           break;
         case 'accessibility':
-          classesOfCategoryKey = AllClassesFlat.screenReaders;
+          classesOfCategoryKey = defaultClasses.Accessibility.screenReaders;
           break;
         case 'transform':
           classesOfCategoryKey = [];
           const configHasOtherTransforms: boolean = classesCategories.some(
-            v => Object.keys(Transforms).indexOf(v) >= 0,
+            v => Object.keys(defaultClasses.Transforms).indexOf(v) >= 0,
           );
           if (configHasOtherTransforms) {
-            const transformsNotInConfig = Object.keys(Transforms).filter(
+            const transformsNotInConfig = Object.keys(defaultClasses.Transforms).filter(
               el => !classesCategories.includes(el),
             );
             transformsNotInConfig.map(transformClass => {
