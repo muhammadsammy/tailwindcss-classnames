@@ -1,4 +1,4 @@
-type ColorShades = string[] | Array<{ [key: string]: string }>;
+type ColorShades = string[] | Array<{[key: string]: string}>;
 
 type ClassesWithOpacities = {
   opacities: string[];
@@ -41,7 +41,7 @@ interface IThemeProps {
     [key: string]: string;
   };
   colors: {
-    [key: string]: string | { [key: string]: string };
+    [key: string]: string | {[key: string]: string};
   };
   spacing: {
     [key: string]: string;

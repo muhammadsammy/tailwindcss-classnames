@@ -311,7 +311,7 @@ export const defaultThemeConfig = {
     disc: 'disc',
     decimal: 'decimal',
   },
-  margin: (theme, { negative }) => ({
+  margin: (theme, {negative}) => ({
     auto: 'auto',
     ...theme('spacing'),
     ...negative(theme('spacing')),
@@ -320,7 +320,7 @@ export const defaultThemeConfig = {
     full: '100%',
     screen: '100vh',
   },
-  maxWidth: (theme, { breakpoints }) => ({
+  maxWidth: (theme, {breakpoints}) => ({
     none: 'none',
     xs: '20rem',
     sm: '24rem',
@@ -382,7 +382,7 @@ export const defaultThemeConfig = {
   padding: theme => theme('spacing'),
   placeholderColor: theme => theme('colors'),
   placeholderOpacity: theme => theme('opacity'),
-  space: (theme, { negative }) => ({
+  space: (theme, {negative}) => ({
     ...theme('spacing'),
     ...negative(theme('spacing')),
   }),
@@ -570,7 +570,7 @@ export const defaultThemeConfig = {
     '90': '90deg',
     '180': '180deg',
   },
-  translate: (theme, { negative }) => ({
+  translate: (theme, {negative}) => ({
     ...theme('spacing'),
     ...negative(theme('spacing')),
     '-full': '-100%',
@@ -624,7 +624,7 @@ export const defaultThemeConfig = {
   },
 };
 
-export const defaultVariants: { [key: string]: string[] } = {
+export const defaultVariants: {[key: string]: string[]} = {
   accessibility: ['responsive', 'focus'],
   alignContent: ['responsive'],
   alignItems: ['responsive'],

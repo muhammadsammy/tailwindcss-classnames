@@ -16,9 +16,9 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-member-accessibility': [
       'warn',
-      { overrides: { constructors: 'no-public' } },
+      {overrides: {constructors: 'no-public'}},
     ],
-    '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+    '@typescript-eslint/explicit-function-return-type': ['warn', {allowExpressions: true}],
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-explicit-any': 1,
     '@typescript-eslint/no-use-before-define': [

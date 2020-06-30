@@ -1,7 +1,7 @@
 import fs from 'fs';
 import colors from 'colors';
-import { baseTemplateString } from './utils/baseTemplateString';
-import { ClassesGenerator } from './ClassesGenerator';
+import {baseTemplateString} from './utils/baseTemplateString';
+import {ClassesGenerator} from './ClassesGenerator';
 
 interface Options {
   configFilename: string | void;
@@ -11,7 +11,7 @@ interface Options {
 }
 
 export function createFileWithGeneratedTypes(options: Options): void {
-  const { configFilename, outputFilename, customClassesFilename, customClassesTypeName } = options;
+  const {configFilename, outputFilename, customClassesFilename, customClassesTypeName} = options;
 
   //prettier-ignore
   if (!configFilename)
@@ -23,7 +23,7 @@ export function createFileWithGeneratedTypes(options: Options): void {
   if (!customClassesTypeName)
     return console.error('Please provide the name of exported custom classes type'.red);
 
-  fs.readFile(`./${configFilename}`, { encoding: 'utf-8' }, (err, data) => {
+  fs.readFile(`./${configFilename}`, {encoding: 'utf-8'}, (err, data) => {
     if (err) {
       console.error(`Error Reading: "./${configFilename}"`.red);
       console.error(err);

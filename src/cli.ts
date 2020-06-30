@@ -3,7 +3,7 @@
 import commander from 'commander';
 import inquirer from 'inquirer';
 import colors from 'colors';
-import { createFileWithGeneratedTypes } from './generation/createFile';
+import {createFileWithGeneratedTypes} from './generation/createFile';
 
 interface InquirerAnswers {
   configFilename: string;
@@ -29,7 +29,7 @@ commander
     'Name of the type exported from file containing the custom classes',
     'none',
   )
-  .action(({ config, output, classesFile, typeName }: { [key: string]: string | void }) => {
+  .action(({config, output, classesFile, typeName}: {[key: string]: string | void}) => {
     if (config) {
       createFileWithGeneratedTypes({
         configFilename: config,

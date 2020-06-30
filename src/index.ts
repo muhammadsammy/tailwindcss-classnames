@@ -10616,7 +10616,7 @@ export type TArgs<T extends TClasses> =
   | T
   | null
   | undefined
-  | { [key in T]?: boolean }
+  | {[key in T]?: boolean}
   | TTailwindString;
 
 export type TTailwind<T extends TClasses = TClasses> = (

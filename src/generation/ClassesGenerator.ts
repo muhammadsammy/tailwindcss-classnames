@@ -1,32 +1,35 @@
-import { ConfigScanner } from './ConfigScanner';
-import { generateOpacities, PseudoclassVariantKey } from './utils/utils';
-import { AllClasses, AllClassesFlat } from '../classes/all';
-import { allTransformClasses, Transforms } from '../classes/Transforms';
-import { IGenerator } from './IGenerator';
-import { Backgrounds as defaultBackgrounds, Backgrounds } from '../classes/Backgrounds';
-import { Borders as defaultBorders, Borders } from '../classes/Borders';
-import { Tables } from '../classes/Tables';
-import { Effects as defaultEffects, Effects } from '../classes/Effects';
-import { FlexBox as defaultFlexBox, FlexBox } from '../classes/Flexbox';
-import { Grid as defaultGrid, Grid } from '../classes/Grid';
-import { Typography as defaultTypography, Typography } from '../classes/Typography';
-import { Transitions as defaultTransitions, Transitions } from '../classes/Transitions';
-import { Transforms as defaultTransforms } from '../classes/Transforms';
-import { Interactivity as defaultInteractivity, Interactivity } from '../classes/Interactivity';
-import { Accessibility } from '../classes/Accessibility';
-import { Layout as defaultLayout, Layout } from '../classes/Layout';
-import { Sizing as defaultSizing, Sizing } from '../classes/Sizing';
-import { SVG as defaultSVG, SVG } from '../classes/SVG';
+import {ConfigScanner} from './ConfigScanner';
+import {generateOpacities, PseudoclassVariantKey} from './utils/utils';
+import {AllClasses, AllClassesFlat} from './default-classes/all';
+import {allTransformClasses, Transforms} from './default-classes/Transforms';
+import {IGenerator} from './IGenerator';
+import {Backgrounds as defaultBackgrounds, Backgrounds} from './default-classes/Backgrounds';
+import {Borders as defaultBorders, Borders} from './default-classes/Borders';
+import {Tables} from './default-classes/Tables';
+import {Effects as defaultEffects, Effects} from './default-classes/Effects';
+import {FlexBox as defaultFlexBox, FlexBox} from './default-classes/Flexbox';
+import {Grid as defaultGrid, Grid} from './default-classes/Grid';
+import {Typography as defaultTypography, Typography} from './default-classes/Typography';
+import {Transitions as defaultTransitions, Transitions} from './default-classes/Transitions';
+import {Transforms as defaultTransforms} from './default-classes/Transforms';
+import {
+  Interactivity as defaultInteractivity,
+  Interactivity,
+} from './default-classes/Interactivity';
+import {Accessibility} from './default-classes/Accessibility';
+import {Layout as defaultLayout, Layout} from './default-classes/Layout';
+import {Sizing as defaultSizing, Sizing} from './default-classes/Sizing';
+import {SVG as defaultSVG, SVG} from './default-classes/SVG';
 import isEmpty from 'lodash.isempty';
-import { Spacing } from '../classes/Spacing';
-import { ClassesGroupTemplateGenerator } from './ClassesGroupTemplateGenerator';
+import {Spacing} from './default-classes/Spacing';
+import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 
 export class ClassesGenerator implements IGenerator {
   private readonly prefix: string;
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
-  private allGeneratedClasses: typeof AllClasses & { PseudoClasses: { variants: string[] } };
+  private allGeneratedClasses: typeof AllClasses & {PseudoClasses: {variants: string[]}};
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
@@ -122,7 +125,7 @@ export class ClassesGenerator implements IGenerator {
       divideWidth: Object.keys(
         isEmpty(this.theme.divideWidth)
           ? this.theme.borderWidth
-          : (this.theme.divideWidth as { [key: string]: string }),
+          : (this.theme.divideWidth as {[key: string]: string}),
       )
         .concat('reverse')
         .flatMap(width => {
@@ -174,8 +177,8 @@ export class ClassesGenerator implements IGenerator {
         return Object.keys(
           // NOTE: translate gets values from theme.spacing + 50% and 100% variations, but theme.translate overrides it.
           isEmpty(this.theme.translate)
-            ? { ...this.theme.spacing, full: '100%', '1/2': '50%' }
-            : (this.theme.translate as { [key: string]: string }),
+            ? {...this.theme.spacing, full: '100%', '1/2': '50%'}
+            : (this.theme.translate as {[key: string]: string}),
         ).map(value => x + '-' + value);
       }),
       skew: ['x', 'y'].flatMap(side =>
@@ -238,7 +241,7 @@ export class ClassesGenerator implements IGenerator {
         return Object.keys(
           isEmpty(this.theme.gap)
             ? this.theme.spacing
-            : (this.theme.gap as { [key: string]: string }),
+            : (this.theme.gap as {[key: string]: string}),
         ).map(gapValue => x + gapValue);
       }),
     };
@@ -297,7 +300,7 @@ export class ClassesGenerator implements IGenerator {
   private getGeneratedClassesWithColors = (
     classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide',
   ): string[] => {
-    const { colorsNames, colorsShades } = this.configScanner.getThemeColors();
+    const {colorsNames, colorsShades} = this.configScanner.getThemeColors();
     return colorsNames.flatMap((colorName, i) => {
       const colorShade = colorsShades[i];
       if (colorShade instanceof Object) {
@@ -350,7 +353,7 @@ export class ClassesGenerator implements IGenerator {
       '2/6', '3/6', '4/6', '5/6', '1/12', '2/12', '3/12', '4/12', '5/12', '6/12',
       '7/12', '8/12', '9/12', '10/12', '11/12', 'auto', 'full', 'screen'
     ].map(spacing => widths.push(`w-${spacing}`));
-    const { spacingKeys, spacingValues } = this.configScanner.getThemeSpacing();
+    const {spacingKeys, spacingValues} = this.configScanner.getThemeSpacing();
 
     spacingKeys.map((spacing, i) => {
       widths.push(`w-${spacing}`);
@@ -382,7 +385,7 @@ export class ClassesGenerator implements IGenerator {
 
   private getGeneratedPseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];
-    const { classesCategories, classesVariants } = this.configScanner.getPseudoClassVariants();
+    const {classesCategories, classesVariants} = this.configScanner.getPseudoClassVariants();
 
     classesCategories.map((k, i) => {
       const key = k as PseudoclassVariantKey;

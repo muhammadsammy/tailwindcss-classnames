@@ -29,7 +29,7 @@ The project is literally the [classnames](https://www.npmjs.com/package/classnam
 ## Create classes
 
 ```js
-import { classnames } from 'tailwindcss-classnames';
+import {classnames} from 'tailwindcss-classnames';
 
 classnames('border-none', 'rounded-sm');
 ```
@@ -43,7 +43,7 @@ The arguments passed to **classnames** is typed, which means you get discoverabi
 Since we are using **classnames** you can also add your classes dynamically:
 
 ```js
-import { classnames } from 'tailwindcss-classnames';
+import {classnames} from 'tailwindcss-classnames';
 
 classnames('border-none', 'rounded-sm', {
   ['bg-gray-200']: true,
@@ -55,7 +55,7 @@ classnames('border-none', 'rounded-sm', {
 Even though **classnames** just returns a string, it is a special typed string that you can compose into other definitions.
 
 ```js
-import { classnames } from 'tailwindcss-classnames';
+import {classnames} from 'tailwindcss-classnames';
 
 export const button = classnames('border-none', 'rounded-sm');
 
@@ -68,7 +68,7 @@ Since React has excellent typing support I want to give an example of how you co
 
 ```tsx
 // styles.ts
-import { classnames } from 'tailwindcss-classnames';
+import {classnames} from 'tailwindcss-classnames';
 
 export const form = classnames('container', 'w-full');
 
@@ -87,7 +87,7 @@ export const submitButton = (disabled: boolean) =>
 import * as React from 'react';
 import * as styles from './styles';
 
-export const App: React.FC<{ disabled }> = ({ disabled }) => {
+export const App: React.FC<{disabled}> = ({disabled}) => {
   return (
     <form className={styles.form}>
       <button type="submit" className={styles.submitButton(disabled)}>

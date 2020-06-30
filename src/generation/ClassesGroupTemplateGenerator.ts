@@ -1,7 +1,7 @@
-import { IGenerator } from './IGenerator';
-import { capitalizeFirstLetter, generateTypes } from './utils/utils';
+import {IGenerator} from './IGenerator';
+import {capitalizeFirstLetter, generateTypes} from './utils/utils';
 
-type ClassesGroup = { [key: string]: string[] };
+type ClassesGroup = {[key: string]: string[]};
 
 export class ClassesGroupTemplateGenerator implements IGenerator {
   private readonly group: ClassesGroup;

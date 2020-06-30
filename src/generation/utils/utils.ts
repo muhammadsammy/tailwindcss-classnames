@@ -11,13 +11,13 @@ export function generateTypes(arr: string[], prefix?: string): string {
 
 /* eslint-disable */
 export function generateOpacities(
-  defaultOpacities: { [key: string]: string },
-  theme: { [key: string]: any },
+  defaultOpacities: {[key: string]: string},
+  theme: {[key: string]: any},
   property: string,
-): { [key: string]: string } {
+): {[key: string]: string} {
   const themeOpacities = isEmpty(theme[property]) ? defaultOpacities : theme[property];
   const extendedThemeOpacities = theme.extend?.[property];
-  return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
+  return extendedThemeOpacities ? {...themeOpacities, ...extendedThemeOpacities} : themeOpacities;
 }
 
 /* eslint-enable */
