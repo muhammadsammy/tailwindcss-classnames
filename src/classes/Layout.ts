@@ -20,7 +20,13 @@ const float = ['float-right', 'float-left', 'float-none', 'clearfix'];
 
 const clear = ['clear-left', 'clear-right', 'clear-both', 'clear-none'];
 
-const objectFit = ['object-contain', 'object-cover', 'object-fill', 'object-none', 'object-scale-down'];
+const objectFit = [
+  'object-contain',
+  'object-cover',
+  'object-fill',
+  'object-none',
+  'object-scale-down',
+];
 
 const objectPosition = [
   'object-bottom',

@@ -26,7 +26,9 @@ export class ConfigScanner {
           [key: string]: string | { [key: string]: string };
         });
     const extendedThemeColors = this.themeConfig?.extend?.colors;
-    const allConfigColors = extendedThemeColors ? { ...themeColors, ...extendedThemeColors } : themeColors;
+    const allConfigColors = extendedThemeColors
+      ? { ...themeColors, ...extendedThemeColors }
+      : themeColors;
 
     return {
       colorsNames: Object.keys(allConfigColors),
@@ -56,7 +58,9 @@ export class ConfigScanner {
         });
     const extendedThemeOpacities = this.themeConfig?.extend?.opacity;
 
-    return extendedThemeOpacities ? { ...themeOpacities, ...extendedThemeOpacities } : themeOpacities;
+    return extendedThemeOpacities
+      ? { ...themeOpacities, ...extendedThemeOpacities }
+      : themeOpacities;
   };
 
   public getThemeSpacing = (): { spacingKeys: string[]; spacingValues: string[] } => {
@@ -66,7 +70,9 @@ export class ConfigScanner {
           [key: string]: string;
         });
     const extendedThemeSpacing = this.themeConfig?.extend?.spacing;
-    const allConfigSpacing = extendedThemeSpacing ? { ...themeSpacing, ...extendedThemeSpacing } : themeSpacing;
+    const allConfigSpacing = extendedThemeSpacing
+      ? { ...themeSpacing, ...extendedThemeSpacing }
+      : themeSpacing;
 
     return {
       spacingKeys: Object.keys(allConfigSpacing),
@@ -74,7 +80,10 @@ export class ConfigScanner {
     };
   };
 
-  public getPseudoClassVariants = (): { classesCategories: string[]; classesVariants: string[][] } => {
+  public getPseudoClassVariants = (): {
+    classesCategories: string[];
+    classesVariants: string[][];
+  } => {
     return {
       classesCategories: Object.keys(this.variantsConfig),
       classesVariants: Object.values(this.variantsConfig),

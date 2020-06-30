@@ -21,7 +21,12 @@ export type TFloat = 'float-right' | 'float-left' | 'float-none' | 'clearfix';
 
 export type TClear = 'clear-left' | 'clear-right' | 'clear-both' | 'clear-none';
 
-export type TObjectFit = 'object-contain' | 'object-cover' | 'object-fill' | 'object-none' | 'object-scale-down';
+export type TObjectFit =
+  | 'object-contain'
+  | 'object-cover'
+  | 'object-fill'
+  | 'object-none'
+  | 'object-scale-down';
 
 export type TObjectPosition =
   | 'object-bottom'
@@ -624,7 +629,12 @@ export type TBorderColor =
   | 'border-pink-800'
   | 'border-pink-900';
 
-export type TBorderStyle = 'border-solid' | 'border-dashed' | 'border-dotted' | 'border-double' | 'border-none';
+export type TBorderStyle =
+  | 'border-solid'
+  | 'border-dashed'
+  | 'border-dotted'
+  | 'border-double'
+  | 'border-none';
 
 export type TBorderWidth =
   | 'border'
@@ -847,9 +857,19 @@ export type TFlexDirection = 'flex-row' | 'flex-row-reverse' | 'flex-col' | 'fle
 
 export type TFlexWrap = 'flex-no-wrap' | 'flex-wrap' | 'flex-wrap-reverse';
 
-export type TAlignItems = 'items-stretch' | 'items-start' | 'items-center' | 'items-end' | 'items-baseline';
+export type TAlignItems =
+  | 'items-stretch'
+  | 'items-start'
+  | 'items-center'
+  | 'items-end'
+  | 'items-baseline';
 
-export type TAlignContent = 'content-start' | 'content-center' | 'content-end' | 'content-between' | 'content-around';
+export type TAlignContent =
+  | 'content-start'
+  | 'content-center'
+  | 'content-end'
+  | 'content-between'
+  | 'content-around';
 
 export type TAlignSelf = 'self-auto' | 'self-start' | 'self-center' | 'self-end' | 'self-stretch';
 
@@ -1053,7 +1073,11 @@ export type TGridGap =
   | 'col-gap-64'
   | 'col-gap-px';
 
-export type TGridAutoFlow = 'grid-flow-row' | 'grid-flow-col' | 'grid-flow-row-dense' | 'grid-flow-col-dense';
+export type TGridAutoFlow =
+  | 'grid-flow-row'
+  | 'grid-flow-col'
+  | 'grid-flow-row-dense'
+  | 'grid-flow-col-dense';
 
 export type TPadding =
   | 'p-auto'
@@ -1826,7 +1850,11 @@ export type TTransitionDelay =
   | 'delay-700'
   | 'delay-1000';
 
-export type TTransitions = TTransitionProperty | TTransitionDuration | TTransitionTimingFunction | TTransitionDelay;
+export type TTransitions =
+  | TTransitionProperty
+  | TTransitionDuration
+  | TTransitionTimingFunction
+  | TTransitionDelay;
 
 export type TScale =
   | 'scale-0'
@@ -2003,7 +2031,13 @@ export type TResize = 'resize-none' | 'resize' | 'resize-y' | 'resize-x';
 
 export type TUserSelect = 'select-none' | 'select-text' | 'select-all' | 'select-auto';
 
-export type TInteractivity = TAppearance | TCursor | TOutline | TPointerEvents | TResize | TUserSelect;
+export type TInteractivity =
+  | TAppearance
+  | TCursor
+  | TOutline
+  | TPointerEvents
+  | TResize
+  | TUserSelect;
 
 export type TFill = 'fill-current';
 
@@ -10578,9 +10612,16 @@ export type TClasses =
 
 export type TTailwindString = string & 'TAILWIND_CLASS';
 
-export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: boolean } | TTailwindString;
+export type TArgs<T extends TClasses> =
+  | T
+  | null
+  | undefined
+  | { [key in T]?: boolean }
+  | TTailwindString;
 
-export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
+export type TTailwind<T extends TClasses = TClasses> = (
+  ...args: Array<TArgs<T>>
+) => TTailwindString;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 export const classnames: TTailwind = classnamesLib as any;

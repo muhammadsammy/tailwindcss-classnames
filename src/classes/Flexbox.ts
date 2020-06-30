@@ -4,11 +4,23 @@ const flexWrap = ['flex-no-wrap', 'flex-wrap', 'flex-wrap-reverse'];
 
 const alignItems = ['items-stretch', 'items-start', 'items-center', 'items-end', 'items-baseline'];
 
-const alignContent = ['content-start', 'content-center', 'content-end', 'content-between', 'content-around'];
+const alignContent = [
+  'content-start',
+  'content-center',
+  'content-end',
+  'content-between',
+  'content-around',
+];
 
 const alignSelf = ['self-auto', 'self-start', 'self-center', 'self-end', 'self-stretch'];
 
-const justifyContent = ['justify-start', 'justify-center', 'justify-end', 'justify-between', 'justify-around'];
+const justifyContent = [
+  'justify-start',
+  'justify-center',
+  'justify-end',
+  'justify-between',
+  'justify-around',
+];
 
 const flex = ['flex-initial', 'flex-1', 'flex-auto', 'flex-none'];
 

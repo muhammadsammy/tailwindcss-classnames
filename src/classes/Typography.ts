@@ -263,7 +263,13 @@ const textColor = [
 
 const textDecoration = ['underline', 'line-through', 'no-underline'];
 
-const textOpacity = ['text-opacity-0', 'text-opacity-25', 'text-opacity-50', 'text-opacity-75', 'text-opacity-100'];
+const textOpacity = [
+  'text-opacity-0',
+  'text-opacity-25',
+  'text-opacity-50',
+  'text-opacity-75',
+  'text-opacity-100',
+];
 
 const textTransform = ['uppercase', 'lowercase', 'capitalize', 'normal-case'];
 

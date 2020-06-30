@@ -102,7 +102,13 @@ const borderOpacity = [
   'border-opacity-100',
 ];
 
-const borderStyle = ['border-solid', 'border-dashed', 'border-dotted', 'border-double', 'border-none'];
+const borderStyle = [
+  'border-solid',
+  'border-dashed',
+  'border-dotted',
+  'border-double',
+  'border-none',
+];
 
 const borderWidth = [
   'border',

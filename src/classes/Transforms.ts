@@ -31,7 +31,15 @@ const scale = [
   'scale-y-150',
 ];
 
-const rotate = ['rotate-0', 'rotate-45', 'rotate-90', 'rotate-180', '-rotate-180', '-rotate-90', '-rotate-45'];
+const rotate = [
+  'rotate-0',
+  'rotate-45',
+  'rotate-90',
+  'rotate-180',
+  '-rotate-180',
+  '-rotate-90',
+  '-rotate-45',
+];
 
 const translate = [
   'translate-x-0',
