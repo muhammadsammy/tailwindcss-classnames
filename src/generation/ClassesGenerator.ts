@@ -44,7 +44,8 @@ export class ClassesGenerator implements IGenerator {
 
   public generate = (): string => {
     const allTemplates = Object.keys(this.allGeneratedClasses).map(classGroup => {
-      return new ClassesGroupTemplateGenerator( // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      return new ClassesGroupTemplateGenerator(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.allGeneratedClasses[classGroup],
         classGroup,
@@ -103,7 +104,8 @@ export class ClassesGenerator implements IGenerator {
       }),
       divideColor: this.getGeneratedClassesWithColors('divide'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
-      // NOTE: divide width inherits its values from theme.borderWidth by default, but theme.divideWidth overrides it.
+      // divide width inherits its values from theme.borderWidth by default
+      // but theme.divideWidth overrides it.
       divideWidth: Object.keys(
         _.isEmpty(this.theme.divideWidth)
           ? this.theme.borderWidth
@@ -155,9 +157,10 @@ export class ClassesGenerator implements IGenerator {
         Object.keys(this.theme.scale).map(value => 'scale-' + x + value),
       ),
       rotate: Object.keys(this.theme.rotate).map(value => 'rotate-' + value),
+      // translate gets values from theme.spacing in addition to 50% and 100% variations
+      // by default and theme.translate overrides this behaviour.
       translate: ['translate-x', '-translate-x', 'translate-y', '-translate-y'].flatMap(x => {
         return Object.keys(
-          // NOTE: translate gets values from theme.spacing + 50% and 100% variations, but theme.translate overrides it.
           _.isEmpty(this.theme.translate)
             ? {...this.theme.spacing, full: '100%', '1/2': '50%'}
             : (this.theme.translate as {[key: string]: string}),
@@ -239,13 +242,15 @@ export class ClassesGenerator implements IGenerator {
 
   private sizing = (): typeof defaultClasses.Sizing => {
     // prettier-ignore
-    const extraWidthSizing = ['full', 'screen', 'auto', '1/2','1/3','2/3','1/4','2/4','3/4','1/5','2/5','3/5','4/5',
-      '1/6','2/6','3/6','4/6', '5/6','1/12','2/12','3/12','4/12','5/12','6/12','7/12','8/12', '9/12','10/12','11/12'];
+    const extraWidthSizing = ['full', 'screen', 'auto', '1/2','1/3','2/3','1/4','2/4','3/4',
+      '1/5', '2/5','3/5','4/5', '1/6','2/6','3/6','4/6', '5/6','1/12','2/12','3/12','4/12',
+      '5/12','6/12', '7/12','8/12', '9/12','10/12','11/12'];
     const extraHeightSizing = ['full', 'screen'];
 
     return {
       ...defaultClasses.Sizing,
-      // NOTE: width values come from theme.spacing + `extraWidthSizing` by default and theme.width overrides it.
+      // width values come from theme.spacing + `extraWidthSizing` by default
+      // and theme.width overrides this default behaviour.
       // prettier-ignore
       width: (_.isEmpty(this.theme.width)
         ? Object.keys(this.theme.spacing).concat(extraWidthSizing)
@@ -253,7 +258,8 @@ export class ClassesGenerator implements IGenerator {
       minWidth: Object.keys(this.theme.minWidth).map(x => 'min-w-' + x),
       maxWidth: Object.keys(this.theme.maxWidth).map(x => 'max-w-' + x),
 
-      // NOTE: height values come from theme.spacing + `extraHeightSizing` by default and overridden by theme.height.
+      // height values come from theme.spacing + `extraHeightSizing` by default
+      // and overridden by theme.height.
       // prettier-ignore
       height: (_.isEmpty(this.theme.height)
         ? Object.keys(this.theme.spacing).concat(extraHeightSizing)
