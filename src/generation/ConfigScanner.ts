@@ -16,13 +16,11 @@ export class ConfigScanner {
       : (tailwindConfig.separator as string);
     this.variantsConfig = _.isEmpty(tailwindConfig.variants)
       ? defaultVariants // Order does matter, defaultVariants will be overridden by themeVariants.
-      : ({...defaultVariants, ...tailwindConfig.variants} as IVariantsConfig);
-
+      : {...defaultVariants, ...tailwindConfig.variants};
     this.themeConfig = _.merge(
-      {},
       {...defaultThemeConfig, ...tailwindConfig.theme},
       tailwindConfig.theme?.extend,
-    ) as IThemeConfig;
+    );
   }
 
   public getPrefix = (): string => this.prefix;
