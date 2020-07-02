@@ -4,10 +4,10 @@ import _ from 'lodash';
 export class ConfigScanner {
   private readonly prefix: string;
   private readonly separator: string;
-  private readonly themeConfig: IThemeConfig;
+  private themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
-  // FIXME: theme config does not consider function values
+  // FIXME: theme scanner does not consider function values
 
   constructor(tailwindConfig: TailwindConfig) {
     this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
@@ -27,7 +27,41 @@ export class ConfigScanner {
 
   public getSeparator = (): string => this.separator;
 
-  public getTheme = (): IThemeConfig => this.themeConfig;
+  public getTheme = (): IThemeConfig => {
+    const theme = (
+      itemName: keyof IThemeConfig,
+    ): {[key: string]: string | {[key: string]: string}} => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return this.themeConfig[itemName];
+    };
+
+    const utils = {
+      negative(item: {[key: string]: string}) {
+        for (const [key] of Object.entries(item)) {
+          item['-' + key] = item[key];
+          delete item[key];
+        }
+        return item;
+      },
+      breakpoints(item: {[key: string]: string}) {
+        for (const [key] of Object.entries(item)) {
+          item['screen-' + key] = item[key];
+          delete item[key];
+        }
+        return item;
+      },
+    };
+
+    for (const [key, value] of Object.entries(this.themeConfig)) {
+      if (_.isFunction(value)) {
+        this.themeConfig[key as keyof IThemeConfig] = value(theme, {...utils}) as {
+          [key: string]: string | {[key: string]: string};
+        };
+      }
+    }
+
+    return this.themeConfig;
+  };
 
   public getVariants = (): IVariantsConfig => this.variantsConfig;
 
