@@ -42,6 +42,10 @@ export class ClassesGenerator implements IGenerator {
     };
   }
 
+  // TODO: check if value are nested objects e.g., colors
+  // this checking is only implemented on colors property
+  // but better to be done on all other properties
+
   public generate = (): string => {
     const allTemplates = Object.keys(this.allGeneratedClasses).map(classGroup => {
       return new ClassesGroupTemplateGenerator(
@@ -371,6 +375,8 @@ export class ClassesGenerator implements IGenerator {
       spaceBetweens,
     };
   };
+
+  // FIXME: pseudoclasses does not generate types depending on generated classes.
 
   private getGeneratedPseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];

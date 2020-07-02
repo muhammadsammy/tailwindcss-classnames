@@ -7,8 +7,6 @@ export class ConfigScanner {
   private themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
-  // FIXME: theme scanner does not consider function values
-
   constructor(tailwindConfig: TailwindConfig) {
     this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this.separator = _.isEmpty(tailwindConfig.separator)
@@ -31,6 +29,7 @@ export class ConfigScanner {
     const theme = (
       itemName: keyof IThemeConfig,
     ): {[key: string]: string | {[key: string]: string}} => {
+      // TODO: check for nested value e.g. theme("colors.blue.100")
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return this.themeConfig[itemName];
     };
