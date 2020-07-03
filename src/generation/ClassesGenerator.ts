@@ -405,10 +405,6 @@ export class ClassesGenerator implements IGenerator {
               }
             });
           });
-        } else {
-          console.warn(
-            `The "${variantsKey}" key in your config.variants is not valid`.bgYellow.black,
-          );
         }
       });
     }
