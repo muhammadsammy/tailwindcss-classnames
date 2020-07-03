@@ -10,8 +10,8 @@ export class ClassesGenerator implements IGenerator {
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
-  private allGeneratedClasses: typeof defaultClasses;
-  private allPseudoClasses: string[];
+  private generatedRegularClasses: typeof defaultClasses;
+  private generatedPseudoClasses: string[];
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
@@ -20,7 +20,7 @@ export class ClassesGenerator implements IGenerator {
     this.theme = configScanner.getTheme();
     this.configScanner = configScanner;
 
-    this.allGeneratedClasses = {
+    this.generatedRegularClasses = {
       Accessibility: this.accessibility(),
       Backgrounds: this.backgrounds(),
       Borders: this.borders(),
@@ -38,7 +38,7 @@ export class ClassesGenerator implements IGenerator {
       Typography: this.typography(),
     };
 
-    this.allPseudoClasses = this.pseudoClasses();
+    this.generatedPseudoClasses = this.pseudoClasses();
   }
 
   // TODO: check if value are nested objects e.g., colors
@@ -46,12 +46,12 @@ export class ClassesGenerator implements IGenerator {
   // but better to be done on all other properties
 
   public generate = (): string => {
-    const allClassesTemplates = Object.keys(this.allGeneratedClasses)
+    const allClassesTemplates = Object.keys(this.generatedRegularClasses)
       .map(classGroup => {
         return new ClassesGroupTemplateGenerator(
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          this.allGeneratedClasses[classGroup],
+          this.generatedRegularClasses[classGroup],
           classGroup,
           this.prefix,
         ).generate();
@@ -62,7 +62,7 @@ export class ClassesGenerator implements IGenerator {
       allClassesTemplates +
       '\n\n' +
       'export type TPseudoClasses =' +
-      generateTypes(this.allPseudoClasses)
+      generateTypes(this.generatedPseudoClasses)
     );
   };
 
@@ -386,10 +386,10 @@ export class ClassesGenerator implements IGenerator {
     const pseudoClasses: string[] = [];
 
     for (const [variantsKey, variantsForKey] of Object.entries(this.configScanner.getVariants())) {
-      Object.keys(this.allGeneratedClasses).map(key => {
-        if (_.has(this.allGeneratedClasses[key as keyof typeof defaultClasses], variantsKey)) {
+      Object.keys(this.generatedRegularClasses).map(key => {
+        if (_.has(this.generatedRegularClasses[key as keyof typeof defaultClasses], variantsKey)) {
           const generatedClass = _.get(
-            this.allGeneratedClasses,
+            this.generatedRegularClasses,
             `${key}.${variantsKey}`,
           ) as string[];
           generatedClass.map(classname => {
