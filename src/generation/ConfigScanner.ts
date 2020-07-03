@@ -29,7 +29,6 @@ export class ConfigScanner {
     const theme = (
       itemName: keyof IThemeConfig,
     ): {[key: string]: string | {[key: string]: string}} => {
-      // TODO: check for nested value e.g. theme("colors.blue.100")
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return this.themeConfig[itemName];
     };
