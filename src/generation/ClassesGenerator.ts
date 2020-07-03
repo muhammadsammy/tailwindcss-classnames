@@ -1,7 +1,6 @@
 import {ConfigScanner} from './ConfigScanner';
-import {generateOpacities, PseudoclassVariantKey} from './utils/utils';
-import {AllClasses as defaultClasses, AllClassesFlat} from './default-classes/all';
-import {allTransformClasses} from './default-classes/Transforms';
+import {generateOpacities, generateTypes} from './utils/utils';
+import {AllClasses as defaultClasses} from './default-classes/all';
 import {IGenerator} from './IGenerator';
 import _ from 'lodash';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
@@ -11,7 +10,8 @@ export class ClassesGenerator implements IGenerator {
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
-  private allGeneratedClasses: typeof defaultClasses & {PseudoClasses: {variants: string[]}};
+  private allGeneratedClasses: typeof defaultClasses;
+  private allPseudoClasses: string[];
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
@@ -36,10 +36,9 @@ export class ClassesGenerator implements IGenerator {
       SVG: this.SVG(),
       Transforms: this.transforms(),
       Typography: this.typography(),
-      PseudoClasses: {
-        variants: this.getGeneratedPseudoClasses(),
-      },
     };
+
+    this.allPseudoClasses = this.pseudoClasses();
   }
 
   // TODO: check if value are nested objects e.g., colors
@@ -47,17 +46,24 @@ export class ClassesGenerator implements IGenerator {
   // but better to be done on all other properties
 
   public generate = (): string => {
-    const allTemplates = Object.keys(this.allGeneratedClasses).map(classGroup => {
-      return new ClassesGroupTemplateGenerator(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        this.allGeneratedClasses[classGroup],
-        classGroup,
-        this.prefix,
-      ).generate();
-    });
+    const allClassesTemplates = Object.keys(this.allGeneratedClasses)
+      .map(classGroup => {
+        return new ClassesGroupTemplateGenerator(
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          this.allGeneratedClasses[classGroup],
+          classGroup,
+          this.prefix,
+        ).generate();
+      })
+      .join('\n');
 
-    return allTemplates.join('\n');
+    return (
+      allClassesTemplates +
+      '\n\n' +
+      'export type TPseudoClasses =' +
+      generateTypes(this.allPseudoClasses)
+    );
   };
 
   private layout = (): typeof defaultClasses.Layout => {
@@ -376,125 +382,35 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  // FIXME: pseudoclasses does not generate types depending on generated classes.
-
-  private getGeneratedPseudoClasses = (): string[] => {
+  private pseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];
 
-    const classesCategories = Object.keys(this.configScanner.getVariants());
-    const classesVariants = Object.values(this.configScanner.getVariants());
-
-    classesCategories.map((k, i) => {
-      const key = k as PseudoclassVariantKey;
-      let classesOfCategoryKey: string[];
-      const variants = classesVariants[i];
-
-      const classesWithOpacities = this.getGeneratedClassesWithOpacities();
-      const classesWithSpacing = this.getGeneratedClassesWithSpacing();
-
-      switch (key) {
-        case 'gap':
-          classesOfCategoryKey = defaultClasses.Grid.gridGap;
-          break;
-        case 'inset':
-          classesOfCategoryKey = defaultClasses.Layout.topRightBottomLeft;
-          break;
-        case 'accessibility':
-          classesOfCategoryKey = defaultClasses.Accessibility.screenReaders;
-          break;
-        case 'transform':
-          classesOfCategoryKey = [];
-          const configHasOtherTransforms: boolean = classesCategories.some(
-            v => Object.keys(defaultClasses.Transforms).indexOf(v) >= 0,
+    for (const [variantsKey, variantsForKey] of Object.entries(this.configScanner.getVariants())) {
+      Object.keys(this.allGeneratedClasses).map(key => {
+        if (_.has(this.allGeneratedClasses[key as keyof typeof defaultClasses], variantsKey)) {
+          const generatedClass = _.get(
+            this.allGeneratedClasses,
+            `${key}.${variantsKey}`,
+          ) as string[];
+          generatedClass.map(classname => {
+            variantsForKey.map(variant => {
+              if (variant === 'responsive') {
+                const [breakpoints] = this.configScanner.getThemeProperty('screens');
+                breakpoints.map((breakpointVariant: string) => {
+                  pseudoClasses.push(breakpointVariant + this.separator + this.prefix + classname);
+                });
+              } else {
+                pseudoClasses.push(variant + this.separator + this.prefix + classname);
+              }
+            });
+          });
+        } else {
+          console.warn(
+            `The "${variantsKey}" key in your config.variants is not valid`.bgYellow.black,
           );
-          if (configHasOtherTransforms) {
-            const transformsNotInConfig = Object.keys(defaultClasses.Transforms).filter(
-              el => !classesCategories.includes(el),
-            );
-            transformsNotInConfig.map(transformClass => {
-              variants.map(variant => {
-                if (variant === 'responsive') {
-                  const [breakpoints] = this.configScanner.getThemeProperty('screens');
-                  breakpoints.map((breakpointVariant: string) => {
-                    pseudoClasses.push(
-                      this.prefix + breakpointVariant + this.separator + transformClass,
-                    );
-                  });
-                } else {
-                  pseudoClasses.push(this.prefix + variant + this.separator + transformClass);
-                }
-              });
-            });
-          } else {
-            classesOfCategoryKey = allTransformClasses;
-          }
-          break;
-        case 'backgroundColor':
-          classesOfCategoryKey = this.getGeneratedClassesWithColors('bg');
-          break;
-        case 'placeholderColor':
-          classesOfCategoryKey = this.getGeneratedClassesWithColors('placeholder');
-          break;
-        case 'borderColor':
-          classesOfCategoryKey = this.getGeneratedClassesWithColors('border');
-          break;
-        case 'textColor':
-          classesOfCategoryKey = this.getGeneratedClassesWithColors('text');
-          break;
-        case 'divideColor':
-          classesOfCategoryKey = this.getGeneratedClassesWithColors('divide');
-          break;
-        case 'opacity':
-          classesOfCategoryKey = classesWithOpacities.opacities;
-          break;
-        case 'textOpacity':
-          classesOfCategoryKey = classesWithOpacities.textOpacities;
-          break;
-        case 'backgroundOpacity':
-          classesOfCategoryKey = classesWithOpacities.backgroundOpacities;
-          break;
-        case 'borderOpacity':
-          classesOfCategoryKey = classesWithOpacities.borderOpacities;
-          break;
-        case 'divideOpacity':
-          classesOfCategoryKey = classesWithOpacities.divideOpacities;
-          break;
-        case 'placeholderOpacity':
-          classesOfCategoryKey = classesWithOpacities.placeholderOpacities;
-          break;
-        case 'width':
-          classesOfCategoryKey = classesWithSpacing.widths;
-          break;
-        case 'height':
-          classesOfCategoryKey = classesWithSpacing.heights;
-          break;
-        case 'margin':
-          classesOfCategoryKey = classesWithSpacing.margins;
-          break;
-        case 'padding':
-          classesOfCategoryKey = classesWithSpacing.paddings;
-          break;
-        case 'space':
-          classesOfCategoryKey = classesWithSpacing.spaceBetweens;
-          break;
-        default:
-          classesOfCategoryKey = AllClassesFlat[key];
-          break;
-      }
-
-      classesOfCategoryKey.map(c => {
-        variants.map(variant => {
-          if (variant === 'responsive') {
-            const [breakpoints] = this.configScanner.getThemeProperty('screens');
-            breakpoints.map((breakpointVariant: string) => {
-              pseudoClasses.push(breakpointVariant + this.separator + this.prefix + c);
-            });
-          } else {
-            pseudoClasses.push(variant + this.separator + this.prefix + c);
-          }
-        });
+        }
       });
-    });
+    }
 
     return pseudoClasses;
   };
