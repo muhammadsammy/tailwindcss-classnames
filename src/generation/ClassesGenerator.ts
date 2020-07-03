@@ -243,10 +243,34 @@ export class ClassesGenerator implements IGenerator {
   };
 
   private spacing = (): typeof defaultClasses.Spacing => {
+    const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
     return {
-      space: this.getGeneratedClassesWithSpacing().spaceBetweens,
-      padding: this.getGeneratedClassesWithSpacing().paddings,
-      margin: this.getGeneratedClassesWithSpacing().margins,
+      padding: sides.flatMap(side => {
+        return Object.keys(
+          _.isEmpty(this.theme.padding) ? this.theme.spacing : this.theme.padding,
+        ).map(value =>
+          value.startsWith('-') ? `-p${side}-${value.slice(1)}` : `p${side}-${value}`,
+        );
+      }),
+      margin: sides.flatMap(side => {
+        return Object.keys(
+          _.isEmpty(this.theme.margin) ? this.theme.spacing : this.theme.margin,
+        ).map(value =>
+          value.startsWith('-') ? `-m${side}-${value.slice(1)}` : `m${side}-${value}`,
+        );
+      }),
+      space: ['x', 'y'].flatMap(axis => {
+        return Object.keys(_.isEmpty(this.theme.space) ? this.theme.spacing : this.theme.space)
+          .concat('reverse')
+          .map(value => {
+            if (value.startsWith('-')) {
+              value = value.slice(1);
+              return '-space-' + axis + `-${value}`;
+            } else {
+              return 'space-' + axis + (value === 'default' ? '' : `-${value}`);
+            }
+          });
+      }),
     };
   };
 
@@ -329,58 +353,6 @@ export class ClassesGenerator implements IGenerator {
       borderOpacities: getOpacity('borderOpacity', 'border'),
       divideOpacities: getOpacity('divideOpacity', 'divide'),
       placeholderOpacities: getOpacity('placeholderOpacity', 'placeholder'),
-    };
-  };
-
-  private getGeneratedClassesWithSpacing = (): ClassesWithSpacing => {
-    const paddings: string[] = [];
-    const margins: string[] = [];
-    const widths: string[] = [];
-    const heights: string[] = [];
-    const spaceBetweens: string[] = [`space-x-reverse`, `space-y-reverse`];
-
-    const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
-
-    sides.map(side => {
-      paddings.push(`p${side}-auto`);
-      margins.push(`m${side}-auto`);
-    });
-
-    ['auto', 'full', 'screen'].map(spacing => heights.push(`h-${spacing}`));
-    // prettier-ignore
-    [
-      '1/2', '1/3', '2/3', '1/4', '2/4', '3/4', '1/5', '2/5', '3/5', '4/5', '1/6',
-      '2/6', '3/6', '4/6', '5/6', '1/12', '2/12', '3/12', '4/12', '5/12', '6/12',
-      '7/12', '8/12', '9/12', '10/12', '11/12', 'auto', 'full', 'screen'
-    ].map(spacing => widths.push(`w-${spacing}`));
-
-    const [spacingKeys, spacingValues] = this.configScanner.getThemeProperty('spacing');
-
-    spacingKeys.map((spacing, i) => {
-      widths.push(`w-${spacing}`);
-      heights.push(`h-${spacing}`);
-      sides.map(side => {
-        paddings.push(`p${side}-${spacing}`);
-        margins.push(`m${side}-${spacing}`);
-        if (parseInt(spacing, 10) !== 0 && spacingValues[i] !== '0') {
-          paddings.push(`-p${side}-${spacing}`);
-          margins.push(`-m${side}-${spacing}`);
-        }
-      });
-
-      ['', '-'].map(spaceBetweenPrefix => {
-        ['x', 'y'].map(axis => {
-          spaceBetweens.push(`${spaceBetweenPrefix}space-${axis}-${spacing}`);
-        });
-      });
-    });
-
-    return {
-      paddings,
-      margins,
-      widths,
-      heights,
-      spaceBetweens,
     };
   };
 

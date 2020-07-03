@@ -130,6 +130,9 @@ interface IThemeProps {
   };
   padding: any;
   placeholderColor: any;
+  space: {
+    [key: string]: string;
+  };
   stroke: {
     [key: string]: string;
   };
