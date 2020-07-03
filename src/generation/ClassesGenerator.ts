@@ -87,7 +87,7 @@ export class ClassesGenerator implements IGenerator {
     return {
       ...defaultClasses.Backgrounds,
       backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
-      backgroundColor: this.getGeneratedClassesWithColors('bg'),
+      backgroundColor: this.generateClassesWithColors('backgroundColor'),
       backgroundPosition: Object.keys(this.theme.backgroundPosition).map(x => 'bg-' + x),
       backgroundSize: Object.keys(this.theme.backgroundSize).map(x => 'bg-' + x),
     };
@@ -96,7 +96,7 @@ export class ClassesGenerator implements IGenerator {
   private borders = (): typeof defaultClasses.Borders => {
     return {
       ...defaultClasses.Borders,
-      borderColor: this.getGeneratedClassesWithColors('border'),
+      borderColor: this.generateClassesWithColors('borderColor'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this.theme.borderRadius).flatMap(radius => {
         const sides = ['', 't', 'r', 'b', 'l', 'tr', 'tl', 'br', 'bl'];
@@ -112,7 +112,7 @@ export class ClassesGenerator implements IGenerator {
             `border${side === '' ? '' : '-' + side}` + (width === 'default' ? '' : `-${width}`),
         );
       }),
-      divideColor: this.getGeneratedClassesWithColors('divide'),
+      divideColor: this.generateClassesWithColors('divideColor'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
       // divide width inherits its values from theme.borderWidth by default
       // but theme.divideWidth overrides it.
@@ -288,25 +288,26 @@ export class ClassesGenerator implements IGenerator {
       letterSpacing: Object.keys(this.theme.letterSpacing).map(value => 'tracking-' + value),
       lineHeight: Object.keys(this.theme.lineHeight).map(value => 'leading-' + value),
       listStyleType: Object.keys(this.theme.listStyleType).map(value => 'list-' + value),
-      placeholderColor: this.getGeneratedClassesWithColors('placeholder'),
+      placeholderColor: this.generateClassesWithColors('placeholderColor'),
       placeholderOpacity: this.getGeneratedClassesWithOpacities().placeholderOpacities,
-      textColor: this.getGeneratedClassesWithColors('text'),
+      textColor: this.generateClassesWithColors('textColor'),
       textOpacity: this.getGeneratedClassesWithOpacities().textOpacities,
     };
   };
 
-  private getGeneratedClassesWithColors = (
-    classPayload: 'bg' | 'placeholder' | 'border' | 'text' | 'divide',
-  ): string[] => {
-    const [colorsNames, colorsShades] = this.configScanner.getThemeProperty('colors');
-    return colorsNames.flatMap((colorName, i) => {
-      const colorShade = colorsShades[i];
-      if (typeof colorShade === 'object' && colorShade !== null) {
-        return Object.keys(colorShade).map(
-          shade => `${classPayload}-${colorName}${shade === 'default' ? '' : `-${shade}`}`,
+  private generateClassesWithColors = (property: keyof IThemeProps): string[] => {
+    const [propertyNames, propertyVariants] = this.configScanner.getThemeProperty(property);
+    return propertyNames.flatMap((propertyValue, i) => {
+      const variant = propertyVariants[i];
+
+      property.replace('Color', '').replace('background', 'bg');
+
+      if (typeof variant === 'object' && variant !== null) {
+        return Object.keys(variant).map(
+          v => `${property}-${propertyValue}${v === 'default' ? '' : `-${v}`}`,
         );
       }
-      return `${classPayload}-${colorName}`;
+      return `${property}-${propertyValue}`;
     });
   };
 
