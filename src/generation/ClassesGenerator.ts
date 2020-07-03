@@ -300,14 +300,15 @@ export class ClassesGenerator implements IGenerator {
     return propertyNames.flatMap((propertyValue, i) => {
       const variant = propertyVariants[i];
 
-      property.replace('Color', '').replace('background', 'bg');
+      const propertyResult = property.replace('Color', '').replace('background', 'bg');
 
       if (typeof variant === 'object' && variant !== null) {
         return Object.keys(variant).map(
-          v => `${property}-${propertyValue}${v === 'default' ? '' : `-${v}`}`,
+          v => `${propertyResult}-${propertyValue}${v === 'default' ? '' : `-${v}`}`,
         );
+      } else {
+        return `${propertyResult}-${propertyValue}`;
       }
-      return `${property}-${propertyValue}`;
     });
   };
 
