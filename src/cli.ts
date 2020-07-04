@@ -74,7 +74,6 @@ commander
           });
         })
         .catch(error => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           if (error.isTtyError) {
             console.error(colors.red("Prompt couldn't be rendered in the current environment"));
           } else {

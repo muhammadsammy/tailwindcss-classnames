@@ -34,8 +34,6 @@ interface IThemeConfig extends IThemeProps {
   extend?: IThemeProps;
 }
 
-// TODO
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface IThemeProps {
   screens: {
     [key: string]: string;
@@ -62,9 +60,15 @@ interface IThemeProps {
   boxShadow: {
     [key: string]: string;
   };
-  backgroundColor?: any;
-  borderColor?: any;
-  container?: any;
+  backgroundColor: {
+    [key: string]: string;
+  };
+  borderColor: {
+    [key: string]: string;
+  };
+  container: {
+    [key: string]: string;
+  };
   cursor: {
     [key: string]: string;
   };
@@ -95,7 +99,9 @@ interface IThemeProps {
   fontWeight: {
     [key: string]: string;
   };
-  height: any;
+  height: {
+    [key: string]: string;
+  };
   inset: {
     [key: string]: string;
   };
@@ -108,11 +114,15 @@ interface IThemeProps {
   listStyleType: {
     [key: string]: string;
   };
-  margin: any;
+  margin: {
+    [key: string]: string;
+  };
   maxHeight: {
     [key: string]: string;
   };
-  maxWidth: any;
+  maxWidth: {
+    [key: string]: string;
+  };
   minHeight: {
     [key: string]: string;
   };
@@ -128,8 +138,12 @@ interface IThemeProps {
   order: {
     [key: string]: string;
   };
-  padding: any;
-  placeholderColor: any;
+  padding: {
+    [key: string]: string;
+  };
+  placeholderColor: {
+    [key: string]: string;
+  };
   space: {
     [key: string]: string;
   };
@@ -139,12 +153,18 @@ interface IThemeProps {
   strokeWidth: {
     [key: string]: string;
   };
-  textColor: any;
-  width: any;
+  textColor: {
+    [key: string]: string;
+  };
+  width: {
+    [key: string]: string;
+  };
   zIndex: {
     [key: string]: string;
   };
-  gap: any;
+  gap: {
+    [key: string]: string;
+  };
   gridTemplateColumns: {
     [key: string]: string;
   };
@@ -179,7 +199,9 @@ interface IThemeProps {
   rotate: {
     [key: string]: string;
   };
-  translate: any;
+  translate: {
+    [key: string]: string;
+  };
   skew: {
     [key: string]: string;
   };

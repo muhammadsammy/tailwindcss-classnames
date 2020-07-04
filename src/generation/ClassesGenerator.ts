@@ -49,9 +49,7 @@ export class ClassesGenerator implements IGenerator {
     const allClassesTemplates = Object.keys(this.generatedRegularClasses)
       .map(classGroup => {
         return new ClassesGroupTemplateGenerator(
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          this.generatedRegularClasses[classGroup],
+          this.generatedRegularClasses[classGroup as keyof typeof defaultClasses],
           classGroup,
           this.prefix,
         ).generate();
@@ -117,9 +115,7 @@ export class ClassesGenerator implements IGenerator {
       // divide width inherits its values from theme.borderWidth by default
       // but theme.divideWidth overrides it.
       divideWidth: Object.keys(
-        _.isEmpty(this.theme.divideWidth)
-          ? this.theme.borderWidth
-          : (this.theme.divideWidth as {[key: string]: string}),
+        _.isEmpty(this.theme.divideWidth) ? this.theme.borderWidth : this.theme.divideWidth,
       )
         .concat('reverse')
         .flatMap(width => {
@@ -173,7 +169,7 @@ export class ClassesGenerator implements IGenerator {
         return Object.keys(
           _.isEmpty(this.theme.translate)
             ? {...this.theme.spacing, full: '100%', '1/2': '50%'}
-            : (this.theme.translate as {[key: string]: string}),
+            : this.theme.translate,
         ).map(value => x + '-' + value);
       }),
       skew: ['x', 'y'].flatMap(side =>
@@ -233,11 +229,9 @@ export class ClassesGenerator implements IGenerator {
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(value => `row-end-${value}`),
       gridGap: ['gap-', 'row-gap-', 'col-gap-'].flatMap(x => {
         // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
-        return Object.keys(
-          _.isEmpty(this.theme.gap)
-            ? this.theme.spacing
-            : (this.theme.gap as {[key: string]: string}),
-        ).map(gapValue => x + gapValue);
+        return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
+          gapValue => x + gapValue,
+        );
       }),
     };
   };
@@ -288,7 +282,7 @@ export class ClassesGenerator implements IGenerator {
       // prettier-ignore
       width: (_.isEmpty(this.theme.width)
         ? Object.keys(this.theme.spacing).concat(extraWidthSizing)
-        : Object.keys(this.theme.width as { [key: string]: string })).map(x => 'w-' + x),
+        : Object.keys(this.theme.width )).map(x => 'w-' + x),
       minWidth: Object.keys(this.theme.minWidth).map(x => 'min-w-' + x),
       maxWidth: Object.keys(this.theme.maxWidth).map(x => 'max-w-' + x),
 
@@ -297,7 +291,7 @@ export class ClassesGenerator implements IGenerator {
       // prettier-ignore
       height: (_.isEmpty(this.theme.height)
         ? Object.keys(this.theme.spacing).concat(extraHeightSizing)
-        : Object.keys(this.theme.height as { [key: string]: string })).map(x => 'h-' + x),
+        : Object.keys(this.theme.height)).map(x => 'h-' + x),
       minHeight: Object.keys(this.theme.minHeight).map(x => 'min-h-' + x),
       maxHeight: Object.keys(this.theme.maxHeight).map(x => 'max-h-' + x),
     };

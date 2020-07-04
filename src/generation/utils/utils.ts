@@ -1,4 +1,3 @@
-/* tslint:disable: prefer-template */
 import _ from 'lodash';
 
 export function capitalizeFirstLetter(s: string): string {

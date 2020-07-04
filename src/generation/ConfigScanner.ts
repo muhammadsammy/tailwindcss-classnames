@@ -18,7 +18,7 @@ export class ConfigScanner {
     this.themeConfig = _.merge(
       {...defaultThemeConfig, ...tailwindConfig.theme},
       tailwindConfig.theme?.extend,
-    );
+    ) as IThemeConfig;
   }
 
   public getPrefix = (): string => this.prefix;
@@ -54,10 +54,8 @@ export class ConfigScanner {
 
     for (const [key, value] of Object.entries(this.themeConfig)) {
       if (_.isFunction(value)) {
-        this.themeConfig[key as keyof IThemeConfig] = value(theme, utils) as Record<
-          string,
-          Record<string, string> | string
-        >;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        this.themeConfig[key as keyof IThemeConfig] = value(theme, utils);
       }
     }
 
@@ -68,10 +66,10 @@ export class ConfigScanner {
 
   public getThemeProperty = (
     themeProperty: keyof IThemeProps,
-  ): [string[], Array<string | {[key: string]: string}>] => {
+  ): [string[], Array<string | Record<string, string>>] => {
     return [
       Object.keys(this.themeConfig[themeProperty]),
-      Object.values(this.themeConfig[themeProperty]),
+      Object.values(this.themeConfig[themeProperty]) as Array<string | Record<string, string>>,
     ];
   };
 }
