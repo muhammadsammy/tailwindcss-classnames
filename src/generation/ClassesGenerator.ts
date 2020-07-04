@@ -165,12 +165,14 @@ export class ClassesGenerator implements IGenerator {
       rotate: Object.keys(this.theme.rotate).map(value => 'rotate-' + value),
       // translate gets values from theme.spacing in addition to 50% and 100% variations
       // by default and theme.translate overrides this behaviour.
-      translate: ['translate-x', '-translate-x', 'translate-y', '-translate-y'].flatMap(x => {
+      translate: ['x', 'y'].flatMap(side => {
         return Object.keys(
-          _.isEmpty(this.theme.translate)
-            ? {...this.theme.spacing, full: '100%', '1/2': '50%'}
-            : this.theme.translate,
-        ).map(value => x + '-' + value);
+          _.isEmpty(this.theme.translate) ? {...this.theme.spacing} : this.theme.translate,
+        ).map(value =>
+          value.startsWith('-')
+            ? `-translate-${side}-${value.slice(1)}`
+            : `translate-${side}-${value}`,
+        );
       }),
       skew: ['x', 'y'].flatMap(side =>
         Object.keys(this.theme.skew).map(value =>
