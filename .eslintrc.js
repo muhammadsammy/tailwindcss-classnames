@@ -14,6 +14,8 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    '@typescript-eslint/no-unsafe-call': 0,
+    '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-member-accessibility': [
       'warn',
       {overrides: {constructors: 'no-public'}},
