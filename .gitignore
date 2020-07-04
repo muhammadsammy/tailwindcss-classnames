@@ -103,10 +103,6 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Lock files
-package-lock.json
-yarn.lock
-
 # End of https://www.gitignore.io/api/node,visualstudiocode,macos
 
 tailwind.config.js
