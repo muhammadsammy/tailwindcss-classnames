@@ -35,18 +35,20 @@ export class ConfigScanner {
 
     const utils = {
       negative(item: {[key: string]: string}) {
-        for (const [key] of Object.entries(item)) {
-          item['-' + key] = item[key];
-          delete item[key];
+        const itemCopy = {...item};
+        for (const [key] of Object.entries(itemCopy)) {
+          itemCopy['-' + key] = itemCopy[key];
+          delete itemCopy[key];
         }
-        return item;
+        return itemCopy;
       },
       breakpoints(item: {[key: string]: string}) {
-        for (const [key] of Object.entries(item)) {
-          item['screen-' + key] = item[key];
-          delete item[key];
+        const itemCopy = {...item};
+        for (const [key] of Object.entries(itemCopy)) {
+          itemCopy['screen-' + key] = itemCopy[key];
+          delete itemCopy[key];
         }
-        return item;
+        return itemCopy;
       },
     };
 
