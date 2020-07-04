@@ -26,11 +26,11 @@ export class ConfigScanner {
   public getSeparator = (): string => this.separator;
 
   public getTheme = (): IThemeConfig => {
-    const theme = (
-      itemName: keyof IThemeConfig,
-    ): {[key: string]: string | {[key: string]: string}} => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return this.themeConfig[itemName];
+    const theme = (path: string): Record<string, unknown> => {
+      return _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
+        string,
+        Record<string, string> | string
+      >;
     };
 
     const utils = {
@@ -54,9 +54,10 @@ export class ConfigScanner {
 
     for (const [key, value] of Object.entries(this.themeConfig)) {
       if (_.isFunction(value)) {
-        this.themeConfig[key as keyof IThemeConfig] = value(theme, {...utils}) as {
-          [key: string]: string | {[key: string]: string};
-        };
+        this.themeConfig[key as keyof IThemeConfig] = value(theme, utils) as Record<
+          string,
+          Record<string, string> | string
+        >;
       }
     }
 
