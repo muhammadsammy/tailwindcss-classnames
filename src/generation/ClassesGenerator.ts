@@ -167,7 +167,7 @@ export class ClassesGenerator implements IGenerator {
       // by default and theme.translate overrides this behaviour.
       translate: ['x', 'y'].flatMap(side => {
         return Object.keys(
-          _.isEmpty(this.theme.translate) ? {...this.theme.spacing} : this.theme.translate,
+          _.isEmpty(this.theme.translate) ? this.theme.spacing : this.theme.translate,
         ).map(value =>
           value.startsWith('-')
             ? `-translate-${side}-${value.slice(1)}`
