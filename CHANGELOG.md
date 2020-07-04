@@ -17,8 +17,7 @@ All notable changes to this project will be documented in this file. See [standa
 - add text opacity type generation ([2239109](https://github.com/muhammadsammy/tailwindcss-classnames/commit/2239109c4953a40678c36f27059fc2c3dd01573d))
 - add theme extend values to scanned theme ([95d9d4c](https://github.com/muhammadsammy/tailwindcss-classnames/commit/95d9d4c9d92cefbf5be9d88c7365a57ec430b5bc))
 - add type generation for flex shrink ([d31bb56](https://github.com/muhammadsammy/tailwindcss-classnames/commit/d31bb56162ab6c87d7016337e3b975de3106f600))
-- bump version ([987343c](https://github.com/muhammadsammy/tailwindcss-classnames/commit/987343c1dc25f0cc44cafc0fedb82d58e0ee70dc))
-- generat list style type types ([13289af](https://github.com/muhammadsammy/tailwindcss-classnames/commit/13289af34fab9fb12dabb8608cec08b271de3d16))
+- generate list style type types ([13289af](https://github.com/muhammadsammy/tailwindcss-classnames/commit/13289af34fab9fb12dabb8608cec08b271de3d16))
 - generate all backgrounds-related types ([269361e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/269361ef89da05ba1f18b912abbde06c0488acc4))
 - generate border radius types from theme ([c0ae9e4](https://github.com/muhammadsammy/tailwindcss-classnames/commit/c0ae9e4f8e6d1ee47df36951e9abcc0151e3aef9))
 - generate border width types from theme ([b733566](https://github.com/muhammadsammy/tailwindcss-classnames/commit/b7335661c18b508f3317699880128b51f7c0686b))
@@ -48,19 +47,10 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 - add missing generated divide color and opacity ([0d56d53](https://github.com/muhammadsammy/tailwindcss-classnames/commit/0d56d53d9bd75866cef77830c5cb918b94c191d6))
-- add result of property modification to returned classes with colors ([fe458c9](https://github.com/muhammadsammy/tailwindcss-classnames/commit/fe458c9071d2327e4b916dcf75b5a212260cf3d2))
-- backgrounds group memeber types references ([0b5867e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/0b5867ec7d35014065483f43898be179866b8ce1))
-- correct typo in customClassesFilename parameter name ([a0e8a3b](https://github.com/muhammadsammy/tailwindcss-classnames/commit/a0e8a3b116bba5aed20b231fc6e3b9ddb689b3f3))
-- generate actual backgrounds group memeber types ([ead0bc0](https://github.com/muhammadsammy/tailwindcss-classnames/commit/ead0bc0a0ac951f6ce771c09273253312da0b51e))
 - generate pseudoclasses for generated classes not the default ones ([bc618aa](https://github.com/muhammadsammy/tailwindcss-classnames/commit/bc618aab09a7bef7b6dfe70e2c008b66e8fe813d))
-- ignore idea folder ([ece221e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/ece221eccd9323e8b8ad6c00526ab745b61ef9ae))
-- prefix generated background position and size classes with ([f9dcd04](https://github.com/muhammadsammy/tailwindcss-classnames/commit/f9dcd04f29b6260fd6246919d5080de1675114e6))
 - prevent utility functions from mutating original theme values ([b414bf0](https://github.com/muhammadsammy/tailwindcss-classnames/commit/b414bf051ecd4fc143de324bf4b405d4ebd7daed))
 - remove false positive warning message for pseudo-classes generation ([d9663d6](https://github.com/muhammadsammy/tailwindcss-classnames/commit/d9663d63ef5c2f86f8899ad98cdb5a806d7dde2e))
 - remove hard coded values in translate generation ([5fca805](https://github.com/muhammadsammy/tailwindcss-classnames/commit/5fca805e28887aaecaf301647ca4b38cc11d2ca6))
-- use correct lodash package imports ([3a041b3](https://github.com/muhammadsammy/tailwindcss-classnames/commit/3a041b3f35a7969d18cb22f92bf0d7fd7d7c67be))
-
-* remove pseudoselector functions ([6c46bc5](https://github.com/muhammadsammy/tailwindcss-classnames/commit/6c46bc5bf3aa40994577d7ba3d11a9264e4bdc38))
 
 ## 0.1.0
 
