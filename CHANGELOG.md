@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.4.0...v1.4.1) (2020-07-05)
+
+### Bug Fixes
+
+- use correct prefix for font sizes types ([c5b6640](https://github.com/muhammadsammy/tailwindcss-classnames/commit/c5b66408a52122be70f02aa96a62660a967d49d9))
+
 ## [1.4.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.3.9...v1.4.0) (2020-07-04)
 
 ### ⚠ BREAKING CHANGES
