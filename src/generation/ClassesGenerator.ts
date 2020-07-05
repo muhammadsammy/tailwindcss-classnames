@@ -303,7 +303,7 @@ export class ClassesGenerator implements IGenerator {
     return {
       ...defaultClasses.Typography,
       fontFamily: Object.keys(this.theme.fontFamily).map(value => 'font-' + value),
-      fontSize: Object.keys(this.theme.fontSize).map(size => 'font-' + size),
+      fontSize: Object.keys(this.theme.fontSize).map(size => 'text-' + size),
       fontWeight: Object.keys(this.theme.fontWeight).map(weight => 'font-' + weight),
       letterSpacing: Object.keys(this.theme.letterSpacing).map(value => 'tracking-' + value),
       lineHeight: Object.keys(this.theme.lineHeight).map(value => 'leading-' + value),
