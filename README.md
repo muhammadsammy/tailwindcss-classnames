@@ -99,84 +99,35 @@ export const App: React.FC<{disabled}> = ({disabled}) => {
 };
 ```
 
-Another custom React button component example:
-
-<!-- prettier-ignore -->
-```tsx
-// buttonStyles.ts
-
-import {tw} from "../tailwindcss-classnames"
-
-export buttonStyles = {
-  minimal: tw(/* some tailwindcss classes */),
-  default: tw(/* some tailwindcss classes */),
-  primary: tw(/* some tailwindcss classes */),
-  outline: tw(/* some tailwindcss classes */),
-  danger: tw(/* some tailwindcss classes */),
-  disabled: tw(/* some tailwindcss classes */),
-}
-
-// Button.tsx
-
-import React from "react"
-import {tw, TTailwindString} from "../tailwindcss-classnames"
-import {buttonStyles} from "./buttonStyles"
-
-type Props = {
-  type: "button" | "submit" | "reset"
-  className?: TTailwindString | string
-  variant?: "minimal" | "default" | "primary" | "outline" | "danger"
-}
-
-export const Button: React.FunctionComponent<Props &
-  React.ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
-  const {type, children, className, variant = "default", onClick} = props
-  const {disabled} = props
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={`${className} ${
-        disabled ? buttonStyles.disabled : buttonStyles[variant]
-      }`}
-    >
-      {children}
-    </button>
-  )
-}
-```
-
 ## Using the CLI to generate custom types
 
-The default types exported from this package are tailwindcss default ones.
-But if you modified some classes in your tailwind config file or want to add external custom classes, you can use the CLI tool to do this.
+The types exported from this package are tailwindcss default ones, but if you modified your tailwind config file and/or want to add external custom classes, you can use the CLI tool to do this.
 
 ### CLI arguments for tailwind config:
 
 - -c --config The name or relative path of TailwindCSS config file.
-- -o --output _(Optional)_ The name or relative path of generated file
-- -f --classesFile _(Optional)_ The name or relative path of the file with the custom types
-- -t --typeName _(Optional)_ The name of the type exported from file containing the custom classes
+- -f --classesFile _(Optional)_ The name or relative path of the file with the custom types.
+- -t --typeName _(Optional)_ The name of the type exported from file containing the custom classes.
+- -o --output _(Optional)_ The name (or path) of the generated file.
 
 Add it in your package.json scripts:
 
 ```json
 "scripts": {
-  "generate-types": "tailwindcss-classnames --config tailwind.config.js"
+  "generate-css-types": "tailwindcss-classnames --config tailwind.config.js"
 }
 ```
 
 or simply run `npx tailwindcss-classnames`
 
-**example:**
+### example:
 
 If you want to add types from external file named `my-custom-classes.ts`
 containing the following code:
 
 ```ts
-export type MyClassesTypes =
-  |"button"
+export type TCustomClasses =
+  | "button"
   | "sidebar"
   | "navbar"
   | ...
@@ -184,4 +135,4 @@ export type MyClassesTypes =
 
 You will excute the CLI with the following arguments:
 
-`tailwindcss-classnames --config path/to/tailwind.config.js --classesFile my-custom-classes --typeName MyClassesTypes`
+`tailwindcss-classnames --config path/to/tailwind.config.js --classesFile my-custom-classes --typeName TCustomClasses`
