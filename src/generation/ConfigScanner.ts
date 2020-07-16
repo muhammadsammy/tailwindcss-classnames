@@ -26,36 +26,35 @@ export class ConfigScanner {
   public getSeparator = (): string => this.separator;
 
   public getTheme = (): IThemeConfig => {
-    const theme = (path: string): Record<string, unknown> => {
-      return _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
-        string,
-        Record<string, string> | string
-      >;
-    };
-
-    const utils = {
-      negative(item: {[key: string]: string}) {
-        const itemCopy = {...item};
-        for (const [key] of Object.entries(itemCopy)) {
-          itemCopy['-' + key] = itemCopy[key];
-          delete itemCopy[key];
-        }
-        return itemCopy;
-      },
-      breakpoints(item: {[key: string]: string}) {
-        const itemCopy = {...item};
-        for (const [key] of Object.entries(itemCopy)) {
-          itemCopy['screen-' + key] = itemCopy[key];
-          delete itemCopy[key];
-        }
-        return itemCopy;
-      },
-    };
-
     for (const [key, value] of Object.entries(this.themeConfig)) {
       if (_.isFunction(value)) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        this.themeConfig[key as keyof IThemeConfig] = value(theme, utils);
+        this.themeConfig[key as keyof IThemeConfig] = value(
+          (path: string): Record<string, unknown> => {
+            return _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
+              string,
+              Record<string, string> | string
+            >;
+          },
+          {
+            negative(item: {[key: string]: string}) {
+              const itemCopy = {...item};
+              for (const [key] of Object.entries(itemCopy)) {
+                itemCopy['-' + key] = itemCopy[key];
+                delete itemCopy[key];
+              }
+              return itemCopy;
+            },
+            breakpoints(item: {[key: string]: string}) {
+              const itemCopy = {...item};
+              for (const [key] of Object.entries(itemCopy)) {
+                itemCopy['screen-' + key] = itemCopy[key];
+                delete itemCopy[key];
+              }
+              return itemCopy;
+            },
+          },
+        );
       }
     }
 
