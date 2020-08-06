@@ -35,13 +35,18 @@ IMPORTED_T_CUSTOM_CLASSES
   | TPseudoClasses;
 
 
-export type TTailwindString = string & 'TAILWIND_CLASS';
+export type TTailwindString = "TAILWIND_STRING"
 
-export type TArgs<T extends TClasses> = T | null | undefined | { [key in T]?: boolean } | TTailwindString;
+export type TArg =
+  | TClasses
+  | null
+  | undefined
+  | {[key in TClasses]?: boolean}
+  | TTailwindString
 
-export type TTailwind<T extends TClasses = TClasses> = (...args: Array<TArgs<T>>) => TTailwindString;
+export type TTailwind = (...args: TArg[]) => TTailwindString
 
-export const classnames: TTailwind = classnamesLib as any;
+export const classnames: TTailwind = classnamesLib as any
 
-export const tw = classnames;
+export const tw = classnames
 `;
