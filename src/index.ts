@@ -10610,18 +10610,16 @@ export type TClasses =
   | TAccessibility
   | TPseudoClasses;
 
-export type TTailwindString = string & 'TAILWIND_CLASS';
+export type TTailwindString = 'TAILWIND_STRING';
 
-export type TArgs<T extends TClasses> =
-  | T
+export type TArg =
+  | TClasses
   | null
   | undefined
-  | {[key in T]?: boolean}
+  | {[key in TClasses]?: boolean}
   | TTailwindString;
 
-export type TTailwind<T extends TClasses = TClasses> = (
-  ...args: Array<TArgs<T>>
-) => TTailwindString;
+export type TTailwind = (...args: TArg[]) => TTailwindString;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 export const classnames: TTailwind = classnamesLib as any;
