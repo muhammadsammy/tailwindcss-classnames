@@ -3,12 +3,12 @@
 import commander from 'commander';
 import inquirer from 'inquirer';
 import colors from 'colors';
-import {createFileWithGeneratedTypes} from './generation/createFile';
+import {GeneratedFileWriter} from './generation/GeneratedFileWriter';
 
 interface InquirerAnswers {
   configFilename: string;
   customClassesTypeName: string | void;
-  cutomClassesFilename: string | void;
+  customClassesFilename: string | void;
   outputFilename: string | void;
 }
 
@@ -22,21 +22,19 @@ commander
   .option(
     '-f, --classesFile <classesFile>',
     'Name or relative path of the file with the custom types',
-    'none',
   )
   .option(
     '-t, --typeName <typeName>',
     'Name of the type exported from file containing the custom classes',
-    'none',
   )
   .action(({config, output, classesFile, typeName}: {[key: string]: string | void}) => {
     if (config) {
-      createFileWithGeneratedTypes({
+      void new GeneratedFileWriter({
         configFilename: config,
         outputFilename: output,
         customClassesFilename: classesFile,
         customClassesTypeName: typeName,
-      });
+      }).write();
     } else {
       inquirer
         .prompt([
@@ -53,25 +51,25 @@ commander
             message: 'Name of the file with generated types',
           },
           {
-            name: 'cutomClassesFilename',
+            name: 'customClassesFilename',
             type: 'input',
-            default: 'none',
+            default: null,
             message: 'Name or path of the file with the custom types',
           },
           {
             name: 'customClassesTypeName',
             type: 'input',
-            default: 'none',
+            default: null,
             message: 'Name of the type exported from file containing the custom classes',
           },
         ])
         .then((answers: InquirerAnswers) => {
-          createFileWithGeneratedTypes({
+          void new GeneratedFileWriter({
             configFilename: answers.configFilename,
             outputFilename: answers.outputFilename,
-            customClassesFilename: answers.cutomClassesFilename,
+            customClassesFilename: answers.customClassesFilename,
             customClassesTypeName: answers.customClassesTypeName,
-          });
+          }).write();
         })
         .catch(error => {
           if (error.isTtyError) {

@@ -1,9 +1,7 @@
 export const baseTemplateString = `/* eslint-disable */
 /* tslint:disable */
 import classnamesLib from 'classnames';
-
 T_CUSTOM_CLASSES_IMPORT_STATEMENT
-
 ___ALL_CLASSES___
 
 export type TCustomFormsPluginClasses =
@@ -29,9 +27,7 @@ export type TClasses =
   | TTransitions
   | TInteractivity
   | TSVG
-  | TAccessibility
-CUSTOM_FORMS_PLUGIN_TYPE
-IMPORTED_T_CUSTOM_CLASSES
+  | TAccessibility CUSTOM_FORMS_PLUGIN_TYPE IMPORTED_T_CUSTOM_CLASSES
   | TPseudoClasses;
 
 
