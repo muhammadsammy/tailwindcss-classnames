@@ -58,7 +58,7 @@ export class GeneratedFileWriter {
     }
   };
 
-  private generateFileContent(): string {
+  private generateFileContent = (): string => {
     return baseTemplateString
       .replace(
         /___ALL_CLASSES___/g,
@@ -82,5 +82,5 @@ export class GeneratedFileWriter {
           ? `import {${this.customClassesTypeName} as TCustomClassesFromExternalFile} from './${this.customClassesFilename}';`
           : '',
       );
-  }
+  };
 }
