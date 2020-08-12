@@ -1,5 +1,12 @@
 type ColorShades = string[] | Array<{[key: string]: string}>;
 
+type ClassesWithColors =
+  | 'backgroundColor'
+  | 'divideColor'
+  | 'placeholderColor'
+  | 'textColor'
+  | 'borderColor';
+
 type ClassesWithOpacities = {
   opacities: string[];
   textOpacities: string[];

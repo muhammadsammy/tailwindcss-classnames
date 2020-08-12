@@ -41,7 +41,7 @@ export class ClassesGenerator implements IGenerator {
     this.generatedPseudoClasses = this.pseudoClasses();
   }
 
-  // TODO: check if value are nested objects e.g., colors
+  // TODO: check if values are nested objects e.g., colors
   // this checking is only implemented on colors property
   // but better to be done on all other properties
 
@@ -284,7 +284,7 @@ export class ClassesGenerator implements IGenerator {
       // prettier-ignore
       width: (_.isEmpty(this.theme.width)
         ? Object.keys(this.theme.spacing).concat(extraWidthSizing)
-        : Object.keys(this.theme.width )).map(x => 'w-' + x),
+        : Object.keys(this.theme.width)).map(x => 'w-' + x),
       minWidth: Object.keys(this.theme.minWidth).map(x => 'min-w-' + x),
       maxWidth: Object.keys(this.theme.maxWidth).map(x => 'max-w-' + x),
 
@@ -315,7 +315,36 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private generateClassesWithColors = (property: keyof IThemeProps): string[] => {
+  private pseudoClasses = (): string[] => {
+    const pseudoClasses: string[] = [];
+
+    for (const [variantsKey, variantsForKey] of Object.entries(this.configScanner.getVariants())) {
+      Object.keys(this.generatedRegularClasses).map(key => {
+        if (_.has(this.generatedRegularClasses[key as keyof typeof defaultClasses], variantsKey)) {
+          const generatedClass = _.get(
+            this.generatedRegularClasses,
+            `${key}.${variantsKey}`,
+          ) as string[];
+          generatedClass.map(classname => {
+            variantsForKey.map(variant => {
+              if (variant === 'responsive') {
+                const [breakpoints] = this.configScanner.getThemeProperty('screens');
+                breakpoints.map((breakpointVariant: string) => {
+                  pseudoClasses.push(breakpointVariant + this.separator + this.prefix + classname);
+                });
+              } else {
+                pseudoClasses.push(variant + this.separator + this.prefix + classname);
+              }
+            });
+          });
+        }
+      });
+    }
+
+    return pseudoClasses;
+  };
+
+  private generateClassesWithColors = (property: ClassesWithColors): string[] => {
     const [propertyNames, propertyVariants] = this.configScanner.getThemeProperty(property);
     return propertyNames.flatMap((propertyValue, i) => {
       const variant = propertyVariants[i];
@@ -350,34 +379,5 @@ export class ClassesGenerator implements IGenerator {
       divideOpacities: getOpacity('divideOpacity', 'divide'),
       placeholderOpacities: getOpacity('placeholderOpacity', 'placeholder'),
     };
-  };
-
-  private pseudoClasses = (): string[] => {
-    const pseudoClasses: string[] = [];
-
-    for (const [variantsKey, variantsForKey] of Object.entries(this.configScanner.getVariants())) {
-      Object.keys(this.generatedRegularClasses).map(key => {
-        if (_.has(this.generatedRegularClasses[key as keyof typeof defaultClasses], variantsKey)) {
-          const generatedClass = _.get(
-            this.generatedRegularClasses,
-            `${key}.${variantsKey}`,
-          ) as string[];
-          generatedClass.map(classname => {
-            variantsForKey.map(variant => {
-              if (variant === 'responsive') {
-                const [breakpoints] = this.configScanner.getThemeProperty('screens');
-                breakpoints.map((breakpointVariant: string) => {
-                  pseudoClasses.push(breakpointVariant + this.separator + this.prefix + classname);
-                });
-              } else {
-                pseudoClasses.push(variant + this.separator + this.prefix + classname);
-              }
-            });
-          });
-        }
-      });
-    }
-
-    return pseudoClasses;
   };
 }
