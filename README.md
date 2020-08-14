@@ -1,5 +1,9 @@
 # tailwindcss-classnames
 
+![NPM](https://img.shields.io/npm/l/tailwindcss-classnames)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/tailwindcss-classnames)
+![npm](https://img.shields.io/npm/v/tailwindcss-classnames)
+
 Functional typed classnames for TailwindCSS
 
 [TailwindCSS](https://tailwindcss.com/) is a CSS library that has gained a lot of traction. The developer experience is pretty epic and you ensure a low footprint on your css by composing existing classes for most of your css.
