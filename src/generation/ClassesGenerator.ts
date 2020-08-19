@@ -10,15 +10,18 @@ export class ClassesGenerator implements IGenerator {
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
+  private readonly deprecations: TFuture;
   private generatedRegularClasses: typeof defaultClasses;
   private generatedPseudoClasses: string[];
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
+
     this.prefix = configScanner.getPrefix();
     this.separator = configScanner.getSeparator();
     this.theme = configScanner.getTheme();
     this.configScanner = configScanner;
+    this.deprecations = configScanner.getDeprecations();
 
     this.generatedRegularClasses = {
       Accessibility: this.accessibility(),
@@ -229,12 +232,14 @@ export class ClassesGenerator implements IGenerator {
       gridRow: Object.keys(this.theme.gridRow).map(value => `row-${value}`),
       gridRowStart: Object.keys(this.theme.gridRowStart).map(value => `row-start-${value}`),
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(value => `row-end-${value}`),
-      gridGap: ['gap-', 'row-gap-', 'col-gap-'].flatMap(x => {
-        // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
-        return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
-          gapValue => x + gapValue,
-        );
-      }),
+      gridGap: ['gap-', 'gap-y-', 'gap-x-']
+        .concat(this.deprecations.removeDeprecatedGapUtilities ? [] : ['row-gap-', 'col-gap-'])
+        .flatMap(x => {
+          // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
+          return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
+            gapValue => x + gapValue,
+          );
+        }),
     };
   };
 

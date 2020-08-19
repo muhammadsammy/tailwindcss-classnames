@@ -24,12 +24,17 @@ type ClassesWithSpacing = {
   spaceBetweens: string[];
 };
 
+type TFuture = {
+  removeDeprecatedGapUtilities?: boolean;
+};
+
 type TailwindConfig = {
   prefix?: string;
   important?: boolean;
   separator?: string;
   theme?: IThemeConfig;
   variants?: IVariantsConfig;
+  future?: TFuture;
   // corePlugins?: {};
 };
 
