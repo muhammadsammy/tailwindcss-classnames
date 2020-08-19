@@ -11,7 +11,7 @@ import {Spacing} from './Spacing';
 import {SVG} from './SVG';
 import {Tables} from './Tables';
 import {Transforms} from './Transforms';
-import {Transitions} from './Transitions';
+import {TransitionsAndAnimations} from './TransitionsAndAnimations';
 import {Typography} from './Typography';
 
 export const AllClassesFlat: {
@@ -30,7 +30,7 @@ export const AllClassesFlat: {
   ...SVG,
   ...Tables,
   ...Transforms,
-  ...Transitions,
+  ...TransitionsAndAnimations,
   ...Typography,
 };
 
@@ -48,6 +48,6 @@ export const AllClasses = {
   SVG,
   Tables,
   Transforms,
-  Transitions,
+  TransitionsAndAnimations,
   Typography,
 };

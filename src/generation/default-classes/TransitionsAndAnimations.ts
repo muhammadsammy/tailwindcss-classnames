@@ -32,9 +32,18 @@ const transitionDelay = [
 
 const transitionTimingFunction = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out'];
 
-export const Transitions = {
+const animation = [
+  'animate-none',
+  'animate-spin',
+  'animate-ping',
+  'animate-pulse',
+  'animate-bounce',
+];
+
+export const TransitionsAndAnimations = {
   transitionProperty,
   transitionDuration,
   transitionTimingFunction,
   transitionDelay,
+  animation,
 };

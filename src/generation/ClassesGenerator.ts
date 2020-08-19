@@ -29,7 +29,7 @@ export class ClassesGenerator implements IGenerator {
       Borders: this.borders(),
       Tables: this.tables(),
       Effects: this.effects(),
-      Transitions: this.transitions(),
+      TransitionsAndAnimations: this.transitionsAndAnimations(),
       FlexBox: this.flexBox(),
       Grid: this.grid(),
       Spacing: this.spacing(),
@@ -143,9 +143,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private transitions = (): typeof defaultClasses.Transitions => {
+  private transitionsAndAnimations = (): typeof defaultClasses.TransitionsAndAnimations => {
     return {
-      ...defaultClasses.Transitions,
+      ...defaultClasses.TransitionsAndAnimations,
       transitionProperty: Object.keys(this.theme.transitionProperty).map(
         property => 'transition-' + property,
       ),
@@ -156,6 +156,7 @@ export class ClassesGenerator implements IGenerator {
         value => 'ease-' + value,
       ),
       transitionDelay: Object.keys(this.theme.transitionDelay).map(value => 'delay-' + value),
+      animation: Object.keys(this.theme.animation).map(val => 'animate-' + val),
     };
   };
 

@@ -47,186 +47,125 @@ interface IThemeConfig extends IThemeProps {
 }
 
 interface IThemeProps {
-  screens: {
-    [key: string]: string;
-  };
-  colors: {
-    [key: string]: string | {[key: string]: string};
-  };
-  spacing: {
-    [key: string]: string;
-  };
-  backgroundPosition: {
-    [key: string]: string;
-  };
-  backgroundSize: {
-    [key: string]: string;
-  };
+  animation: Record<string, string>;
 
-  borderRadius: {
-    [key: string]: string;
-  };
-  borderWidth: {
-    [key: string]: string;
-  };
-  boxShadow: {
-    [key: string]: string;
-  };
-  backgroundColor: {
-    [key: string]: string;
-  };
-  borderColor: {
-    [key: string]: string;
-  };
-  container: {
-    [key: string]: string;
-  };
-  cursor: {
-    [key: string]: string;
-  };
-  divideColor: {
-    [key: string]: string;
-  };
-  divideWidth: {
-    [key: string]: string;
-  };
-  fill: {
-    [key: string]: string;
-  };
-  flex: {
-    [key: string]: string;
-  };
-  flexGrow: {
-    [key: string]: string;
-  };
-  flexShrink: {
-    [key: string]: string;
-  };
-  fontFamily: {
-    [key: string]: string[];
-  };
-  fontSize: {
-    [key: string]: string;
-  };
-  fontWeight: {
-    [key: string]: string;
-  };
-  height: {
-    [key: string]: string;
-  };
-  inset: {
-    [key: string]: string;
-  };
-  letterSpacing: {
-    [key: string]: string;
-  };
-  lineHeight: {
-    [key: string]: string;
-  };
-  listStyleType: {
-    [key: string]: string;
-  };
-  margin: {
-    [key: string]: string;
-  };
-  maxHeight: {
-    [key: string]: string;
-  };
-  maxWidth: {
-    [key: string]: string;
-  };
-  minHeight: {
-    [key: string]: string;
-  };
-  minWidth: {
-    [key: string]: string;
-  };
-  objectPosition: {
-    [key: string]: string;
-  };
-  opacity: {
-    [key: string]: string;
-  };
-  order: {
-    [key: string]: string;
-  };
-  padding: {
-    [key: string]: string;
-  };
-  placeholderColor: {
-    [key: string]: string;
-  };
-  space: {
-    [key: string]: string;
-  };
-  stroke: {
-    [key: string]: string;
-  };
-  strokeWidth: {
-    [key: string]: string;
-  };
-  textColor: {
-    [key: string]: string;
-  };
-  width: {
-    [key: string]: string;
-  };
-  zIndex: {
-    [key: string]: string;
-  };
-  gap: {
-    [key: string]: string;
-  };
-  gridTemplateColumns: {
-    [key: string]: string;
-  };
-  gridColumn: {
-    [key: string]: string;
-  };
-  gridColumnStart: {
-    [key: string]: string;
-  };
-  gridColumnEnd: {
-    [key: string]: string;
-  };
-  gridTemplateRows: {
-    [key: string]: string;
-  };
-  gridRow: {
-    auto: 'auto';
-    [key: string]: string;
-  };
-  gridRowStart: {
-    [key: string]: string;
-  };
-  gridRowEnd: {
-    [key: string]: string;
-  };
-  transformOrigin: {
-    [key: string]: string;
-  };
-  scale: {
-    [key: string]: string;
-  };
-  rotate: {
-    [key: string]: string;
-  };
-  translate: {
-    [key: string]: string;
-  };
-  skew: {
-    [key: string]: string;
-  };
-  transitionProperty: {
-    [key: string]: string;
-  };
-  transitionTimingFunction: {
-    [key: string]: string;
-  };
-  transitionDuration: {
-    [key: string]: string;
-  };
-  transitionDelay: {
-    [key: string]: string;
-  };
+  screens: Record<string, string>;
+
+  colors: Record<string, string | Record<string, string>>;
+
+  spacing: Record<string, string>;
+
+  backgroundPosition: Record<string, string>;
+
+  backgroundSize: Record<string, string>;
+
+  borderRadius: Record<string, string>;
+
+  borderWidth: Record<string, string>;
+
+  boxShadow: Record<string, string>;
+
+  backgroundColor: Record<string, string>;
+
+  borderColor: Record<string, string>;
+
+  container: Record<string, string>;
+
+  cursor: Record<string, string>;
+
+  divideColor: Record<string, string>;
+
+  divideWidth: Record<string, string>;
+
+  fill: Record<string, string>;
+
+  flex: Record<string, string>;
+
+  flexGrow: Record<string, string>;
+
+  flexShrink: Record<string, string>;
+
+  fontFamily: {[key: string]: string[]};
+
+  fontSize: Record<string, string>;
+
+  fontWeight: Record<string, string>;
+
+  height: Record<string, string>;
+
+  inset: Record<string, string>;
+
+  letterSpacing: Record<string, string>;
+
+  lineHeight: Record<string, string>;
+
+  listStyleType: Record<string, string>;
+
+  margin: Record<string, string>;
+
+  maxHeight: Record<string, string>;
+
+  maxWidth: Record<string, string>;
+
+  minHeight: Record<string, string>;
+
+  minWidth: Record<string, string>;
+
+  objectPosition: Record<string, string>;
+
+  opacity: Record<string, string>;
+
+  order: Record<string, string>;
+
+  padding: Record<string, string>;
+
+  placeholderColor: Record<string, string>;
+
+  space: Record<string, string>;
+
+  stroke: Record<string, string>;
+
+  strokeWidth: Record<string, string>;
+
+  textColor: Record<string, string>;
+
+  width: Record<string, string>;
+
+  zIndex: Record<string, string>;
+
+  gap: Record<string, string>;
+
+  gridTemplateColumns: Record<string, string>;
+
+  gridColumn: Record<string, string>;
+
+  gridColumnStart: Record<string, string>;
+
+  gridColumnEnd: Record<string, string>;
+
+  gridTemplateRows: Record<string, string>;
+
+  gridRow: {auto: 'auto'; [key: string]: string};
+
+  gridRowStart: Record<string, string>;
+
+  gridRowEnd: Record<string, string>;
+
+  transformOrigin: Record<string, string>;
+
+  scale: Record<string, string>;
+
+  rotate: Record<string, string>;
+
+  translate: Record<string, string>;
+
+  skew: Record<string, string>;
+
+  transitionProperty: Record<string, string>;
+
+  transitionTimingFunction: Record<string, string>;
+
+  transitionDuration: Record<string, string>;
+
+  transitionDelay: Record<string, string>;
 }
