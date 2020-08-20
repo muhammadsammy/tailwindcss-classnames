@@ -11,6 +11,7 @@ const display = [
   'table',
   'table-row',
   'table-cell',
+  'contents',
   'hidden',
 ];
 
