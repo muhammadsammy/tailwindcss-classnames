@@ -10,15 +10,18 @@ export class ClassesGenerator implements IGenerator {
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
+  private readonly deprecations: TFuture;
   private generatedRegularClasses: typeof defaultClasses;
   private generatedPseudoClasses: string[];
 
   constructor(tailwindConfig: TailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
+
     this.prefix = configScanner.getPrefix();
     this.separator = configScanner.getSeparator();
     this.theme = configScanner.getTheme();
     this.configScanner = configScanner;
+    this.deprecations = configScanner.getDeprecations();
 
     this.generatedRegularClasses = {
       Accessibility: this.accessibility(),
@@ -26,7 +29,7 @@ export class ClassesGenerator implements IGenerator {
       Borders: this.borders(),
       Tables: this.tables(),
       Effects: this.effects(),
-      Transitions: this.transitions(),
+      TransitionsAndAnimations: this.transitionsAndAnimations(),
       FlexBox: this.flexBox(),
       Grid: this.grid(),
       Spacing: this.spacing(),
@@ -40,10 +43,6 @@ export class ClassesGenerator implements IGenerator {
 
     this.generatedPseudoClasses = this.pseudoClasses();
   }
-
-  // TODO: check if values are nested objects e.g., colors
-  // this checking is only implemented on colors property
-  // but better to be done on all other properties
 
   public generate = (): string => {
     const allClassesTemplates = Object.keys(this.generatedRegularClasses)
@@ -88,6 +87,10 @@ export class ClassesGenerator implements IGenerator {
       backgroundColor: this.generateClassesWithColors('backgroundColor'),
       backgroundPosition: Object.keys(this.theme.backgroundPosition).map(x => 'bg-' + x),
       backgroundSize: Object.keys(this.theme.backgroundSize).map(x => 'bg-' + x),
+      backgroundImage: Object.keys(this.theme.backgroundImage).map(x => 'bg-' + x),
+      gradientColorStops: this.generateClassesWithColors('gradientColorStops').flatMap(val =>
+        ['from', 'via', 'to'].map(x => x + val.replace('gradient', '')),
+      ),
     };
   };
 
@@ -140,9 +143,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private transitions = (): typeof defaultClasses.Transitions => {
+  private transitionsAndAnimations = (): typeof defaultClasses.TransitionsAndAnimations => {
     return {
-      ...defaultClasses.Transitions,
+      ...defaultClasses.TransitionsAndAnimations,
       transitionProperty: Object.keys(this.theme.transitionProperty).map(
         property => 'transition-' + property,
       ),
@@ -153,6 +156,7 @@ export class ClassesGenerator implements IGenerator {
         value => 'ease-' + value,
       ),
       transitionDelay: Object.keys(this.theme.transitionDelay).map(value => 'delay-' + value),
+      animation: Object.keys(this.theme.animation).map(val => 'animate-' + val),
     };
   };
 
@@ -229,12 +233,14 @@ export class ClassesGenerator implements IGenerator {
       gridRow: Object.keys(this.theme.gridRow).map(value => `row-${value}`),
       gridRowStart: Object.keys(this.theme.gridRowStart).map(value => `row-start-${value}`),
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(value => `row-end-${value}`),
-      gridGap: ['gap-', 'row-gap-', 'col-gap-'].flatMap(x => {
-        // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
-        return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
-          gapValue => x + gapValue,
-        );
-      }),
+      gridGap: ['gap-', 'gap-y-', 'gap-x-']
+        .concat(this.deprecations.removeDeprecatedGapUtilities ? [] : ['row-gap-', 'col-gap-'])
+        .flatMap(x => {
+          // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
+          return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
+            gapValue => x + gapValue,
+          );
+        }),
     };
   };
 
@@ -349,7 +355,10 @@ export class ClassesGenerator implements IGenerator {
     return propertyNames.flatMap((propertyValue, i) => {
       const variant = propertyVariants[i];
 
-      const propertyResult = property.replace('Color', '').replace('background', 'bg');
+      const propertyResult = property
+        .replace('Color', '')
+        .replace('Stops', '')
+        .replace('background', 'bg');
 
       if (typeof variant === 'object' && variant !== null) {
         return Object.keys(variant).map(

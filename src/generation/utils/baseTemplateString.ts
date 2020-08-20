@@ -24,7 +24,7 @@ export type TClasses =
   | TTables
   | TEffects
   | TTransforms
-  | TTransitions
+  | TTransitionsAndAnimations
   | TInteractivity
   | TSVG
   | TAccessibility CUSTOM_FORMS_PLUGIN_TYPE IMPORTED_T_CUSTOM_CLASSES

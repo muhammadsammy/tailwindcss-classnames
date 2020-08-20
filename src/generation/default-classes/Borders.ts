@@ -315,6 +315,14 @@ const divideColor = [
   'divide-pink-900',
 ];
 
+const divideStyle = [
+  'divide-solid',
+  'divide-dashed',
+  'divide-dotted',
+  'divide-double',
+  'divide-none',
+];
+
 export const Borders = {
   borderColor,
   borderOpacity,
@@ -324,4 +332,5 @@ export const Borders = {
   divideWidth,
   divideOpacity,
   divideColor,
+  divideStyle,
 };

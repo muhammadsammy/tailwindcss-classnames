@@ -11,6 +11,7 @@ const display = [
   'table',
   'table-row',
   'table-cell',
+  'contents',
   'hidden',
 ];
 
@@ -57,6 +58,18 @@ const overflow = [
   'scrolling-auto',
 ];
 
+const overscrollBehavior = [
+  'overscroll-auto',
+  'overscroll-contain',
+  'overscroll-none',
+  'overscroll-y-auto',
+  'overscroll-y-contain',
+  'overscroll-y-none',
+  'overscroll-x-auto',
+  'overscroll-x-contain',
+  'overscroll-x-none',
+];
+
 const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
 const topRightBottomLeft = [
@@ -89,6 +102,7 @@ export const Layout = {
   objectFit,
   objectPosition,
   overflow,
+  overscrollBehavior,
   position,
   topRightBottomLeft,
   visibility,
