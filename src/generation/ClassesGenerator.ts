@@ -5,16 +5,33 @@ import {IGenerator} from './IGenerator';
 import _ from 'lodash';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 
+type ClassesWithColors =
+  | 'backgroundColor'
+  | 'divideColor'
+  | 'placeholderColor'
+  | 'textColor'
+  | 'borderColor'
+  | 'gradientColorStops';
+
+type ClassesWithOpacities = {
+  opacities: string[];
+  textOpacities: string[];
+  backgroundOpacities: string[];
+  borderOpacities: string[];
+  divideOpacities: string[];
+  placeholderOpacities: string[];
+};
+
 export class ClassesGenerator implements IGenerator {
   private readonly prefix: string;
   private readonly separator: string;
   private readonly theme: IThemeConfig;
   private readonly configScanner: ConfigScanner;
   private readonly deprecations: TFuture;
-  private generatedRegularClasses: typeof defaultClasses;
-  private generatedPseudoClasses: string[];
+  private readonly generatedRegularClasses: typeof defaultClasses;
+  private readonly generatedPseudoClasses: string[];
 
-  constructor(tailwindConfig: TailwindConfig) {
+  constructor(tailwindConfig: TTailwindConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
 
     this.prefix = configScanner.getPrefix();

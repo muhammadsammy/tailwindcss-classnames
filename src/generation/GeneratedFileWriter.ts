@@ -13,11 +13,11 @@ type CliArguments = {
 };
 
 export class GeneratedFileWriter {
-  private configFilename: string | void;
-  private outputFilename: string | void;
-  private customClassesFilename: string | void;
-  private customClassesTypeName: string | void;
-  private isCustomClassesAdded: boolean;
+  private readonly configFilename: string | void;
+  private readonly outputFilename: string | void;
+  private readonly customClassesFilename: string | void;
+  private readonly customClassesTypeName: string | void;
+  private readonly isCustomClassesAdded: boolean;
   private configFileData = '';
 
   constructor(options: CliArguments) {

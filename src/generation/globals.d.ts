@@ -1,35 +1,8 @@
-type ColorShades = string[] | Array<{[key: string]: string}>;
-
-type ClassesWithColors =
-  | 'backgroundColor'
-  | 'divideColor'
-  | 'placeholderColor'
-  | 'textColor'
-  | 'borderColor'
-  | 'gradientColorStops';
-
-type ClassesWithOpacities = {
-  opacities: string[];
-  textOpacities: string[];
-  backgroundOpacities: string[];
-  borderOpacities: string[];
-  divideOpacities: string[];
-  placeholderOpacities: string[];
-};
-
-type ClassesWithSpacing = {
-  paddings: string[];
-  margins: string[];
-  widths: string[];
-  heights: string[];
-  spaceBetweens: string[];
-};
-
 type TFuture = {
   removeDeprecatedGapUtilities?: boolean;
 };
 
-type TailwindConfig = {
+type TTailwindConfig = {
   prefix?: string;
   important?: boolean;
   separator?: string;

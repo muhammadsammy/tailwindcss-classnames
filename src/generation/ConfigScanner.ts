@@ -5,10 +5,10 @@ export class ConfigScanner {
   private future: TFuture;
   private readonly prefix: string;
   private readonly separator: string;
-  private themeConfig: IThemeConfig;
+  private readonly themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
-  constructor(tailwindConfig: TailwindConfig) {
+  constructor(tailwindConfig: TTailwindConfig) {
     this.future = tailwindConfig?.future ?? {};
     this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this.separator = _.isEmpty(tailwindConfig.separator)
