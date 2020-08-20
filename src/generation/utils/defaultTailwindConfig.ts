@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+/* eslint-disable */
 // @ts-nocheck
+
 export const defaultThemeConfig = {
   screens: {
     sm: '640px',
@@ -151,6 +148,18 @@ export const defaultThemeConfig = {
     '64': '16rem',
   },
   backgroundColor: theme => theme('colors'),
+  backgroundImage: {
+    none: 'none',
+    'gradient-to-t': 'linear-gradient(to top, var(--gradient-color-stops))',
+    'gradient-to-tr': 'linear-gradient(to top right, var(--gradient-color-stops))',
+    'gradient-to-r': 'linear-gradient(to right, var(--gradient-color-stops))',
+    'gradient-to-br': 'linear-gradient(to bottom right, var(--gradient-color-stops))',
+    'gradient-to-b': 'linear-gradient(to bottom, var(--gradient-color-stops))',
+    'gradient-to-bl': 'linear-gradient(to bottom left, var(--gradient-color-stops))',
+    'gradient-to-l': 'linear-gradient(to left, var(--gradient-color-stops))',
+    'gradient-to-tl': 'linear-gradient(to top left, var(--gradient-color-stops))',
+  },
+  gradientColorStops: theme => theme('colors'),
   backgroundOpacity: theme => theme('opacity'),
   backgroundPosition: {
     bottom: 'bottom',
@@ -629,16 +638,40 @@ export const defaultThemeConfig = {
     pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
     bounce: 'bounce 1s infinite',
   },
+  keyframes: {
+    spin: {
+      to: {transform: 'rotate(360deg)'},
+    },
+    ping: {
+      '75%, 100%': {transform: 'scale(2)', opacity: '0'},
+    },
+    pulse: {
+      '50%': {opacity: '.5'},
+    },
+    bounce: {
+      '0%, 100%': {
+        transform: 'translateY(-25%)',
+        animationTimingFunction: 'cubic-bezier(0.8,0,1,1)',
+      },
+      '50%': {
+        transform: 'none',
+        animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+      },
+    },
+  },
 };
 
-export const defaultVariants: {[key: string]: string[]} = {
+export const defaultVariants: Record<string, string[]> = {
   accessibility: ['responsive', 'focus'],
   alignContent: ['responsive'],
   alignItems: ['responsive'],
   alignSelf: ['responsive'],
   appearance: ['responsive'],
   backgroundAttachment: ['responsive'],
+  backgroundClip: ['responsive'],
   backgroundColor: ['responsive', 'hover', 'focus'],
+  backgroundImage: ['responsive'],
+  gradientColorStops: ['responsive', 'hover', 'focus'],
   backgroundOpacity: ['responsive', 'hover', 'focus'],
   backgroundPosition: ['responsive'],
   backgroundRepeat: ['responsive'],
@@ -651,10 +684,12 @@ export const defaultVariants: {[key: string]: string[]} = {
   borderWidth: ['responsive'],
   boxShadow: ['responsive', 'hover', 'focus'],
   boxSizing: ['responsive'],
+  container: ['responsive'],
   cursor: ['responsive'],
   display: ['responsive'],
   divideColor: ['responsive'],
   divideOpacity: ['responsive'],
+  divideStyle: ['responsive'],
   divideWidth: ['responsive'],
   fill: ['responsive'],
   flex: ['responsive'],
@@ -687,6 +722,7 @@ export const defaultVariants: {[key: string]: string[]} = {
   order: ['responsive'],
   outline: ['responsive', 'focus'],
   overflow: ['responsive'],
+  overscrollBehavior: ['responsive'],
   padding: ['responsive'],
   placeholderColor: ['responsive', 'focus'],
   placeholderOpacity: ['responsive', 'focus'],
@@ -729,4 +765,5 @@ export const defaultVariants: {[key: string]: string[]} = {
   transitionTimingFunction: ['responsive'],
   transitionDuration: ['responsive'],
   transitionDelay: ['responsive'],
+  animation: ['responsive'],
 };

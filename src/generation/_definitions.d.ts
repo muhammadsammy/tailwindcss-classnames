@@ -5,7 +5,8 @@ type ClassesWithColors =
   | 'divideColor'
   | 'placeholderColor'
   | 'textColor'
-  | 'borderColor';
+  | 'borderColor'
+  | 'gradientColorStops';
 
 type ClassesWithOpacities = {
   opacities: string[];
@@ -58,6 +59,10 @@ interface IThemeProps {
   backgroundPosition: Record<string, string>;
 
   backgroundSize: Record<string, string>;
+
+  backgroundImage: Record<string, string>;
+
+  gradientColorStops: Record<string, string | Record<string, string>>;
 
   borderRadius: Record<string, string>;
 

@@ -44,10 +44,6 @@ export class ClassesGenerator implements IGenerator {
     this.generatedPseudoClasses = this.pseudoClasses();
   }
 
-  // TODO: check if values are nested objects e.g., colors
-  // this checking is only implemented on colors property
-  // but better to be done on all other properties
-
   public generate = (): string => {
     const allClassesTemplates = Object.keys(this.generatedRegularClasses)
       .map(classGroup => {
@@ -91,6 +87,10 @@ export class ClassesGenerator implements IGenerator {
       backgroundColor: this.generateClassesWithColors('backgroundColor'),
       backgroundPosition: Object.keys(this.theme.backgroundPosition).map(x => 'bg-' + x),
       backgroundSize: Object.keys(this.theme.backgroundSize).map(x => 'bg-' + x),
+      backgroundImage: Object.keys(this.theme.backgroundImage).map(x => 'bg-' + x),
+      gradientColorStops: this.generateClassesWithColors('gradientColorStops').flatMap(val =>
+        ['from', 'via', 'to'].map(x => x + val.replace('gradient', '')),
+      ),
     };
   };
 
@@ -355,7 +355,10 @@ export class ClassesGenerator implements IGenerator {
     return propertyNames.flatMap((propertyValue, i) => {
       const variant = propertyVariants[i];
 
-      const propertyResult = property.replace('Color', '').replace('background', 'bg');
+      const propertyResult = property
+        .replace('Color', '')
+        .replace('Stops', '')
+        .replace('background', 'bg');
 
       if (typeof variant === 'object' && variant !== null) {
         return Object.keys(variant).map(
