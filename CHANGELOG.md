@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.4.1...v1.5.0) (2020-08-20)
+
+### Features
+
+- add compatibility with TailwindCSS v1.7 ([#32](https://github.com/muhammadsammy/tailwindcss-classnames/issues/32)) ([83562f3](https://github.com/muhammadsammy/tailwindcss-classnames/commit/83562f30fe614a1490d6f6df648f8c97530c0cee))
+
 ### [1.4.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.4.0...v1.4.1) (2020-07-05)
 
 ### Bug Fixes
