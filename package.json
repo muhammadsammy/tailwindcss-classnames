@@ -11,7 +11,7 @@
   "repository": "git+https://github.com/muhammadsammy/tailwindcss-classnames.git",
   "main": "lib/index.js",
   "bin": {
-    "tailwindcss-classnames": "lib/cli.js"
+    "tailwindcss-classnames": "lib/cli/index.js"
   },
   "module": "es/index.js",
   "browser": "dist/bundle.js",
