@@ -11929,3 +11929,5 @@ export type TTailwind = (...args: TArg[]) => TTailwindString;
 export const classnames: TTailwind = classnamesLib as any;
 
 export const tw = classnames;
+
+export default tw;
