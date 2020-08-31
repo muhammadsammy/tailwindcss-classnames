@@ -84,7 +84,7 @@ export class ClassesGenerator implements IGenerator {
     return {
       ...defaultClasses.Layout,
       objectPosition: Object.keys(this.theme.objectPosition).map(x => 'object-' + x),
-      topRightBottomLeft: Object.keys(this.theme.inset).flatMap(insetValue => {
+      inset: Object.keys(this.theme.inset).flatMap(insetValue => {
         return ['inset', 'inset-x', 'inset-y', 'top', 'right', 'bottom', 'left'].map(side =>
           insetValue.startsWith('-')
             ? `-${side}-${insetValue.substring(1)}`
@@ -250,7 +250,7 @@ export class ClassesGenerator implements IGenerator {
       gridRow: Object.keys(this.theme.gridRow).map(value => `row-${value}`),
       gridRowStart: Object.keys(this.theme.gridRowStart).map(value => `row-start-${value}`),
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(value => `row-end-${value}`),
-      gridGap: ['gap-', 'gap-y-', 'gap-x-']
+      gap: ['gap-', 'gap-y-', 'gap-x-']
         .concat(this.deprecations.removeDeprecatedGapUtilities ? [] : ['row-gap-', 'col-gap-'])
         .flatMap(x => {
           // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
@@ -341,7 +341,14 @@ export class ClassesGenerator implements IGenerator {
   private pseudoClasses = (): string[] => {
     const pseudoClasses: string[] = [];
 
-    for (const [variantsKey, variantsForKey] of Object.entries(this.configScanner.getVariants())) {
+    // HACK
+    const variantsConfig = Object.entries(
+      _.merge(this.configScanner.getVariants(), {
+        screenReaders: this.configScanner.getVariants().accessibility,
+      }),
+    );
+
+    for (const [variantsKey, variantsForKey] of variantsConfig) {
       Object.keys(this.generatedRegularClasses).map(key => {
         if (_.has(this.generatedRegularClasses[key as keyof typeof defaultClasses], variantsKey)) {
           const generatedClass = _.get(

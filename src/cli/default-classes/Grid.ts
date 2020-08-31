@@ -145,7 +145,7 @@ const deprecatedGridGaps = [
   'col-gap-px',
 ];
 
-const gridGap = [
+const gap = [
   'gap-0',
   'gap-1',
   'gap-2',
@@ -222,6 +222,6 @@ export const Grid = {
   gridRow,
   gridRowStart,
   gridRowEnd,
-  gridGap,
+  gap,
   gridAutoFlow,
 };

@@ -72,7 +72,7 @@ const overscrollBehavior = [
 
 const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
-const topRightBottomLeft = [
+const inset = [
   'inset-0',
   'inset-y-0',
   'inset-x-0',
@@ -104,7 +104,7 @@ export const Layout = {
   overflow,
   overscrollBehavior,
   position,
-  topRightBottomLeft,
+  inset,
   visibility,
   zIndex,
 };
