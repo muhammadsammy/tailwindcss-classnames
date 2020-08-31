@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.0...v1.6.1) (2020-08-31)
+
+### Bug Fixes
+
+- add missing pseudoclasses for gap, accessiblity and inset classes ([9c7d3a3](https://github.com/muhammadsammy/tailwindcss-classnames/commit/9c7d3a329cf6536481e9a0e4f5ef8d2504dee2a2))
+
 ## [1.6.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.4.1...v1.6.0) (2020-08-30)
 
 ### Features
