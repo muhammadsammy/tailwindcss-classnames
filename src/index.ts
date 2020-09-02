@@ -12368,7 +12368,9 @@ export type TClasses =
 
 export type TTailwindString = 'TAILWIND_STRING';
 
-export type TArg = TClasses | null | undefined | {[key in TClasses]?: boolean} | TTailwindString;
+export type TKey = TClasses | TTailwindString;
+
+export type TArg = TClasses | null | undefined | {[key in TKey]?: boolean} | TTailwindString;
 
 export type TTailwind = (...args: TArg[]) => TTailwindString;
 
