@@ -21,7 +21,7 @@
     "build:lib": "tsc --outDir lib --module commonjs",
     "build:es": "tsc --outDir es --module es2015",
     "build:umd": "npm run build:es && rollup --config && dts-bundle --name dist/bundle --main es --outputAsModuleFolder",
-    "clean": "rimraf dist es lib coverage tailwindcss-classnames.ts",
+    "clean": "rimraf dist es lib coverage tailwindcss-classnames.ts tailwind.config.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix && npm run format",
     "format": "prettier \"**/*.{md,js,jsx,json,ts,tsx}\" --write",
@@ -33,7 +33,10 @@
     "posttest": "npm run typecheck && npm run lint",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
-    "release": "standard-version"
+    "release": "standard-version",
+    "pregenerate": "npm run clean && npm run build:lib",
+    "generate": "tailwindcss init --full && node lib/cli/index.js --config tailwind.config.js --output src/index.ts",
+    "postgenerate": "npm run clean"
   },
   "keywords": [
     "typescript",
@@ -83,6 +86,7 @@
     "rollup-plugin-terser": "^5.3.0",
     "semver": "^7.3.2",
     "standard-version": "^8.0.0",
+    "tailwindcss": "^1.7.6",
     "ts-jest": "~23.10.0",
     "typescript": "^3.1.4"
   }
