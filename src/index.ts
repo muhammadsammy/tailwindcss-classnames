@@ -12348,6 +12348,8 @@ export type TCustomFormsPluginClasses =
   | 'form-checkbox'
   | 'form-radio';
 
+export type TTypographyPluginClasses = 'prose' | 'prose-sm' | 'prose-lg' | 'prose-xl' | 'prose-2xl';
+
 export type TClasses =
   | TLayout
   | TTypography
@@ -12368,7 +12370,9 @@ export type TClasses =
 
 export type TTailwindString = 'TAILWIND_STRING';
 
-export type TArg = TClasses | null | undefined | {[key in TClasses]?: boolean} | TTailwindString;
+export type TKey = TClasses | TTailwindString;
+
+export type TArg = TClasses | null | undefined | {[key in TKey]?: boolean} | TTailwindString;
 
 export type TTailwind = (...args: TArg[]) => TTailwindString;
 

@@ -73,6 +73,12 @@ export class GeneratedFileWriter {
           : '',
       )
       .replace(
+        /TYPOGRAPHY_PLUGIN_TYPE/g,
+        this.configFileData.includes('@tailwindcss/typography')
+          ? '\n  | TTypographyPluginClasses'
+          : '',
+      )
+      .replace(
         /IMPORTED_T_CUSTOM_CLASSES/g,
         this.isCustomClassesAdded ? '\n  | TCustomClassesFromExternalFile' : '',
       )
