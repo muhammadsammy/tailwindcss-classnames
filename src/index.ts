@@ -12348,6 +12348,8 @@ export type TCustomFormsPluginClasses =
   | 'form-checkbox'
   | 'form-radio';
 
+export type TTypographyPluginClasses = 'prose' | 'prose-sm' | 'prose-lg' | 'prose-xl' | 'prose-2xl';
+
 export type TClasses =
   | TLayout
   | TTypography

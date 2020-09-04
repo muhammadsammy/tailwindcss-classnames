@@ -12,6 +12,13 @@ export type TCustomFormsPluginClasses =
   | 'form-checkbox'
   | 'form-radio'
 
+export type TTypographyPluginClasses =
+  | 'prose'
+  | 'prose-sm'
+  | 'prose-lg'
+  | 'prose-xl'
+  | 'prose-2xl'
+
 export type TClasses =
   | TLayout
   | TTypography
@@ -27,7 +34,7 @@ export type TClasses =
   | TTransitionsAndAnimations
   | TInteractivity
   | TSVG
-  | TAccessibility CUSTOM_FORMS_PLUGIN_TYPE IMPORTED_T_CUSTOM_CLASSES
+  | TAccessibility CUSTOM_FORMS_PLUGIN_TYPE TYPOGRAPHY_PLUGIN_TYPE IMPORTED_T_CUSTOM_CLASSES
   | TPseudoClasses;
 
 
