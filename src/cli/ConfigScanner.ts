@@ -2,10 +2,10 @@ import {defaultThemeConfig, defaultVariants} from './utils/defaultTailwindConfig
 import _ from 'lodash';
 
 export class ConfigScanner {
-  private future: TFuture;
+  private readonly future: TFuture;
   private readonly prefix: string;
   private readonly separator: string;
-  private readonly themeConfig: IThemeConfig;
+  private themeConfig: IThemeConfig;
   private readonly variantsConfig: IVariantsConfig;
 
   constructor(tailwindConfig: TTailwindConfig) {
@@ -17,10 +17,7 @@ export class ConfigScanner {
     this.variantsConfig = _.isEmpty(tailwindConfig.variants)
       ? defaultVariants // Order does matter, defaultVariants will be overridden by themeVariants.
       : {...defaultVariants, ...tailwindConfig.variants};
-    this.themeConfig = _.merge(
-      {...defaultThemeConfig, ...tailwindConfig.theme},
-      tailwindConfig.theme?.extend,
-    ) as IThemeConfig;
+    this.themeConfig = {...defaultThemeConfig, ...tailwindConfig.theme} as IThemeConfig;
   }
 
   public getPrefix = (): string => this.prefix;
@@ -47,6 +44,25 @@ export class ConfigScanner {
       }
     }
 
+    if (this.themeConfig.extend) {
+      for (const [key, value] of Object.entries(this.themeConfig.extend)) {
+        if (_.isFunction(value)) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          this.themeConfig.extend[key as keyof IThemeProps] = value(
+            (path: string): Record<string, unknown> =>
+              _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
+                string,
+                Record<string, string> | string
+              >,
+            {
+              negative,
+              breakpoints,
+            },
+          );
+        }
+      }
+    }
+
     function negative(item: Record<string, string>): Record<string, string> {
       const itemCopy = {...item};
       for (const [key] of Object.entries(itemCopy)) {
@@ -63,6 +79,9 @@ export class ConfigScanner {
       }
       return itemCopy;
     }
+
+    this.themeConfig = _.merge(this.themeConfig, this.themeConfig?.extend);
+    delete this.themeConfig?.extend;
 
     return this.themeConfig;
   };
