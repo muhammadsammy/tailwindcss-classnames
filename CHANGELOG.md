@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.8.0) (2020-09-10)
+
+### Features
+
+- **plugins:** add typography plugin support ([#44](https://github.com/muhammadsammy/tailwindcss-classnames/issues/44)) ([7b8eabb](https://github.com/muhammadsammy/tailwindcss-classnames/commit/7b8eabbbdba03132e97bc400f0181c77a5c96cf3))
+- **types:** add TKey ([#42](https://github.com/muhammadsammy/tailwindcss-classnames/issues/42)) ([8011ab3](https://github.com/muhammadsammy/tailwindcss-classnames/commit/8011ab3d279fda7920cea4c0445ae5ff977bf841))
+
+### Bug Fixes
+
+- functions in theme.extend overrides the theme not extend it ([#49](https://github.com/muhammadsammy/tailwindcss-classnames/issues/49)) ([3be8b6f](https://github.com/muhammadsammy/tailwindcss-classnames/commit/3be8b6f9678e8560ee89f8b686f3ff0bdbcc11fe))
+
 ## [1.7.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.7.0) (2020-09-04)
 
 ### Features
