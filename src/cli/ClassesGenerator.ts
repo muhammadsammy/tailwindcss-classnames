@@ -163,9 +163,9 @@ export class ClassesGenerator implements IGenerator {
   private transitionsAndAnimations = (): typeof defaultClasses.TransitionsAndAnimations => {
     return {
       ...defaultClasses.TransitionsAndAnimations,
-      transitionProperty: Object.keys(this.theme.transitionProperty).map(
-        property => 'transition-' + property,
-      ),
+      transitionProperty: Object.keys(this.theme.transitionProperty)
+        .map(property => 'transition-' + property)
+        .concat('transition'),
       transitionDuration: Object.keys(this.theme.transitionDuration).map(
         value => 'duration-' + value,
       ),
