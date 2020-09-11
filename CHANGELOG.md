@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.2](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.7.2) (2020-09-11)
+
+### Bug Fixes
+
+- add missing 'transition' type ([bf4bb5e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/bf4bb5ed16c7a758a9f362efd8ee4b6748e47753))
+- functions in theme.extend overrides the theme not extend it ([#49](https://github.com/muhammadsammy/tailwindcss-classnames/issues/49)) ([3be8b6f](https://github.com/muhammadsammy/tailwindcss-classnames/commit/3be8b6f9678e8560ee89f8b686f3ff0bdbcc11fe))
+
 ### [1.7.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.7.1) (2020-09-10)
 
 ### Bug Fixes
