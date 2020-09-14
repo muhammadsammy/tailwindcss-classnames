@@ -86,7 +86,7 @@
     "rollup-plugin-terser": "^5.3.0",
     "semver": "^7.3.2",
     "standard-version": "^8.0.0",
-    "tailwindcss": "^1.7.6",
+    "tailwindcss": "^1.8.7",
     "ts-jest": "~23.10.0",
     "typescript": "^3.1.4"
   }

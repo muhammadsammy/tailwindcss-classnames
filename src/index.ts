@@ -803,7 +803,8 @@ export type TTransitionProperty =
   | 'transition-colors'
   | 'transition-opacity'
   | 'transition-shadow'
-  | 'transition-transform';
+  | 'transition-transform'
+  | 'transition';
 
 export type TTransitionDuration =
   | 'duration-75'
@@ -861,12 +862,49 @@ export type TAlignContent =
 
 export type TAlignSelf = 'self-auto' | 'self-start' | 'self-center' | 'self-end' | 'self-stretch';
 
+export type TPlaceContent =
+  | 'place-content-start'
+  | 'place-content-center'
+  | 'place-content-end'
+  | 'place-content-between'
+  | 'place-content-around'
+  | 'place-content-evenly'
+  | 'place-content-stretch';
+
+export type TPlaceItems =
+  | 'place-items-auto'
+  | 'place-items-start'
+  | 'place-items-center'
+  | 'place-items-end'
+  | 'place-items-stretch';
+
+export type TPlaceSelf =
+  | 'place-self-auto'
+  | 'place-self-start'
+  | 'place-self-center'
+  | 'place-self-end'
+  | 'place-self-stretch';
+
 export type TJustifyContent =
   | 'justify-start'
   | 'justify-center'
   | 'justify-end'
   | 'justify-between'
   | 'justify-around';
+
+export type TJustifyItems =
+  | 'justify-items-auto'
+  | 'justify-items-start'
+  | 'justify-items-center'
+  | 'justify-items-end'
+  | 'justify-items-stretch';
+
+export type TJustifySelf =
+  | 'justify-self-auto'
+  | 'justify-self-start'
+  | 'justify-self-center'
+  | 'justify-self-end'
+  | 'justify-self-stretch';
 
 export type TFlex = 'flex-initial' | 'flex-1' | 'flex-auto' | 'flex-none';
 
@@ -897,7 +935,12 @@ export type TFlexBox =
   | TAlignItems
   | TAlignContent
   | TAlignSelf
+  | TPlaceContent
+  | TPlaceItems
+  | TPlaceSelf
   | TJustifyContent
+  | TJustifyItems
+  | TJustifySelf
   | TFlex
   | TFlexGrow
   | TFlexShrink
@@ -2034,6 +2077,17 @@ export type TFontWeight =
   | 'font-extrabold'
   | 'font-black';
 
+export type TFontVariantNumeric =
+  | 'normal-nums'
+  | 'ordinal'
+  | 'slashed-zero'
+  | 'lining-nums'
+  | 'oldstyle-nums'
+  | 'proportional-nums'
+  | 'tabular-nums'
+  | 'diagonal-fractions'
+  | 'stacked-fractions';
+
 export type TLetterSpacing =
   | 'tracking-tighter'
   | 'tracking-tight'
@@ -2297,6 +2351,7 @@ export type TTypography =
   | TFontSmoothing
   | TFontStyle
   | TFontWeight
+  | TFontVariantNumeric
   | TLetterSpacing
   | TLineHeight
   | TListStyleType
@@ -6515,6 +6570,42 @@ export type TPseudoClasses =
   | 'md:subpixel-antialiased'
   | 'lg:subpixel-antialiased'
   | 'xl:subpixel-antialiased'
+  | 'sm:normal-nums'
+  | 'md:normal-nums'
+  | 'lg:normal-nums'
+  | 'xl:normal-nums'
+  | 'sm:ordinal'
+  | 'md:ordinal'
+  | 'lg:ordinal'
+  | 'xl:ordinal'
+  | 'sm:slashed-zero'
+  | 'md:slashed-zero'
+  | 'lg:slashed-zero'
+  | 'xl:slashed-zero'
+  | 'sm:lining-nums'
+  | 'md:lining-nums'
+  | 'lg:lining-nums'
+  | 'xl:lining-nums'
+  | 'sm:oldstyle-nums'
+  | 'md:oldstyle-nums'
+  | 'lg:oldstyle-nums'
+  | 'xl:oldstyle-nums'
+  | 'sm:proportional-nums'
+  | 'md:proportional-nums'
+  | 'lg:proportional-nums'
+  | 'xl:proportional-nums'
+  | 'sm:tabular-nums'
+  | 'md:tabular-nums'
+  | 'lg:tabular-nums'
+  | 'xl:tabular-nums'
+  | 'sm:diagonal-fractions'
+  | 'md:diagonal-fractions'
+  | 'lg:diagonal-fractions'
+  | 'xl:diagonal-fractions'
+  | 'sm:stacked-fractions'
+  | 'md:stacked-fractions'
+  | 'lg:stacked-fractions'
+  | 'xl:stacked-fractions'
   | 'sm:italic'
   | 'md:italic'
   | 'lg:italic'
@@ -6741,6 +6832,46 @@ export type TPseudoClasses =
   | 'md:justify-around'
   | 'lg:justify-around'
   | 'xl:justify-around'
+  | 'sm:justify-items-auto'
+  | 'md:justify-items-auto'
+  | 'lg:justify-items-auto'
+  | 'xl:justify-items-auto'
+  | 'sm:justify-items-start'
+  | 'md:justify-items-start'
+  | 'lg:justify-items-start'
+  | 'xl:justify-items-start'
+  | 'sm:justify-items-center'
+  | 'md:justify-items-center'
+  | 'lg:justify-items-center'
+  | 'xl:justify-items-center'
+  | 'sm:justify-items-end'
+  | 'md:justify-items-end'
+  | 'lg:justify-items-end'
+  | 'xl:justify-items-end'
+  | 'sm:justify-items-stretch'
+  | 'md:justify-items-stretch'
+  | 'lg:justify-items-stretch'
+  | 'xl:justify-items-stretch'
+  | 'sm:justify-self-auto'
+  | 'md:justify-self-auto'
+  | 'lg:justify-self-auto'
+  | 'xl:justify-self-auto'
+  | 'sm:justify-self-start'
+  | 'md:justify-self-start'
+  | 'lg:justify-self-start'
+  | 'xl:justify-self-start'
+  | 'sm:justify-self-center'
+  | 'md:justify-self-center'
+  | 'lg:justify-self-center'
+  | 'xl:justify-self-center'
+  | 'sm:justify-self-end'
+  | 'md:justify-self-end'
+  | 'lg:justify-self-end'
+  | 'xl:justify-self-end'
+  | 'sm:justify-self-stretch'
+  | 'md:justify-self-stretch'
+  | 'lg:justify-self-stretch'
+  | 'xl:justify-self-stretch'
   | 'sm:tracking-tighter'
   | 'md:tracking-tighter'
   | 'lg:tracking-tighter'
@@ -8800,6 +8931,74 @@ export type TPseudoClasses =
   | 'md:pl-px'
   | 'lg:pl-px'
   | 'xl:pl-px'
+  | 'sm:place-content-start'
+  | 'md:place-content-start'
+  | 'lg:place-content-start'
+  | 'xl:place-content-start'
+  | 'sm:place-content-center'
+  | 'md:place-content-center'
+  | 'lg:place-content-center'
+  | 'xl:place-content-center'
+  | 'sm:place-content-end'
+  | 'md:place-content-end'
+  | 'lg:place-content-end'
+  | 'xl:place-content-end'
+  | 'sm:place-content-between'
+  | 'md:place-content-between'
+  | 'lg:place-content-between'
+  | 'xl:place-content-between'
+  | 'sm:place-content-around'
+  | 'md:place-content-around'
+  | 'lg:place-content-around'
+  | 'xl:place-content-around'
+  | 'sm:place-content-evenly'
+  | 'md:place-content-evenly'
+  | 'lg:place-content-evenly'
+  | 'xl:place-content-evenly'
+  | 'sm:place-content-stretch'
+  | 'md:place-content-stretch'
+  | 'lg:place-content-stretch'
+  | 'xl:place-content-stretch'
+  | 'sm:place-items-auto'
+  | 'md:place-items-auto'
+  | 'lg:place-items-auto'
+  | 'xl:place-items-auto'
+  | 'sm:place-items-start'
+  | 'md:place-items-start'
+  | 'lg:place-items-start'
+  | 'xl:place-items-start'
+  | 'sm:place-items-center'
+  | 'md:place-items-center'
+  | 'lg:place-items-center'
+  | 'xl:place-items-center'
+  | 'sm:place-items-end'
+  | 'md:place-items-end'
+  | 'lg:place-items-end'
+  | 'xl:place-items-end'
+  | 'sm:place-items-stretch'
+  | 'md:place-items-stretch'
+  | 'lg:place-items-stretch'
+  | 'xl:place-items-stretch'
+  | 'sm:place-self-auto'
+  | 'md:place-self-auto'
+  | 'lg:place-self-auto'
+  | 'xl:place-self-auto'
+  | 'sm:place-self-start'
+  | 'md:place-self-start'
+  | 'lg:place-self-start'
+  | 'xl:place-self-start'
+  | 'sm:place-self-center'
+  | 'md:place-self-center'
+  | 'lg:place-self-center'
+  | 'xl:place-self-center'
+  | 'sm:place-self-end'
+  | 'md:place-self-end'
+  | 'lg:place-self-end'
+  | 'xl:place-self-end'
+  | 'sm:place-self-stretch'
+  | 'md:place-self-stretch'
+  | 'lg:place-self-stretch'
+  | 'xl:place-self-stretch'
   | 'sm:placeholder-transparent'
   | 'md:placeholder-transparent'
   | 'lg:placeholder-transparent'
@@ -12229,6 +12428,10 @@ export type TPseudoClasses =
   | 'md:transition-transform'
   | 'lg:transition-transform'
   | 'xl:transition-transform'
+  | 'sm:transition'
+  | 'md:transition'
+  | 'lg:transition'
+  | 'xl:transition'
   | 'sm:ease-linear'
   | 'md:ease-linear'
   | 'lg:ease-linear'
