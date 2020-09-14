@@ -727,6 +727,7 @@ export const defaultVariants: Record<string, string[]> = {
   overflow: ['responsive'],
   overscrollBehavior: ['responsive'],
   padding: ['responsive'],
+  placeContent: ['responsive'],
   placeholderColor: ['responsive', 'focus'],
   placeholderOpacity: ['responsive', 'focus'],
   pointerEvents: ['responsive'],
