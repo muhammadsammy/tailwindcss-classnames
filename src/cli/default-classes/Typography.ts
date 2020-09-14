@@ -29,6 +29,18 @@ const fontWeight = [
   'font-black',
 ];
 
+const fontVariantNumeric = [
+  'normal-nums',
+  'ordinal',
+  'slashed-zero',
+  'lining-nums',
+  'oldstyle-nums',
+  'proportional-nums',
+  'tabular-nums',
+  'diagonal-fractions',
+  'stacked-fractions',
+];
+
 const letterSpacing = [
   'tracking-tighter',
   'tracking-tight',
@@ -298,6 +310,7 @@ export const Typography = {
   fontSmoothing,
   fontStyle,
   fontWeight,
+  fontVariantNumeric,
   letterSpacing,
   lineHeight,
   listStyleType,
