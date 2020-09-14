@@ -729,6 +729,7 @@ export const defaultVariants: Record<string, string[]> = {
   padding: ['responsive'],
   placeContent: ['responsive'],
   placeItems: ['responsive'],
+  placeSelf: ['responsive'],
   placeholderColor: ['responsive', 'focus'],
   placeholderOpacity: ['responsive', 'focus'],
   pointerEvents: ['responsive'],
