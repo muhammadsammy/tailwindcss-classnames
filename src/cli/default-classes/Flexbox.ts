@@ -24,6 +24,14 @@ const placeContent = [
   'place-content-stretch',
 ];
 
+const placeItems = [
+  'place-items-auto',
+  'place-items-start',
+  'place-items-center',
+  'place-items-end',
+  'place-items-stretch',
+];
+
 const justifyContent = [
   'justify-start',
   'justify-center',
@@ -79,6 +87,7 @@ export const FlexBox = {
   alignContent,
   alignSelf,
   placeContent,
+  placeItems,
   justifyContent,
   justifyItems,
   justifySelf,
