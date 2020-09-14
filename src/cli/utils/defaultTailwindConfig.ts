@@ -709,6 +709,7 @@ export const defaultVariants: Record<string, string[]> = {
   inset: ['responsive'],
   justifyContent: ['responsive'],
   justifyItems: ['responsive'],
+  justifySelf: ['responsive'],
   letterSpacing: ['responsive'],
   lineHeight: ['responsive'],
   listStylePosition: ['responsive'],

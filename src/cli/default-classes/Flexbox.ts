@@ -30,6 +30,14 @@ const justifyItems = [
   'justify-items-stretch',
 ];
 
+const justifySelf = [
+  'justify-self-auto',
+  'justify-self-start',
+  'justify-self-center',
+  'justify-self-end',
+  'justify-self-stretch',
+];
+
 const flex = ['flex-initial', 'flex-1', 'flex-auto', 'flex-none'];
 
 const flexGrow = ['flex-grow', 'flex-grow-0'];
@@ -62,6 +70,7 @@ export const FlexBox = {
   alignSelf,
   justifyContent,
   justifyItems,
+  justifySelf,
   flex,
   flexGrow,
   flexShrink,
