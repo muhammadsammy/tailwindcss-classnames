@@ -704,6 +704,7 @@ export const defaultVariants: Record<string, string[]> = {
   fontSmoothing: ['responsive'],
   fontStyle: ['responsive'],
   fontWeight: ['responsive', 'hover', 'focus'],
+  fontVariantNumeric: ['responsive'],
   height: ['responsive'],
   inset: ['responsive'],
   justifyContent: ['responsive'],
