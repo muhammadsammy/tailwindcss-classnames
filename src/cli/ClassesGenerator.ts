@@ -362,6 +362,8 @@ export class ClassesGenerator implements IGenerator {
                 breakpoints.map((breakpointVariant: string) => {
                   pseudoClasses.push(breakpointVariant + this.separator + this.prefix + classname);
                 });
+              } else if (variant.startsWith('group') && !pseudoClasses.includes('group')) {
+                pseudoClasses.push('group');
               } else {
                 pseudoClasses.push(variant + this.separator + this.prefix + classname);
               }
