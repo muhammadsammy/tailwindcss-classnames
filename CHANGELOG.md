@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.8.1) (2020-09-15)
+
+### Features
+
+- make lib compatible with tailwindcss 1.8 ([#52](https://github.com/muhammadsammy/tailwindcss-classnames/issues/52)) ([664d2af](https://github.com/muhammadsammy/tailwindcss-classnames/commit/664d2af999e7670d7a389efc82964a95fbd24179))
+- **plugins:** add typography plugin support ([#44](https://github.com/muhammadsammy/tailwindcss-classnames/issues/44)) ([7b8eabb](https://github.com/muhammadsammy/tailwindcss-classnames/commit/7b8eabbbdba03132e97bc400f0181c77a5c96cf3))
+- **types:** add TKey ([#42](https://github.com/muhammadsammy/tailwindcss-classnames/issues/42)) ([8011ab3](https://github.com/muhammadsammy/tailwindcss-classnames/commit/8011ab3d279fda7920cea4c0445ae5ff977bf841))
+
+### Bug Fixes
+
+- **types:** add missing 'group' type for group-\* variants (fixes [#53](https://github.com/muhammadsammy/tailwindcss-classnames/issues/53)) ([dbf7f20](https://github.com/muhammadsammy/tailwindcss-classnames/commit/dbf7f2009989246eea91e587d14a248a57733258))
+- add missing 'transition' type ([bf4bb5e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/bf4bb5ed16c7a758a9f362efd8ee4b6748e47753))
+- functions in theme.extend overrides the theme not extend it ([#49](https://github.com/muhammadsammy/tailwindcss-classnames/issues/49)) ([3be8b6f](https://github.com/muhammadsammy/tailwindcss-classnames/commit/3be8b6f9678e8560ee89f8b686f3ff0bdbcc11fe))
+
 ## [1.8.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.8.0) (2020-09-14)
 
 ### Features
