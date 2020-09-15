@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.2](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.8.1...v1.8.2) (2020-09-15)
+
+### Bug Fixes
+
+- **types:** group type replaces group-hover/ group-focus variants ([7381d13](https://github.com/muhammadsammy/tailwindcss-classnames/commit/7381d13252eb58cdc44073020856995692dfe711))
+
 ### [1.8.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.6.1...v1.8.1) (2020-09-15)
 
 ### Features
