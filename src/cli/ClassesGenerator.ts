@@ -365,7 +365,7 @@ export class ClassesGenerator implements IGenerator {
               } else {
                 pseudoClasses.push(variant + this.separator + this.prefix + classname);
                 if (variant.startsWith('group') && !pseudoClasses.includes('group'))
-                  pseudoClasses.push(this.prefix + 'group');
+                  pseudoClasses.push('group');
               }
             });
           });
