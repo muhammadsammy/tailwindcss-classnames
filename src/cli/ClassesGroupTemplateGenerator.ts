@@ -1,5 +1,5 @@
 import {IGenerator} from './IGenerator';
-import {capitalizeFirstLetter, generateTypes} from './utils/utils';
+import {capitalizeFirstLetter, generateTypes} from './utils';
 
 type ClassesGroup = {[key: string]: string[]};
 

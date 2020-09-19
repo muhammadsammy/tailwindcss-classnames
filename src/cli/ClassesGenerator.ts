@@ -1,9 +1,10 @@
 import {ConfigScanner} from './ConfigScanner';
-import {generateOpacities, generateTypes} from './utils/utils';
+import {generateTypes} from './utils';
 import {AllClasses as defaultClasses} from './default-classes/all';
 import {IGenerator} from './IGenerator';
 import _ from 'lodash';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
+import {defaultThemeConfig} from './utils/defaultTailwindConfig';
 
 type ClassesWithColors =
   | 'backgroundColor'
@@ -399,12 +400,34 @@ export class ClassesGenerator implements IGenerator {
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
     const allOpacities = this.configScanner.getTheme().opacity;
 
-    const getOpacity = (themePropertyName: string, outputNamePrefix: string): string[] => {
-      const generatedOpacities = generateOpacities(allOpacities, this.theme, themePropertyName);
+    // prettier-ignore
+    type TOpacityProp = | 'divideOpacity' | 'textOpacity'| 'backgroundOpacity'
+                        | 'borderOpacity' | 'placeholderOpacity'
+    const getOpacity = (themePropertyName: TOpacityProp, outputNamePrefix: string): string[] => {
+      const generatedOpacities = generateOpacities(
+        allOpacities,
+        <typeof defaultThemeConfig & {extend: typeof defaultThemeConfig}>(<unknown>this.theme),
+        themePropertyName,
+      );
+
       return Object.keys(generatedOpacities).map(
         opacity => `${outputNamePrefix}-opacity-${opacity}`,
       );
     };
+
+    function generateOpacities(
+      defaultOpacities: Record<string, string>,
+      theme: typeof defaultThemeConfig & {extend: typeof defaultThemeConfig},
+      property: keyof typeof defaultThemeConfig,
+    ): Record<string, string> {
+      const themeOpacities = _.isEmpty(theme[property]) ? defaultOpacities : theme[property];
+      const extendedThemeOpacities = theme.extend?.[property];
+      const result = extendedThemeOpacities
+        ? {...themeOpacities, ...extendedThemeOpacities}
+        : themeOpacities;
+
+      return result as Record<string, string>;
+    }
 
     return {
       opacities: Object.keys(allOpacities).map(opacity => `opacity-${opacity}`),
