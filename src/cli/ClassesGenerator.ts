@@ -118,18 +118,12 @@ export class ClassesGenerator implements IGenerator {
       borderColor: this.generateClassesWithColors('borderColor'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this.theme.borderRadius).flatMap(radius => {
-        const sides = ['', 't', 'r', 'b', 'l', 'tr', 'tl', 'br', 'bl'];
-        return sides.map(
-          side =>
-            `rounded${side === '' ? '' : '-' + side}` + (radius === 'default' ? '' : `-${radius}`),
-        );
+        const sides = ['t', 'r', 'b', 'l', 'tr', 'tl', 'br', 'bl'];
+        return sides.map(side => `rounded-${side}-${radius}`).concat(`rounded-${radius}`);
       }),
       borderWidth: Object.keys(this.theme.borderWidth).flatMap(width => {
-        const sides = ['', 't', 'r', 'b', 'l'];
-        return sides.map(
-          side =>
-            `border${side === '' ? '' : '-' + side}` + (width === 'default' ? '' : `-${width}`),
-        );
+        const sides = ['t', 'r', 'b', 'l'];
+        return sides.map(side => `border-${side}-${width}`).concat(`border-${width}`);
       }),
       divideColor: this.generateClassesWithColors('divideColor'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
@@ -139,11 +133,7 @@ export class ClassesGenerator implements IGenerator {
         _.isEmpty(this.theme.divideWidth) ? this.theme.borderWidth : this.theme.divideWidth,
       )
         .concat('reverse')
-        .flatMap(width => {
-          return ['x', 'y'].map(
-            axis => `divide-${axis}` + (width === 'default' ? '' : `-${width}`),
-          );
-        }),
+        .flatMap(width => ['x', 'y'].map(axis => `divide-${axis}-${width}`)),
     };
   };
 
@@ -154,9 +144,7 @@ export class ClassesGenerator implements IGenerator {
   private effects = (): typeof defaultClasses.Effects => {
     return {
       ...defaultClasses.Effects,
-      boxShadow: Object.keys(this.theme.boxShadow).map(shadow => {
-        return `shadow${shadow === 'default' ? '' : '-' + shadow}`;
-      }),
+      boxShadow: Object.keys(this.theme.boxShadow).map(key => `shadow-${key}`),
       opacity: this.getGeneratedClassesWithOpacities().opacities,
     };
   };
@@ -164,9 +152,9 @@ export class ClassesGenerator implements IGenerator {
   private transitionsAndAnimations = (): typeof defaultClasses.TransitionsAndAnimations => {
     return {
       ...defaultClasses.TransitionsAndAnimations,
-      transitionProperty: Object.keys(this.theme.transitionProperty)
-        .map(property => 'transition-' + property)
-        .concat('transition'),
+      transitionProperty: Object.keys(this.theme.transitionProperty).map(
+        property => 'transition-' + property,
+      ),
       transitionDuration: Object.keys(this.theme.transitionDuration).map(
         value => 'duration-' + value,
       ),
@@ -228,13 +216,9 @@ export class ClassesGenerator implements IGenerator {
   private flexBox = (): typeof defaultClasses.FlexBox => {
     return {
       ...defaultClasses.FlexBox,
-      flexGrow: Object.keys(this.theme.flexGrow).map(
-        value => 'flex-grow' + (value === 'default' ? '' : `-${value}`),
-      ),
-      flexShrink: Object.keys(this.theme.flexShrink).map(
-        value => 'flex-shrink' + (value === 'default' ? '' : `-${value}`),
-      ),
-      order: Object.keys(this.theme.order).map(value => `order-${value}`),
+      flexGrow: Object.keys(this.theme.flexGrow).map(key => `flex-grow-${key}`),
+      flexShrink: Object.keys(this.theme.flexShrink).map(key => `flex-shrink-${key}`),
+      order: Object.keys(this.theme.order).map(key => `order-${key}`),
     };
   };
 
@@ -242,15 +226,15 @@ export class ClassesGenerator implements IGenerator {
     return {
       ...defaultClasses.Grid,
       gridTemplateColumns: Object.keys(this.theme.gridTemplateColumns).map(
-        value => `grid-cols-${value}`,
+        key => `grid-cols-${key}`,
       ),
-      gridColumn: Object.keys(this.theme.gridColumn).map(value => `col-${value}`),
-      gridColumnStart: Object.keys(this.theme.gridColumnStart).map(value => `col-start-${value}`),
-      gridColumnEnd: Object.keys(this.theme.gridColumnEnd).map(value => `col-end-${value}`),
-      gridTemplateRows: Object.keys(this.theme.gridTemplateRows).map(value => `grid-rows-${value}`),
-      gridRow: Object.keys(this.theme.gridRow).map(value => `row-${value}`),
-      gridRowStart: Object.keys(this.theme.gridRowStart).map(value => `row-start-${value}`),
-      gridRowEnd: Object.keys(this.theme.gridRowEnd).map(value => `row-end-${value}`),
+      gridColumn: Object.keys(this.theme.gridColumn).map(key => `col-${key}`),
+      gridColumnStart: Object.keys(this.theme.gridColumnStart).map(key => `col-start-${key}`),
+      gridColumnEnd: Object.keys(this.theme.gridColumnEnd).map(key => `col-end-${key}`),
+      gridTemplateRows: Object.keys(this.theme.gridTemplateRows).map(key => `grid-rows-${key}`),
+      gridRow: Object.keys(this.theme.gridRow).map(key => `row-${key}`),
+      gridRowStart: Object.keys(this.theme.gridRowStart).map(key => `row-start-${key}`),
+      gridRowEnd: Object.keys(this.theme.gridRowEnd).map(key => `row-end-${key}`),
       gap: ['gap-', 'gap-y-', 'gap-x-']
         .concat(this.deprecations.removeDeprecatedGapUtilities ? [] : ['row-gap-', 'col-gap-'])
         .flatMap(x => {
@@ -282,12 +266,12 @@ export class ClassesGenerator implements IGenerator {
       space: ['x', 'y'].flatMap(axis => {
         return Object.keys(_.isEmpty(this.theme.space) ? this.theme.spacing : this.theme.space)
           .concat('reverse')
-          .map(value => {
-            if (value.startsWith('-')) {
-              value = value.slice(1);
-              return '-space-' + axis + `-${value}`;
+          .map(key => {
+            if (key.startsWith('-')) {
+              key = key.slice(1);
+              return '-space-' + axis + `-${key}`;
             } else {
-              return 'space-' + axis + (value === 'default' ? '' : `-${value}`);
+              return `space-${axis}-${key}`;
             }
           });
       }),
@@ -311,7 +295,6 @@ export class ClassesGenerator implements IGenerator {
         : Object.keys(this.theme.width)).map(x => 'w-' + x),
       minWidth: Object.keys(this.theme.minWidth).map(x => 'min-w-' + x),
       maxWidth: Object.keys(this.theme.maxWidth).map(x => 'max-w-' + x),
-
       // height values come from theme.spacing + `extraHeightSizing` by default
       // and overridden by theme.height.
       // prettier-ignore
@@ -378,30 +361,31 @@ export class ClassesGenerator implements IGenerator {
   };
 
   private generateClassesWithColors = (property: ClassesWithColors): string[] => {
-    const [propertyNames, propertyVariants] = this.configScanner.getThemeProperty(property);
-    return propertyNames.flatMap((propertyValue, i) => {
-      const variant = propertyVariants[i];
+    const [propertyKeys, propertyValues] = this.configScanner.getThemeProperty(property);
 
-      const propertyResult = property
-        .replace('Color', '')
-        .replace('Stops', '')
-        .replace('background', 'bg');
+    return propertyKeys
+      .filter(k => k !== 'default') // exclude `default` keys
+      .flatMap((colorName, i) => {
+        const colorValue = propertyValues[i]; // could be a `string` value or an `object` of shades.
 
-      if (typeof variant === 'object' && variant !== null) {
-        return Object.keys(variant).map(
-          v => `${propertyResult}-${propertyValue}${v === 'default' ? '' : `-${v}`}`,
-        );
-      } else {
-        return `${propertyResult}-${propertyValue}`;
-      }
-    });
+        const utilName = property
+          .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
+          .replace('Stops', '') // gradientStops -> gradient
+          .replace('background', 'bg');
+
+        if (typeof colorValue === 'object' && colorValue !== null) {
+          return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
+        } else {
+          return `${utilName}-${colorName}`;
+        }
+      });
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
     const allOpacities = this.configScanner.getTheme().opacity;
 
     // prettier-ignore
-    type TOpacityProp = | 'divideOpacity' | 'textOpacity'| 'backgroundOpacity'
+    type TOpacityProp = | 'divideOpacity' | 'textOpacity' | 'backgroundOpacity'
                         | 'borderOpacity' | 'placeholderOpacity'
     const getOpacity = (themePropertyName: TOpacityProp, outputNamePrefix: string): string[] => {
       const generatedOpacities = generateOpacities(
