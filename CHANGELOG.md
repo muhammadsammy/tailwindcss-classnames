@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.3](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.8.2...v1.8.3) (2020-09-20)
+
+### Bug Fixes
+
+- add group prefix ([#55](https://github.com/muhammadsammy/tailwindcss-classnames/issues/55)) ([52f10eb](https://github.com/muhammadsammy/tailwindcss-classnames/commit/52f10eb13cce21eda24913fb4c8d0d624a363f17))
+- remove `default` suffix from all types except types known to use it ([845b9bc](https://github.com/muhammadsammy/tailwindcss-classnames/commit/845b9bc12a640a3709b7c596bf7c8ca55064464b))
+
 ### [1.8.2](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.8.1...v1.8.2) (2020-09-15)
 
 ### Bug Fixes
