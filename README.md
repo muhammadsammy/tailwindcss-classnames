@@ -1,8 +1,8 @@
 # tailwindcss-classnames
 
 ![NPM](https://img.shields.io/npm/l/tailwindcss-classnames)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/tailwindcss-classnames)
-![npm](https://img.shields.io/npm/v/tailwindcss-classnames)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/tailwindcss-classnames)](https://bundlephobia.com/result?p=tailwindcss-classnames)
+[![npm version](https://img.shields.io/npm/v/tailwindcss-classnames.svg)](https://www.npmjs.com/package/tailwindcss-classnames)
 
 Functional typed classnames for TailwindCSS
 
@@ -105,14 +105,14 @@ export const App: React.FC<{disabled}> = ({disabled}) => {
 
 ## Using the CLI to generate custom types
 
-The types exported from this package are tailwindcss default ones, but if you modified your tailwind config file and/or want to add external custom classes, you can use the CLI tool to do this.
+The types included in this package are the default tailwindcss classes, but if you modified your tailwind config file and/or want to add external custom classes, you can use the CLI tool to do this.
 
 ### CLI arguments for tailwind config:
 
-- -c --config The name or relative path of TailwindCSS config file.
-- -f --classesFile _(Optional)_ The name or relative path of the file with the custom types.
+- -c --config The relative path for TailwindCSS config file.
+- -f --classesFile _(Optional)_ The relative path of the file with the custom types.
 - -t --typeName _(Optional)_ The name of the type exported from file containing the custom classes.
-- -o --output _(Optional)_ The name (or path) of the generated file.
+- -o --output _(Optional)_ The name (or path) to generate the file into.
 
 Add it in your package.json scripts:
 
