@@ -27,7 +27,7 @@ export class ConfigScanner {
 
   public getDeprecations = (): TConfigFuture => this.future;
 
-  public getTheme = (): TConfigTheme => {
+  public getTheme = (): Omit<TConfigTheme, 'extend'> => {
     for (const [key, value] of Object.entries(this.themeConfig)) {
       if (_.isFunction(value)) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

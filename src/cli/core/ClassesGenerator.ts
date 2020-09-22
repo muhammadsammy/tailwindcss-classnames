@@ -26,7 +26,7 @@ type ClassesWithOpacities = {
 export class ClassesGenerator implements IGenerator {
   private readonly prefix: string;
   private readonly separator: string;
-  private readonly theme: TConfigTheme;
+  private readonly theme: Omit<TConfigTheme, 'extend'>;
   private readonly configScanner: ConfigScanner;
   private readonly deprecations: TConfigFuture;
   private readonly generatedRegularClasses: typeof defaultClasses;
@@ -63,7 +63,7 @@ export class ClassesGenerator implements IGenerator {
   }
 
   public generate = (): string => {
-    const allClassesTemplates = Object.keys(this.generatedRegularClasses)
+    const regularClassesTemplate = Object.keys(this.generatedRegularClasses)
       .map(classGroup => {
         return new ClassesGroupTemplateGenerator(
           this.generatedRegularClasses[classGroup as keyof typeof defaultClasses],
@@ -73,12 +73,10 @@ export class ClassesGenerator implements IGenerator {
       })
       .join('\n');
 
-    return (
-      allClassesTemplates +
-      '\n\n' +
-      'export type TPseudoClasses =' +
-      generateTypes(this.generatedPseudoClasses)
-    );
+    const pseudoClassesTemplate =
+      'export type TPseudoClasses =' + generateTypes(this.generatedPseudoClasses);
+
+    return regularClassesTemplate + '\n\n' + pseudoClassesTemplate;
   };
 
   private layout = (): typeof defaultClasses.Layout => {
