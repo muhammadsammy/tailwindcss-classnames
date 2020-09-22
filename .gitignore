@@ -4,6 +4,7 @@
 .code
 dist
 lib
+!src/cli/lib
 es
 
 ### macOS ###

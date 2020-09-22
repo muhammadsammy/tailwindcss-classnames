@@ -1,10 +1,10 @@
+import _ from 'lodash';
 import {ConfigScanner} from './ConfigScanner';
 import {generateTypes} from './utils';
 import {AllClasses as defaultClasses} from './default-classes/all';
+import {TConfigTheme, TConfigFuture, TTailwindCSSConfig} from './lib/types';
 import {IGenerator} from './IGenerator';
-import _ from 'lodash';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
-import {defaultThemeConfig} from './utils/defaultTailwindConfig';
 
 type ClassesWithColors =
   | 'backgroundColor'
@@ -26,13 +26,13 @@ type ClassesWithOpacities = {
 export class ClassesGenerator implements IGenerator {
   private readonly prefix: string;
   private readonly separator: string;
-  private readonly theme: IThemeConfig;
+  private readonly theme: TConfigTheme;
   private readonly configScanner: ConfigScanner;
-  private readonly deprecations: TFuture;
+  private readonly deprecations: TConfigFuture;
   private readonly generatedRegularClasses: typeof defaultClasses;
   private readonly generatedPseudoClasses: string[];
 
-  constructor(tailwindConfig: TTailwindConfig) {
+  constructor(tailwindConfig: TTailwindCSSConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
 
     this.prefix = configScanner.getPrefix();
@@ -388,11 +388,7 @@ export class ClassesGenerator implements IGenerator {
     type TOpacityProp = | 'divideOpacity' | 'textOpacity' | 'backgroundOpacity'
                         | 'borderOpacity' | 'placeholderOpacity'
     const getOpacity = (themePropertyName: TOpacityProp, outputNamePrefix: string): string[] => {
-      const generatedOpacities = generateOpacities(
-        allOpacities,
-        <typeof defaultThemeConfig & {extend: typeof defaultThemeConfig}>(<unknown>this.theme),
-        themePropertyName,
-      );
+      const generatedOpacities = generateOpacities(allOpacities, this.theme, themePropertyName);
 
       return Object.keys(generatedOpacities).map(
         opacity => `${outputNamePrefix}-opacity-${opacity}`,
@@ -401,8 +397,8 @@ export class ClassesGenerator implements IGenerator {
 
     function generateOpacities(
       defaultOpacities: Record<string, string>,
-      theme: typeof defaultThemeConfig & {extend: typeof defaultThemeConfig},
-      property: keyof typeof defaultThemeConfig,
+      theme: TConfigTheme,
+      property: keyof Omit<TConfigTheme, 'extend'>,
     ): Record<string, string> {
       const themeOpacities = _.isEmpty(theme[property]) ? defaultOpacities : theme[property];
       const extendedThemeOpacities = theme.extend?.[property];

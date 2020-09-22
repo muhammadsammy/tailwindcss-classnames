@@ -1,36 +1,37 @@
-import {defaultThemeConfig, defaultVariants} from './utils/defaultTailwindConfig';
 import _ from 'lodash';
+import {defaultTailwindConfig} from './lib/defaultTailwindConfig';
+import {TTailwindCSSConfig, TConfigTheme, TConfigVariants, TConfigFuture} from './lib/types';
 
 export class ConfigScanner {
-  private readonly future: TFuture;
+  private readonly future: TConfigFuture;
   private readonly prefix: string;
   private readonly separator: string;
-  private themeConfig: IThemeConfig;
-  private readonly variantsConfig: IVariantsConfig;
+  private themeConfig: TConfigTheme;
+  private readonly variantsConfig: TConfigVariants;
 
-  constructor(tailwindConfig: TTailwindConfig) {
+  constructor(tailwindConfig: TTailwindCSSConfig) {
     this.future = tailwindConfig?.future ?? {};
     this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this.separator = _.isEmpty(tailwindConfig.separator)
       ? ':'
       : (tailwindConfig.separator as string);
     this.variantsConfig = _.isEmpty(tailwindConfig.variants)
-      ? defaultVariants // Order does matter, defaultVariants will be overridden by themeVariants.
-      : {...defaultVariants, ...tailwindConfig.variants};
-    this.themeConfig = {...defaultThemeConfig, ...tailwindConfig.theme} as IThemeConfig;
+      ? defaultTailwindConfig.variants // Order does matter, defaultVariants will be overridden by themeVariants.
+      : {...defaultTailwindConfig.variants, ...tailwindConfig.variants};
+    this.themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
   }
 
   public getPrefix = (): string => this.prefix;
 
   public getSeparator = (): string => this.separator;
 
-  public getDeprecations = (): TFuture => this.future;
+  public getDeprecations = (): TConfigFuture => this.future;
 
-  public getTheme = (): IThemeConfig => {
+  public getTheme = (): TConfigTheme => {
     for (const [key, value] of Object.entries(this.themeConfig)) {
       if (_.isFunction(value)) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        this.themeConfig[key as keyof IThemeConfig] = value(
+        this.themeConfig[key as keyof TConfigTheme] = value(
           (path: string): Record<string, unknown> =>
             _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
               string,
@@ -48,7 +49,7 @@ export class ConfigScanner {
       for (const [key, value] of Object.entries(this.themeConfig.extend)) {
         if (_.isFunction(value)) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          this.themeConfig.extend[key as keyof IThemeProps] = value(
+          this.themeConfig.extend[key as keyof Omit<TConfigTheme, 'extend'>] = value(
             (path: string): Record<string, unknown> =>
               _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
                 string,
@@ -86,10 +87,10 @@ export class ConfigScanner {
     return this.themeConfig;
   };
 
-  public getVariants = (): IVariantsConfig => this.variantsConfig;
+  public getVariants = (): TConfigVariants => this.variantsConfig;
 
   public getThemeProperty = (
-    themeProperty: keyof IThemeProps,
+    themeProperty: keyof Omit<TConfigTheme, 'extend'>,
   ): [string[], Array<string | Record<string, string>>] => {
     return [
       Object.keys(this.themeConfig[themeProperty]),
