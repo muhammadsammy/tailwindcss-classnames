@@ -2,7 +2,7 @@
 
 import {promises as fs} from 'fs';
 import colors from 'colors';
-import {baseTemplateString} from './utils/baseTemplateString';
+import {baseTemplateString} from '../lib/baseTemplateString';
 import {ClassesGenerator} from './ClassesGenerator';
 
 type CliArguments = {

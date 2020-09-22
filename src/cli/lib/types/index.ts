@@ -1,4 +1,4 @@
-import {defaultTailwindConfig} from '../defaultTailwindConfig';
+import {defaultTailwindConfig} from '../../lib/defaultTailwindConfig';
 
 export type TTailwindCSSConfig = Partial<typeof defaultTailwindConfig>;
 

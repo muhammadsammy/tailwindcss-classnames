@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {defaultTailwindConfig} from './lib/defaultTailwindConfig';
-import {TTailwindCSSConfig, TConfigTheme, TConfigVariants, TConfigFuture} from './lib/types';
+import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
+import {TTailwindCSSConfig, TConfigTheme, TConfigVariants, TConfigFuture} from '../lib/types';
 
 export class ConfigScanner {
   private readonly future: TConfigFuture;

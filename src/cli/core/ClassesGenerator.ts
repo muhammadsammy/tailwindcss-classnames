@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import {ConfigScanner} from './ConfigScanner';
-import {generateTypes} from './utils';
-import {AllClasses as defaultClasses} from './default-classes/all';
-import {TConfigTheme, TConfigFuture, TTailwindCSSConfig} from './lib/types';
+import {generateTypes} from '../utils';
+import {AllClasses as defaultClasses} from '../lib/default-classes';
+import {TConfigTheme, TConfigFuture, TTailwindCSSConfig} from '../lib/types';
 import {IGenerator} from './IGenerator';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 

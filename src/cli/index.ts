@@ -3,7 +3,7 @@
 import commander from 'commander';
 import inquirer from 'inquirer';
 import colors from 'colors';
-import {GeneratedFileWriter} from './GeneratedFileWriter';
+import {GeneratedFileWriter} from './core/GeneratedFileWriter';
 
 interface InquirerAnswers {
   configFilename: string;
