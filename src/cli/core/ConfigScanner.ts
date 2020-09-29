@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
-import {TTailwindCSSConfig, TConfigTheme, TConfigVariants, TConfigFuture} from '../lib/types';
+import {TTailwindCSSConfig, TConfigVariants, TConfigFuture} from '../lib/types';
+import {TConfigTheme, TThemeItems} from '../lib/types';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
 export class ConfigScanner {
   private readonly future: TConfigFuture;
@@ -27,61 +29,27 @@ export class ConfigScanner {
 
   public getDeprecations = (): TConfigFuture => this.future;
 
-  public getTheme = (): Omit<TConfigTheme, 'extend'> => {
-    for (const [key, value] of Object.entries(this.themeConfig)) {
-      if (_.isFunction(value)) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        this.themeConfig[key as keyof TConfigTheme] = value(
-          (path: string): Record<string, unknown> =>
-            _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
-              string,
-              Record<string, string> | string
-            >,
-          {
-            negative,
-            breakpoints,
-          },
-        );
+  public getTheme = (): TThemeItems => {
+    const evaluateCoreTheme = (): TThemeItems => {
+      const coreTheme = _.omit(this.themeConfig, 'extend');
+      const valueEvaluator = new ThemeClosuresEvaluator(coreTheme);
+      for (const [key, value] of Object.entries(this.themeConfig)) {
+        coreTheme[key as keyof TThemeItems] = valueEvaluator.evaluate(value);
       }
-    }
+      return coreTheme;
+    };
 
-    if (this.themeConfig.extend) {
-      for (const [key, value] of Object.entries(this.themeConfig.extend)) {
-        if (_.isFunction(value)) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          this.themeConfig.extend[key as keyof Omit<TConfigTheme, 'extend'>] = value(
-            (path: string): Record<string, unknown> =>
-              _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
-                string,
-                Record<string, string> | string
-              >,
-            {
-              negative,
-              breakpoints,
-            },
-          );
-        }
+    const evaluateThemeExtend = (): Partial<TConfigTheme['extend']> => {
+      const themeExtend = this.themeConfig.extend;
+      if (themeExtend) {
+        const valueEvaluator = new ThemeClosuresEvaluator(themeExtend);
+        for (const [key, value] of Object.entries(themeExtend))
+          themeExtend[key as keyof TThemeItems] = valueEvaluator.evaluate(value);
       }
-    }
+      return themeExtend;
+    };
 
-    function negative(item: Record<string, string>): Record<string, string> {
-      const itemCopy = {...item};
-      for (const [key] of Object.entries(itemCopy)) {
-        itemCopy['-' + key] = itemCopy[key];
-        delete itemCopy[key];
-      }
-      return itemCopy;
-    }
-    function breakpoints(item: Record<string, string>): Record<string, string> {
-      const itemCopy = {...item};
-      for (const [key] of Object.entries(itemCopy)) {
-        itemCopy['screen-' + key] = itemCopy[key];
-        delete itemCopy[key];
-      }
-      return itemCopy;
-    }
-
-    this.themeConfig = _.merge(this.themeConfig, this.themeConfig?.extend);
+    this.themeConfig = _.merge(evaluateCoreTheme(), evaluateThemeExtend());
     delete this.themeConfig?.extend;
 
     return this.themeConfig;
@@ -90,11 +58,52 @@ export class ConfigScanner {
   public getVariants = (): TConfigVariants => this.variantsConfig;
 
   public getThemeProperty = (
-    themeProperty: keyof Omit<TConfigTheme, 'extend'>,
+    themeProperty: keyof TThemeItems,
   ): [string[], Array<string | Record<string, string>>] => {
     return [
       Object.keys(this.themeConfig[themeProperty]),
-      Object.values(this.themeConfig[themeProperty]) as Array<string | Record<string, string>>,
+      Object.values(this.themeConfig[themeProperty]),
     ];
   };
+}
+
+class ThemeClosuresEvaluator {
+  constructor(private themeConfig: Partial<TThemeItems>) {}
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public evaluate(value: any): any {
+    if (_.isFunction(value)) {
+      return value(this.theme, {
+        negative: ThemeClosuresEvaluator.negative.bind(this),
+        breakpoints: ThemeClosuresEvaluator.breakpoints.bind(this),
+      });
+    } else {
+      return value;
+    }
+  }
+
+  private theme = (path: string): Record<string, unknown> => {
+    return _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
+      string,
+      Record<string, string> | string
+    >;
+  };
+
+  private static negative(item: Record<string, string>): Record<string, string> {
+    const itemCopy = {...item};
+    for (const [key] of Object.entries(itemCopy)) {
+      itemCopy['-' + key] = itemCopy[key];
+      delete itemCopy[key];
+    }
+    return itemCopy;
+  }
+
+  private static breakpoints(item: Record<string, string>): Record<string, string> {
+    const itemCopy = {...item};
+    for (const [key] of Object.entries(itemCopy)) {
+      itemCopy['screen-' + key] = itemCopy[key];
+      delete itemCopy[key];
+    }
+    return itemCopy;
+  }
 }

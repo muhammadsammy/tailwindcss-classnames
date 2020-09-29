@@ -14,6 +14,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'no-use-before-define': 'off',
     '@typescript-eslint/no-unsafe-call': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-member-accessibility': [
@@ -27,6 +28,7 @@ module.exports = {
       2,
       {
         functions: false,
+        classes: false,
       },
     ],
     '@typescript-eslint/no-inferrable-types': [

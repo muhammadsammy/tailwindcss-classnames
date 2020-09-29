@@ -1,4 +1,4 @@
-import {defaultTailwindConfig} from '../../lib/defaultTailwindConfig';
+import {defaultTailwindConfig} from '../defaultTailwindConfig';
 
 export type TTailwindCSSConfig = Partial<typeof defaultTailwindConfig>;
 
@@ -10,4 +10,4 @@ export type TConfigTheme = TThemeItems & {extend?: TThemeItems};
 
 export type TConfigVariants = typeof defaultTailwindConfig.variants;
 
-type TThemeItems = typeof defaultTailwindConfig.theme;
+export type TThemeItems = typeof defaultTailwindConfig.theme;
