@@ -61,8 +61,8 @@ export class ConfigScanner {
     themeProperty: keyof TThemeItems,
   ): [string[], Array<string | Record<string, string>>] => {
     return [
-      Object.keys(this.themeConfig[themeProperty]),
-      Object.values(this.themeConfig[themeProperty]),
+      Object.keys(this.getTheme()[themeProperty]),
+      Object.values(this.getTheme()[themeProperty]),
     ];
   };
 }
