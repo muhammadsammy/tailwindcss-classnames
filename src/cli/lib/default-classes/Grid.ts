@@ -16,6 +16,7 @@ const gridTemplateColumns = [
 
 const gridColumn = [
   'col-auto',
+  'col-span-full',
   'col-span-1',
   'col-span-2',
   'col-span-3',
@@ -74,6 +75,7 @@ const gridTemplateRows = [
 
 const gridRow = [
   'row-auto',
+  'row-span-full',
   'row-span-1',
   'row-span-2',
   'row-span-3',
