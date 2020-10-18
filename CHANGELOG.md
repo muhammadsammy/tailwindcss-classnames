@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.8.3...v1.9.0) (2020-10-18)
+
+### Features
+
+- add types for new classes introduced in tailwindcss 1.9 ([#59](https://github.com/muhammadsammy/tailwindcss-classnames/issues/59)) ([823d56c](https://github.com/muhammadsammy/tailwindcss-classnames/commit/823d56cd8cc21ee6482e7d541e1bbeda55fd8c93))
+
+### Bug Fixes
+
+- return evaluated theme from ConfigScanner.getThemeProperty method ([5dbb337](https://github.com/muhammadsammy/tailwindcss-classnames/commit/5dbb337e7518c4fc35ddbb07b62f3b615ce0a899))
+
 ### [1.8.3](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.8.2...v1.8.3) (2020-09-20)
 
 ### Bug Fixes
