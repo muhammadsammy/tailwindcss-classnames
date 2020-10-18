@@ -195,6 +195,7 @@ export class ClassesGenerator implements IGenerator {
     return {
       ...defaultClasses.Interactivity,
       cursor: Object.keys(this.theme.cursor).map(x => 'cursor-' + x),
+      outline: Object.keys(this.theme.outline).map(x => 'outline-' + x),
     };
   };
 
