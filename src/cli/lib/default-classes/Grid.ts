@@ -14,6 +14,8 @@ const gridTemplateColumns = [
   'grid-cols-none',
 ];
 
+const gridAutoColumns = ['auto-rows-auto', 'auto-rows-max', 'auto-rows-min', 'auto-rows-fr'];
+
 const gridColumn = [
   'col-auto',
   'col-span-full',
@@ -72,6 +74,8 @@ const gridTemplateRows = [
   'grid-rows-6',
   'grid-rows-none',
 ];
+
+const gridAutoRows = ['auto-cols-auto', 'auto-cols-max', 'auto-cols-min', 'auto-cols-fr'];
 
 const gridRow = [
   'row-auto',
@@ -217,10 +221,12 @@ const gridAutoFlow = [
 
 export const Grid = {
   gridTemplateColumns,
+  gridAutoColumns,
   gridColumn,
   gridColumnStart,
   gridColumnEnd,
   gridTemplateRows,
+  gridAutoRows,
   gridRow,
   gridRowStart,
   gridRowEnd,
