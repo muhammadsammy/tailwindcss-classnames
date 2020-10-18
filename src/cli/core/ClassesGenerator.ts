@@ -170,7 +170,9 @@ export class ClassesGenerator implements IGenerator {
       scale: ['', 'x-', 'y-'].flatMap(x =>
         Object.keys(this.theme.scale).map(value => 'scale-' + x + value),
       ),
-      rotate: Object.keys(this.theme.rotate).map(value => 'rotate-' + value),
+      rotate: Object.keys(this.theme.rotate).map(value =>
+        value.startsWith('-') ? '-rotate-' + value.slice(1) : `rotate-${value}`,
+      ),
       // translate gets values from theme.spacing in addition to 50% and 100% variations
       // by default and theme.translate overrides this behaviour.
       translate: ['x', 'y'].flatMap(side => {
@@ -195,6 +197,7 @@ export class ClassesGenerator implements IGenerator {
     return {
       ...defaultClasses.Interactivity,
       cursor: Object.keys(this.theme.cursor).map(x => 'cursor-' + x),
+      outline: Object.keys(this.theme.outline).map(x => 'outline-' + x),
     };
   };
 
@@ -226,10 +229,12 @@ export class ClassesGenerator implements IGenerator {
       gridTemplateColumns: Object.keys(this.theme.gridTemplateColumns).map(
         key => `grid-cols-${key}`,
       ),
+      gridAutoColumns: Object.keys(this.theme.gridAutoColumns).map(key => `auto-cols-${key}`),
       gridColumn: Object.keys(this.theme.gridColumn).map(key => `col-${key}`),
       gridColumnStart: Object.keys(this.theme.gridColumnStart).map(key => `col-start-${key}`),
       gridColumnEnd: Object.keys(this.theme.gridColumnEnd).map(key => `col-end-${key}`),
       gridTemplateRows: Object.keys(this.theme.gridTemplateRows).map(key => `grid-rows-${key}`),
+      gridAutoRows: Object.keys(this.theme.gridAutoRows).map(key => `auto-rows-${key}`),
       gridRow: Object.keys(this.theme.gridRow).map(key => `row-${key}`),
       gridRowStart: Object.keys(this.theme.gridRowStart).map(key => `row-start-${key}`),
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(key => `row-end-${key}`),

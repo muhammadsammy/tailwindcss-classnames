@@ -34,6 +34,8 @@ export const AllClassesFlat: {
   ...Typography,
 };
 
+// TODO: only keep non-configurable classes [not generated from tailwind.config.js]
+
 export const AllClasses = {
   Accessibility,
   Backgrounds,

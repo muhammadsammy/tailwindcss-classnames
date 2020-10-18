@@ -10,7 +10,7 @@ const cursor = [
   'cursor-not-allowed',
 ];
 
-const outline = ['outline-none'];
+const outline = ['outline-none', 'outline-white', 'outline-black'];
 
 const pointerEvents = ['pointer-events-none', 'pointer-events-auto'];
 
