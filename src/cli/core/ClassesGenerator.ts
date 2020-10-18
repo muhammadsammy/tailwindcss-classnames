@@ -227,10 +227,12 @@ export class ClassesGenerator implements IGenerator {
       gridTemplateColumns: Object.keys(this.theme.gridTemplateColumns).map(
         key => `grid-cols-${key}`,
       ),
+      gridAutoColumns: Object.keys(this.theme.gridAutoColumns).map(key => `auto-cols-${key}`),
       gridColumn: Object.keys(this.theme.gridColumn).map(key => `col-${key}`),
       gridColumnStart: Object.keys(this.theme.gridColumnStart).map(key => `col-start-${key}`),
       gridColumnEnd: Object.keys(this.theme.gridColumnEnd).map(key => `col-end-${key}`),
       gridTemplateRows: Object.keys(this.theme.gridTemplateRows).map(key => `grid-rows-${key}`),
+      gridAutoRows: Object.keys(this.theme.gridAutoRows).map(key => `auto-rows-${key}`),
       gridRow: Object.keys(this.theme.gridRow).map(key => `row-${key}`),
       gridRowStart: Object.keys(this.theme.gridRowStart).map(key => `row-start-${key}`),
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(key => `row-end-${key}`),
