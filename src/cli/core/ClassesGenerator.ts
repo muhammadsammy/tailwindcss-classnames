@@ -170,7 +170,9 @@ export class ClassesGenerator implements IGenerator {
       scale: ['', 'x-', 'y-'].flatMap(x =>
         Object.keys(this.theme.scale).map(value => 'scale-' + x + value),
       ),
-      rotate: Object.keys(this.theme.rotate).map(value => 'rotate-' + value),
+      rotate: Object.keys(this.theme.rotate).map(value =>
+        value.startsWith('-') ? '-rotate-' + value.slice(1) : `rotate-${value}`,
+      ),
       // translate gets values from theme.spacing in addition to 50% and 100% variations
       // by default and theme.translate overrides this behaviour.
       translate: ['x', 'y'].flatMap(side => {
