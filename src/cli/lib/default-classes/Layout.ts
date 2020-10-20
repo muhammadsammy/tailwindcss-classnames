@@ -29,17 +29,7 @@ const objectFit = [
   'object-scale-down',
 ];
 
-const objectPosition = [
-  'object-bottom',
-  'object-center',
-  'object-left',
-  'object-left-bottom',
-  'object-left-top',
-  'object-right',
-  'object-right-bottom',
-  'object-right-top',
-  'object-top',
-];
+const objectPosition = [''];
 
 const overflow = [
   'overflow-auto',
@@ -72,26 +62,11 @@ const overscrollBehavior = [
 
 const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
-const inset = [
-  'inset-0',
-  'inset-y-0',
-  'inset-x-0',
-  'top-0',
-  'right-0',
-  'bottom-0',
-  'left-0',
-  'inset-auto',
-  'inset-y-auto',
-  'inset-x-auto',
-  'top-auto',
-  'bottom-auto',
-  'left-auto',
-  'right-auto',
-];
+const inset = [''];
 
 const visibility = ['visible', 'invisible'];
 
-const zIndex = ['z-0', 'z-10', 'z-20', 'z-30', 'z-40', 'z-50', 'z-auto'];
+const zIndex = [''];
 
 export const Layout = {
   display,

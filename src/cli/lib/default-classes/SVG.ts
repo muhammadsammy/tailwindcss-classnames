@@ -1,8 +1,8 @@
-const fill = ['fill-current'];
+const fill = [''];
 
-const stroke = ['stroke-current'];
+const stroke = [''];
 
-const strokeWidth = ['stroke-0', 'stroke-1', 'stroke- 2'];
+const strokeWidth = [''];
 
 export const SVG = {
   fill,

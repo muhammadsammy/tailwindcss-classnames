@@ -1,16 +1,8 @@
 const appearance = ['appearance-none'];
 
-const cursor = [
-  'cursor-auto',
-  'cursor-default',
-  'cursor-pointer',
-  'cursor-wait',
-  'cursor-text',
-  'cursor-move',
-  'cursor-not-allowed',
-];
+const cursor = [''];
 
-const outline = ['outline-none', 'outline-white', 'outline-black'];
+const outline = [''];
 
 const pointerEvents = ['pointer-events-none', 'pointer-events-auto'];
 
