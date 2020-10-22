@@ -14,6 +14,21 @@ export type TBackgroundClip =
   | 'bg-clip-content'
   | 'bg-clip-text';
 
+export type TBackgroundRepeat =
+  | 'bg-repeat'
+  | 'bg-no-repeat'
+  | 'bg-repeat-x'
+  | 'bg-repeat-y'
+  | 'bg-repeat-round'
+  | 'bg-repeat-space';
+
+export type TBackgroundOpacity =
+  | 'bg-opacity-0'
+  | 'bg-opacity-25'
+  | 'bg-opacity-50'
+  | 'bg-opacity-75'
+  | 'bg-opacity-100';
+
 export type TBackgroundColor =
   | 'bg-transparent'
   | 'bg-current'
@@ -110,13 +125,6 @@ export type TBackgroundColor =
   | 'bg-pink-800'
   | 'bg-pink-900';
 
-export type TBackgroundOpacity =
-  | 'bg-opacity-0'
-  | 'bg-opacity-25'
-  | 'bg-opacity-50'
-  | 'bg-opacity-75'
-  | 'bg-opacity-100';
-
 export type TBackgroundPosition =
   | 'bg-bottom'
   | 'bg-center'
@@ -127,14 +135,6 @@ export type TBackgroundPosition =
   | 'bg-right-bottom'
   | 'bg-right-top'
   | 'bg-top';
-
-export type TBackgroundRepeat =
-  | 'bg-repeat'
-  | 'bg-no-repeat'
-  | 'bg-repeat-x'
-  | 'bg-repeat-y'
-  | 'bg-repeat-round'
-  | 'bg-repeat-space';
 
 export type TBackgroundSize = 'bg-auto' | 'bg-cover' | 'bg-contain';
 
@@ -436,13 +436,27 @@ export type TGradientColorStops =
 export type TBackgrounds =
   | TBackgroundAttachment
   | TBackgroundClip
-  | TBackgroundColor
-  | TBackgroundOpacity
-  | TBackgroundPosition
   | TBackgroundRepeat
+  | TBackgroundOpacity
+  | TBackgroundColor
+  | TBackgroundPosition
   | TBackgroundSize
   | TBackgroundImage
   | TGradientColorStops;
+
+export type TBorderStyle =
+  | 'border-solid'
+  | 'border-dashed'
+  | 'border-dotted'
+  | 'border-double'
+  | 'border-none';
+
+export type TDivideStyle =
+  | 'divide-solid'
+  | 'divide-dashed'
+  | 'divide-dotted'
+  | 'divide-double'
+  | 'divide-none';
 
 export type TBorderColor =
   | 'border-transparent'
@@ -547,40 +561,6 @@ export type TBorderOpacity =
   | 'border-opacity-75'
   | 'border-opacity-100';
 
-export type TBorderStyle =
-  | 'border-solid'
-  | 'border-dashed'
-  | 'border-dotted'
-  | 'border-double'
-  | 'border-none';
-
-export type TBorderWidth =
-  | 'border-t-0'
-  | 'border-r-0'
-  | 'border-b-0'
-  | 'border-l-0'
-  | 'border-0'
-  | 'border-t-2'
-  | 'border-r-2'
-  | 'border-b-2'
-  | 'border-l-2'
-  | 'border-2'
-  | 'border-t-4'
-  | 'border-r-4'
-  | 'border-b-4'
-  | 'border-l-4'
-  | 'border-4'
-  | 'border-t-8'
-  | 'border-r-8'
-  | 'border-b-8'
-  | 'border-l-8'
-  | 'border-8'
-  | 'border-t'
-  | 'border-r'
-  | 'border-b'
-  | 'border-l'
-  | 'border';
-
 export type TBorderRadius =
   | 'rounded-t-none'
   | 'rounded-r-none'
@@ -664,26 +644,32 @@ export type TBorderRadius =
   | 'rounded-bl-full'
   | 'rounded-full';
 
-export type TDivideWidth =
-  | 'divide-x-0'
-  | 'divide-y-0'
-  | 'divide-x-2'
-  | 'divide-y-2'
-  | 'divide-x-4'
-  | 'divide-y-4'
-  | 'divide-x-8'
-  | 'divide-y-8'
-  | 'divide-x'
-  | 'divide-y'
-  | 'divide-x-reverse'
-  | 'divide-y-reverse';
-
-export type TDivideOpacity =
-  | 'divide-opacity-0'
-  | 'divide-opacity-25'
-  | 'divide-opacity-50'
-  | 'divide-opacity-75'
-  | 'divide-opacity-100';
+export type TBorderWidth =
+  | 'border-t-0'
+  | 'border-r-0'
+  | 'border-b-0'
+  | 'border-l-0'
+  | 'border-0'
+  | 'border-t-2'
+  | 'border-r-2'
+  | 'border-b-2'
+  | 'border-l-2'
+  | 'border-2'
+  | 'border-t-4'
+  | 'border-r-4'
+  | 'border-b-4'
+  | 'border-l-4'
+  | 'border-4'
+  | 'border-t-8'
+  | 'border-r-8'
+  | 'border-b-8'
+  | 'border-l-8'
+  | 'border-8'
+  | 'border-t'
+  | 'border-r'
+  | 'border-b'
+  | 'border-l'
+  | 'border';
 
 export type TDivideColor =
   | 'divide-transparent'
@@ -781,23 +767,37 @@ export type TDivideColor =
   | 'divide-pink-800'
   | 'divide-pink-900';
 
-export type TDivideStyle =
-  | 'divide-solid'
-  | 'divide-dashed'
-  | 'divide-dotted'
-  | 'divide-double'
-  | 'divide-none';
+export type TDivideOpacity =
+  | 'divide-opacity-0'
+  | 'divide-opacity-25'
+  | 'divide-opacity-50'
+  | 'divide-opacity-75'
+  | 'divide-opacity-100';
+
+export type TDivideWidth =
+  | 'divide-x-0'
+  | 'divide-y-0'
+  | 'divide-x-2'
+  | 'divide-y-2'
+  | 'divide-x-4'
+  | 'divide-y-4'
+  | 'divide-x-8'
+  | 'divide-y-8'
+  | 'divide-x'
+  | 'divide-y'
+  | 'divide-x-reverse'
+  | 'divide-y-reverse';
 
 export type TBorders =
+  | TBorderStyle
+  | TDivideStyle
   | TBorderColor
   | TBorderOpacity
-  | TBorderStyle
-  | TBorderWidth
   | TBorderRadius
-  | TDivideWidth
-  | TDivideOpacity
+  | TBorderWidth
   | TDivideColor
-  | TDivideStyle;
+  | TDivideOpacity
+  | TDivideWidth;
 
 export type TBorderCollapse = 'border-collapse' | 'border-separate';
 
@@ -969,6 +969,12 @@ export type TFlexBox =
   | TFlexGrow
   | TFlexShrink
   | TOrder;
+
+export type TGridAutoFlow =
+  | 'grid-flow-row'
+  | 'grid-flow-col'
+  | 'grid-flow-row-dense'
+  | 'grid-flow-col-dense';
 
 export type TGridTemplateColumns =
   | 'grid-cols-1'
@@ -1177,13 +1183,8 @@ export type TGap =
   | 'col-gap-64'
   | 'col-gap-px';
 
-export type TGridAutoFlow =
-  | 'grid-flow-row'
-  | 'grid-flow-col'
-  | 'grid-flow-row-dense'
-  | 'grid-flow-col-dense';
-
 export type TGrid =
+  | TGridAutoFlow
   | TGridTemplateColumns
   | TGridAutoColumns
   | TGridColumn
@@ -1194,8 +1195,7 @@ export type TGrid =
   | TGridRow
   | TGridRowStart
   | TGridRowEnd
-  | TGap
-  | TGridAutoFlow;
+  | TGap;
 
 export type TPadding =
   | 'p-0'
@@ -1691,6 +1691,12 @@ export type TSpacing = TPadding | TMargin | TSpace;
 
 export type TAppearance = 'appearance-none';
 
+export type TPointerEvents = 'pointer-events-none' | 'pointer-events-auto';
+
+export type TResize = 'resize-none' | 'resize' | 'resize-y' | 'resize-x';
+
+export type TUserSelect = 'select-none' | 'select-text' | 'select-all' | 'select-auto';
+
 export type TCursor =
   | 'cursor-auto'
   | 'cursor-default'
@@ -1702,19 +1708,13 @@ export type TCursor =
 
 export type TOutline = 'outline-none' | 'outline-white' | 'outline-black';
 
-export type TPointerEvents = 'pointer-events-none' | 'pointer-events-auto';
-
-export type TResize = 'resize-none' | 'resize' | 'resize-y' | 'resize-x';
-
-export type TUserSelect = 'select-none' | 'select-text' | 'select-all' | 'select-auto';
-
 export type TInteractivity =
   | TAppearance
-  | TCursor
-  | TOutline
   | TPointerEvents
   | TResize
-  | TUserSelect;
+  | TUserSelect
+  | TCursor
+  | TOutline;
 
 export type TDisplay =
   | 'block'
@@ -1745,17 +1745,6 @@ export type TObjectFit =
   | 'object-none'
   | 'object-scale-down';
 
-export type TObjectPosition =
-  | 'object-bottom'
-  | 'object-center'
-  | 'object-left'
-  | 'object-left-bottom'
-  | 'object-left-top'
-  | 'object-right'
-  | 'object-right-bottom'
-  | 'object-right-top'
-  | 'object-top';
-
 export type TOverflow =
   | 'overflow-auto'
   | 'overflow-hidden'
@@ -1785,6 +1774,19 @@ export type TOverscrollBehavior =
 
 export type TPosition = 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
 
+export type TVisibility = 'visible' | 'invisible';
+
+export type TObjectPosition =
+  | 'object-bottom'
+  | 'object-center'
+  | 'object-left'
+  | 'object-left-bottom'
+  | 'object-left-top'
+  | 'object-right'
+  | 'object-right-bottom'
+  | 'object-right-top'
+  | 'object-top';
+
 export type TInset =
   | 'inset-0'
   | 'inset-x-0'
@@ -1801,8 +1803,6 @@ export type TInset =
   | 'bottom-auto'
   | 'left-auto';
 
-export type TVisibility = 'visible' | 'invisible';
-
 export type TZIndex = 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50' | 'z-auto';
 
 export type TLayout =
@@ -1812,12 +1812,12 @@ export type TLayout =
   | TFloat
   | TClear
   | TObjectFit
-  | TObjectPosition
   | TOverflow
   | TOverscrollBehavior
   | TPosition
-  | TInset
   | TVisibility
+  | TObjectPosition
+  | TInset
   | TZIndex;
 
 export type TWidth =
@@ -2102,6 +2102,46 @@ export type TTransformOrigin =
 
 export type TTransforms = TScale | TRotate | TTranslate | TSkew | TTransformOrigin;
 
+export type TFontSmoothing = 'antialiased' | 'subpixel-antialiased';
+
+export type TFontStyle = 'italic' | 'non-italic';
+
+export type TFontVariantNumeric =
+  | 'normal-nums'
+  | 'ordinal'
+  | 'slashed-zero'
+  | 'lining-nums'
+  | 'oldstyle-nums'
+  | 'proportional-nums'
+  | 'tabular-nums'
+  | 'diagonal-fractions'
+  | 'stacked-fractions';
+
+export type TListStylePosition = 'list-inside' | 'list-outside';
+
+export type TTextAlign = 'text-left' | 'text-center' | 'text-right' | 'text-justify';
+
+export type TTextDecoration = 'underline' | 'line-through' | 'no-underline';
+
+export type TTextTransform = 'uppercase' | 'lowercase' | 'capitalize' | 'normal-case';
+
+export type TVerticalAlign =
+  | 'align-baseline'
+  | 'align-top'
+  | 'align-middle'
+  | 'align-bottom'
+  | 'align-text-top'
+  | 'align-text-bottom';
+
+export type TWhitespace =
+  | 'whitespace-normal'
+  | 'whitespace-no-wrap'
+  | 'whitespace-pre'
+  | 'whitespace-pre-line'
+  | 'whitespace-pre-wrap';
+
+export type TWordBreak = 'break-normal' | 'break-words' | 'break-all' | 'truncate';
+
 export type TFontFamily = 'font-sans' | 'font-serif' | 'font-mono';
 
 export type TFontSize =
@@ -2116,10 +2156,6 @@ export type TFontSize =
   | 'text-5xl'
   | 'text-6xl';
 
-export type TFontSmoothing = 'antialiased' | 'subpixel-antialiased';
-
-export type TFontStyle = 'italic' | 'non-italic';
-
 export type TFontWeight =
   | 'font-hairline'
   | 'font-thin'
@@ -2130,17 +2166,6 @@ export type TFontWeight =
   | 'font-bold'
   | 'font-extrabold'
   | 'font-black';
-
-export type TFontVariantNumeric =
-  | 'normal-nums'
-  | 'ordinal'
-  | 'slashed-zero'
-  | 'lining-nums'
-  | 'oldstyle-nums'
-  | 'proportional-nums'
-  | 'tabular-nums'
-  | 'diagonal-fractions'
-  | 'stacked-fractions';
 
 export type TLetterSpacing =
   | 'tracking-tighter'
@@ -2167,8 +2192,6 @@ export type TLineHeight =
   | 'leading-loose';
 
 export type TListStyleType = 'list-none' | 'list-disc' | 'list-decimal';
-
-export type TListStylePosition = 'list-inside' | 'list-outside';
 
 export type TPlaceholderColor =
   | 'placeholder-transparent'
@@ -2273,8 +2296,6 @@ export type TPlaceholderOpacity =
   | 'placeholder-opacity-75'
   | 'placeholder-opacity-100';
 
-export type TTextAlign = 'text-left' | 'text-center' | 'text-right' | 'text-justify';
-
 export type TTextColor =
   | 'text-transparent'
   | 'text-current'
@@ -2371,8 +2392,6 @@ export type TTextColor =
   | 'text-pink-800'
   | 'text-pink-900';
 
-export type TTextDecoration = 'underline' | 'line-through' | 'no-underline';
-
 export type TTextOpacity =
   | 'text-opacity-0'
   | 'text-opacity-25'
@@ -2380,46 +2399,27 @@ export type TTextOpacity =
   | 'text-opacity-75'
   | 'text-opacity-100';
 
-export type TTextTransform = 'uppercase' | 'lowercase' | 'capitalize' | 'normal-case';
-
-export type TVerticalAlign =
-  | 'align-baseline'
-  | 'align-top'
-  | 'align-middle'
-  | 'align-bottom'
-  | 'align-text-top'
-  | 'align-text-bottom';
-
-export type TWhitespace =
-  | 'whitespace-normal'
-  | 'whitespace-no-wrap'
-  | 'whitespace-pre'
-  | 'whitespace-pre-line'
-  | 'whitespace-pre-wrap';
-
-export type TWordBreak = 'break-normal' | 'break-words' | 'break-all' | 'truncate';
-
 export type TTypography =
-  | TFontFamily
-  | TFontSize
   | TFontSmoothing
   | TFontStyle
-  | TFontWeight
   | TFontVariantNumeric
-  | TLetterSpacing
-  | TLineHeight
-  | TListStyleType
   | TListStylePosition
-  | TPlaceholderColor
-  | TPlaceholderOpacity
   | TTextAlign
-  | TTextColor
   | TTextDecoration
-  | TTextOpacity
   | TTextTransform
   | TVerticalAlign
   | TWhitespace
-  | TWordBreak;
+  | TWordBreak
+  | TFontFamily
+  | TFontSize
+  | TFontWeight
+  | TLetterSpacing
+  | TLineHeight
+  | TListStyleType
+  | TPlaceholderColor
+  | TPlaceholderOpacity
+  | TTextColor
+  | TTextOpacity;
 
 export type TPseudoClasses =
   | 'sm:content-start'

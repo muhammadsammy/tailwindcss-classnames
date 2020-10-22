@@ -1,27 +1,14 @@
 import _ from 'lodash';
-import {ConfigScanner} from './ConfigScanner';
 import {generateTypes} from '../utils';
-import {AllClasses as defaultClasses} from '../lib/default-classes';
-import {TConfigTheme, TConfigFuture, TTailwindCSSConfig} from '../lib/types';
-import {IGenerator} from './IGenerator';
+import {ConfigScanner} from './ConfigScanner';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
-
-type ClassesWithColors =
-  | 'backgroundColor'
-  | 'divideColor'
-  | 'placeholderColor'
-  | 'textColor'
-  | 'borderColor'
-  | 'gradientColorStops';
-
-type ClassesWithOpacities = {
-  opacities: string[];
-  textOpacities: string[];
-  backgroundOpacities: string[];
-  borderOpacities: string[];
-  divideOpacities: string[];
-  placeholderOpacities: string[];
-};
+import {IGenerator} from './IGenerator';
+import {nonConfigurableClassNames} from '../lib/non-configurable';
+// prettier-ignore
+import {AllClasses, Backgrounds, Layout, Borders, Tables, Effects,
+        Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
+        FlexBox, Grid, Spacing, Sizing, Typography} from '../lib/types/classes';
+import {TConfigTheme, TConfigFuture, TTailwindCSSConfig} from '../lib/types/config';
 
 export class ClassesGenerator implements IGenerator {
   private readonly prefix: string;
@@ -29,7 +16,7 @@ export class ClassesGenerator implements IGenerator {
   private readonly theme: Omit<TConfigTheme, 'extend'>;
   private readonly configScanner: ConfigScanner;
   private readonly deprecations: TConfigFuture;
-  private readonly generatedRegularClasses: typeof defaultClasses;
+  private readonly generatedRegularClasses: AllClasses;
   private readonly generatedPseudoClasses: string[];
 
   constructor(tailwindConfig: TTailwindCSSConfig) {
@@ -66,7 +53,7 @@ export class ClassesGenerator implements IGenerator {
     const regularClassesTemplate = Object.keys(this.generatedRegularClasses)
       .map(classGroup => {
         return new ClassesGroupTemplateGenerator(
-          this.generatedRegularClasses[classGroup as keyof typeof defaultClasses],
+          this.generatedRegularClasses[classGroup as keyof AllClasses],
           classGroup,
           this.prefix,
         ).generate();
@@ -79,9 +66,9 @@ export class ClassesGenerator implements IGenerator {
     return regularClassesTemplate + '\n\n' + pseudoClassesTemplate;
   };
 
-  private layout = (): typeof defaultClasses.Layout => {
+  private layout = (): Layout => {
     return {
-      ...defaultClasses.Layout,
+      ...nonConfigurableClassNames.Layout,
       objectPosition: Object.keys(this.theme.objectPosition).map(x => 'object-' + x),
       inset: Object.keys(this.theme.inset).flatMap(insetValue => {
         return ['inset', 'inset-x', 'inset-y', 'top', 'right', 'bottom', 'left'].map(side =>
@@ -96,9 +83,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private backgrounds = (): typeof defaultClasses.Backgrounds => {
+  private backgrounds = (): Backgrounds => {
     return {
-      ...defaultClasses.Backgrounds,
+      ...nonConfigurableClassNames.Backgrounds,
       backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
       backgroundColor: this.generateClassesWithColors('backgroundColor'),
       backgroundPosition: Object.keys(this.theme.backgroundPosition).map(x => 'bg-' + x),
@@ -110,9 +97,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private borders = (): typeof defaultClasses.Borders => {
+  private borders = (): Borders => {
     return {
-      ...defaultClasses.Borders,
+      ...nonConfigurableClassNames.Borders,
       borderColor: this.generateClassesWithColors('borderColor'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this.theme.borderRadius).flatMap(radius => {
@@ -135,21 +122,21 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private tables = (): typeof defaultClasses.Tables => {
-    return defaultClasses.Tables;
+  private tables = (): Tables => {
+    return nonConfigurableClassNames.Tables;
   };
 
-  private effects = (): typeof defaultClasses.Effects => {
+  private effects = (): Effects => {
     return {
-      ...defaultClasses.Effects,
+      ...nonConfigurableClassNames.Effects,
       boxShadow: Object.keys(this.theme.boxShadow).map(key => `shadow-${key}`),
       opacity: this.getGeneratedClassesWithOpacities().opacities,
     };
   };
 
-  private transitionsAndAnimations = (): typeof defaultClasses.TransitionsAndAnimations => {
+  private transitionsAndAnimations = (): TransitionsAndAnimations => {
     return {
-      ...defaultClasses.TransitionsAndAnimations,
+      ...nonConfigurableClassNames.TransitionsAndAnimations,
       transitionProperty: Object.keys(this.theme.transitionProperty).map(
         property => 'transition-' + property,
       ),
@@ -164,9 +151,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private transforms = (): typeof defaultClasses.Transforms => {
+  private transforms = (): Transforms => {
     return {
-      ...defaultClasses.Transforms,
+      ...nonConfigurableClassNames.Transforms,
       scale: ['', 'x-', 'y-'].flatMap(x =>
         Object.keys(this.theme.scale).map(value => 'scale-' + x + value),
       ),
@@ -193,39 +180,41 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private interactivity = (): typeof defaultClasses.Interactivity => {
+  private interactivity = (): Interactivity => {
     return {
-      ...defaultClasses.Interactivity,
+      ...nonConfigurableClassNames.Interactivity,
       cursor: Object.keys(this.theme.cursor).map(x => 'cursor-' + x),
       outline: Object.keys(this.theme.outline).map(x => 'outline-' + x),
     };
   };
 
-  private SVG = (): typeof defaultClasses.SVG => {
+  private SVG = (): SVG => {
     return {
-      ...defaultClasses.SVG,
+      ...nonConfigurableClassNames.SVG,
       fill: Object.keys(this.theme.fill).map(value => 'fill-' + value),
       stroke: Object.keys(this.theme.stroke).map(value => 'stroke-' + value),
       strokeWidth: Object.keys(this.theme.strokeWidth).map(value => 'stroke-' + value),
     };
   };
 
-  private accessibility = (): typeof defaultClasses.Accessibility => {
-    return defaultClasses.Accessibility;
+  private accessibility = (): Accessibility => {
+    return {
+      ...nonConfigurableClassNames.Accessibility,
+    };
   };
 
-  private flexBox = (): typeof defaultClasses.FlexBox => {
+  private flexBox = (): FlexBox => {
     return {
-      ...defaultClasses.FlexBox,
+      ...nonConfigurableClassNames.FlexBox,
       flexGrow: Object.keys(this.theme.flexGrow).map(key => `flex-grow-${key}`),
       flexShrink: Object.keys(this.theme.flexShrink).map(key => `flex-shrink-${key}`),
       order: Object.keys(this.theme.order).map(key => `order-${key}`),
     };
   };
 
-  private grid = (): typeof defaultClasses.Grid => {
+  private grid = (): Grid => {
     return {
-      ...defaultClasses.Grid,
+      ...nonConfigurableClassNames.Grid,
       gridTemplateColumns: Object.keys(this.theme.gridTemplateColumns).map(
         key => `grid-cols-${key}`,
       ),
@@ -249,7 +238,7 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private spacing = (): typeof defaultClasses.Spacing => {
+  private spacing = (): Spacing => {
     const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
     return {
       padding: sides.flatMap(side => {
@@ -281,7 +270,7 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private sizing = (): typeof defaultClasses.Sizing => {
+  private sizing = (): Sizing => {
     // prettier-ignore
     const extraWidthSizing = ['full', 'screen', 'auto', '1/2','1/3','2/3','1/4','2/4','3/4',
       '1/5', '2/5','3/5','4/5', '1/6','2/6','3/6','4/6', '5/6','1/12','2/12','3/12','4/12',
@@ -289,7 +278,7 @@ export class ClassesGenerator implements IGenerator {
     const extraHeightSizing = ['full', 'screen'];
 
     return {
-      ...defaultClasses.Sizing,
+      ...nonConfigurableClassNames.Sizing,
       // width values come from theme.spacing + `extraWidthSizing` by default
       // and theme.width overrides this default behaviour.
       // prettier-ignore
@@ -309,9 +298,9 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 
-  private typography = (): typeof defaultClasses.Typography => {
+  private typography = (): Typography => {
     return {
-      ...defaultClasses.Typography,
+      ...nonConfigurableClassNames.Typography,
       fontFamily: Object.keys(this.theme.fontFamily).map(value => 'font-' + value),
       fontSize: Object.keys(this.theme.fontSize).map(size => 'text-' + size),
       fontWeight: Object.keys(this.theme.fontWeight).map(weight => 'font-' + weight),
@@ -337,7 +326,7 @@ export class ClassesGenerator implements IGenerator {
 
     for (const [variantsKey, variantsForKey] of variantsConfig) {
       Object.keys(this.generatedRegularClasses).map(key => {
-        if (_.has(this.generatedRegularClasses[key as keyof typeof defaultClasses], variantsKey)) {
+        if (_.has(this.generatedRegularClasses[key as keyof AllClasses], variantsKey)) {
           const generatedClass = _.get(
             this.generatedRegularClasses,
             `${key}.${variantsKey}`,
@@ -422,3 +411,20 @@ export class ClassesGenerator implements IGenerator {
     };
   };
 }
+
+type ClassesWithColors =
+  | 'backgroundColor'
+  | 'divideColor'
+  | 'placeholderColor'
+  | 'textColor'
+  | 'borderColor'
+  | 'gradientColorStops';
+
+type ClassesWithOpacities = {
+  opacities: string[];
+  textOpacities: string[];
+  backgroundOpacities: string[];
+  borderOpacities: string[];
+  divideOpacities: string[];
+  placeholderOpacities: string[];
+};

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
-import {TTailwindCSSConfig, TConfigVariants, TConfigFuture} from '../lib/types';
-import {TConfigTheme, TThemeItems} from '../lib/types';
+import {TTailwindCSSConfig, TConfigVariants, TConfigFuture} from '../lib/types/config';
+import {TConfigTheme, TThemeItems} from '../lib/types/config';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
 export class ConfigScanner {

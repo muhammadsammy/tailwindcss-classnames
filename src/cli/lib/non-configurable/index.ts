@@ -14,29 +14,10 @@ import {Transforms} from './Transforms';
 import {TransitionsAndAnimations} from './TransitionsAndAnimations';
 import {Typography} from './Typography';
 
-export const AllClassesFlat: {
-  [key: string]: string[];
-} = {
-  ...Accessibility,
-  ...Backgrounds,
-  ...Borders,
-  ...Effects,
-  ...FlexBox,
-  ...Grid,
-  ...Interactivity,
-  ...Layout,
-  ...Sizing,
-  ...Spacing,
-  ...SVG,
-  ...Tables,
-  ...Transforms,
-  ...TransitionsAndAnimations,
-  ...Typography,
-};
-
-// TODO: only keep non-configurable classes [not generated from tailwind.config.js]
-
-export const AllClasses = {
+// These utility classes are classes that thier names does not change. Thier names are not
+// configured by the `tailwind.config.js` file. e.g. 'flex-start', 'object-cover' etc.
+// the only configuration that is applicable to these classes are pseudo-class variants.
+export const nonConfigurableClassNames = {
   Accessibility,
   Backgrounds,
   Borders,
