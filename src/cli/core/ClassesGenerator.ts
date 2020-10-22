@@ -3,7 +3,7 @@ import {generateTypes} from '../utils';
 import {ConfigScanner} from './ConfigScanner';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 import {IGenerator} from './IGenerator';
-import {nonConfigurableClasses} from '../lib/non-configurable';
+import {nonConfigurableClassNames} from '../lib/non-configurable';
 // prettier-ignore
 import {AllClasses, Backgrounds, Layout, Borders, Tables, Effects,
         Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
@@ -68,7 +68,7 @@ export class ClassesGenerator implements IGenerator {
 
   private layout = (): Layout => {
     return {
-      ...nonConfigurableClasses.Layout,
+      ...nonConfigurableClassNames.Layout,
       objectPosition: Object.keys(this.theme.objectPosition).map(x => 'object-' + x),
       inset: Object.keys(this.theme.inset).flatMap(insetValue => {
         return ['inset', 'inset-x', 'inset-y', 'top', 'right', 'bottom', 'left'].map(side =>
@@ -85,7 +85,7 @@ export class ClassesGenerator implements IGenerator {
 
   private backgrounds = (): Backgrounds => {
     return {
-      ...nonConfigurableClasses.Backgrounds,
+      ...nonConfigurableClassNames.Backgrounds,
       backgroundOpacity: this.getGeneratedClassesWithOpacities().backgroundOpacities,
       backgroundColor: this.generateClassesWithColors('backgroundColor'),
       backgroundPosition: Object.keys(this.theme.backgroundPosition).map(x => 'bg-' + x),
@@ -99,7 +99,7 @@ export class ClassesGenerator implements IGenerator {
 
   private borders = (): Borders => {
     return {
-      ...nonConfigurableClasses.Borders,
+      ...nonConfigurableClassNames.Borders,
       borderColor: this.generateClassesWithColors('borderColor'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this.theme.borderRadius).flatMap(radius => {
@@ -123,12 +123,12 @@ export class ClassesGenerator implements IGenerator {
   };
 
   private tables = (): Tables => {
-    return nonConfigurableClasses.Tables;
+    return nonConfigurableClassNames.Tables;
   };
 
   private effects = (): Effects => {
     return {
-      ...nonConfigurableClasses.Effects,
+      ...nonConfigurableClassNames.Effects,
       boxShadow: Object.keys(this.theme.boxShadow).map(key => `shadow-${key}`),
       opacity: this.getGeneratedClassesWithOpacities().opacities,
     };
@@ -136,7 +136,7 @@ export class ClassesGenerator implements IGenerator {
 
   private transitionsAndAnimations = (): TransitionsAndAnimations => {
     return {
-      ...nonConfigurableClasses.TransitionsAndAnimations,
+      ...nonConfigurableClassNames.TransitionsAndAnimations,
       transitionProperty: Object.keys(this.theme.transitionProperty).map(
         property => 'transition-' + property,
       ),
@@ -153,7 +153,7 @@ export class ClassesGenerator implements IGenerator {
 
   private transforms = (): Transforms => {
     return {
-      ...nonConfigurableClasses.Transforms,
+      ...nonConfigurableClassNames.Transforms,
       scale: ['', 'x-', 'y-'].flatMap(x =>
         Object.keys(this.theme.scale).map(value => 'scale-' + x + value),
       ),
@@ -182,7 +182,7 @@ export class ClassesGenerator implements IGenerator {
 
   private interactivity = (): Interactivity => {
     return {
-      ...nonConfigurableClasses.Interactivity,
+      ...nonConfigurableClassNames.Interactivity,
       cursor: Object.keys(this.theme.cursor).map(x => 'cursor-' + x),
       outline: Object.keys(this.theme.outline).map(x => 'outline-' + x),
     };
@@ -190,7 +190,7 @@ export class ClassesGenerator implements IGenerator {
 
   private SVG = (): SVG => {
     return {
-      ...nonConfigurableClasses.SVG,
+      ...nonConfigurableClassNames.SVG,
       fill: Object.keys(this.theme.fill).map(value => 'fill-' + value),
       stroke: Object.keys(this.theme.stroke).map(value => 'stroke-' + value),
       strokeWidth: Object.keys(this.theme.strokeWidth).map(value => 'stroke-' + value),
@@ -199,13 +199,13 @@ export class ClassesGenerator implements IGenerator {
 
   private accessibility = (): Accessibility => {
     return {
-      ...nonConfigurableClasses.Accessibility,
+      ...nonConfigurableClassNames.Accessibility,
     };
   };
 
   private flexBox = (): FlexBox => {
     return {
-      ...nonConfigurableClasses.FlexBox,
+      ...nonConfigurableClassNames.FlexBox,
       flexGrow: Object.keys(this.theme.flexGrow).map(key => `flex-grow-${key}`),
       flexShrink: Object.keys(this.theme.flexShrink).map(key => `flex-shrink-${key}`),
       order: Object.keys(this.theme.order).map(key => `order-${key}`),
@@ -214,7 +214,7 @@ export class ClassesGenerator implements IGenerator {
 
   private grid = (): Grid => {
     return {
-      ...nonConfigurableClasses.Grid,
+      ...nonConfigurableClassNames.Grid,
       gridTemplateColumns: Object.keys(this.theme.gridTemplateColumns).map(
         key => `grid-cols-${key}`,
       ),
@@ -278,7 +278,7 @@ export class ClassesGenerator implements IGenerator {
     const extraHeightSizing = ['full', 'screen'];
 
     return {
-      ...nonConfigurableClasses.Sizing,
+      ...nonConfigurableClassNames.Sizing,
       // width values come from theme.spacing + `extraWidthSizing` by default
       // and theme.width overrides this default behaviour.
       // prettier-ignore
@@ -300,7 +300,7 @@ export class ClassesGenerator implements IGenerator {
 
   private typography = (): Typography => {
     return {
-      ...nonConfigurableClasses.Typography,
+      ...nonConfigurableClassNames.Typography,
       fontFamily: Object.keys(this.theme.fontFamily).map(value => 'font-' + value),
       fontSize: Object.keys(this.theme.fontSize).map(size => 'text-' + size),
       fontWeight: Object.keys(this.theme.fontWeight).map(weight => 'font-' + weight),
