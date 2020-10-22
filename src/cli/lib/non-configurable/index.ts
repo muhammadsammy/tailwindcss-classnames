@@ -1,36 +1,36 @@
-import {Accessibility} from './Accessibility';
-import {Backgrounds} from './Backgrounds';
-import {Borders} from './Borders';
-import {Effects} from './Effects';
-import {FlexBox} from './Flexbox';
-import {Grid} from './Grid';
-import {Interactivity} from './Interactivity';
-import {Layout} from './Layout';
-import {Sizing} from './Sizing';
-import {Spacing} from './Spacing';
-import {SVG} from './SVG';
-import {Tables} from './Tables';
-import {Transforms} from './Transforms';
-import {TransitionsAndAnimations} from './TransitionsAndAnimations';
-import {Typography} from './Typography';
+import accessibility from './accessibility';
+import backgrounds from './backgrounds';
+import borders from './borders';
+import effects from './effects';
+import flexBox from './flexbox';
+import grid from './grid';
+import interactivity from './interactivity';
+import layout from './layout';
+import sizing from './sizing';
+import spacing from './spacing';
+import svg from './svg';
+import tables from './tables';
+import transforms from './transforms';
+import transitionsAndAnimations from './transitionsAndAnimations';
+import typography from './typography';
 
 // These utility classes are classes that thier names does not change. Thier names are not
 // configured by the `tailwind.config.js` file. e.g. 'flex-start', 'object-cover' etc.
 // the only configuration that is applicable to these classes are pseudo-class variants.
 export const nonConfigurableClassNames = {
-  Accessibility,
-  Backgrounds,
-  Borders,
-  Effects,
-  FlexBox,
-  Grid,
-  Interactivity,
-  Layout,
-  Sizing,
-  Spacing,
-  SVG,
-  Tables,
-  Transforms,
-  TransitionsAndAnimations,
-  Typography,
+  accessibility,
+  backgrounds,
+  borders,
+  effects,
+  flexBox,
+  grid,
+  interactivity,
+  layout,
+  sizing,
+  spacing,
+  sVG: svg,
+  tables,
+  transforms,
+  transitionsAndAnimations,
+  typography,
 };

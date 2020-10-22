@@ -1,3 +1,5 @@
+import {FlexBox} from '../types/classes';
+
 const flexDirection = ['flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse'];
 
 const flexWrap = ['flex-no-wrap', 'flex-wrap', 'flex-wrap-reverse'];
@@ -66,7 +68,7 @@ const justifySelf = [
 
 const flex = ['flex-initial', 'flex-1', 'flex-auto', 'flex-none'];
 
-export const FlexBox = {
+const flexBox: Partial<FlexBox> = {
   flexDirection,
   flexWrap,
   alignItems,
@@ -80,3 +82,5 @@ export const FlexBox = {
   justifySelf,
   flex,
 };
+
+export default flexBox;

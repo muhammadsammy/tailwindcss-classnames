@@ -1,3 +1,5 @@
+import {Typography} from '../types/classes';
+
 const fontSmoothing = ['antialiased', 'subpixel-antialiased'];
 
 const fontStyle = ['italic', 'non-italic'];
@@ -41,7 +43,7 @@ const whitespace = [
 
 const wordBreak = ['break-normal', 'break-words', 'break-all', 'truncate'];
 
-export const Typography = {
+const typography: Partial<Typography> = {
   fontSmoothing,
   fontStyle,
   fontVariantNumeric,
@@ -53,3 +55,5 @@ export const Typography = {
   whitespace,
   wordBreak,
 };
+
+export default typography;
