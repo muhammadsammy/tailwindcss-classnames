@@ -14,29 +14,7 @@ import {Transforms} from './Transforms';
 import {TransitionsAndAnimations} from './TransitionsAndAnimations';
 import {Typography} from './Typography';
 
-export const AllClassesFlat: {
-  [key: string]: string[];
-} = {
-  ...Accessibility,
-  ...Backgrounds,
-  ...Borders,
-  ...Effects,
-  ...FlexBox,
-  ...Grid,
-  ...Interactivity,
-  ...Layout,
-  ...Sizing,
-  ...Spacing,
-  ...SVG,
-  ...Tables,
-  ...Transforms,
-  ...TransitionsAndAnimations,
-  ...Typography,
-};
-
-// TODO: only keep non-configurable classes [not generated from tailwind.config.js]
-
-export const AllClasses = {
+export const nonConfigurableClasses = {
   Accessibility,
   Backgrounds,
   Borders,
