@@ -66,12 +66,6 @@ const justifySelf = [
 
 const flex = ['flex-initial', 'flex-1', 'flex-auto', 'flex-none'];
 
-const flexGrow = [''];
-
-const flexShrink = [''];
-
-const order = [''];
-
 export const FlexBox = {
   flexDirection,
   flexWrap,
@@ -85,7 +79,4 @@ export const FlexBox = {
   justifyItems,
   justifySelf,
   flex,
-  flexGrow,
-  flexShrink,
-  order,
 };

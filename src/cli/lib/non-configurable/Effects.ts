@@ -1,8 +1,1 @@
-const boxShadow = [''];
-
-const opacity = [''];
-
-export const Effects = {
-  boxShadow,
-  opacity,
-};
+export const Effects = {};

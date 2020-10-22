@@ -1,7 +1,3 @@
-const borderColor = [''];
-
-const borderOpacity = [''];
-
 const borderStyle = [
   'border-solid',
   'border-dashed',
@@ -9,16 +5,6 @@ const borderStyle = [
   'border-double',
   'border-none',
 ];
-
-const borderWidth = [''];
-
-const borderRadius = [''];
-
-const divideWidth = [''];
-
-const divideOpacity = [''];
-
-const divideColor = [''];
 
 const divideStyle = [
   'divide-solid',
@@ -29,13 +15,6 @@ const divideStyle = [
 ];
 
 export const Borders = {
-  borderColor,
-  borderOpacity,
   borderStyle,
-  borderWidth,
-  borderRadius,
-  divideWidth,
-  divideOpacity,
-  divideColor,
   divideStyle,
 };

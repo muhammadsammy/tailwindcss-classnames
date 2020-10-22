@@ -29,8 +29,6 @@ const objectFit = [
   'object-scale-down',
 ];
 
-const objectPosition = [''];
-
 const overflow = [
   'overflow-auto',
   'overflow-hidden',
@@ -62,11 +60,7 @@ const overscrollBehavior = [
 
 const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
-const inset = [''];
-
 const visibility = ['visible', 'invisible'];
-
-const zIndex = [''];
 
 export const Layout = {
   display,
@@ -75,11 +69,8 @@ export const Layout = {
   float,
   clear,
   objectFit,
-  objectPosition,
   overflow,
   overscrollBehavior,
   position,
-  inset,
   visibility,
-  zIndex,
 };
