@@ -1,5 +1,3 @@
-import {Grid} from '../types/classes';
-
 const gridAutoFlow = [
   'grid-flow-row',
   'grid-flow-col',
@@ -7,8 +5,6 @@ const gridAutoFlow = [
   'grid-flow-col-dense',
 ];
 
-const grid: Partial<Grid> = {
+export default {
   gridAutoFlow,
 };
-
-export default grid;

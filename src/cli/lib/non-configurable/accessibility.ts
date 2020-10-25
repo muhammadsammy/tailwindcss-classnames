@@ -1,9 +1,5 @@
-import {Accessibility} from '../types/classes';
-
 const screenReaders = ['sr-only', 'not-sr-only'];
 
-const accessibility: Partial<Accessibility> = {
+export default {
   screenReaders,
 };
-
-export default accessibility;

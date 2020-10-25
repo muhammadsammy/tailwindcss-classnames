@@ -28,7 +28,7 @@ export const nonConfigurableClassNames = {
   layout,
   sizing,
   spacing,
-  sVG: svg,
+  svg,
   tables,
   transforms,
   transitionsAndAnimations,

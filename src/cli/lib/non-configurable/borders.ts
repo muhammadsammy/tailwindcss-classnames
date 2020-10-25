@@ -1,5 +1,3 @@
-import {Borders} from '../types/classes';
-
 const borderStyle = [
   'border-solid',
   'border-dashed',
@@ -16,9 +14,7 @@ const divideStyle = [
   'divide-none',
 ];
 
-const borders: Partial<Borders> = {
+export default {
   borderStyle,
   divideStyle,
 };
-
-export default borders;

@@ -1,5 +1,3 @@
-import {Layout} from '../types/classes';
-
 const boxSizing = ['box-border', 'box-content'];
 
 const display = [
@@ -64,7 +62,7 @@ const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
 const visibility = ['visible', 'invisible'];
 
-const layout: Partial<Layout> = {
+export default {
   display,
   boxSizing,
   container,
@@ -76,5 +74,3 @@ const layout: Partial<Layout> = {
   position,
   visibility,
 };
-
-export default layout;
