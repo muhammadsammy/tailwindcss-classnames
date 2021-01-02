@@ -8,14 +8,13 @@ import {nonConfigurableClassNames} from '../lib/non-configurable';
 import {AllClasses, Backgrounds, Layout, Borders, Tables, Effects,
         Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
         FlexBox, Grid, Spacing, Sizing, Typography} from '../lib/types/classes';
-import {TConfigTheme, TConfigFuture, TTailwindCSSConfig} from '../lib/types/config';
+import {TConfigTheme, TTailwindCSSConfig} from '../lib/types/config';
 
 export class ClassesGenerator implements IGenerator {
   private readonly prefix: string;
   private readonly separator: string;
   private readonly theme: Omit<TConfigTheme, 'extend'>;
   private readonly configScanner: ConfigScanner;
-  private readonly deprecations: TConfigFuture;
   private readonly generatedRegularClasses: AllClasses;
   private readonly generatedPseudoClasses: string[];
 
@@ -26,7 +25,6 @@ export class ClassesGenerator implements IGenerator {
     this.separator = configScanner.getSeparator();
     this.theme = configScanner.getTheme();
     this.configScanner = configScanner;
-    this.deprecations = configScanner.getDeprecations();
 
     this.generatedRegularClasses = {
       Accessibility: this.accessibility(),
@@ -227,14 +225,12 @@ export class ClassesGenerator implements IGenerator {
       gridRow: Object.keys(this.theme.gridRow).map(key => `row-${key}`),
       gridRowStart: Object.keys(this.theme.gridRowStart).map(key => `row-start-${key}`),
       gridRowEnd: Object.keys(this.theme.gridRowEnd).map(key => `row-end-${key}`),
-      gap: ['gap-', 'gap-y-', 'gap-x-']
-        .concat(this.deprecations.removeDeprecatedGapUtilities ? [] : ['row-gap-', 'col-gap-'])
-        .flatMap(x => {
-          // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
-          return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
-            gapValue => x + gapValue,
-          );
-        }),
+      gap: ['gap-', 'gap-y-', 'gap-x-'].flatMap(x => {
+        // grid gap inherits its values from theme.spacing by default, but theme.gap overrides it.
+        return Object.keys(_.isEmpty(this.theme.gap) ? this.theme.spacing : this.theme.gap).map(
+          gapValue => x + gapValue,
+        );
+      }),
     };
   };
 

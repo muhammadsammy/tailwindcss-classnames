@@ -1,18 +1,16 @@
 import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
-import {TTailwindCSSConfig, TConfigVariants, TConfigFuture} from '../lib/types/config';
+import {TTailwindCSSConfig, TConfigVariants} from '../lib/types/config';
 import {TConfigTheme, TThemeItems} from '../lib/types/config';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
 export class ConfigScanner {
-  private readonly future: TConfigFuture;
   private readonly prefix: string;
   private readonly separator: string;
   private themeConfig: TConfigTheme;
   private readonly variantsConfig: TConfigVariants;
 
   constructor(tailwindConfig: TTailwindCSSConfig) {
-    this.future = tailwindConfig?.future ?? {};
     this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this.separator = _.isEmpty(tailwindConfig.separator)
       ? ':'
@@ -26,8 +24,6 @@ export class ConfigScanner {
   public getPrefix = (): string => this.prefix;
 
   public getSeparator = (): string => this.separator;
-
-  public getDeprecations = (): TConfigFuture => this.future;
 
   public getTheme = (): TThemeItems => {
     const evaluateCoreTheme = (): TThemeItems => {
