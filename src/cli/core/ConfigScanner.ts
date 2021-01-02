@@ -1,42 +1,48 @@
 import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
-import {TTailwindCSSConfig, TConfigVariants} from '../lib/types/config';
+import {TTailwindCSSConfig, TConfigVariants, TConfigDarkMode} from '../lib/types/config';
 import {TConfigTheme, TThemeItems} from '../lib/types/config';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
 export class ConfigScanner {
-  private readonly prefix: string;
-  private readonly separator: string;
-  private themeConfig: TConfigTheme;
-  private readonly variantsConfig: TConfigVariants;
+  private readonly _prefix: string;
+  private readonly _separator: string;
+  private readonly _darkMode: TConfigDarkMode;
+  private _themeConfig: TConfigTheme;
+  private readonly _variantsConfig: TConfigVariants;
 
   constructor(tailwindConfig: TTailwindCSSConfig) {
-    this.prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
-    this.separator = _.isEmpty(tailwindConfig.separator)
+    this._prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
+    this._darkMode = _.isEmpty(tailwindConfig?.darkMode)
+      ? false
+      : (tailwindConfig.darkMode as TConfigDarkMode);
+    this._separator = _.isEmpty(tailwindConfig.separator)
       ? ':'
       : (tailwindConfig.separator as string);
-    this.variantsConfig = _.isEmpty(tailwindConfig.variants)
+    this._variantsConfig = _.isEmpty(tailwindConfig.variants)
       ? defaultTailwindConfig.variants // Order does matter, defaultVariants will be overridden by themeVariants.
       : {...defaultTailwindConfig.variants, ...tailwindConfig.variants};
-    this.themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
+    this._themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
   }
 
-  public getPrefix = (): string => this.prefix;
+  public getPrefix = (): string => this._prefix;
 
-  public getSeparator = (): string => this.separator;
+  public getDarkMode = (): TConfigDarkMode => this._darkMode;
+
+  public getSeparator = (): string => this._separator;
 
   public getTheme = (): TThemeItems => {
     const evaluateCoreTheme = (): TThemeItems => {
-      const coreTheme = _.omit(this.themeConfig, 'extend');
+      const coreTheme = _.omit(this._themeConfig, 'extend');
       const valueEvaluator = new ThemeClosuresEvaluator(coreTheme);
-      for (const [key, value] of Object.entries(this.themeConfig)) {
+      for (const [key, value] of Object.entries(this._themeConfig)) {
         coreTheme[key as keyof TThemeItems] = valueEvaluator.evaluate(value);
       }
       return coreTheme;
     };
 
     const evaluateThemeExtend = (): Partial<TConfigTheme['extend']> => {
-      const themeExtend = this.themeConfig.extend;
+      const themeExtend = this._themeConfig.extend;
       if (themeExtend) {
         const valueEvaluator = new ThemeClosuresEvaluator(themeExtend);
         for (const [key, value] of Object.entries(themeExtend))
@@ -45,13 +51,13 @@ export class ConfigScanner {
       return themeExtend;
     };
 
-    this.themeConfig = _.merge(evaluateCoreTheme(), evaluateThemeExtend());
-    delete this.themeConfig?.extend;
+    this._themeConfig = _.merge(evaluateCoreTheme(), evaluateThemeExtend());
+    delete this._themeConfig?.extend;
 
-    return this.themeConfig;
+    return this._themeConfig;
   };
 
-  public getVariants = (): TConfigVariants => this.variantsConfig;
+  public getVariants = (): TConfigVariants => this._variantsConfig;
 
   public getThemeProperty = (
     themeProperty: keyof TThemeItems,
