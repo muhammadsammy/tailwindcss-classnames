@@ -393,7 +393,8 @@ export class ClassesGenerator implements IGenerator {
                   pseudoClasses.push(this._prefix + 'group');
 
                 // Add 'dark' class if dark mode stategy is set to "class"
-                if (this._darkMode === 'class') pseudoClasses.push(this._prefix + 'dark');
+                if (this._darkMode === 'class' && !pseudoClasses.includes('dark'))
+                  pseudoClasses.push(this._prefix + 'dark');
               }
             });
           });
