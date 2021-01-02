@@ -4,6 +4,8 @@ export type TTailwindCSSConfig = Partial<
   typeof defaultTailwindConfig & Record<'separator' | 'prefix', string>
 >;
 
+export type TConfigDarkMode = false | 'media' | 'class';
+
 export type TConfigTheme = TThemeItems & {extend?: TThemeItems};
 
 export type TConfigVariants = typeof defaultTailwindConfig.variants;
