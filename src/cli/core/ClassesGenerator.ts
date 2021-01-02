@@ -345,18 +345,43 @@ export class ClassesGenerator implements IGenerator {
 
           // For every member of the found regular classes group...
           generatedClassGroup.map(classname => {
+            const isDarkModeEnabled = this._darkMode !== false;
+
             // Generate the classname of each variant...
             pseudoClassesVariantsForKey.map(variant => {
+              // Get the breakpoints from config
+
               // If the variant is the responsive variant (md:, lg:)...
               if (variant === 'responsive') {
-                // Get the breakpoints from config and create the classname for each one
+                // Create the classname for each breakpoint
                 const [breakpoints] = this._configScanner.getThemeProperty('screens');
                 breakpoints.map((breakpointVariant: string) => {
                   // Push the created classes to the pseudoClasses array
                   pseudoClasses.push(
                     breakpointVariant + this._separator + this._prefix + classname,
                   );
+
+                  // Add stackable dark and responsive pseudoclasses if the key has both as variants
+                  if (pseudoClassesVariantsForKey.includes('dark') && isDarkModeEnabled) {
+                    pseudoClasses.push(
+                      breakpointVariant +
+                        this._separator +
+                        'dark' +
+                        this._separator +
+                        this._prefix +
+                        classname,
+                    );
+                  }
                 });
+              }
+              // Otherwise if the variant is 'dark'
+              else if (variant === 'dark') {
+                // If the dark mode is enabled...
+                if (isDarkModeEnabled) {
+                  // Add the 'dark' prefix to the classname to create its pseudoclass
+                  pseudoClasses.push(variant + this._separator + this._prefix + classname);
+                }
+                // Otherwise, do nothing.
               }
               // Otherwise...
               else {
@@ -366,10 +391,14 @@ export class ClassesGenerator implements IGenerator {
                 // Add 'group' class if a the variant is group-hover, group-focus etc.
                 if (variant.startsWith(this._prefix + 'group') && !pseudoClasses.includes('group'))
                   pseudoClasses.push(this._prefix + 'group');
+
+                // Add 'dark' class if dark mode stategy is set to "class"
+                if (this._darkMode === 'class') pseudoClasses.push(this._prefix + 'dark');
               }
             });
           });
         }
+        // Otherwise, skip and do nothing
       });
     }
 
