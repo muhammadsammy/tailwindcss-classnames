@@ -13,6 +13,7 @@ export type Tables = Record<TTablesCategoryItem, string[]>;
 export type Transforms = Record<TTransformsCategoryItem, string[]>;
 export type TransitionsAndAnimations = Record<TTransitionsAndAnimationsCategoryItem, string[]>;
 export type Typography = Record<TTypographyCategoryItem, string[]>;
+
 export type AllClasses = {
   Accessibility: Accessibility;
   Backgrounds: Backgrounds;
