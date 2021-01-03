@@ -33,7 +33,7 @@ const verticalAlign = [
 
 const whitespace = [
   'whitespace-normal',
-  'whitespace-no-wrap',
+  'whitespace-nowrap',
   'whitespace-pre',
   'whitespace-pre-line',
   'whitespace-pre-wrap',
