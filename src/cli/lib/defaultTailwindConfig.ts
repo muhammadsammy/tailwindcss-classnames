@@ -644,6 +644,7 @@ export const defaultTailwindConfig = {
     fontSize: ['responsive'],
     fontSmoothing: ['responsive'],
     fontVariantNumeric: ['responsive'],
+    fontWeight: ['responsive'],
     gradientColorStops: ['responsive', 'dark', 'hover', 'focus'],
     height: ['responsive'],
     inset: ['responsive'],
