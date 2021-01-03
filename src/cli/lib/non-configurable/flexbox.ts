@@ -1,6 +1,6 @@
 const flexDirection = ['flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse'];
 
-const flexWrap = ['flex-no-wrap', 'flex-wrap', 'flex-wrap-reverse'];
+const flexWrap = ['flex-nowrap', 'flex-wrap', 'flex-wrap-reverse'];
 
 const alignItems = ['items-stretch', 'items-start', 'items-center', 'items-end', 'items-baseline'];
 
