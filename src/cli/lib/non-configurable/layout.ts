@@ -17,7 +17,7 @@ const display = [
 
 const container = ['container'];
 
-const float = ['float-right', 'float-left', 'float-none', 'clearfix'];
+const float = ['float-right', 'float-left', 'float-none'];
 
 const clear = ['clear-left', 'clear-right', 'clear-both', 'clear-none'];
 
