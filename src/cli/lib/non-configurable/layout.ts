@@ -42,8 +42,6 @@ const overflow = [
   'overflow-y-visible',
   'overflow-x-scroll',
   'overflow-y-scroll',
-  'scrolling-touch',
-  'scrolling-auto',
 ];
 
 const overscrollBehavior = [
