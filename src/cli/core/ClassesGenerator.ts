@@ -423,24 +423,26 @@ export class ClassesGenerator implements IGenerator {
   };
 
   private generateClassesWithColors = (property: ClassesWithColors): string[] => {
+    // Get the key-value pairs of the passed property
     const [propertyKeys, propertyValues] = this._configScanner.getThemeProperty(property);
+
+    // Store a conversion of the property name into actual utility name
+    const utilName = property
+      .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
+      .replace('Stops', '') // gradientStops -> gradient
+      .replace('ringOffset', 'ring-offset')
+      .replace('background', 'bg');
 
     return (
       propertyKeys
-        // exclude `default` keys as they do not correspond to a class name.
+        // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
         .filter(k => k !== 'DEFAULT')
-        // For every key of the propery...
+        // Then, for every key of the property...
         .flatMap((colorName, i) => {
-          const colorValue = propertyValues[i]; // could be a `string` value or an `object` of shades.
+          // Get the value that corresponds to that key. NOTE: the value could be a `string` or an `object` of shades.
+          const colorValue = propertyValues[i];
 
-          // Transform propert names into actual utility name
-          const utilName = property
-            .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
-            .replace('Stops', '') // gradientStops -> gradient
-            .replace('ringOffset', 'ring-offset')
-            .replace('background', 'bg');
-
-          // If the colors config is a nested object of colors...
+          // If the value is a nested object of color shades...
           if (typeof colorValue === 'object' && colorValue !== null) {
             // Loop over the deep objects and return the result for each key of the object.
             return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
