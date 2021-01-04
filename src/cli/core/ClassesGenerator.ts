@@ -136,7 +136,7 @@ export class ClassesGenerator implements IGenerator {
       ringWidth: Object.keys(this._theme.ringWidth)
         .map(x => 'ring-' + x)
         .concat('inset'),
-      ringOpacity: [],
+      ringOpacity: this.getGeneratedClassesWithOpacities().ringOpacities,
       ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
     };
@@ -459,7 +459,7 @@ export class ClassesGenerator implements IGenerator {
 
     // prettier-ignore
     type TOpacityProp = | 'divideOpacity' | 'textOpacity' | 'backgroundOpacity'
-                        | 'borderOpacity' | 'placeholderOpacity'
+                        | 'borderOpacity' | 'placeholderOpacity' | 'ringOpacity'
     const getOpacity = (themePropertyName: TOpacityProp, outputNamePrefix: string): string[] => {
       const generatedOpacities = generateOpacities(allOpacities, this._theme, themePropertyName);
 
@@ -489,6 +489,7 @@ export class ClassesGenerator implements IGenerator {
       borderOpacities: getOpacity('borderOpacity', 'border'),
       divideOpacities: getOpacity('divideOpacity', 'divide'),
       placeholderOpacities: getOpacity('placeholderOpacity', 'placeholder'),
+      ringOpacities: getOpacity('ringOpacity', 'ring'),
     };
   };
 }
@@ -510,4 +511,5 @@ type ClassesWithOpacities = {
   borderOpacities: string[];
   divideOpacities: string[];
   placeholderOpacities: string[];
+  ringOpacities: string[];
 };
