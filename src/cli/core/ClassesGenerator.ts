@@ -133,7 +133,9 @@ export class ClassesGenerator implements IGenerator {
 
       /* Dynamic ring utilities */
       ringColor: this.generateClassesWithColors('ringColor'),
-      ringWidth: Object.keys(this._theme.ringWidth).map(x => 'ring-' + x),
+      ringWidth: Object.keys(this._theme.ringWidth)
+        .map(x => 'ring-' + x)
+        .concat('inset'),
       ringOpacity: [],
       ringOffsetColor: [],
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
