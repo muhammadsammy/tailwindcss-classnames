@@ -104,7 +104,11 @@ export class ClassesGenerator implements IGenerator {
 
   private borders = (): Borders => {
     return {
+      // Add all non configurable classes in `borders` plugin.
+      // These are utilities that thier names never change e.g. border styles (dashed, solid etc.)
       ...nonConfigurableClassNames.borders,
+
+      /* Dynamic border utils */
       borderColor: this.generateClassesWithColors('borderColor'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this._theme.borderRadius).flatMap(radius => {
@@ -115,6 +119,8 @@ export class ClassesGenerator implements IGenerator {
         const sides = ['t', 'r', 'b', 'l'];
         return sides.map(side => `border-${side}-${width}`).concat(`border-${width}`);
       }),
+
+      /* Dynamic divide utilities */
       divideColor: this.generateClassesWithColors('divideColor'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
       // divide width inherits its values from theme.borderWidth by default
@@ -124,6 +130,15 @@ export class ClassesGenerator implements IGenerator {
       )
         .concat('reverse')
         .flatMap(width => ['x', 'y'].map(axis => `divide-${axis}-${width}`)),
+
+      /* Dynamic ring utilities */
+      ringColor: this.generateClassesWithColors('ringColor'),
+      ringWidth: Object.keys(this._theme.ringWidth)
+        .map(x => 'ring-' + x)
+        .concat('inset'),
+      ringOpacity: this.getGeneratedClassesWithOpacities().ringOpacities,
+      ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
+      ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
     };
   };
 
@@ -408,24 +423,37 @@ export class ClassesGenerator implements IGenerator {
   };
 
   private generateClassesWithColors = (property: ClassesWithColors): string[] => {
+    // Get the key-value pairs of the passed property
     const [propertyKeys, propertyValues] = this._configScanner.getThemeProperty(property);
 
-    return propertyKeys
-      .filter(k => k !== 'default') // exclude `default` keys
-      .flatMap((colorName, i) => {
-        const colorValue = propertyValues[i]; // could be a `string` value or an `object` of shades.
+    // Store a conversion of the property name into actual utility name
+    const utilName = property
+      .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
+      .replace('Stops', '') // gradientStops -> gradient
+      .replace('ringOffset', 'ring-offset')
+      .replace('background', 'bg');
 
-        const utilName = property
-          .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
-          .replace('Stops', '') // gradientStops -> gradient
-          .replace('background', 'bg');
+    return (
+      propertyKeys
+        // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
+        .filter(k => k !== 'DEFAULT')
+        // Then, for every key of the property...
+        .flatMap((colorName, i) => {
+          // Get the value that corresponds to that key. NOTE: the value could be a `string` or an `object` of shades.
+          const colorValue = propertyValues[i];
 
-        if (typeof colorValue === 'object' && colorValue !== null) {
-          return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
-        } else {
-          return `${utilName}-${colorName}`;
-        }
-      });
+          // If the value is a nested object of color shades...
+          if (typeof colorValue === 'object' && colorValue !== null) {
+            // Loop over the deep objects and return the result for each key of the object.
+            return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
+          }
+          // Otherwise...
+          else {
+            // Return the result of merging the utility name with color value
+            return `${utilName}-${colorName}`;
+          }
+        })
+    );
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
@@ -433,7 +461,7 @@ export class ClassesGenerator implements IGenerator {
 
     // prettier-ignore
     type TOpacityProp = | 'divideOpacity' | 'textOpacity' | 'backgroundOpacity'
-                        | 'borderOpacity' | 'placeholderOpacity'
+                        | 'borderOpacity' | 'placeholderOpacity' | 'ringOpacity'
     const getOpacity = (themePropertyName: TOpacityProp, outputNamePrefix: string): string[] => {
       const generatedOpacities = generateOpacities(allOpacities, this._theme, themePropertyName);
 
@@ -463,6 +491,7 @@ export class ClassesGenerator implements IGenerator {
       borderOpacities: getOpacity('borderOpacity', 'border'),
       divideOpacities: getOpacity('divideOpacity', 'divide'),
       placeholderOpacities: getOpacity('placeholderOpacity', 'placeholder'),
+      ringOpacities: getOpacity('ringOpacity', 'ring'),
     };
   };
 }
@@ -473,6 +502,8 @@ type ClassesWithColors =
   | 'placeholderColor'
   | 'textColor'
   | 'borderColor'
+  | 'ringColor'
+  | 'ringOffsetColor'
   | 'gradientColorStops';
 
 type ClassesWithOpacities = {
@@ -482,4 +513,5 @@ type ClassesWithOpacities = {
   borderOpacities: string[];
   divideOpacities: string[];
   placeholderOpacities: string[];
+  ringOpacities: string[];
 };
