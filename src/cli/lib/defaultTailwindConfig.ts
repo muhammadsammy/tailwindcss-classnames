@@ -309,6 +309,21 @@ export const defaultTailwindConfig = {
       DEFAULT: theme('colors.blue.500', '#3b82f6'),
       ...theme('colors'),
     }),
+    ringOffsetWidth: {
+      0: '0px',
+      1: '1px',
+      2: '2px',
+      4: '4px',
+      8: '8px',
+    },
+    ringWidth: {
+      DEFAULT: '3px',
+      0: '0px',
+      1: '1px',
+      2: '2px',
+      4: '4px',
+      8: '8px',
+    },
     space: (theme, {negative}) => ({
       ...theme('spacing'),
       ...negative(theme('spacing')),

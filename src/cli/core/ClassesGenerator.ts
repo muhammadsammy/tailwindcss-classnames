@@ -133,10 +133,10 @@ export class ClassesGenerator implements IGenerator {
 
       /* Dynamic ring utilities */
       ringColor: this.generateClassesWithColors('ringColor'),
-      ringWidth: [],
+      ringWidth: Object.keys(this._theme.ringWidth).map(x => 'ring-' + x),
       ringOpacity: [],
       ringOffsetColor: [],
-      ringOffsetWidth: [],
+      ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
     };
   };
 
