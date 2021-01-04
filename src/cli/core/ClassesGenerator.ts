@@ -104,7 +104,11 @@ export class ClassesGenerator implements IGenerator {
 
   private borders = (): Borders => {
     return {
+      // Add all non configurable classes in `borders` plugin.
+      // These are utilities that thier names never change e.g. border styles (dashed, solid etc.)
       ...nonConfigurableClassNames.borders,
+
+      /* Dynamic border utils */
       borderColor: this.generateClassesWithColors('borderColor'),
       borderOpacity: this.getGeneratedClassesWithOpacities().borderOpacities,
       borderRadius: Object.keys(this._theme.borderRadius).flatMap(radius => {
@@ -115,6 +119,8 @@ export class ClassesGenerator implements IGenerator {
         const sides = ['t', 'r', 'b', 'l'];
         return sides.map(side => `border-${side}-${width}`).concat(`border-${width}`);
       }),
+
+      /* Dynamic divide utilities */
       divideColor: this.generateClassesWithColors('divideColor'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
       // divide width inherits its values from theme.borderWidth by default
@@ -124,6 +130,13 @@ export class ClassesGenerator implements IGenerator {
       )
         .concat('reverse')
         .flatMap(width => ['x', 'y'].map(axis => `divide-${axis}-${width}`)),
+
+      /* Dynamic ring utilities */
+      ringColor: this.generateClassesWithColors('ringColor'),
+      ringWidth: [],
+      ringOpacity: [],
+      ringOffsetColor: [],
+      ringOffsetWidth: [],
     };
   };
 
@@ -410,22 +423,32 @@ export class ClassesGenerator implements IGenerator {
   private generateClassesWithColors = (property: ClassesWithColors): string[] => {
     const [propertyKeys, propertyValues] = this._configScanner.getThemeProperty(property);
 
-    return propertyKeys
-      .filter(k => k !== 'default') // exclude `default` keys
-      .flatMap((colorName, i) => {
-        const colorValue = propertyValues[i]; // could be a `string` value or an `object` of shades.
+    return (
+      propertyKeys
+        // exclude `default` keys as they do not correspond to a class name.
+        .filter(k => k !== 'DEFAULT')
+        // For every key of the propery...
+        .flatMap((colorName, i) => {
+          const colorValue = propertyValues[i]; // could be a `string` value or an `object` of shades.
 
-        const utilName = property
-          .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
-          .replace('Stops', '') // gradientStops -> gradient
-          .replace('background', 'bg');
+          // Transform propert names into actual utility name
+          const utilName = property
+            .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
+            .replace('Stops', '') // gradientStops -> gradient
+            .replace('background', 'bg');
 
-        if (typeof colorValue === 'object' && colorValue !== null) {
-          return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
-        } else {
-          return `${utilName}-${colorName}`;
-        }
-      });
+          // If the colors config is a nested object of colors...
+          if (typeof colorValue === 'object' && colorValue !== null) {
+            // Loop over the deep objects and return the result for each key of the object.
+            return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
+          }
+          // Otherwise...
+          else {
+            // Return the result of merging the utility name with color value
+            return `${utilName}-${colorName}`;
+          }
+        })
+    );
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
@@ -473,6 +496,7 @@ type ClassesWithColors =
   | 'placeholderColor'
   | 'textColor'
   | 'borderColor'
+  | 'ringColor'
   | 'gradientColorStops';
 
 type ClassesWithOpacities = {

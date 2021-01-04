@@ -305,6 +305,10 @@ export const defaultTailwindConfig = {
     padding: theme => theme('spacing'),
     placeholderColor: theme => theme('colors'),
     placeholderOpacity: theme => theme('opacity'),
+    ringColor: theme => ({
+      DEFAULT: theme('colors.blue.500', '#3b82f6'),
+      ...theme('colors'),
+    }),
     space: (theme, {negative}) => ({
       ...theme('spacing'),
       ...negative(theme('spacing')),

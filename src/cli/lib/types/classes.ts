@@ -54,7 +54,12 @@ type TBordersCategoryItem =
   | 'divideWidth'
   | 'divideOpacity'
   | 'divideColor'
-  | 'divideStyle';
+  | 'divideStyle'
+  | 'ringColor'
+  | 'ringOpacity'
+  | 'ringOffsetColor'
+  | 'ringOffsetWidth'
+  | 'ringWidth';
 
 type TEffectsCategoryItem = 'boxShadow' | 'opacity';
 
