@@ -137,7 +137,7 @@ export class ClassesGenerator implements IGenerator {
         .map(x => 'ring-' + x)
         .concat('inset'),
       ringOpacity: [],
-      ringOffsetColor: [],
+      ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
     };
   };
@@ -437,6 +437,7 @@ export class ClassesGenerator implements IGenerator {
           const utilName = property
             .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
             .replace('Stops', '') // gradientStops -> gradient
+            .replace('ringOffset', 'ring-offset')
             .replace('background', 'bg');
 
           // If the colors config is a nested object of colors...
@@ -499,6 +500,7 @@ type ClassesWithColors =
   | 'textColor'
   | 'borderColor'
   | 'ringColor'
+  | 'ringOffsetColor'
   | 'gradientColorStops';
 
 type ClassesWithOpacities = {

@@ -309,6 +309,7 @@ export const defaultTailwindConfig = {
       DEFAULT: theme('colors.blue.500', '#3b82f6'),
       ...theme('colors'),
     }),
+    ringOffsetColor: theme => theme('colors'),
     ringOffsetWidth: {
       0: '0px',
       1: '1px',
@@ -316,6 +317,10 @@ export const defaultTailwindConfig = {
       4: '4px',
       8: '8px',
     },
+    ringOpacity: theme => ({
+      DEFAULT: '0.5',
+      ...theme('opacity'),
+    }),
     ringWidth: {
       DEFAULT: '3px',
       0: '0px',
