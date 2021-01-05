@@ -1,1 +1,5 @@
-export default {};
+const hardwareAcceleration = ['transform-gpu'];
+
+export default {
+  hardwareAcceleration,
+};
