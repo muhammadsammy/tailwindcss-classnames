@@ -269,6 +269,7 @@ export const defaultTailwindConfig = {
       '5xl': '64rem',
       '6xl': '72rem',
       full: '100%',
+      prose: '65ch',
       ...breakpoints(theme('screens')),
     }),
     minHeight: {
