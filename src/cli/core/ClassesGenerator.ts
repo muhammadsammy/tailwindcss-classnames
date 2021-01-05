@@ -163,9 +163,9 @@ export class ClassesGenerator implements IGenerator {
       transitionDuration: Object.keys(this._theme.transitionDuration).map(
         value => 'duration-' + value,
       ),
-      transitionTimingFunction: Object.keys(this._theme.transitionTimingFunction).map(
-        value => 'ease-' + value,
-      ),
+      transitionTimingFunction: Object.keys(this._theme.transitionTimingFunction)
+        .filter(k => k !== 'DEFAULT') // The `DEFAULT` key does not correspond to a classname
+        .map(value => 'ease-' + value),
       transitionDelay: Object.keys(this._theme.transitionDelay).map(value => 'delay-' + value),
       animation: Object.keys(this._theme.animation).map(val => 'animate-' + val),
     };
