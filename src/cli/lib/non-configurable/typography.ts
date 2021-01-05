@@ -22,6 +22,8 @@ const textDecoration = ['underline', 'line-through', 'no-underline'];
 
 const textTransform = ['uppercase', 'lowercase', 'capitalize', 'normal-case'];
 
+const textOverflow = ['truncate', 'overflow-ellipsis', 'overflow-clip'];
+
 const verticalAlign = [
   'align-baseline',
   'align-top',
@@ -39,7 +41,7 @@ const whitespace = [
   'whitespace-pre-wrap',
 ];
 
-const wordBreak = ['break-normal', 'break-words', 'break-all', 'truncate'];
+const wordBreak = ['break-normal', 'break-words', 'break-all'];
 
 export default {
   fontSmoothing,
@@ -49,6 +51,7 @@ export default {
   textAlign,
   textDecoration,
   textTransform,
+  textOverflow,
   verticalAlign,
   whitespace,
   wordBreak,
