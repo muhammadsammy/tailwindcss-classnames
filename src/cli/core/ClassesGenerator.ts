@@ -364,12 +364,11 @@ export class ClassesGenerator implements IGenerator {
 
             // Generate the classname of each variant...
             pseudoClassesVariantsForKey.map(variant => {
-              // Get the breakpoints from config
-
-              // If the variant is the responsive variant (md:, lg:)...
               if (variant === 'responsive') {
-                // Create the classname for each breakpoint
+                // Get the breakpoints from config
                 const [breakpoints] = this._configScanner.getThemeProperty('screens');
+
+                // Create the classname for each breakpoint
                 breakpoints.map((breakpointVariant: string) => {
                   // Push the created classes to the pseudoClasses array
                   pseudoClasses.push(
@@ -439,7 +438,7 @@ export class ClassesGenerator implements IGenerator {
         .filter(k => k !== 'DEFAULT')
         // Then, for every key of the property...
         .flatMap((colorName, i) => {
-          // Get the value that corresponds to that key. NOTE: the value could be a `string` or an `object` of shades.
+          // Get the value that corresponds to that key. NOTE: It can be `string` or an `object` of shades.
           const colorValue = propertyValues[i];
 
           // If the value is a nested object of color shades...
