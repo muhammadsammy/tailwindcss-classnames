@@ -5,37 +5,36 @@ import inquirer from 'inquirer';
 import colors from 'colors';
 import {GeneratedFileWriter} from './core/GeneratedFileWriter';
 
-interface InquirerAnswers {
+type TInquirerAnswers = {
   configFilename: string;
-  customClassesTypeName: string | void;
-  customClassesFilename: string | void;
   outputFilename: string | void;
-}
+  customClassesFilename: string | void;
+};
 
 commander
-  .option('-c, --config <config>', 'Name or relative path of the TailwindCSS config file')
+  // Configure CLI options
+  .option('-i, --input <input>', 'Name or relative path of the TailwindCSS config file')
   .option(
     '-o, --output <output>',
     'Name or relative path of the generated types file',
     'tailwindcss-classnames.ts',
   )
-  .option(
-    '-f, --classesFile <classesFile>',
-    'Name or relative path of the file with the custom types',
-  )
-  .option(
-    '-t, --typeName <typeName>',
-    'Name of the type exported from file containing the custom classes',
-  )
-  .action(({config, output, classesFile, typeName}: {[key: string]: string | void}) => {
-    if (config) {
+  .option('-x, --extra <extra>', 'Name or relative path of the file with the custom extra types')
+
+  // Define the action of the CLI
+  .action(({input, output, classesFile: extra}: {[key: string]: string | void}) => {
+    // If a required minimum of arguments is supplied to the CLI interface...
+    if (input) {
+      // Generate the types and write them to a file on disk
       void new GeneratedFileWriter({
-        configFilename: config,
+        configFilename: input,
         outputFilename: output,
-        customClassesFilename: classesFile,
-        customClassesTypeName: typeName,
+        customClassesFilename: extra,
       }).write();
-    } else {
+    }
+    // Otherwise...
+    else {
+      // Prompt the user and ask to enter required information
       inquirer
         .prompt([
           {
@@ -56,21 +55,16 @@ commander
             default: null,
             message: 'Name or path of the file with the custom types',
           },
-          {
-            name: 'customClassesTypeName',
-            type: 'input',
-            default: null,
-            message: 'Name of the type exported from file containing the custom classes',
-          },
         ])
-        .then((answers: InquirerAnswers) => {
+        .then((answers: TInquirerAnswers) => {
+          // Get the answers and use them to create the file with generated types
           void new GeneratedFileWriter({
             configFilename: answers.configFilename,
             outputFilename: answers.outputFilename,
             customClassesFilename: answers.customClassesFilename,
-            customClassesTypeName: answers.customClassesTypeName,
           }).write();
         })
+        // Catch any errors that occur when prompting the user...
         .catch(error => {
           if (error.isTtyError) {
             console.error(colors.red("Prompt couldn't be rendered in the current environment"));

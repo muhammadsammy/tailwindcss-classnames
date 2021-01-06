@@ -28,7 +28,7 @@ Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up 
 npm install tailwindcss-classnames
 ```
 
-The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing and functions for applying pseudo elements. That means it arrives at your browser at approximately **422b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=classnames@2.2.6)).
+The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing and functions for applying pseudo elements. That means it arrives at your browser at approximately **484b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
 
 ## Create classes
 
@@ -107,36 +107,43 @@ export const App: React.FC<{disabled}> = ({disabled}) => {
 
 The types included in this package are the default tailwindcss classes, but if you modified your tailwind config file and/or want to add external custom classes, you can use the CLI tool to do this.
 
-### CLI arguments for tailwind config:
+Simply run `npx tailwindcss-classnames`.
 
-- -c --config The relative path for TailwindCSS config file.
-- -f --classesFile _(Optional)_ The relative path of the file with the custom types.
-- -t --typeName _(Optional)_ The name of the type exported from file containing the custom classes.
-- -o --output _(Optional)_ The name (or path) to generate the file into.
+## CLI arguments:
 
-Add it in your package.json scripts:
-
-```json
-"scripts": {
-  "generate-css-types": "tailwindcss-classnames --config tailwind.config.js"
-}
+```
+  -i, --input <input>    Name or relative path of the TailwindCSS config file
+  -o, --output <output>  Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
+  -x, --extra <extra>    Name or relative path of the file with the custom extra types **(optional)**
+  -h, --help             display help for command
 ```
 
-or simply run `npx tailwindcss-classnames`
-
-### example:
+## Example of CLI usage:
 
 If you want to add types from external file named `my-custom-classes.ts`
 containing the following code:
 
 ```ts
-export type TCustomClasses =
-  | "button"
-  | "sidebar"
-  | "navbar"
+type TCustomClasses =
+  | "red-button"
+  | "app-sidebar"
+  | "app-navbar"
   | ...
+
+// Note that you must provide a default export of the type
+export default TCustomClasses;
 ```
 
-You will excute the CLI with the following arguments:
+You will execute the CLI with the following arguments:
 
-`tailwindcss-classnames --config path/to/tailwind.config.js --classesFile my-custom-classes --typeName TCustomClasses`
+```bash
+npx tailwindcss-classnames -i path/to/tailwind.config.js -o path/to/output-file.ts -x my-custom-classes
+```
+
+Also, you can add it to your `package.json` scripts for convenience:
+
+```json
+"scripts": {
+  "generate-css-types": "tailwindcss-classnames -i relative/path/to/tailwind.config.js"
+}
+```

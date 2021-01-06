@@ -5,88 +5,133 @@ import colors from 'colors';
 import {baseTemplateString} from '../lib/baseTemplateString';
 import {ClassesGenerator} from './ClassesGenerator';
 
-type CliArguments = {
+type TCliOptions = {
   configFilename: string | void;
   outputFilename: string | void;
   customClassesFilename: string | void;
-  customClassesTypeName: string | void;
 };
 
 export class GeneratedFileWriter {
-  private readonly configFilename: string | void;
-  private readonly outputFilename: string | void;
-  private readonly customClassesFilename: string | void;
-  private readonly customClassesTypeName: string | void;
-  private readonly isCustomClassesAdded: boolean;
-  private configFileData = '';
+  private readonly _configFilename: string | void;
+  private readonly _outputFilename: string | void;
+  private readonly _customClassesFilename: string | void;
+  private _configFileData = '';
 
-  constructor(options: CliArguments) {
-    this.configFilename = options.configFilename;
-    this.outputFilename = options.outputFilename;
-    this.customClassesFilename = options.customClassesFilename;
-    this.customClassesTypeName = options.customClassesTypeName;
-    this.isCustomClassesAdded = !!(this.customClassesFilename && this.customClassesTypeName);
+  constructor(options: TCliOptions) {
+    this._configFilename = options.configFilename;
+    this._outputFilename = options.outputFilename;
+    this._customClassesFilename = options.customClassesFilename;
   }
 
   public write = async (): Promise<void> => {
-    if (this.missingCliOptionError().length > 0)
-      return console.error(this.missingCliOptionError().red);
+    // Check for missing cli options
+    if (this.missingCliOptionError().length > 0) {
+      this.printCliMessage('error', this.missingCliOptionError());
+    }
 
+    // Check for invalid custom classes file content
+    if (!!this._customClassesFilename) {
+      return fs
+        .readFile(`./${this._customClassesFilename}`)
+        .then(data => {
+          if (!data.toString().includes('export default')) {
+            this.printCliMessage(
+              'error',
+              'The type having the custom classes must be a default export',
+            );
+            return;
+          }
+        })
+        .catch(error => {
+          this.printCliMessage('error', `Unable to read the file with custom types. ${error}`);
+          return;
+        });
+    }
+
+    // If everything goes well, read the tailwind config file
     await this.readTailwindConfigFile();
 
-    fs.writeFile(`${this.outputFilename}`, this.generateFileContent(), 'utf8').catch(error => {
-      console.error(colors.red(error));
-    });
+    // Then create a file with the generated types
+    fs.writeFile(`${this._outputFilename}`, this.generateFileContent(), 'utf8')
+      .then(() => {
+        this.printCliMessage(
+          'success',
+          `Types has successfully been generated in ${this._outputFilename} file.`,
+        );
+      })
+      .catch(error => {
+        this.printCliMessage('error', error);
+      });
   };
 
   private missingCliOptionError = (): string => {
-    if (!this.configFilename) return 'tailwindcss config file name or path is not provided';
-    if (!this.outputFilename) return 'Please provide a valid filename to add generated types to it';
-    if (this.customClassesTypeName && !this.customClassesFilename)
-      return 'Please provide the file containing custom classes';
-    if (this.customClassesFilename && !this.customClassesTypeName)
-      return 'Please provide the name of the exported custom type';
+    if (!this._configFilename) return 'tailwindcss config file name or path is not provided';
+    if (!this._outputFilename)
+      return 'Please provide a valid filename to add generated types to it';
 
     return '';
   };
 
   private readTailwindConfigFile = async (): Promise<void> => {
     try {
-      this.configFileData = await fs.readFile(`./${this.configFilename}`, {encoding: 'utf-8'});
+      this._configFileData = await fs.readFile(`./${this._configFilename}`, {encoding: 'utf-8'});
     } catch (err) {
-      console.error(`Error Reading: "./${this.configFilename}"`.red);
+      this.printCliMessage('error', `Error Reading: "./${this._configFilename}"`);
     }
   };
 
   private generateFileContent = (): string => {
-    return baseTemplateString
-      .replace(
-        /___ALL_CLASSES___/g,
-        new ClassesGenerator(
-          eval(this.configFileData.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, '')),
-        ).generate(),
-      )
-      .replace(
-        /CUSTOM_FORMS_PLUGIN_TYPE/g,
-        this.configFileData.includes('@tailwindcss/custom-forms')
-          ? '\n  | TCustomFormsPluginClasses'
-          : '',
-      )
-      .replace(
-        /TYPOGRAPHY_PLUGIN_TYPE/g,
-        this.configFileData.includes('@tailwindcss/typography')
-          ? '\n  | TTypographyPluginClasses'
-          : '',
-      )
-      .replace(
-        /IMPORTED_T_CUSTOM_CLASSES/g,
-        this.isCustomClassesAdded ? '\n  | TCustomClassesFromExternalFile' : '',
-      )
-      .replace(
-        /T_CUSTOM_CLASSES_IMPORT_STATEMENT/g,
-        this.isCustomClassesAdded
-          ? `import {${this.customClassesTypeName} as TCustomClassesFromExternalFile} from './${this.customClassesFilename}';`
-          : '',
-      );
+    return (
+      baseTemplateString
+        // Add all generated classnames types
+        .replace(
+          /___ALL_CLASSES___/g,
+          new ClassesGenerator(
+            eval(this._configFileData.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, '')),
+          ).generate(),
+        )
+
+        // Add typing support for first-party plugins if found in the config
+        .replace(
+          /CUSTOM_FORMS_PLUGIN_TYPE/g,
+          this._configFileData.includes('@tailwindcss/custom-forms')
+            ? '\n  | TCustomFormsPluginClasses'
+            : '',
+        )
+        .replace(
+          /TYPOGRAPHY_PLUGIN_TYPE/g,
+          this._configFileData.includes('@tailwindcss/typography')
+            ? '\n  | TTypographyPluginClasses'
+            : '',
+        )
+
+        // Append the custom classes types from external file if provided.
+        .replace(
+          /IMPORTED_T_CUSTOM_CLASSES/g,
+          !!this._customClassesFilename ? '\n  | TCustomClassesFromExternalFile' : '',
+        )
+        .replace(
+          /T_CUSTOM_CLASSES_IMPORT_STATEMENT/g,
+          !!this._customClassesFilename
+            ? `import TCustomClassesFromExternalFile from './${this._customClassesFilename}';`
+            : '',
+        )
+    );
+  };
+
+  private printCliMessage = (type: 'error' | 'success', message: string): void => {
+    const formattedMessage = '\n\n' + message + '\n' + '\n\n';
+
+    switch (type) {
+      case 'success':
+        console.log(colors.black.bgGreen(formattedMessage));
+        break;
+      case 'error':
+        console.error(colors.white.bgRed(formattedMessage));
+        break;
+      default:
+        console.log(formattedMessage);
+        break;
+    }
   };
 }

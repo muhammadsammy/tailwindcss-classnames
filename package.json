@@ -35,8 +35,8 @@
     "postversion": "git push && git push --tags",
     "release": "standard-version",
     "pregenerate": "npm run clean && npm run build:lib",
-    "generate": "tailwindcss init --full && node lib/cli/index.js --config tailwind.config.js --output src/index.ts",
-    "postgenerate": "npm run clean",
+    "generate": "tailwindcss init --full && node lib/cli/index.js -i tailwind.config.js -o src/index.ts",
+    "postgenerate": "npm run clean && prettier src/index.ts --write",
     "preupdateConfig": "npm run clean",
     "updateConfig": "tailwindcss init --full && node helpers/updateDefaultConfig.js",
     "postupdateConfig": "npm run clean && prettier src/cli/lib/defaultTailwindConfig.ts --write"
