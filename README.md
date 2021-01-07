@@ -1,8 +1,4 @@
-# tailwindcss-classnames
-
-![NPM](https://img.shields.io/npm/l/tailwindcss-classnames)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/tailwindcss-classnames)](https://bundlephobia.com/result?p=tailwindcss-classnames)
-[![npm version](https://img.shields.io/npm/v/tailwindcss-classnames.svg)](https://www.npmjs.com/package/tailwindcss-classnames)
+# tailwindcss-classnames ![NPM](https://img.shields.io/npm/l/tailwindcss-classnames) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/tailwindcss-classnames)](https://bundlephobia.com/result?p=tailwindcss-classnames) [![npm version](https://img.shields.io/npm/v/tailwindcss-classnames.svg)](https://www.npmjs.com/package/tailwindcss-classnames)
 
 Functional typed classnames for TailwindCSS
 
@@ -21,6 +17,8 @@ You can not get this experience using pure TailwindCSS and the VSCode extension,
 [![Edit tailwindcss-classnames](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/elegant-lederberg-sih5r?fontsize=14&hidenavigation=1&theme=dark)
 
 ## Install
+
+**⚠️ NOTE:** This package releases versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
 
 Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up **TailwindCSS**. Now do:
 
