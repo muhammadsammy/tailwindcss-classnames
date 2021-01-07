@@ -57,7 +57,28 @@ export class ConfigScanner {
     return this._themeConfig;
   };
 
-  public getVariants = (): TConfigVariants => this._variantsConfig;
+  public getVariants = (): Omit<TConfigVariants, 'extend'> => {
+    // Get the `variants.extend` object
+    const variantsConfigExtend = this._variantsConfig?.extend;
+
+    // If the variants.extend exists...
+    if (!!variantsConfigExtend) {
+      //Return the result of merging the variants with extend
+      return _.mergeWith(
+        this._variantsConfig,
+        variantsConfigExtend,
+        (variantsValues, variantsExtendValues) => {
+          if (_.isArray(variantsValues)) {
+            return variantsValues.concat(variantsExtendValues);
+          }
+        },
+      );
+      // Otherwise...
+    } else {
+      // Return the variants
+      return this._variantsConfig;
+    }
+  };
 
   public getThemeProperty = (
     themeProperty: keyof TThemeItems,

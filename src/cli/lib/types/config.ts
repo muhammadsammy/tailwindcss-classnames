@@ -8,6 +8,8 @@ export type TConfigDarkMode = false | 'media' | 'class';
 
 export type TConfigTheme = TThemeItems & {extend?: TThemeItems};
 
-export type TConfigVariants = typeof defaultTailwindConfig.variants;
+export type TConfigVariants = TVariantsItems & {extend?: Partial<TVariantsItems>};
 
 export type TThemeItems = typeof defaultTailwindConfig.theme;
+
+type TVariantsItems = typeof defaultTailwindConfig.variants;
