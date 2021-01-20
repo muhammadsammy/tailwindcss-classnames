@@ -28,6 +28,7 @@
     "test": "jest --env=jsdom --coverage --passWithNoTests",
     "test:watch": "jest --env=jsdom --watch --updateSnapshot",
     "prepublishOnly": "npm run build",
+    "run-cli": "npm run build:lib && node lib/cli/index.js",
     "prebuild": "npm run clean",
     "postbuild": "rimraf {lib,es}/**/__tests__ {lib,es}/**/*.{spec,test}.{js,d.ts,js.map}",
     "posttest": "npm run typecheck && npm run lint",
