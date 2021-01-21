@@ -62,7 +62,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
+    "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^8.3.4",
     "@types/classnames": "^2.2.9",
     "@types/inquirer": "^6.5.0",
