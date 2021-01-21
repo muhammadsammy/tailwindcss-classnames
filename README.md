@@ -11,7 +11,7 @@ TailwindCSS is based on strings and with some nice tooling on top like [Tailwind
 - **Validation of classnames**: You can not write the wrong classname, cause the API only allows you to insert valid classnames
 - **Functional approach**: Since we are working in Typescript we get more freedom in using functional powers like composition and dynamic composition
 - **Defining by variables**: Even though it is nice to write TailwindCSS inline with your elements, it does not scale. You want to move definitions outside of the component for reusability and composition
-- **Support for all editors and IDEs**: Because it's just typescript types, you get these powers in all editors and IDEs that support TypeScript.
+- **Support for all editors and IDEs**: Because it's just TypeScript types, you get these powers in all editors and IDEs that support TypeScript.
 
 You can not get this experience using pure TailwindCSS and the VSCode extension, but you do get it with **tailwindcss-classnames**.
 
@@ -25,9 +25,9 @@ Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up 
 npm install tailwindcss-classnames
 ```
 
-**⚠️ NOTE:** This package releases versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
+**⚠️ NOTE:** This project versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
 
-The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing and functions for applying pseudo elements. That means it arrives at your browser at approximately **484b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
+The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **484b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
 
 ## Create classes
 
@@ -163,4 +163,4 @@ To submit patches or features:
 
 ## Credits
 
-Tailwindcss-classnames was started by [Christian Alfoni](https://github.com/christianalfoni) and is now maintained by [Muhammad Sammy](https://github.com/muhammadsammy). The full list of contributors can be found [here](https://github.com/muhammadsammy/tailwindcss-classnames/graphs/contributors).
+The tailwindcss-classnames project was started by [Christian Alfoni](https://github.com/christianalfoni) and is now maintained by [Muhammad Sammy](https://github.com/muhammadsammy). The full list of contributors can be found [here](https://github.com/muhammadsammy/tailwindcss-classnames/graphs/contributors).
