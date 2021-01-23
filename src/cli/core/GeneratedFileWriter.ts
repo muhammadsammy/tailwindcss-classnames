@@ -11,44 +11,37 @@ type TCliOptions = {
   customClassesFilename: string | void;
 };
 
+/**
+ * Responsible for writing a file with the generated content to the disk.
+ */
 export class GeneratedFileWriter {
   private readonly _configFilename: string | void;
   private readonly _outputFilename: string | void;
   private readonly _customClassesFilename: string | void;
   private _configFileData = '';
 
+  /**
+   * Initializes a new instance of `GeneratedFileWriter` class.
+   * @param options The parsed CLI options from user input.
+   */
   constructor(options: TCliOptions) {
     this._configFilename = options.configFilename;
     this._outputFilename = options.outputFilename;
     this._customClassesFilename = options.customClassesFilename;
   }
 
+  /**
+   * Writes the generated file to disk.
+   */
   public write = async (): Promise<void> => {
-    // Check for missing cli options
-    if (this.missingCliOptionError().length > 0) {
-      this.printCliMessage('error', this.missingCliOptionError());
+    // Check CLI inputs
+    try {
+      this.validateCliOptions();
+    } catch (error) {
+      return;
     }
 
-    // Check for invalid custom classes file content
-    if (!!this._customClassesFilename) {
-      return fs
-        .readFile(`./${this._customClassesFilename}`)
-        .then(data => {
-          if (!data.toString().includes('export default')) {
-            this.printCliMessage(
-              'error',
-              'The type having the custom classes must be a default export',
-            );
-            return;
-          }
-        })
-        .catch(error => {
-          this.printCliMessage('error', `Unable to read the file with custom types. ${error}`);
-          return;
-        });
-    }
-
-    // If everything goes well, read the tailwind config file
+    // If inputs are valid, read the tailwind config file
     await this.readTailwindConfigFile();
 
     // Then create a file with the generated types
@@ -64,12 +57,35 @@ export class GeneratedFileWriter {
       });
   };
 
-  private missingCliOptionError = (): string => {
-    if (!this._configFilename) return 'tailwindcss config file name or path is not provided';
-    if (!this._outputFilename)
-      return 'Please provide a valid filename to add generated types to it';
+  private validateCliOptions = (): void => {
+    // Check for missing cli options
 
-    return '';
+    if (!this._configFilename) {
+      this.printCliMessage('error', 'tailwindcss config file name or path is not provided');
+      throw new Error();
+    }
+    if (!this._outputFilename) {
+      this.printCliMessage('error', 'Please provide a valid filename to add generated types to it');
+      throw new Error();
+    }
+
+    // Check for invalid custom classes file content
+    if (!!this._customClassesFilename) {
+      fs.readFile(`./${this._customClassesFilename}`)
+        .then(data => {
+          if (!data.toString().includes('export default')) {
+            this.printCliMessage(
+              'error',
+              'The type having the custom classes must be a default export',
+            );
+          }
+        })
+        .catch(error => {
+          this.printCliMessage('error', `Unable to read the file with custom types. ${error}`);
+        });
+
+      throw new Error();
+    }
   };
 
   private readTailwindConfigFile = async (): Promise<void> => {
