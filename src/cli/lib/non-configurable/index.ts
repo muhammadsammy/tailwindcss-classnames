@@ -14,7 +14,7 @@ import transforms from './transforms';
 import transitionsAndAnimations from './transitionsAndAnimations';
 import typography from './typography';
 
-// These utility classes are classes that thier names does not change. Thier names are not
+// These utility classes are classes that their names does not change. Their names are not
 // configured by the `tailwind.config.js` file. e.g. 'flex-start', 'object-cover' etc.
 // the only configuration that is applicable to these classes are pseudo-class variants.
 export const nonConfigurableClassNames = {
