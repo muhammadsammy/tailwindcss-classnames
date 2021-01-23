@@ -2,7 +2,6 @@ import _ from 'lodash';
 import {generateTypes} from '../utils';
 import {ConfigScanner} from './ConfigScanner';
 import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
-import {IGenerator} from './IGenerator';
 import {nonConfigurableClassNames} from '../lib/non-configurable';
 // prettier-ignore
 import {AllClasses, Backgrounds, Layout, Borders, Tables, Effects,
@@ -11,19 +10,21 @@ import {AllClasses, Backgrounds, Layout, Borders, Tables, Effects,
 import {TConfigTheme, TTailwindCSSConfig, TConfigDarkMode} from '../lib/types/config';
 
 /**
- * The class responsible for generating the types from a parsed config by ConfigScanner.
+ * Responsible for generating the types from a parsed config by ConfigScanner.
  */
-export class ClassesGenerator implements IGenerator {
+export class ClassesGenerator {
   private readonly _prefix: string;
   private readonly _separator: string;
   private readonly _darkMode: TConfigDarkMode;
   private readonly _theme: Omit<TConfigTheme, 'extend'>;
   private readonly _configScanner: ConfigScanner;
-  /** The array of generated types for regular classes */
   private readonly _generatedRegularClasses: AllClasses;
-  /** The array of generated types for pseudo classes */
   private readonly _generatedPseudoClasses: string[];
 
+  /**
+   * Initializes a new instance of the `ClassesGenerator` class.
+   * @param tailwindConfig The _parsed_ TailwindCSS Config.
+   */
   constructor(tailwindConfig: TTailwindCSSConfig) {
     const configScanner = new ConfigScanner(tailwindConfig);
 
@@ -54,6 +55,9 @@ export class ClassesGenerator implements IGenerator {
     this._generatedPseudoClasses = this.pseudoClasses();
   }
 
+  /**
+   * Generates template for all generated classes.
+   */
   public generate = (): string => {
     const regularClassesTemplate = Object.keys(this._generatedRegularClasses)
       .map(classGroup => {
