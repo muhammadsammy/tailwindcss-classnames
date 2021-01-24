@@ -4,8 +4,9 @@ jobs:
   run_linter:
     runs-on: ubuntu-latest
     steps:
-    - name:  node version
+    - name:  action
     - uses: actions/checkout@v2
+    - name: node verison  
     - uses: actions/setup-node@v1
       with:
         node-version: '14.x'
