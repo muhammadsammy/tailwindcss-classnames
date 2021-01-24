@@ -2,8 +2,10 @@
 
 import {promises as fs} from 'fs';
 import colors from 'colors';
-import {baseTemplateString} from '../lib/baseTemplateString';
-import {ClassesGenerator} from './ClassesGenerator';
+import {ClassnamesGenerator} from './ClassnamesGenerator';
+import {TTailwindCSSConfig} from '../types/config';
+import {ConfigScanner} from './ConfigScanner';
+import {FileContentGenerator} from './FileContentGenerator';
 
 type TCliOptions = {
   configFilename: string | void;
@@ -57,6 +59,50 @@ export class GeneratedFileWriter {
       });
   };
 
+  private readTailwindConfigFile = async (): Promise<void> => {
+    try {
+      this._configFileData = await fs.readFile(`./${this._configFilename}`, {encoding: 'utf-8'});
+    } catch (err) {
+      this.printCliMessage('error', `Error Reading: "./${this._configFilename}"`);
+    }
+  };
+
+  private generateFileContent = (): string => {
+    // Evaluate the config as a JS object
+    const configEval = eval(
+      this._configFileData.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, ''),
+    ) as TTailwindCSSConfig;
+
+    // Parse the config with the config scanner
+    const scanner = new ConfigScanner(configEval, {
+      pluginTypography: this._configFileData.includes('@tailwindcss/typography'),
+      pluginCustomForms: this._configFileData.includes('@tailwindcss/custom-forms'),
+    });
+
+    // Generate all classnames from the config
+    const generatedClassnames = new ClassnamesGenerator(scanner).generate();
+
+    // Create the file content from the generated classes
+    const contentGenerator = new FileContentGenerator(generatedClassnames, scanner.getPrefix());
+    const fileContentTemplate = contentGenerator.generateFileContent();
+
+    // Return final file content
+    return (
+      fileContentTemplate
+        // Append the custom classes types from external file if provided.
+        .replace(
+          /T_CUSTOM_CLASSES_IMPORT_STATEMENT/g,
+          !!this._customClassesFilename
+            ? `import TCustomClassesFromExternalFile from './${this._customClassesFilename}';`
+            : '',
+        )
+        .replace(
+          /IMPORTED_T_CUSTOM_CLASSES/g,
+          !!this._customClassesFilename ? '\n  | TCustomClassesFromExternalFile' : '',
+        )
+    );
+  };
+
   private validateCliOptions = (): void => {
     // Check for missing cli options
 
@@ -86,53 +132,6 @@ export class GeneratedFileWriter {
 
       throw new Error();
     }
-  };
-
-  private readTailwindConfigFile = async (): Promise<void> => {
-    try {
-      this._configFileData = await fs.readFile(`./${this._configFilename}`, {encoding: 'utf-8'});
-    } catch (err) {
-      this.printCliMessage('error', `Error Reading: "./${this._configFilename}"`);
-    }
-  };
-
-  private generateFileContent = (): string => {
-    return (
-      baseTemplateString
-        // Add all generated classnames types
-        .replace(
-          /___ALL_CLASSES___/g,
-          new ClassesGenerator(
-            eval(this._configFileData.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, '')),
-          ).generate(),
-        )
-
-        // Add typing support for first-party plugins if found in the config
-        .replace(
-          /CUSTOM_FORMS_PLUGIN_TYPE/g,
-          this._configFileData.includes('@tailwindcss/custom-forms')
-            ? '\n  | TCustomFormsPluginClasses'
-            : '',
-        )
-        .replace(
-          /TYPOGRAPHY_PLUGIN_TYPE/g,
-          this._configFileData.includes('@tailwindcss/typography')
-            ? '\n  | TTypographyPluginClasses'
-            : '',
-        )
-
-        // Append the custom classes types from external file if provided.
-        .replace(
-          /IMPORTED_T_CUSTOM_CLASSES/g,
-          !!this._customClassesFilename ? '\n  | TCustomClassesFromExternalFile' : '',
-        )
-        .replace(
-          /T_CUSTOM_CLASSES_IMPORT_STATEMENT/g,
-          !!this._customClassesFilename
-            ? `import TCustomClassesFromExternalFile from './${this._customClassesFilename}';`
-            : '',
-        )
-    );
   };
 
   private printCliMessage = (type: 'error' | 'success', message: string): void => {

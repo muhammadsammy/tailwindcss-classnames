@@ -1,40 +1,37 @@
 import _ from 'lodash';
-import {generateTypes} from '../utils';
 import {ConfigScanner} from './ConfigScanner';
-import {ClassesGroupTemplateGenerator} from './ClassesGroupTemplateGenerator';
 import {nonConfigurableClassNames} from '../lib/non-configurable';
 // prettier-ignore
-import {AllClasses, Backgrounds, Layout, Borders, Tables, Effects,
+import {TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
         Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
-        FlexBox, Grid, Spacing, Sizing, Typography} from '../lib/types/classes';
-import {TConfigTheme, TTailwindCSSConfig, TConfigDarkMode} from '../lib/types/config';
+        FlexBox, Grid, Spacing, Sizing, Typography, TGeneratedClassnames} from '../types/classes';
+import {TConfigTheme, TConfigDarkMode} from '../types/config';
+import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
 
 /**
  * Responsible for generating the types from a parsed config by ConfigScanner.
  */
-export class ClassesGenerator {
+export class ClassnamesGenerator {
   private readonly _prefix: string;
   private readonly _separator: string;
   private readonly _darkMode: TConfigDarkMode;
   private readonly _theme: Omit<TConfigTheme, 'extend'>;
   private readonly _configScanner: ConfigScanner;
-  private readonly _generatedRegularClasses: AllClasses;
-  private readonly _generatedPseudoClasses: string[];
+  private readonly _generatedRegularClassnames: TAllClassnames;
+  private readonly _generatedPseudoClassnames: string[];
 
   /**
    * Initializes a new instance of the `ClassesGenerator` class.
    * @param tailwindConfig The _parsed_ TailwindCSS Config.
    */
-  constructor(tailwindConfig: TTailwindCSSConfig) {
-    const configScanner = new ConfigScanner(tailwindConfig);
+  constructor(scanner: ConfigScanner) {
+    this._configScanner = scanner;
+    this._prefix = this._configScanner.getPrefix();
+    this._separator = this._configScanner.getSeparator();
+    this._darkMode = this._configScanner.getDarkMode();
+    this._theme = this._configScanner.getTheme();
 
-    this._prefix = configScanner.getPrefix();
-    this._separator = configScanner.getSeparator();
-    this._darkMode = configScanner.getDarkMode();
-    this._theme = configScanner.getTheme();
-    this._configScanner = configScanner;
-
-    this._generatedRegularClasses = {
+    this._generatedRegularClassnames = {
       Accessibility: this.accessibility(),
       Backgrounds: this.backgrounds(),
       Borders: this.borders(),
@@ -52,27 +49,21 @@ export class ClassesGenerator {
       Typography: this.typography(),
     };
 
-    this._generatedPseudoClasses = this.pseudoClasses();
+    if (this._configScanner.getPlugins()) {
+      this._generatedRegularClassnames.TailwindLabsPlugins = tailwindLabsPlugins;
+    }
+
+    this._generatedPseudoClassnames = this.pseudoClasses();
   }
 
   /**
-   * Generates template for all generated classes.
+   * Get the generated classnames.
    */
-  public generate = (): string => {
-    const regularClassesTemplate = Object.keys(this._generatedRegularClasses)
-      .map(classGroup => {
-        return new ClassesGroupTemplateGenerator(
-          this._generatedRegularClasses[classGroup as keyof AllClasses],
-          classGroup,
-          this._prefix,
-        ).generate();
-      })
-      .join('\n');
-
-    const pseudoClassesTemplate =
-      'export type TPseudoClasses =' + generateTypes(this._generatedPseudoClasses);
-
-    return regularClassesTemplate + '\n\n' + pseudoClassesTemplate;
+  public generate = (): TGeneratedClassnames => {
+    return {
+      regularClassnames: this._generatedRegularClassnames,
+      pseudoClassnames: this._generatedPseudoClassnames,
+    };
   };
 
   private layout = (): Layout => {
@@ -353,12 +344,14 @@ export class ClassesGenerator {
     // For every key-value pair in the variants section in tailwind config...
     for (const [regularClassGroupKey, pseudoClassesVariantsForKey] of variantsConfig) {
       // Find all matching names from the generated regular classes with the key of the variants config
-      Object.keys(this._generatedRegularClasses).map(key => {
+      Object.keys(this._generatedRegularClassnames).map(key => {
         // If the current key is found to be a member of the generated regular classes group...
-        if (_.has(this._generatedRegularClasses[key as keyof AllClasses], regularClassGroupKey)) {
+        if (
+          _.has(this._generatedRegularClassnames[key as keyof TAllClassnames], regularClassGroupKey)
+        ) {
           // Get the value of the found generated class group
           const generatedClassGroup = _.get(
-            this._generatedRegularClasses,
+            this._generatedRegularClassnames,
             `${key}.${regularClassGroupKey}`,
           ) as string[];
 
@@ -379,7 +372,7 @@ export class ClassesGenerator {
                     breakpointVariant + this._separator + this._prefix + classname,
                   );
 
-                  // Add stackable dark and responsive pseudoclasses if the key has both as variants
+                  // Add stackable dark and responsive pseudoclasses if the key has both variants
                   if (pseudoClassesVariantsForKey.includes('dark') && isDarkModeEnabled) {
                     pseudoClasses.push(
                       breakpointVariant +
