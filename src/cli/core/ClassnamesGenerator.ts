@@ -49,8 +49,16 @@ export class ClassnamesGenerator {
       Typography: this.typography(),
     };
 
-    if (this._configScanner.getPlugins()) {
-      this._generatedRegularClassnames.TailwindLabsPlugins = tailwindLabsPlugins;
+    const configPlugins = this._configScanner.getPlugins();
+    if (configPlugins !== null) {
+      this._generatedRegularClassnames.TailwindLabsPlugins = {};
+      const {pluginCustomForms, pluginTypography} = tailwindLabsPlugins;
+
+      if (!!configPlugins.pluginCustomForms)
+        this._generatedRegularClassnames.TailwindLabsPlugins.pluginCustomForms = pluginCustomForms;
+
+      if (!!configPlugins.pluginTypography)
+        this._generatedRegularClassnames.TailwindLabsPlugins.pluginTypography = pluginTypography;
     }
 
     this._generatedPseudoClassnames = this.pseudoClasses();
