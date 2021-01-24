@@ -1,0 +1,13 @@
+name: Lint
+on: [push, pull_request]
+jobs:
+  run_linter:
+    runs-on: ubuntu-latest
+    steps:
+    - name:  node version
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: lint
+      run: npm run lint
