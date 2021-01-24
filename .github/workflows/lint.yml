@@ -1,8 +1,8 @@
-name: Lint Commit Messages
+name: Lint & Build
 on: [push, pull_request]
 
 jobs:
-  commitlint:
+  commit_&_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,3 +14,5 @@ jobs:
       - run: yarn install
       - name: lint
         run: npm run lint
+      - name: build
+        run: npm run build
