@@ -1,16 +1,16 @@
-name: Lint
+name: Lint Commit Messages
 on: [push, pull_request]
+
 jobs:
-  run_linter:
+  commitlint:
     runs-on: ubuntu-latest
     steps:
-    - name:  action
-    - uses: actions/checkout@v2
-    - name: node verison  
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-    - name: yarn install
-      run: yarn install  
-    - name: lint
-      run: npm run lint
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - run: yarn install
+      - name: lint
+        run: npm run lint
