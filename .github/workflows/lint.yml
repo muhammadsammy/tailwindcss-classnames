@@ -16,3 +16,5 @@ jobs:
         run: npm run lint
       - name: build
         run: npm run build
+      - name: build
+        run: yarn run-cli
