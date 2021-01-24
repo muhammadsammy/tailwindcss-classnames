@@ -1,3 +1,5 @@
+import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
+
 export type Accessibility = Record<TAccessibilityCategoryItem, string[]>;
 export type Backgrounds = Record<TBackgroundsCategoryItem, string[]>;
 export type Borders = Record<TBordersCategoryItem, string[]>;
@@ -14,7 +16,12 @@ export type Transforms = Record<TTransformsCategoryItem, string[]>;
 export type TransitionsAndAnimations = Record<TTransitionsAndAnimationsCategoryItem, string[]>;
 export type Typography = Record<TTypographyCategoryItem, string[]>;
 
-export type AllClasses = {
+export type TGeneratedClassnames = {
+  regularClassnames: TAllClassnames;
+  pseudoClassnames: string[];
+};
+
+export type TAllClassnames = {
   Accessibility: Accessibility;
   Backgrounds: Backgrounds;
   Borders: Borders;
@@ -30,6 +37,8 @@ export type AllClasses = {
   Transforms: Transforms;
   TransitionsAndAnimations: TransitionsAndAnimations;
   Typography: Typography;
+
+  TailwindLabsPlugins?: Partial<typeof tailwindLabsPlugins>;
 };
 
 type TAccessibilityCategoryItem = 'screenReaders';

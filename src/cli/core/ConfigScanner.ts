@@ -1,7 +1,12 @@
 import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
-import {TTailwindCSSConfig, TConfigVariants, TConfigDarkMode} from '../lib/types/config';
-import {TConfigTheme, TThemeItems} from '../lib/types/config';
+import {
+  TTailwindCSSConfig,
+  TConfigVariants,
+  TConfigDarkMode,
+  TConfigPlugins,
+} from '../types/config';
+import {TConfigTheme, TThemeItems} from '../types/config';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
 /**
@@ -13,8 +18,9 @@ export class ConfigScanner {
   private readonly _darkMode: TConfigDarkMode;
   private _themeConfig: TConfigTheme;
   private readonly _variantsConfig: TConfigVariants;
+  private readonly _pluginsConfig: TConfigPlugins;
 
-  constructor(tailwindConfig: TTailwindCSSConfig) {
+  constructor(tailwindConfig: TTailwindCSSConfig, plugins: TConfigPlugins) {
     this._prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this._darkMode = _.isEmpty(tailwindConfig?.darkMode)
       ? false
@@ -26,6 +32,7 @@ export class ConfigScanner {
       ? defaultTailwindConfig.variants // Order does matter, defaultVariants will be overridden by themeVariants.
       : {...defaultTailwindConfig.variants, ...tailwindConfig.variants};
     this._themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
+    this._pluginsConfig = plugins;
   }
 
   /**
@@ -42,6 +49,15 @@ export class ConfigScanner {
    * Gets the config separator value
    */
   public getSeparator = (): string => this._separator;
+
+  /**
+   * Gets the config plugins value
+   */
+  public getPlugins = (): TConfigPlugins | null => {
+    const {pluginTypography, pluginCustomForms} = this._pluginsConfig;
+
+    return pluginTypography || pluginCustomForms ? this._pluginsConfig : null;
+  };
 
   /**
    *  Gets the config theme object
