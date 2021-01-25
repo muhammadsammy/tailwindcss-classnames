@@ -1,8 +1,8 @@
-name: Lint & Build
+name: Lint 
 on: [push, pull_request]
 
 jobs:
-  commit_and_build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
