@@ -23,7 +23,7 @@
     "build:umd": "npm run build:es && rollup --config && dts-bundle --name dist/bundle --main es --outputAsModuleFolder",
     "clean": "rimraf dist es lib coverage tailwindcss-classnames.ts tailwind.config.js",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix && npm run format",
+    "lint": "eslint \"src/**/*.{js,ts}\" && typecheck",
     "format": "prettier \"**/*.{md,js,jsx,json,ts,tsx}\" --write",
     "test": "jest --env=jsdom --coverage --passWithNoTests",
     "test:watch": "jest --env=jsdom --watch --updateSnapshot",
