@@ -3,6 +3,8 @@
 import commander from 'commander';
 import inquirer from 'inquirer';
 import colors from 'colors';
+import fs from 'fs';
+
 import {GeneratedFileWriter} from './core/GeneratedFileWriter';
 
 type TInquirerAnswers = {
@@ -23,11 +25,12 @@ commander
 
   // Define the action of the CLI
   .action(({input, output, classesFile: extra}: {[key: string]: string | void}) => {
-    // If a required minimum of arguments is supplied to the CLI interface...
-    if (input) {
+    const isConfigFileFound: boolean = fs.existsSync('./tailwind.config.js');
+    // If the config file is found or provided explicitly by the user...
+    if (isConfigFileFound || !!input) {
       // Generate the types and write them to a file on disk
       void new GeneratedFileWriter({
-        configFilename: input,
+        configFilename: isConfigFileFound ? 'tailwind.config.js' : input,
         outputFilename: output,
         customClassesFilename: extra,
       }).write();
