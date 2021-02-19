@@ -40,7 +40,7 @@
     "generate": "tailwindcss init --full && node lib/cli/index.js -i tailwind.config.js -o src/index.ts",
     "postgenerate": "npm run clean && prettier src/index.ts --write",
     "preupdateConfig": "npm run clean",
-    "updateConfig": "tailwindcss init --full && node helpers/updateDefaultConfig.js",
+    "updateConfig": "tailwindcss init --full && node scripts/updateDefaultConfig.js",
     "postupdateConfig": "npm run clean && prettier src/cli/lib/defaultTailwindConfig.ts --write"
   },
   "keywords": [
