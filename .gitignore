@@ -98,8 +98,14 @@ typings/
 
 ### VisualStudioCode ###
 .vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 
 # End of https://www.gitignore.io/api/node,visualstudiocode,macos
 
+# npm lock file
+package-lock.json
+
+# project specific
 tailwind.config.js
 tailwindcss-classnames.ts
