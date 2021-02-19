@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/2.0.1...v2.1.0) (2021-02-19)
+
+
+### Features
+
+* add cursor-helper by default ([2fa990e](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/2fa990e6b0d20e584e26f34c202c6e08f4e7ee55))
+* add more dark mode varints by default ([43fee47](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/43fee47a1b1a1647437be57093103921731090c4))
+
 ### [2.0.1](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.9.0...v2.0.1) (2021-02-07)
 
 ### ⚠ BREAKING CHANGES
