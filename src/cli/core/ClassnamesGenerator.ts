@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {ConfigScanner} from './ConfigScanner';
+import {TailwindConfigParser} from './TailwindConfigParser';
 import {nonConfigurableClassNames} from '../lib/non-configurable';
 // prettier-ignore
 import {TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
@@ -16,7 +16,7 @@ export class ClassnamesGenerator {
   private readonly _separator: string;
   private readonly _darkMode: TConfigDarkMode;
   private readonly _theme: Omit<TConfigTheme, 'extend'>;
-  private readonly _configScanner: ConfigScanner;
+  private readonly _configParser: TailwindConfigParser;
   private readonly _generatedRegularClassnames: TAllClassnames;
   private readonly _generatedPseudoClassnames: string[];
 
@@ -24,12 +24,12 @@ export class ClassnamesGenerator {
    * Initializes a new instance of the `ClassesGenerator` class.
    * @param tailwindConfig The _parsed_ TailwindCSS Config.
    */
-  constructor(scanner: ConfigScanner) {
-    this._configScanner = scanner;
-    this._prefix = this._configScanner.getPrefix();
-    this._separator = this._configScanner.getSeparator();
-    this._darkMode = this._configScanner.getDarkMode();
-    this._theme = this._configScanner.getTheme();
+  constructor(parser: TailwindConfigParser) {
+    this._configParser = parser;
+    this._prefix = this._configParser.getPrefix();
+    this._separator = this._configParser.getSeparator();
+    this._darkMode = this._configParser.getDarkMode();
+    this._theme = this._configParser.getTheme();
 
     this._generatedRegularClassnames = {
       Accessibility: this.accessibility(),
@@ -49,7 +49,7 @@ export class ClassnamesGenerator {
       Typography: this.typography(),
     };
 
-    const configPlugins = this._configScanner.getPlugins();
+    const configPlugins = this._configParser.getPlugins();
     if (configPlugins !== null) {
       this._generatedRegularClassnames.TailwindLabsPlugins = {};
       const {pluginCustomForms, pluginTypography} = tailwindLabsPlugins;
@@ -344,8 +344,8 @@ export class ClassnamesGenerator {
 
     // HACK: This block is just to make accessibility object align with other types object shape
     const variantsConfig = Object.entries(
-      _.merge(this._configScanner.getVariants(), {
-        screenReaders: this._configScanner.getVariants().accessibility,
+      _.merge(this._configParser.getVariants(), {
+        screenReaders: this._configParser.getVariants().accessibility,
       }),
     );
 
@@ -371,7 +371,7 @@ export class ClassnamesGenerator {
             pseudoClassesVariantsForKey.map(variant => {
               if (variant === 'responsive') {
                 // Get the breakpoints from config
-                const [breakpoints] = this._configScanner.getThemeProperty('screens');
+                const [breakpoints] = this._configParser.getThemeProperty('screens');
 
                 // Create the classname for each breakpoint
                 breakpoints.map((breakpointVariant: string) => {
@@ -428,7 +428,7 @@ export class ClassnamesGenerator {
 
   private generateClassesWithColors = (property: ClassesWithColors): string[] => {
     // Get the key-value pairs of the passed property
-    const [propertyKeys, propertyValues] = this._configScanner.getThemeProperty(property);
+    const [propertyKeys, propertyValues] = this._configParser.getThemeProperty(property);
 
     // Store a conversion of the property name into actual utility name
     const utilName = property
@@ -461,7 +461,7 @@ export class ClassnamesGenerator {
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
-    const allOpacities = this._configScanner.getTheme().opacity;
+    const allOpacities = this._configParser.getTheme().opacity;
 
     // prettier-ignore
     type TOpacityProp = | 'divideOpacity' | 'textOpacity' | 'backgroundOpacity'

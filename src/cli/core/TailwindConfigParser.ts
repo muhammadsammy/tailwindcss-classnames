@@ -12,7 +12,7 @@ import {TConfigTheme, TThemeItems} from '../types/config';
 /**
  * Parses the tailwind config object
  */
-export class ConfigScanner {
+export class TailwindConfigParser {
   private readonly _prefix: string;
   private readonly _separator: string;
   private readonly _darkMode: TConfigDarkMode;

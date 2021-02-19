@@ -4,7 +4,7 @@ import {promises as fs} from 'fs';
 import colors from 'colors';
 import {ClassnamesGenerator} from './ClassnamesGenerator';
 import {TTailwindCSSConfig} from '../types/config';
-import {ConfigScanner} from './ConfigScanner';
+import {TailwindConfigParser} from './TailwindConfigParser';
 import {FileContentGenerator} from './FileContentGenerator';
 
 type TCliOptions = {
@@ -74,7 +74,7 @@ export class GeneratedFileWriter {
     ) as TTailwindCSSConfig;
 
     // Parse the config with the config scanner
-    const scanner = new ConfigScanner(configEval, {
+    const scanner = new TailwindConfigParser(configEval, {
       pluginTypography: this._configFileData.includes('@tailwindcss/typography'),
       pluginCustomForms: this._configFileData.includes('@tailwindcss/custom-forms'),
     });
