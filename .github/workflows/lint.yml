@@ -1,4 +1,4 @@
-name: Lint 
+name: Lint
 on: [push, pull_request]
 
 jobs:
@@ -11,6 +11,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-      - run: yarn install  
+      - run: yarn install
       - name: lint
         run: yarn run lint
