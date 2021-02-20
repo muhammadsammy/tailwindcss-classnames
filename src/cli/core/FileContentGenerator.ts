@@ -81,14 +81,14 @@ export class FileContentGenerator {
     return (
       'export type TTailwindString = "TAILWIND_STRING"\n' +
       '\n' +
-      'export type TKey = TClasses | TTailwindString\n' +
+      'export type TKey = TClasses | TTailwindStringIMPORTED_T_CUSTOM_CLASSES_KEY\n' +
       '\n' +
       'export type TArg =\n' +
       '| TClasses\n' +
       '| null\n' +
       '| undefined\n' +
       '| {[key in TKey]?: boolean}\n' +
-      '| TTailwindString\n' +
+      '| TTailwindString\nIMPORTED_T_CUSTOM_CLASSES_ARG' +
       '\n' +
       'export type TTailwind = (...args: TArg[]) => TTailwindString\n' +
       '\n' +

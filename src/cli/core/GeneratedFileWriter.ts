@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
 import {promises as fs} from 'fs';
+import path from 'path';
 import colors from 'colors';
 import {ClassnamesGenerator} from './ClassnamesGenerator';
 import {TTailwindCSSConfig} from '../types/config';
@@ -38,7 +39,7 @@ export class GeneratedFileWriter {
   public write = async (): Promise<void> => {
     // Check CLI inputs
     try {
-      this.validateCliOptions();
+      await this.validateCliOptions();
     } catch (error) {
       return;
     }
@@ -86,24 +87,48 @@ export class GeneratedFileWriter {
     const contentGenerator = new FileContentGenerator(generatedClassnames, scanner.getPrefix());
     const fileContentTemplate = contentGenerator.generateFileContent();
 
+    // Resolve the custom classes import path relative to the output file
+    let customClassesImportPath: string | null = null;
+    if (!!this._outputFilename && !!this._customClassesFilename) {
+      customClassesImportPath = path
+        .join(
+          path.relative(
+            path.join(process.cwd(), path.dirname(this._outputFilename)),
+            path.join(process.cwd(), path.dirname(this._customClassesFilename)),
+          ),
+          path.basename(this._customClassesFilename),
+        )
+        // Convert any Windows path separators to posix
+        .replace(/\\/g, '/')
+        .replace(/(\.d)?\.ts$/, '');
+      customClassesImportPath =
+        customClassesImportPath[0] === '.'
+          ? customClassesImportPath
+          : `./${customClassesImportPath}`;
+    }
+
     // Return final file content
     return (
       fileContentTemplate
         // Append the custom classes types from external file if provided.
         .replace(
           /T_CUSTOM_CLASSES_IMPORT_STATEMENT/g,
-          !!this._customClassesFilename
-            ? `import TCustomClassesFromExternalFile from './${this._customClassesFilename}';`
+          !!customClassesImportPath
+            ? `import type TCustomClassesFromExternalFile from '${customClassesImportPath}';`
             : '',
         )
         .replace(
-          /IMPORTED_T_CUSTOM_CLASSES/g,
-          !!this._customClassesFilename ? '\n  | TCustomClassesFromExternalFile' : '',
+          / ?IMPORTED_T_CUSTOM_CLASSES_KEY/g,
+          !!customClassesImportPath ? ' | TCustomClassesFromExternalFile' : '',
+        )
+        .replace(
+          / ?IMPORTED_T_CUSTOM_CLASSES_ARG/g,
+          !!customClassesImportPath ? '| TCustomClassesFromExternalFile\n' : '',
         )
     );
   };
 
-  private validateCliOptions = (): void => {
+  private validateCliOptions = (): Promise<void> => {
     // Check for missing cli options
 
     if (!this._configFilename) {
@@ -117,7 +142,8 @@ export class GeneratedFileWriter {
 
     // Check for invalid custom classes file content
     if (!!this._customClassesFilename) {
-      fs.readFile(`./${this._customClassesFilename}`)
+      return fs
+        .readFile(`./${this._customClassesFilename}`)
         .then(data => {
           if (!data.toString().includes('export default')) {
             this.printCliMessage(
@@ -128,10 +154,11 @@ export class GeneratedFileWriter {
         })
         .catch(error => {
           this.printCliMessage('error', `Unable to read the file with custom types. ${error}`);
+          throw new Error();
         });
-
-      throw new Error();
     }
+
+    return Promise.resolve();
   };
 
   private printCliMessage = (type: 'error' | 'success', message: string): void => {
