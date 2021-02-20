@@ -24,12 +24,12 @@ commander
   .option('-x, --extra <extra>', 'Name or relative path of the file with the custom extra types')
 
   // Define the action of the CLI
-  .action(({input, output, classesFile: extra}: {[key: string]: string | void}) => {
+  .action(({input, output, extra}: {[key: string]: string | void}) => {
     const isConfigFileFound: boolean = fs.existsSync('./tailwind.config.js');
     // If the config file is found or provided explicitly by the user...
     if (isConfigFileFound || !!input) {
       // Generate the types and write them to a file on disk
-      void new GeneratedFileWriter({
+      return new GeneratedFileWriter({
         configFilename: isConfigFileFound ? 'tailwind.config.js' : input,
         outputFilename: output,
         customClassesFilename: extra,
@@ -61,7 +61,7 @@ commander
         ])
         .then((answers: TInquirerAnswers) => {
           // Get the answers and use them to create the file with generated types
-          void new GeneratedFileWriter({
+          return new GeneratedFileWriter({
             configFilename: answers.configFilename,
             outputFilename: answers.outputFilename,
             customClassesFilename: answers.customClassesFilename,
