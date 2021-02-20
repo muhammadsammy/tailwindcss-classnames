@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.4](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v1.9.0...v2.0.4) (2021-02-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename CLI args and improve its output (resolves #116)
+
+### Features
+
+* add `max-width-prose` class (fixes [#101](https://github.com/muhammadsammy/tailwindcss-classnames/issues/101)) ([#113](https://github.com/muhammadsammy/tailwindcss-classnames/issues/113)) ([c130f57](https://github.com/muhammadsammy/tailwindcss-classnames/commit/c130f5780c701d7beeb444721a1a7804b49bff32))
+* add `overflow-ellipsis` and `overflow-clip` utilities (close [#109](https://github.com/muhammadsammy/tailwindcss-classnames/issues/109)) ([d8fd228](https://github.com/muhammadsammy/tailwindcss-classnames/commit/d8fd22877ce6209d9a37674070a3a8f90b2b980b))
+* add `transform-gpu` utility classname (closes [#110](https://github.com/muhammadsammy/tailwindcss-classnames/issues/110)) ([53f4973](https://github.com/muhammadsammy/tailwindcss-classnames/commit/53f4973e0ac0c3c77f58c5ba9be0908796ad737e))
+* add cursor-helper by default ([2fa990e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/2fa990e6b0d20e584e26f34c202c6e08f4e7ee55))
+* add more dark mode varints by default ([43fee47](https://github.com/muhammadsammy/tailwindcss-classnames/commit/43fee47a1b1a1647437be57093103921731090c4))
+* add new config scales (closes [#99](https://github.com/muhammadsammy/tailwindcss-classnames/issues/99), [#111](https://github.com/muhammadsammy/tailwindcss-classnames/issues/111), [#105](https://github.com/muhammadsammy/tailwindcss-classnames/issues/105), [#106](https://github.com/muhammadsammy/tailwindcss-classnames/issues/106)) ([#114](https://github.com/muhammadsammy/tailwindcss-classnames/issues/114)) ([b632094](https://github.com/muhammadsammy/tailwindcss-classnames/commit/b632094ecfca10941a9fe3ec7a52f9b676761024))
+* add ring utility classnames (closes [#97](https://github.com/muhammadsammy/tailwindcss-classnames/issues/97)) ([#112](https://github.com/muhammadsammy/tailwindcss-classnames/issues/112)) ([4b12183](https://github.com/muhammadsammy/tailwindcss-classnames/commit/4b1218306d52ffad856ad241df92d165f855384b))
+* default to disabling hover and focus variants for font weight ([c22de68](https://github.com/muhammadsammy/tailwindcss-classnames/commit/c22de68a86f49b7242a6b2091a1b28f387641d46))
+* detect config file if it exists to avoid prompting the user (closes [#144](https://github.com/muhammadsammy/tailwindcss-classnames/issues/144)) ([69b7e55](https://github.com/muhammadsammy/tailwindcss-classnames/commit/69b7e55ca49734a62af7fa40e379a403cf9d4104))
+* enable variants extention (resolves [#102](https://github.com/muhammadsammy/tailwindcss-classnames/issues/102)) ([380e5d7](https://github.com/muhammadsammy/tailwindcss-classnames/commit/380e5d7113c3f95274328bb45bce84d1b09de92b))
+* generate lib types with new colors, dark mode ([72bc948](https://github.com/muhammadsammy/tailwindcss-classnames/commit/72bc9481b51eadf5376a2e2397aceddc9683e7c1))
+* remove `clear-fix` utility from layout/float ([7556452](https://github.com/muhammadsammy/tailwindcss-classnames/commit/7556452bf64cc8fc3f007c506cf64b0078bff785))
+* remove `scrolling-touch` and `scrolling-auto` from layout/overflow ([8e10edb](https://github.com/muhammadsammy/tailwindcss-classnames/commit/8e10edbb4135c6ffd350b7cdcbfcafb5957f55a2))
+* remove `shadow-outline` and `shadow-xs` (closes [#92](https://github.com/muhammadsammy/tailwindcss-classnames/issues/92)) ([6c8db2d](https://github.com/muhammadsammy/tailwindcss-classnames/commit/6c8db2d8e1c2b8c171a57f23259274028f4bbf40))
+* rename `whitespace-no-wrap` utility class to `whitespace-nowrap` ([dafec5d](https://github.com/muhammadsammy/tailwindcss-classnames/commit/dafec5de8508b1798c46eab3e5b11cfcae5e47b0))
+* rename CLI args and improve its output (resolves [#116](https://github.com/muhammadsammy/tailwindcss-classnames/issues/116)) ([b1e5e43](https://github.com/muhammadsammy/tailwindcss-classnames/commit/b1e5e431753bb23415692b3630943e43ac99fa6e))
+* support dark mode classes ([#67](https://github.com/muhammadsammy/tailwindcss-classnames/issues/67)) ([a4bcd0b](https://github.com/muhammadsammy/tailwindcss-classnames/commit/a4bcd0bfffd5a732af04d1f71358230398b3e5b4))
+* support the new color palette by default ([6acb30b](https://github.com/muhammadsammy/tailwindcss-classnames/commit/6acb30bdeb505631d4d593c43f1dac4898017bb7))
+* update the default tailwind config from v2 ([#115](https://github.com/muhammadsammy/tailwindcss-classnames/issues/115)) ([16b0b26](https://github.com/muhammadsammy/tailwindcss-classnames/commit/16b0b261b44622c5cb3ebe3205559ed359a76989))
+* use new name for flex no wrap `flex-nowrap` ([b47865e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/b47865ea1f86222fb531af3d81d297900d0df0e1))
+
+
+### Bug Fixes
+
+* detect default classes from the new 'DEFAULT' string ([b14973a](https://github.com/muhammadsammy/tailwindcss-classnames/commit/b14973ae93996d555842cdb7a8a112db95c792ef))
+* ignore default keys in transition timing function config ([5a36e8e](https://github.com/muhammadsammy/tailwindcss-classnames/commit/5a36e8e16608605e4c1c381915409dd2048c5feb))
+* use and emit custom classes ([7fd741c](https://github.com/muhammadsammy/tailwindcss-classnames/commit/7fd741ca7f6a09ec653c71988f984a35a0dde869))
+
 ### [2.0.3](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/2.0.1...v2.0.3) (2021-02-19)
 
 
