@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.5](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.4...v2.0.5) (2021-02-23)
+
+
+### Bug Fixes
+
+* generate lib types with latest changes ([0a7a654](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/0a7a6547555bd4a3c7b2bb46c69762859017dd78))
+
 ### [2.0.4](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.3...v2.0.4) (2021-02-20)
 
 
