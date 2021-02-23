@@ -71,20 +71,26 @@ export class GeneratedFileWriter {
 
   private generateFileContent = (): string => {
     // Evaluate the config as a JS object
-    const configEval = vm.runInNewContext(this._configFileData, {require, module: {}}) as TConfig;
+    const evaluatedConfig = <TConfig>vm.runInNewContext(this._configFileData, {
+      __dirname: path.dirname(path.resolve(`./${this._configFilename}`)),
+      module: {},
+      require,
+    });
 
     // Parse the config with the config parser class
-    const scanner = new TailwindConfigParser(configEval, {
+    const configParser = new TailwindConfigParser(evaluatedConfig, {
       pluginTypography: this._configFileData.includes('@tailwindcss/typography'),
       pluginCustomForms: this._configFileData.includes('@tailwindcss/custom-forms'),
     });
 
     // Generate all classnames from the config
-    const generatedClassnames = new ClassnamesGenerator(scanner).generate();
+    const generatedClassnames = new ClassnamesGenerator(configParser).generate();
 
-    // Create the file content from the generated classes
-    const contentGenerator = new FileContentGenerator(generatedClassnames, scanner.getPrefix());
-    const fileContentTemplate = contentGenerator.generateFileContent();
+    // Create the file content from the generated classnames
+    const fileContentTemplate = new FileContentGenerator(
+      generatedClassnames,
+      configParser.getPrefix(),
+    ).generateFileContent();
 
     // Resolve the custom classes import path relative to the output file
     let customClassesImportPath: string | null = null;
