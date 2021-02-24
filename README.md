@@ -117,20 +117,14 @@ The types included in this package are the default tailwindcss classes, but if y
 
 ### Example of CLI usage:
 
-Add the CLI to npm scripts in your `package.json`:
-
+Add the CLI to npm scripts in your **package.json** then run `npm run generate-css-types` or `yarn generate-css-types`:
 ```json
 "scripts": {
   "generate-css-types": "tailwindcss-classnames -i path/to/tailwind.config.js -o path/to/output-file.ts"
 }
 ```
 
-then run `npm run generate-css-types` or `yarn generate-css-types`.
-
-<br/>
-
 **⚠️ NOTE:** that if you want to add custom types from external file, the type must be a default export:
-
 ```ts
 export default MyCustomType;
 type MyCustomType =
@@ -138,6 +132,14 @@ type MyCustomType =
   | "sidebar"
   ...
 ```
+
+### Known limitiations
+
+- Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) for details.
+- Don't run as `npx tailwindcss-classnames`, use as an npm script as mentioned above.
+- [Backlog](https://github.com/muhammadsammy/tailwindcss-classnames/milestone/2)
+
+Any help with these issues is very much appreciated.
 
 ## Contributing
 
