@@ -102,49 +102,41 @@ export const App: React.FC<{disabled}> = ({disabled}) => {
 };
 ```
 
-## Using the CLI to generate custom types
+## Using the CLI
 
 The types included in this package are the default tailwindcss classes, but if you modified your tailwind config file and/or want to add external custom classes, you can use the CLI tool to do this.
 
-Simply run `npx tailwindcss-classnames`.
-
-## CLI arguments:
+### CLI arguments:
 
 ```
-  -i, --input <input>    Name or relative path of the TailwindCSS config file
+  -i, --input <input>    Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
   -o, --output <output>  Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
   -x, --extra <extra>    Name or relative path of the file with the custom extra types **(optional)**
   -h, --help             display help for command
 ```
 
-## Example of CLI usage:
+### Example of CLI usage:
 
-If you want to add types from external file named `my-custom-classes.ts`
-containing the following code:
-
-```ts
-type TCustomClasses =
-  | "red-button"
-  | "app-sidebar"
-  | "app-navbar"
-  | ...
-
-// Note that you must provide a default export of the type
-export default TCustomClasses;
-```
-
-You will execute the CLI with the following arguments:
-
-```bash
-npx tailwindcss-classnames -i path/to/tailwind.config.js -o path/to/output-file.ts -x my-custom-classes
-```
-
-Also, you can add it to your `package.json` scripts for convenience:
+Add the CLI to npm scripts in your `package.json`:
 
 ```json
 "scripts": {
-  "generate-css-types": "tailwindcss-classnames -i relative/path/to/tailwind.config.js"
+  "generate-css-types": "tailwindcss-classnames -i path/to/tailwind.config.js -o path/to/output-file.ts"
 }
+```
+
+then run `npm run generate-css-types` or `yarn generate-css-types`.
+
+<br/>
+
+**⚠️ NOTE:** that if you want to add custom types from external file, the type must be a default export:
+
+```ts
+export default MyCustomType;
+type MyCustomType =
+  | "btn"
+  | "sidebar"
+  ...
 ```
 
 ## Contributing
@@ -163,4 +155,4 @@ To submit patches or features:
 
 ## Credits
 
-The tailwindcss-classnames project was started by [Christian Alfoni](https://github.com/christianalfoni) and is now maintained by [Muhammad Sammy](https://github.com/muhammadsammy). The full list of contributors can be found [here](https://github.com/muhammadsammy/tailwindcss-classnames/graphs/contributors).
+This project was started by [Christian Alfoni](https://github.com/christianalfoni) and is now maintained by [Muhammad Sammy](https://github.com/muhammadsammy). The full list of contributors can be found [here](https://github.com/muhammadsammy/tailwindcss-classnames/graphs/contributors).
