@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-classnames",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Functional typed classnames for TailwindCSS",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "contributors": [
@@ -35,7 +35,8 @@
     "posttest": "npm run typecheck && npm run lint",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
-    "release": "standard-version --release-as",
+    "release": "standard-version",
+    "releaseAs": "standard-version --release-as",
     "pregenerate": "npm run clean && npm run build:lib",
     "generate": "tailwindcss init --full && node lib/cli/index.js -i tailwind.config.js -o src/index.ts",
     "postgenerate": "npm run clean && prettier src/index.ts --write",
