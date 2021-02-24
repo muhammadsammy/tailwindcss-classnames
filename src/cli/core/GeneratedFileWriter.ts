@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
 import {promises as fs} from 'fs';
+import vm from 'vm';
 import path from 'path';
 import colors from 'colors';
 import {ClassnamesGenerator} from './ClassnamesGenerator';
-import {TTailwindCSSConfig} from '../types/config';
 import {TailwindConfigParser} from './TailwindConfigParser';
 import {FileContentGenerator} from './FileContentGenerator';
+import {TTailwindCSSConfig as TConfig} from '../types/config';
 
 type TCliOptions = {
   configFilename: string | void;
@@ -70,22 +71,26 @@ export class GeneratedFileWriter {
 
   private generateFileContent = (): string => {
     // Evaluate the config as a JS object
-    const configEval = eval(
-      this._configFileData.replace(/(['"])?plugins(['"])? *: *\[(.*|\n)*?],?/g, ''),
-    ) as TTailwindCSSConfig;
+    const evaluatedConfig = <TConfig>vm.runInNewContext(this._configFileData, {
+      __dirname: path.dirname(path.resolve(`./${this._configFilename}`)),
+      module: {},
+      require,
+    });
 
-    // Parse the config with the config scanner
-    const scanner = new TailwindConfigParser(configEval, {
+    // Parse the config with the config parser class
+    const configParser = new TailwindConfigParser(evaluatedConfig, {
       pluginTypography: this._configFileData.includes('@tailwindcss/typography'),
       pluginCustomForms: this._configFileData.includes('@tailwindcss/custom-forms'),
     });
 
     // Generate all classnames from the config
-    const generatedClassnames = new ClassnamesGenerator(scanner).generate();
+    const generatedClassnames = new ClassnamesGenerator(configParser).generate();
 
-    // Create the file content from the generated classes
-    const contentGenerator = new FileContentGenerator(generatedClassnames, scanner.getPrefix());
-    const fileContentTemplate = contentGenerator.generateFileContent();
+    // Create the file content from the generated classnames
+    const fileContentTemplate = new FileContentGenerator(
+      generatedClassnames,
+      configParser.getPrefix(),
+    ).generateFileContent();
 
     // Resolve the custom classes import path relative to the output file
     let customClassesImportPath: string | null = null;
