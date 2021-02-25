@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.7](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.6...v2.0.7) (2021-02-25)
+
+
+### Bug Fixes
+
+* add missing `process` global to the node vm context ([0e401e3](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/0e401e3f0633282e19dfc5fe6274538072719a7a))
+
 ### [2.0.6](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.5...v2.0.6) (2021-02-24)
 
 ### Bug Fixes
