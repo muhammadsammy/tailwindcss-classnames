@@ -111,7 +111,7 @@ export class TailwindConfigParser {
 
     // If the variants.extend exists...
     if (!!variantsConfigExtend) {
-      //Return the result of merging the variants with extend
+      // Return the result of merging the variants with extend
       return _.mergeWith(
         this._variantsConfig,
         variantsConfigExtend,

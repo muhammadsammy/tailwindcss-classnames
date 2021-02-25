@@ -7,7 +7,7 @@ import colors from 'colors';
 import {ClassnamesGenerator} from './ClassnamesGenerator';
 import {TailwindConfigParser} from './TailwindConfigParser';
 import {FileContentGenerator} from './FileContentGenerator';
-import {TTailwindCSSConfig as TConfig} from '../types/config';
+import {TTailwindCSSConfig} from '../types/config';
 
 type TCliOptions = {
   configFilename: string | void;
@@ -69,13 +69,18 @@ export class GeneratedFileWriter {
     }
   };
 
+  private evaluateTailwindConfigFile = (): TTailwindCSSConfig => {
+    return <TTailwindCSSConfig>vm.runInNewContext(this._configFileData, {
+      __dirname: path.dirname(path.resolve(`./${this._configFilename}`)),
+      require,
+      module: {},
+      process,
+    });
+  };
+
   private generateFileContent = (): string => {
     // Evaluate the config as a JS object
-    const evaluatedConfig = <TConfig>vm.runInNewContext(this._configFileData, {
-      __dirname: path.dirname(path.resolve(`./${this._configFilename}`)),
-      module: {},
-      require,
-    });
+    const evaluatedConfig = this.evaluateTailwindConfigFile();
 
     // Parse the config with the config parser class
     const configParser = new TailwindConfigParser(evaluatedConfig, {
