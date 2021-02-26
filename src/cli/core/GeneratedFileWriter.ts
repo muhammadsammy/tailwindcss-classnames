@@ -22,6 +22,7 @@ export class GeneratedFileWriter {
   private readonly _configFilename: string | void;
   private readonly _outputFilename: string | void;
   private readonly _customClassesFilename: string | void;
+  /** The data returned from reading the config file */
   private _configFileData = '';
 
   /**
@@ -38,18 +39,18 @@ export class GeneratedFileWriter {
    * Writes the generated file to disk.
    */
   public write = async (): Promise<void> => {
-    // Check CLI inputs
+    // Check whether the CLI inputs are valid or not
     try {
       await this.validateCliOptions();
     } catch (error) {
       return;
     }
 
-    // If inputs are valid, read the tailwind config file
-    await this.readTailwindConfigFile();
+    // If the inputs were valid, generate the file content
+    const contentGenerationResult = await this.generateFileContent();
 
-    // Then create a file with the generated types
-    fs.writeFile(`${this._outputFilename}`, this.generateFileContent(), 'utf8')
+    // Then write the generation result to a file with the provided value from the CLI interface.
+    fs.writeFile(`${this._outputFilename}`, contentGenerationResult, 'utf8')
       .then(() => {
         this.printCliMessage(
           'success',
@@ -61,15 +62,15 @@ export class GeneratedFileWriter {
       });
   };
 
-  private readTailwindConfigFile = async (): Promise<void> => {
+  private evaluateTailwindConfigFile = async (): Promise<TTailwindCSSConfig> => {
+    // Read the config file from the provided config path
     try {
       this._configFileData = await fs.readFile(`./${this._configFilename}`, {encoding: 'utf-8'});
     } catch (err) {
       this.printCliMessage('error', `Error Reading: "./${this._configFilename}"`);
     }
-  };
 
-  private evaluateTailwindConfigFile = (): TTailwindCSSConfig => {
+    // Execute the config file content as JavaScript code
     return <TTailwindCSSConfig>vm.runInNewContext(this._configFileData, {
       __dirname: path.dirname(path.resolve(`./${this._configFilename}`)),
       require,
@@ -78,9 +79,9 @@ export class GeneratedFileWriter {
     });
   };
 
-  private generateFileContent = (): string => {
+  private generateFileContent = async (): Promise<string> => {
     // Evaluate the config as a JS object
-    const evaluatedConfig = this.evaluateTailwindConfigFile();
+    const evaluatedConfig = await this.evaluateTailwindConfigFile();
 
     // Parse the config with the config parser class
     const configParser = new TailwindConfigParser(evaluatedConfig, {
@@ -140,7 +141,6 @@ export class GeneratedFileWriter {
 
   private validateCliOptions = (): Promise<void> => {
     // Check for missing cli options
-
     if (!this._configFilename) {
       this.printCliMessage('error', 'tailwindcss config file name or path is not provided');
       throw new Error();
