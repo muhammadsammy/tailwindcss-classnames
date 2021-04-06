@@ -430,7 +430,7 @@ export class ClassnamesGenerator {
     // Get the key-value pairs of the passed property
     const [propertyKeys, propertyValues] = this._configParser.getThemeProperty(property);
 
-    // Store a conversion of the property name into actual utility name
+    // Convert the config property names into utility class names
     const utilName = property
       .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
       .replace('Stops', '') // gradientStops -> gradient
