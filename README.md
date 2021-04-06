@@ -106,18 +106,17 @@ export const App: React.FC<{disabled}> = ({disabled}) => {
 
 The types included in this package are the default tailwindcss classes, but if you modified your tailwind config file and/or want to add external custom classes, you can use the CLI tool to do this.
 
-### CLI arguments:
+### CLI arguments
 
-```
-  -i, --input <input>    Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
-  -o, --output <output>  Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
-  -x, --extra <extra>    Name or relative path of the file with the custom extra types **(optional)**
-  -h, --help             display help for command
-```
+- `-i`, `--input`    Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
+- `-o`, `--output`   Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
+- `-x`, `--extra`    Name or relative path of the file with the custom extra types **(optional)**
+- `-h`, `--help`     display help for command
 
-### Example of CLI usage:
+### Example of CLI usage
 
 Add the CLI to npm scripts in your **package.json** then run `npm run generate-css-types` or `yarn generate-css-types`:
+
 ```json
 "scripts": {
   "generate-css-types": "tailwindcss-classnames -i path/to/tailwind.config.js -o path/to/output-file.ts"
@@ -125,6 +124,7 @@ Add the CLI to npm scripts in your **package.json** then run `npm run generate-c
 ```
 
 **⚠️ NOTE:** that if you want to add custom types from external file, the type must be a default export:
+
 ```ts
 export default MyCustomType;
 type MyCustomType =
@@ -154,6 +154,8 @@ To submit patches or features:
 3. Make changes
 4. Build and run the CLI by `yarn run-cli`
 5. Submit your changes via GitHub Pull Requests.
+
+Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a PR.
 
 ## Credits
 
