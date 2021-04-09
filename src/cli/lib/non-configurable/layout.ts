@@ -21,6 +21,8 @@ const float = ['float-right', 'float-left', 'float-none'];
 
 const clear = ['clear-left', 'clear-right', 'clear-both', 'clear-none'];
 
+const isolation = ['isolate', 'isolation-auto'];
+
 const objectFit = [
   'object-contain',
   'object-cover',
@@ -66,6 +68,7 @@ export default {
   container,
   float,
   clear,
+  isolation,
   objectFit,
   overflow,
   overscrollBehavior,
