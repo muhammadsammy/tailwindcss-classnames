@@ -2,6 +2,7 @@ import accessibility from './accessibility';
 import backgrounds from './backgrounds';
 import borders from './borders';
 import effects from './effects';
+import filters from './filters';
 import flexBox from './flexbox';
 import grid from './grid';
 import interactivity from './interactivity';
@@ -22,6 +23,7 @@ export const nonConfigurableClassNames = {
   backgrounds,
   borders,
   effects,
+  filters,
   flexBox,
   grid,
   interactivity,
