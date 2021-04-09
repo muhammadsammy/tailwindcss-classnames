@@ -15,6 +15,8 @@ const display = [
   'hidden',
 ];
 
+const boxDecorationBreak = ['decoration-slice', 'decoration-clone'];
+
 const container = ['container'];
 
 const float = ['float-right', 'float-left', 'float-none'];
@@ -64,6 +66,7 @@ const visibility = ['visible', 'invisible'];
 
 export default {
   display,
+  boxDecorationBreak,
   boxSizing,
   container,
   float,

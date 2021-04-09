@@ -138,6 +138,7 @@ type TInteractivityCategoryItem =
 
 type TLayoutCategoryItem =
   | 'display'
+  | 'boxDecorationBreak'
   | 'boxSizing'
   | 'container'
   | 'float'
