@@ -4,6 +4,7 @@ export type Accessibility = Record<TAccessibilityCategoryItem, string[]>;
 export type Backgrounds = Record<TBackgroundsCategoryItem, string[]>;
 export type Borders = Record<TBordersCategoryItem, string[]>;
 export type Effects = Record<TEffectsCategoryItem, string[]>;
+export type Filters = Record<TFiltersCategoryItem, string[]>;
 export type FlexBox = Record<TFlexBoxCategoryItem, string[]>;
 export type Grid = Record<TGridCategoryItem, string[]>;
 export type Interactivity = Record<TInteractivityCategoryItem, string[]>;
@@ -71,6 +72,29 @@ type TBordersCategoryItem =
   | 'ringWidth';
 
 type TEffectsCategoryItem = 'boxShadow' | 'opacity';
+
+type TFiltersCategoryItem =
+  | 'filter'
+  | 'backdropFilter'
+  | 'blur'
+  | 'brightness'
+  | 'contrast'
+  | 'dropShadow'
+  | 'grayscale'
+  | 'hueRotate'
+  | 'invert'
+  | 'saturate'
+  | 'sepia'
+  | 'backdropFilter'
+  | 'backdropBlur'
+  | 'backdropBrightness'
+  | 'backdropContrast'
+  | 'backdropGrayscale'
+  | 'backdropHueRotate'
+  | 'backdropInvert'
+  | 'backdropOpacity'
+  | 'backdropSaturate'
+  | 'backdropSepia';
 
 type TFlexBoxCategoryItem =
   | 'flexDirection'
