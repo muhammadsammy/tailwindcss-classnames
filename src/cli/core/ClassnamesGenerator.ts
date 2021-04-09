@@ -4,7 +4,7 @@ import {nonConfigurableClassNames} from '../lib/non-configurable';
 // prettier-ignore
 import {TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
         Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
-        FlexBox, Grid, Spacing, Sizing, Typography, TGeneratedClassnames} from '../types/classes';
+        FlexBox, Grid, Spacing, Sizing, Typography, TGeneratedClassnames, Filters} from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
 
@@ -38,6 +38,7 @@ export class ClassnamesGenerator {
       Tables: this.tables(),
       Effects: this.effects(),
       TransitionsAndAnimations: this.transitionsAndAnimations(),
+      Filters: this.filters(),
       FlexBox: this.flexBox(),
       Grid: this.grid(),
       Spacing: this.spacing(),
@@ -223,6 +224,40 @@ export class ClassnamesGenerator {
   private accessibility = (): Accessibility => {
     return {
       ...nonConfigurableClassNames.accessibility,
+    };
+  };
+
+  private filters = (): Filters => {
+    return {
+      ...nonConfigurableClassNames.filters,
+      blur: Object.keys(this._theme.blur).map(x => 'blur-' + x),
+      brightness: Object.keys(this._theme.brightness).map(x => 'brightness-' + x),
+      contrast: Object.keys(this._theme.contrast).map(x => 'contrast-' + x),
+      dropShadow: Object.keys(this._theme.dropShadow).map(x => 'drop-shadow-' + x),
+      grayscale: Object.keys(this._theme.grayscale).map(x => 'grayscale-' + x),
+      hueRotate: Object.keys(this._theme.hueRotate).map(x => 'hue-rotate-' + x),
+      invert: Object.keys(this._theme.invert).map(x => 'invert-' + x),
+      saturate: Object.keys(this._theme.saturate).map(x => 'saturate-' + x),
+      sepia: Object.keys(this._theme.sepia).map(x => 'sepia-' + x),
+      backdropBlur: Object.keys(this._theme.backdropBlur).map(x => 'backdrop-blur-' + x),
+      backdropBrightness: Object.keys(this._theme.backdropBrightness).map(
+        x => 'backdrop-brightness-' + x,
+      ),
+      backdropContrast: Object.keys(this._theme.backdropContrast).map(
+        x => 'backdrop-contrast-' + x,
+      ),
+      backdropGrayscale: Object.keys(this._theme.backdropGrayscale).map(
+        x => 'backdrop-grayscale-' + x,
+      ),
+      backdropHueRotate: Object.keys(this._theme.backdropHueRotate).map(
+        x => 'backdrop-hue-rotate-' + x,
+      ),
+      backdropInvert: Object.keys(this._theme.backdropInvert).map(x => 'backdrop-invert-' + x),
+      backdropOpacity: Object.keys(this._theme.backdropOpacity).map(x => 'backdrop-opacity-' + x),
+      backdropSaturate: Object.keys(this._theme.backdropSaturate).map(
+        x => 'backdrop-saturate-' + x,
+      ),
+      backdropSepia: Object.keys(this._theme.backdropSepia).map(x => 'backdrop-sepia-' + x),
     };
   };
 

@@ -27,6 +27,7 @@ export type TAllClassnames = {
   Backgrounds: Backgrounds;
   Borders: Borders;
   Effects: Effects;
+  Filters: Filters;
   FlexBox: FlexBox;
   Grid: Grid;
   Interactivity: Interactivity;
