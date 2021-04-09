@@ -72,7 +72,7 @@ type TBordersCategoryItem =
   | 'ringOffsetWidth'
   | 'ringWidth';
 
-type TEffectsCategoryItem = 'boxShadow' | 'opacity';
+type TEffectsCategoryItem = 'boxShadow' | 'opacity' | 'mixBlendMode' | 'backgroundBlendMode';
 
 type TFiltersCategoryItem =
   | 'filter'
