@@ -2538,6 +2538,8 @@ export type TFloat = 'float-right' | 'float-left' | 'float-none';
 
 export type TClear = 'clear-left' | 'clear-right' | 'clear-both' | 'clear-none';
 
+export type TIsolation = 'isolate' | 'isolation-auto';
+
 export type TObjectFit =
   | 'object-contain'
   | 'object-cover'
@@ -3190,6 +3192,7 @@ export type TLayout =
   | TContainer
   | TFloat
   | TClear
+  | TIsolation
   | TObjectFit
   | TOverflow
   | TOverscrollBehavior
@@ -14285,6 +14288,16 @@ export type TPseudoClasses =
   | 'lg:invert'
   | 'xl:invert'
   | '2xl:invert'
+  | 'sm:isolate'
+  | 'md:isolate'
+  | 'lg:isolate'
+  | 'xl:isolate'
+  | '2xl:isolate'
+  | 'sm:isolation-auto'
+  | 'md:isolation-auto'
+  | 'lg:isolation-auto'
+  | 'xl:isolation-auto'
+  | '2xl:isolation-auto'
   | 'sm:justify-start'
   | 'md:justify-start'
   | 'lg:justify-start'

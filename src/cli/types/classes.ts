@@ -142,6 +142,7 @@ type TLayoutCategoryItem =
   | 'container'
   | 'float'
   | 'clear'
+  | 'isolation'
   | 'objectFit'
   | 'objectPosition'
   | 'overflow'
