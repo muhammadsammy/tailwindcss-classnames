@@ -2530,6 +2530,8 @@ export type TDisplay =
   | 'contents'
   | 'hidden';
 
+export type TBoxDecorationBreak = 'decoration-slice' | 'decoration-clone';
+
 export type TBoxSizing = 'box-border' | 'box-content';
 
 export type TContainer = 'container';
@@ -3188,6 +3190,7 @@ export type TZIndex = 'z-0' | 'z-10' | 'z-20' | 'z-30' | 'z-40' | 'z-50' | 'z-au
 
 export type TLayout =
   | TDisplay
+  | TBoxDecorationBreak
   | TBoxSizing
   | TContainer
   | TFloat
@@ -6987,6 +6990,16 @@ export type TPseudoClasses =
   | 'lg:border'
   | 'xl:border'
   | '2xl:border'
+  | 'sm:decoration-slice'
+  | 'md:decoration-slice'
+  | 'lg:decoration-slice'
+  | 'xl:decoration-slice'
+  | '2xl:decoration-slice'
+  | 'sm:decoration-clone'
+  | 'md:decoration-clone'
+  | 'lg:decoration-clone'
+  | 'xl:decoration-clone'
+  | '2xl:decoration-clone'
   | 'sm:shadow-sm'
   | 'md:shadow-sm'
   | 'lg:shadow-sm'
