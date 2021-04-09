@@ -9,9 +9,11 @@ const display = [
   'grid',
   'inline-grid',
   'table',
+  'inline-table',
   'table-row',
   'table-cell',
   'contents',
+  'list-item',
   'hidden',
 ];
 
