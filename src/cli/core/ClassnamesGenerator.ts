@@ -75,6 +75,8 @@ export class ClassnamesGenerator {
     };
   };
 
+  private isJitModeEnabled = (): boolean => this._configParser.getMode() === 'jit';
+
   private layout = (): Layout => {
     return {
       ...nonConfigurableClassNames.layout,
@@ -371,11 +373,16 @@ export class ClassnamesGenerator {
   };
 
   // Generate the types for pseudo classes as hover:, focus: etc.
-  // and return them in a string array to be parsed and coverted into a template string that
-  // will be a part of the final generated file. See ClassesGroupTemplateGenerator class.
+  // and return them in a string array to be parsed and converted into a template string that
+  // will be a part of the final generated file. See `FileContentGenerator` class.
   private pseudoClasses = (): string[] => {
     // Initialise a pseudoclasses variable with empty array value.
     const pseudoClasses: string[] = [];
+    // prettier-ignore
+    const allVariants = [
+      'responsive', 'motion-safe', 'motion-reduce', 'first', 'last', 'odd', 'even', 'visited', 'checked',
+      'group-hover', 'group-focus', 'focus-within', 'hover', 'focus', 'focus-visible', 'active', 'disabled',
+    ];
 
     // HACK: This block is just to make accessibility object align with other types object shape
     const variantsConfig = Object.entries(
@@ -385,7 +392,8 @@ export class ClassnamesGenerator {
     );
 
     // For every key-value pair in the variants section in tailwind config...
-    for (const [regularClassGroupKey, pseudoClassesVariantsForKey] of variantsConfig) {
+    // eslint-disable-next-line prefer-const
+    for (let [regularClassGroupKey, pseudoClassesVariantsForKey] of variantsConfig) {
       // Find all matching names from the generated regular classes with the key of the variants config
       Object.keys(this._generatedRegularClassnames).map(key => {
         // If the current key is found to be a member of the generated regular classes group...
@@ -401,6 +409,11 @@ export class ClassnamesGenerator {
           // For every member of the found regular classes group...
           generatedClassGroup.map(classname => {
             const isDarkModeEnabled = this._darkMode !== false;
+
+            // If JIT compiler mode is enabled, enable all variants...
+            if (this.isJitModeEnabled()) {
+              pseudoClassesVariantsForKey = allVariants;
+            }
 
             // Generate the classname of each variant...
             pseudoClassesVariantsForKey.map(variant => {
