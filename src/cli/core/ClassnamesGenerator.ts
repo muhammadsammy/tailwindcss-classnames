@@ -401,17 +401,34 @@ export class ClassnamesGenerator {
           _.has(this._generatedRegularClassnames[key as keyof TAllClassnames], regularClassGroupKey)
         ) {
           // Get the value of the found generated class group
-          const generatedClassGroup = _.get(
+          let generatedClassGroup = _.get(
             this._generatedRegularClassnames,
             `${key}.${regularClassGroupKey}`,
           ) as string[];
+
+          // If JIT compiler mode is enabled...
+          if (this.isJitModeEnabled()) {
+            // Duplicate classnames with an important (!) prefix
+            const generatedClassGroupWithImportantPrefix = generatedClassGroup.map(
+              cls => '!' + cls,
+            );
+
+            // Append the classnames with important prefix to the regular classnames
+            generatedClassGroup = generatedClassGroup.concat(
+              generatedClassGroupWithImportantPrefix,
+            );
+
+            // Append the classnames with important prefix to the pseudo classes array
+            generatedClassGroupWithImportantPrefix.map(cls => pseudoClasses.push(cls));
+          }
 
           // For every member of the found regular classes group...
           generatedClassGroup.map(classname => {
             const isDarkModeEnabled = this._darkMode !== false;
 
-            // If JIT compiler mode is enabled, enable all variants...
+            // If JIT compiler mode is enabled...
             if (this.isJitModeEnabled()) {
+              // Enable all variants
               pseudoClassesVariantsForKey = allVariants;
             }
 
