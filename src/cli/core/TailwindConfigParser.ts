@@ -13,6 +13,7 @@ import {TConfigTheme, TThemeItems} from '../types/config';
  * Parses the tailwind config object
  */
 export class TailwindConfigParser {
+  private readonly _mode: string | undefined;
   private readonly _prefix: string;
   private readonly _separator: string;
   private readonly _darkMode: TConfigDarkMode;
@@ -21,6 +22,7 @@ export class TailwindConfigParser {
   private readonly _pluginsConfig: TConfigPlugins;
 
   constructor(tailwindConfig: TTailwindCSSConfig, plugins: TConfigPlugins) {
+    this._mode = tailwindConfig?.mode;
     this._prefix = _.isEmpty(tailwindConfig?.prefix) ? '' : (tailwindConfig.prefix as string);
     this._darkMode = _.isEmpty(tailwindConfig?.darkMode)
       ? false
@@ -34,6 +36,11 @@ export class TailwindConfigParser {
     this._themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
     this._pluginsConfig = plugins;
   }
+
+  /**
+   *  Gets the config mode value
+   */
+  public getMode = (): string | undefined => this._mode;
 
   /**
    *  Gets the config prefix value

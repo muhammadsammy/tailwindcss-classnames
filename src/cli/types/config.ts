@@ -1,7 +1,7 @@
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
 
 export type TTailwindCSSConfig = Partial<
-  typeof defaultTailwindConfig & Record<'separator' | 'prefix', string>
+  typeof defaultTailwindConfig & Record<'separator' | 'prefix' | 'mode', string>
 >;
 
 export type TConfigDarkMode = false | 'media' | 'class';
