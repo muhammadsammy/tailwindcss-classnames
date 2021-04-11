@@ -42,7 +42,10 @@
     "postgenerate": "npm run clean && prettier src/index.ts --write",
     "preupdateConfig": "npm run clean",
     "updateConfig": "tailwindcss init --full && node scripts/updateDefaultConfig.js",
-    "postupdateConfig": "npm run clean && prettier src/cli/lib/defaultTailwindConfig.ts --write"
+    "postupdateConfig": "npm run clean && prettier src/cli/lib/defaultTailwindConfig.ts --write",
+    "preupdateStackableVariants": "npm run clean",
+    "updateStackableVariants": "tailwindcss init --full && node scripts/updateStackableVariants.js",
+    "postupdateStackableVariants": "npm run clean && prettier src/cli/lib/stackableVariants.ts --write"
   },
   "keywords": [
     "typescript",
