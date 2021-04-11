@@ -29,6 +29,7 @@ npm install tailwindcss-classnames
 
 The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **484b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
 
+
 ## Create classes
 
 ```js
@@ -136,7 +137,8 @@ type MyCustomType =
 ### Known limitiations
 
 - Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) for details.
-- Don't run as `npx tailwindcss-classnames`, use as an npm script as mentioned above.
+- Don't run as `npx tailwindcss-classnames`. Use as an npm script as mentioned above.
+- Limited support for the JIT engine ([#204](https://github.com/muhammadsammy/tailwindcss-classnames/issues/204)).
 - [Backlog](https://github.com/muhammadsammy/tailwindcss-classnames/milestone/2)
 
 Any help with these issues is very much appreciated.
