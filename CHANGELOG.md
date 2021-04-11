@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.7...v2.1.0) (2021-04-11)
+
+
+### Features
+
+* **jit:** generate important (!) modifier before classnames ([9a3b64f](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/9a3b64fdaf5f9f103f7eae3e3155c307c6819b15))
+* add `box-decoration-break` utilities ([65416ca](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/65416caa3491fc2da71118f187aed726e961762c)), closes [#193](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/193)
+* add `isolation` utilities ([0529a87](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/0529a873e726ca9927ab3e742dbd8bac215288d7)), closes [#194](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/194)
+* add `mix-blend-mode` and `background-blend-mode` utilities ([#200](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/200)) ([a6c8e87](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/a6c8e87659eca548c5f3c6a7b47eae02aa6ccf37)), closes [#195](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/195)
+* add CSS Filters classnames ([#198](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/198)) ([84a8c48](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/84a8c4832877ceda1609b2b5d1daa08d92d3cfe9))
+* add support for display : `inline-table`,  `list-item` utilities ([6a500af](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/6a500afb4f4a491bdc2ff5f558af53128038cbcb)), closes [#192](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/192)
+* generate all variants when JIT mode is enabled ([c95cef5](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/c95cef51e9bba5d11591692adf5183e0b183c158))
+
 ### [2.0.7](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.6...v2.0.7) (2021-02-25)
 
 
