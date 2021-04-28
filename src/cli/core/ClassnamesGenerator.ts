@@ -473,12 +473,12 @@ export class ClassnamesGenerator {
                 pseudoClasses.push(variant + this._separator + this._prefix + classname);
 
                 // Add 'group' class if a the variant is group-hover, group-focus etc.
-                if (variant.startsWith(this._prefix + 'group') && !pseudoClasses.includes('group'))
-                  pseudoClasses.push(this._prefix + 'group');
+                if (variant.startsWith('group') && !pseudoClasses.includes('group'))
+                  pseudoClasses.push('group');
 
                 // Add 'dark' class if dark mode stategy is set to "class"
                 if (this._darkMode === 'class' && !pseudoClasses.includes('dark'))
-                  pseudoClasses.push(this._prefix + 'dark');
+                  pseudoClasses.push('dark');
               }
             });
           });

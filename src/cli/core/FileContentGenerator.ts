@@ -58,7 +58,6 @@ export class FileContentGenerator {
     const pseudoClassnamesTemplate = this.generateTypesTemplate({
       typeName: 'PseudoClasses',
       items: pseudoClassnames,
-      prefix: this._configPrefix,
     });
 
     const allclassnamesExportTemplate = this.generateTypesTemplate({
