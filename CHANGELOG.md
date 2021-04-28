@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.1.0...v2.1.1) (2021-04-28)
+
+
+### Bug Fixes
+
+* pseudoClasses formatted incorrectly with prefix ([#213](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/213)) ([240476d](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/240476d4dbbcf7ba6f081a68968698010766790b))
+
 ## [2.1.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.0.7...v2.1.0) (2021-04-11)
 
 
