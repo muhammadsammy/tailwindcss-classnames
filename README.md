@@ -137,7 +137,8 @@ type MyCustomType =
 ### Known limitiations
 
 - Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) for details.
-- Don't run as `npx tailwindcss-classnames`. Use as an npm script as mentioned above.
+- Only official TailwindLabs plugins are supported.
+- `npx tailwindcss-classnames` won't work. Use as an npm script as mentioned above.
 - Limited support for the JIT engine ([#204](https://github.com/muhammadsammy/tailwindcss-classnames/issues/204)).
 - [Backlog](https://github.com/muhammadsammy/tailwindcss-classnames/milestone/2)
 
