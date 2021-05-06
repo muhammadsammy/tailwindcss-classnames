@@ -39,7 +39,7 @@ export class FileContentGenerator {
   };
 
   private importStatementsTemplate = (): string => {
-    return "import classnamesLib from 'classnames';" + '\n' + `T_CUSTOM_CLASSES_IMPORT_STATEMENT`;
+    return "import classnamesLib from 'clsx';" + '\n' + `T_CUSTOM_CLASSES_IMPORT_STATEMENT`;
   };
 
   private allClassnamesTypesTemplate = (): string => {
