@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.1.1...v2.1.2) (2021-05-06)
+
+
+### Bug Fixes
+
+* **performance:** using clsx in place of classnames package ([611a0f4](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/611a0f4dda143f812f2bfaf00ca8b02864321547)), closes [#126](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/126)
+
 ### [2.1.1](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.1.0...v2.1.1) (2021-04-28)
 
 
