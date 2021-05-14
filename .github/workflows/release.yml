@@ -23,8 +23,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
         if: ${{ steps.release.outputs.release_created }}
       - run: yarn install --frozen-lockfile
+        if: ${{ steps.release.outputs.release_created }}
       - name: Generating Lib types
         run: yarn generate
+        if: ${{ steps.release.outputs.release_created }}
       - name: Commit yarn generated files
         uses: stefanzweifel/git-auto-commit-action@v2.3.0
         with:
