@@ -25,6 +25,11 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Generating Lib types
         run: yarn generate
+      - name: Commit yarn generated files
+        uses: stefanzweifel/git-auto-commit-action@v2.3.0
+        with:
+          commit_message: Commit yarn generated files
+          branch: ${{ github.head_ref }}
         if: ${{ steps.release.outputs.release_created }}
       - run: npm publish
         env:
