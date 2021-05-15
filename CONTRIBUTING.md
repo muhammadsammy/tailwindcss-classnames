@@ -1,5 +1,13 @@
 # Contributing guidelines
 
+To submit patches or features:
+
+1. Fork the repo
+2. Run `yarn install` or `npm install`
+3. Make changes
+4. Build and run the CLI by `yarn run-cli` or `npm run run-cli`
+5. Submit your changes via GitHub Pull Requests.
+
 ## Git commits style
 
 Commit messages follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) style.

@@ -147,17 +147,7 @@ Any help with these issues is very much appreciated.
 
 All contributions from everyone are very welcome.
 
-Feel free to use the discussions to ask questions or discuss anything related to the project. Please use the issue template when submitting an issue.
-
-To submit patches or features:
-
-1. Fork the repo
-2. Run `yarn install`
-3. Make changes
-4. Build and run the CLI by `yarn run-cli`
-5. Submit your changes via GitHub Pull Requests.
-
-Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a PR.
+Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a Pull Request.
 
 ## Credits
 
