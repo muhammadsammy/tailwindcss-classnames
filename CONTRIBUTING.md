@@ -6,18 +6,18 @@ Commit messages follows the [Conventional Commits](https://www.conventionalcommi
 
 ## Code style
 
-The code style is enforced by prettier and eslint rules and there is pre-commit hooks that automatically fixes any fixable violations.
+The code style is enforced by prettier and eslint rules and there is a pre-commit hooks setup that automatically fixes any fixable violations.
 
 Check style violations by running:
 
 ```bash
-npm run lint && npm run check-formatting
+yarn run lint && yarn run check-formatting
 ```
 
 Fix formatting issues by running:
 
 ```bash
-npm run fix-formatting
+yarn run fix-formatting
 ```
 
 ## Adding new features from TailwindCSS
@@ -48,5 +48,5 @@ After doing this for new classes, the CLI would be compatible with new tailwind 
 Now `src/index.ts` can be updated with the new types by running:
 
 ```bash
-yarn generate
+yarn run generate
 ```

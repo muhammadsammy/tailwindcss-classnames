@@ -21,14 +21,13 @@ You can not get this experience using pure TailwindCSS and the VSCode extension,
 
 Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up **TailwindCSS**. Now do:
 
-```
+```bash
 npm install tailwindcss-classnames
 ```
 
 **⚠️ NOTE:** This project versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
 
-The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **484b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
-
+The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **370b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
 
 ## Create classes
 
