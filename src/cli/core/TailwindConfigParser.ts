@@ -17,7 +17,8 @@ export class TailwindConfigParser {
   private readonly _prefix: string;
   private readonly _separator: string;
   private readonly _darkMode: TConfigDarkMode;
-  private _themeConfig: TConfigTheme;
+  private readonly _themeConfig: TConfigTheme;
+  private _evaluatedTheme: TConfigTheme | null;
   private readonly _variantsConfig: TConfigVariants;
   private readonly _pluginsConfig: TConfigPlugins;
 
@@ -34,6 +35,7 @@ export class TailwindConfigParser {
       ? defaultTailwindConfig.variants // Order does matter, defaultVariants will be overridden by themeVariants.
       : {...defaultTailwindConfig.variants, ...tailwindConfig.variants};
     this._themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
+    this._evaluatedTheme = null;
     this._pluginsConfig = plugins;
   }
 
@@ -70,14 +72,26 @@ export class TailwindConfigParser {
    *  Gets the config theme object
    */
   public getTheme = (): TThemeItems => {
+    // Check whether config was evaluated before; if yes, return cached result instead of re-calc
+    if (this._evaluatedTheme) {
+      return this._evaluatedTheme;
+    }
+
     /** Evaluate function closures inside theme config and get the evaluated theme object */
-    const evaluateCoreTheme = (): TThemeItems => {
+    const evaluateTheme = (valueSourceTheme?: TThemeItems): TThemeItems => {
       // Pick the theme config items except theme.extend
       const coreTheme = _.omit(this._themeConfig, 'extend');
       // Iterate over theme object items and run the evaluator on it
       const valueEvaluator = new ThemeClosuresEvaluator(coreTheme);
       for (const [key, value] of Object.entries(this._themeConfig)) {
-        coreTheme[key as keyof TThemeItems] = valueEvaluator.evaluate(value);
+        let evaluatorResult = valueEvaluator.evaluate(value, valueSourceTheme);
+        // Need to make sure that extensions for specific properties are considered
+        // For example when 'width' is extended, which is originally based on spacing
+        if (valueSourceTheme && _.isObject(evaluatorResult)) {
+          const sourceValue = valueSourceTheme[key as keyof TThemeItems];
+          evaluatorResult = {...(_.isObject(sourceValue) ? sourceValue : {}), ...evaluatorResult};
+        }
+        coreTheme[key as keyof TThemeItems] = evaluatorResult;
       }
 
       // Return the result of evaluation
@@ -101,12 +115,14 @@ export class TailwindConfigParser {
       return themeExtend;
     };
 
-    // Set theme config to the result of merging evaluation of both theme and theme.extend objects
-    this._themeConfig = _.merge(evaluateCoreTheme(), evaluateThemeExtend());
-    delete this._themeConfig?.extend;
+    // Merge theme with extensions
+    const themeWithMergedExtend = _.merge(evaluateTheme(), evaluateThemeExtend());
+    // Evaluate the theme again, however taking the values from the merge result
+    this._evaluatedTheme = evaluateTheme(themeWithMergedExtend);
+    delete this._evaluatedTheme?.extend;
 
-    // Return the theme config
-    return this._themeConfig;
+    // Return the evaluated theme
+    return this._evaluatedTheme;
   };
 
   /**
@@ -156,11 +172,11 @@ class ThemeClosuresEvaluator {
   constructor(private themeConfig: Partial<TThemeItems>) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public evaluate(value: any): any {
+  public evaluate(value: any, valueSourceTheme?: TThemeItems): any {
     // If a value is a function...
     if (_.isFunction(value)) {
       // evaluate the value by running the evaluator methods in this class.
-      return value(this.theme, {
+      return value(this.makeThemePathResolver(valueSourceTheme || this.themeConfig), {
         negative: ThemeClosuresEvaluator.negative.bind(this),
         breakpoints: ThemeClosuresEvaluator.breakpoints.bind(this),
       });
@@ -172,13 +188,12 @@ class ThemeClosuresEvaluator {
   }
 
   /**
-   * Evaluate `theme()` functions/closures
+   * Creates evaluator for `theme()` functions/closures in config file
    */
-  private theme = (path: string): Record<string, unknown> => {
-    return _.get(this.themeConfig, _.trim(path, `'"`)) as Record<
-      string,
-      Record<string, string> | string
-    >;
+  private makeThemePathResolver = (theme: Partial<TThemeItems>) => (
+    path: string,
+  ): Record<string, unknown> => {
+    return _.get(theme, _.trim(path, `'"`)) as Record<string, Record<string, string> | string>;
   };
 
   /**
