@@ -543,7 +543,7 @@ export class ClassnamesGenerator {
 
     // Return the result classnames based on whether JIT mode is enabled or not
     if (this.isJitModeEnabled()) {
-      return classnamesWithColorsAndOpacitySuffix;
+      return classnamesWithColors.concat(classnamesWithColorsAndOpacitySuffix);
     } else {
       return classnamesWithColors;
     }
