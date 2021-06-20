@@ -502,26 +502,30 @@ export class ClassnamesGenerator {
       .replace('ringOffset', 'ring-offset')
       .replace('background', 'bg');
 
-    return (
-      propertyKeys
-        // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
-        .filter(k => k !== 'DEFAULT')
-        // Then, for every key of the property...
-        .flatMap((colorName, i) => {
-          // Get the value that corresponds to that key. NOTE: It can be `string` or an `object` of shades.
-          const colorValue = propertyValues[i];
+    const resultedClassnamesWithColors = propertyKeys
+      // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
+      .filter(k => k !== 'DEFAULT')
+      // Then, for every key of the property...
+      .flatMap((colorName, i) => {
+        // Get the value that corresponds to that key. NOTE: It can be `string` or an `object` of shades.
+        const colorValue = propertyValues[i];
 
-          // If the value is a nested object of color shades...
-          if (typeof colorValue === 'object' && colorValue !== null) {
-            // Loop over the deep objects and return the result for each key of the object.
-            return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
-          }
-          // Otherwise...
-          else {
-            // Return the result of merging the utility name with color value
-            return `${utilName}-${colorName}`;
-          }
-        })
+        // If the value is a nested object of color shades...
+        if (typeof colorValue === 'object' && colorValue !== null) {
+          // Loop over the deep objects and return the result for each key of the object.
+          return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
+        }
+        // Otherwise...
+        else {
+          // Return the result of merging the utility name with color value
+          return `${utilName}-${colorName}`;
+        }
+      });
+
+    // Return the resulted classnames with thier opacity short hand syntax
+    return Object.keys(this._configParser.getTheme().opacity).flatMap(op =>
+      // Add the opacities short hand suffix `/{opacity}`: "bg-red-100/50"
+      resultedClassnamesWithColors.map(cls => cls + '/' + op),
     );
   };
 
