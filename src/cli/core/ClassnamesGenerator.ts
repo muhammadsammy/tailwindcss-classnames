@@ -502,7 +502,7 @@ export class ClassnamesGenerator {
       .replace('ringOffset', 'ring-offset')
       .replace('background', 'bg');
 
-    const resultedClassnamesWithColors = propertyKeys
+    const classnamesWithColors = propertyKeys
       // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
       .filter(k => k !== 'DEFAULT')
       // Then, for every key of the property...
@@ -522,11 +522,17 @@ export class ClassnamesGenerator {
         }
       });
 
-    // Return the resulted classnames with thier opacity short hand syntax
-    return Object.keys(this._configParser.getTheme().opacity).flatMap(op =>
-      // Add the opacities short hand suffix `/{opacity}`: "bg-red-100/50"
-      resultedClassnamesWithColors.map(cls => cls + '/' + op),
-    );
+    // Add the opacities short hand suffix `/{opacity}`: "bg-red-100/50"
+    const classnamesWithColorsAndOpacitySuffix = Object.keys(
+      this._configParser.getTheme().opacity,
+    ).flatMap(op => classnamesWithColors.map(cls => cls + '/' + op));
+
+    // Return the result classnames based on whether JIT mode is enabled or not
+    if (this.isJitModeEnabled()) {
+      return classnamesWithColorsAndOpacitySuffix;
+    } else {
+      return classnamesWithColors;
+    }
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
