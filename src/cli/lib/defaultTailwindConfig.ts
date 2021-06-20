@@ -114,6 +114,7 @@ export const defaultTailwindConfig = {
     },
     blur: {
       0: '0',
+      none: '0',
       sm: '4px',
       DEFAULT: '8px',
       md: '12px',
