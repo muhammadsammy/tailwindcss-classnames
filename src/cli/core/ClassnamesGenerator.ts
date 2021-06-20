@@ -513,12 +513,26 @@ export class ClassnamesGenerator {
         // If the value is a nested object of color shades...
         if (typeof colorValue === 'object' && colorValue !== null) {
           // Loop over the deep objects and return the result for each key of the object.
-          return Object.keys(colorValue).map(shade => `${utilName}-${colorName}-${shade}`);
+          return Object.keys(colorValue).flatMap(shade => {
+            if (utilName === 'border' && this.isJitModeEnabled()) {
+              return ['', 't', 'r', 'b', 'l'].map(
+                side => `${utilName}-${side}-${colorName}-${shade}`,
+              );
+            } else {
+              return `${utilName}-${colorName}-${shade}`;
+            }
+          });
         }
         // Otherwise...
         else {
           // Return the result of merging the utility name with color value
-          return `${utilName}-${colorName}`;
+          if (utilName === 'border' && this.isJitModeEnabled()) {
+            return ['', 't', 'r', 'b', 'l'].map(
+              side => `${utilName}-${side.length > 0 ? side + '-' : ''}${colorName}`,
+            );
+          } else {
+            return `${utilName}-${colorName}`;
+          }
         }
       });
 
