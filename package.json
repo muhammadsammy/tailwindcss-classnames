@@ -59,7 +59,7 @@
     "clsx": "^1.1.1",
     "colors": "^1.4.0",
     "commander": "^7.0.0",
-    "inquirer": "^7.1.0",
+    "inquirer": "^8.1.1",
     "lodash": "^4.17.15",
     "tslib": "^2.0.0"
   },
