@@ -169,6 +169,7 @@ export const defaultTailwindConfig = {
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       none: 'none',
     },
+    caretColor: theme => theme('colors'),
     contrast: {
       0: '0',
       50: '.5',
@@ -810,6 +811,8 @@ export const defaultTailwindConfig = {
     'even',
     'visited',
     'checked',
+    'empty',
+    'read-only',
     'group-hover',
     'group-focus',
     'focus-within',
