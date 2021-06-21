@@ -2,9 +2,11 @@ import _ from 'lodash';
 import {TailwindConfigParser} from './TailwindConfigParser';
 import {nonConfigurableClassNames} from '../lib/non-configurable';
 // prettier-ignore
-import {TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
-        Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
-        FlexBox, Grid, Spacing, Sizing, Typography, TGeneratedClassnames, Filters} from '../types/classes';
+import {
+  TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
+  Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
+  FlexBox, Grid, Spacing, Sizing, Typography, TGeneratedClassnames, Filters
+} from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
 
@@ -108,10 +110,10 @@ export class ClassnamesGenerator {
     };
   };
 
-  private borders = (): Borders => {
-    return {
+  private borders = (): Borders | Record<keyof Borders | 'caretColor', string[]> => {
+    const classnames = {
       // Add all non configurable classes in `borders` plugin.
-      // These are utilities that thier names never change e.g. border styles (dashed, solid etc.)
+      // These are utilities that their names never change e.g. border styles (dashed, solid etc.)
       ...nonConfigurableClassNames.borders,
 
       /* Dynamic border utils */
@@ -146,6 +148,10 @@ export class ClassnamesGenerator {
       ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
     };
+
+    return this.isJitModeEnabled()
+      ? {...classnames, caretColor: this.generateClassesWithColors('caretColor')}
+      : classnames;
   };
 
   private tables = (): Tables => {
@@ -330,9 +336,9 @@ export class ClassnamesGenerator {
 
   private sizing = (): Sizing => {
     // prettier-ignore
-    const extraWidthSizing = ['full', 'screen', 'auto', '1/2','1/3','2/3','1/4','2/4','3/4',
-      '1/5', '2/5','3/5','4/5', '1/6','2/6','3/6','4/6', '5/6','1/12','2/12','3/12','4/12',
-      '5/12','6/12', '7/12','8/12', '9/12','10/12','11/12'];
+    const extraWidthSizing = ['full', 'screen', 'auto', '1/2', '1/3', '2/3', '1/4', '2/4', '3/4',
+      '1/5', '2/5', '3/5', '4/5', '1/6', '2/6', '3/6', '4/6', '5/6', '1/12', '2/12', '3/12', '4/12',
+      '5/12', '6/12', '7/12', '8/12', '9/12', '10/12', '11/12'];
     const extraHeightSizing = ['full', 'screen'];
 
     return {
@@ -554,7 +560,7 @@ export class ClassnamesGenerator {
 
     // prettier-ignore
     type TOpacityProp = | 'divideOpacity' | 'textOpacity' | 'backgroundOpacity'
-                        | 'borderOpacity' | 'placeholderOpacity' | 'ringOpacity'
+      | 'borderOpacity' | 'placeholderOpacity' | 'ringOpacity'
     const getOpacity = (themePropertyName: TOpacityProp, outputNamePrefix: string): string[] => {
       const generatedOpacities = generateOpacities(allOpacities, this._theme, themePropertyName);
 
@@ -590,6 +596,7 @@ export class ClassnamesGenerator {
 }
 
 type ClassesWithColors =
+  | 'caretColor'
   | 'backgroundColor'
   | 'divideColor'
   | 'placeholderColor'
