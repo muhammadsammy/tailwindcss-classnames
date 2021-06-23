@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.1.3...v2.2.0) (2021-06-23)
+
+
+### Features
+
+* add 'content' utilities in JIT mode ([47c04bd](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/47c04bdd6605c4cb5bddad926744554b046f87ea))
+* add blur-none by default (Closes [#230](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/230)) ([7d317b7](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/7d317b72d11e65152a3599137da9345d812e2ea9))
+* add caret-color utilities ([5ecbcf3](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/5ecbcf35557db4d93865b0d94a835de2fc7cdd09)), closes [#235](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/235)
+* add exhaustive pseudo-class and pseudo-element variant support ([#252](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/252)) ([9cb18e6](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/9cb18e6bc190aeb51fa60d8dd77ef11e0bb4c118))
+* add per-side border color utilities for JIT mode enabled configs ([6ec97b9](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/6ec97b9151257094e07bf0c66cfe9c49bc5edf65))
+* add support for the new background origin utils ([2bc9840](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/2bc98406f9a864dfb211e3692dd65de623aaf127)), closes [#241](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/241)
+* add universal shorthand color opacity syntax ([38f27dd](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/38f27ddebe1690fcd74256723489b2d19187874c))
+
+
+### Bug Fixes
+
+* add missing classnames that does not have the opacity short hand suffix ([a48e16b](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/a48e16b0b6165f53578a6ee884b7e1a2b3157284))
+* only generate classnames opacity short hand when JIT mode is enabled ([75902d9](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/75902d90c58f12d810befd51dfef650cc41d9a33))
+
 ### [2.1.3](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.1.2...v2.1.3) (2021-05-19)
 
 
