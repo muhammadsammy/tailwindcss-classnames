@@ -31,7 +31,8 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v2.3.0
         with:
           commit_message: chore:generate library types
-          branch: ${{ github.head_ref }}
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com
         if: ${{ steps.release.outputs.release_created }}
       - run: npm publish
         env:
