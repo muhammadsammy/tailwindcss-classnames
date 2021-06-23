@@ -441,6 +441,8 @@ export class ClassnamesGenerator {
             if (this.isJitModeEnabled()) {
               // Enable all variants
               pseudoClassesVariantsForKey = allVariants;
+              // Add 'peer' utility classname. used with peer-* classnames
+              pseudoClasses.push('peer');
             }
 
             // Generate the classname of each variant...
