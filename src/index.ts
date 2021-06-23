@@ -20,6 +20,8 @@ export type TBackgroundClip =
   | 'bg-clip-content'
   | 'bg-clip-text';
 
+export type TBackgroundOrigin = 'bg-origin-border' | 'bg-origin-padding' | 'bg-origin-content';
+
 export type TBackgroundRepeat =
   | 'bg-repeat'
   | 'bg-no-repeat'
@@ -412,6 +414,7 @@ export type TGradientColorStops =
 export type TBackgrounds =
   | TBackgroundAttachment
   | TBackgroundClip
+  | TBackgroundOrigin
   | TBackgroundRepeat
   | TBackgroundOpacity
   | TBackgroundColor
@@ -1093,6 +1096,7 @@ export type TBackdropFilter = 'backdrop-filter' | 'backdrop-filter-none';
 
 export type TBlur =
   | 'blur-0'
+  | 'blur-none'
   | 'blur-sm'
   | 'blur'
   | 'blur-md'
@@ -1160,6 +1164,7 @@ export type TSepia = 'sepia-0' | 'sepia';
 
 export type TBackdropBlur =
   | 'backdrop-blur-0'
+  | 'backdrop-blur-none'
   | 'backdrop-blur-sm'
   | 'backdrop-blur'
   | 'backdrop-blur-md'
@@ -4109,6 +4114,11 @@ export type TPseudoClasses =
   | 'lg:backdrop-blur-0'
   | 'xl:backdrop-blur-0'
   | '2xl:backdrop-blur-0'
+  | 'sm:backdrop-blur-none'
+  | 'md:backdrop-blur-none'
+  | 'lg:backdrop-blur-none'
+  | 'xl:backdrop-blur-none'
+  | '2xl:backdrop-blur-none'
   | 'sm:backdrop-blur-sm'
   | 'md:backdrop-blur-sm'
   | 'lg:backdrop-blur-sm'
@@ -5496,11 +5506,31 @@ export type TPseudoClasses =
   | 'lg:bg-contain'
   | 'xl:bg-contain'
   | '2xl:bg-contain'
+  | 'sm:bg-origin-border'
+  | 'md:bg-origin-border'
+  | 'lg:bg-origin-border'
+  | 'xl:bg-origin-border'
+  | '2xl:bg-origin-border'
+  | 'sm:bg-origin-padding'
+  | 'md:bg-origin-padding'
+  | 'lg:bg-origin-padding'
+  | 'xl:bg-origin-padding'
+  | '2xl:bg-origin-padding'
+  | 'sm:bg-origin-content'
+  | 'md:bg-origin-content'
+  | 'lg:bg-origin-content'
+  | 'xl:bg-origin-content'
+  | '2xl:bg-origin-content'
   | 'sm:blur-0'
   | 'md:blur-0'
   | 'lg:blur-0'
   | 'xl:blur-0'
   | '2xl:blur-0'
+  | 'sm:blur-none'
+  | 'md:blur-none'
+  | 'lg:blur-none'
+  | 'xl:blur-none'
+  | '2xl:blur-none'
   | 'sm:blur-sm'
   | 'md:blur-sm'
   | 'lg:blur-sm'
