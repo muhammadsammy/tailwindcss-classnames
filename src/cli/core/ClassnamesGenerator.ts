@@ -388,6 +388,11 @@ export class ClassnamesGenerator {
     const allVariants = [
       'responsive', 'motion-safe', 'motion-reduce', 'first', 'last', 'odd', 'even', 'visited', 'checked',
       'group-hover', 'group-focus', 'focus-within', 'hover', 'focus', 'focus-visible', 'active', 'disabled',
+      // Exhaustive pseudo-classess
+      'only', 'first-of-type', 'last-of-type', 'only-of-type', 'target', 'default', 'indeterminate',
+      'placeholder-shown', 'autofill', 'required', 'valid', 'invalid', 'in-range', 'out-of-range',
+      // New peer-*, selection & marker variants
+      'peer-hover', 'peer-checked', 'peer-focus', 'selection', 'marker'
     ];
 
     // HACK: This block is just to make accessibility object align with other types object shape
