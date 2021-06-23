@@ -79,8 +79,8 @@ export class ClassnamesGenerator {
 
   private isJitModeEnabled = (): boolean => this._configParser.getMode() === 'jit';
 
-  private layout = (): Layout => {
-    return {
+  private layout = (): Layout | Record<keyof Layout | 'content', string[]> => {
+    const classnames = {
       ...nonConfigurableClassNames.layout,
       objectPosition: Object.keys(this._theme.objectPosition).map(x => 'object-' + x),
       inset: Object.keys(this._theme.inset).flatMap(insetValue => {
@@ -94,6 +94,12 @@ export class ClassnamesGenerator {
         zIndexValue.startsWith('-') ? `-z-${zIndexValue.substring(1)}` : `z-${zIndexValue}`,
       ),
     };
+
+    if (this.isJitModeEnabled()) {
+      return {...classnames, content: Object.keys(this._theme.content).map(x => 'content-' + x)};
+    } else {
+      return classnames;
+    }
   };
 
   private backgrounds = (): Backgrounds => {
@@ -391,8 +397,8 @@ export class ClassnamesGenerator {
       // Exhaustive pseudo-classess
       'only', 'first-of-type', 'last-of-type', 'only-of-type', 'target', 'default', 'indeterminate',
       'placeholder-shown', 'autofill', 'required', 'valid', 'invalid', 'in-range', 'out-of-range',
-      // New peer-*, selection & marker variants
-      'peer-hover', 'peer-checked', 'peer-focus', 'selection', 'marker'
+      // New peer-*, selection & marker variants and before/after
+      'peer-hover', 'peer-checked', 'peer-focus', 'selection', 'marker', 'before', 'after'
     ];
 
     // HACK: This block is just to make accessibility object align with other types object shape
