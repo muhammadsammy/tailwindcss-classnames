@@ -12,7 +12,7 @@ const alignContent = [
   'content-around',
 ];
 
-const alignSelf = ['self-auto', 'self-start', 'self-center', 'self-end', 'self-stretch'];
+const alignSelf = ['self-auto', 'self-start', 'self-center', 'self-end', 'self-stretch', 'self-baseline'];
 
 const placeContent = [
   'place-content-start',
