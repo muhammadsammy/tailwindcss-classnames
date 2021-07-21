@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.1...v2.2.2) (2021-07-21)
+
+
+### Bug Fixes
+
+* add `self-baseline` utility ([6f3a05f](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/6f3a05fc2cf4aaa3a4f38c43ce5540e83c9c1b8b))
+
 ### [2.2.1](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.0...v2.2.1) (2021-06-23)
 
 
