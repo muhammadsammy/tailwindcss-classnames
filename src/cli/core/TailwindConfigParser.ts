@@ -40,11 +40,6 @@ export class TailwindConfigParser {
   }
 
   /**
-   *  Gets the config mode value
-   */
-  public getMode = (): string | undefined => this._mode;
-
-  /**
    *  Gets the config prefix value
    */
   public getPrefix = (): string => this._prefix;
@@ -190,11 +185,11 @@ class ThemeClosuresEvaluator {
   /**
    * Creates evaluator for `theme()` functions/closures in config file
    */
-  private makeThemePathResolver = (theme: Partial<TThemeItems>) => (
-    path: string,
-  ): Record<string, unknown> => {
-    return _.get(theme, _.trim(path, `'"`)) as Record<string, Record<string, string> | string>;
-  };
+  private makeThemePathResolver =
+    (theme: Partial<TThemeItems>) =>
+    (path: string): Record<string, unknown> => {
+      return _.get(theme, _.trim(path, `'"`)) as Record<string, Record<string, string> | string>;
+    };
 
   /**
    * Evaluate `negative()` functions/closures
