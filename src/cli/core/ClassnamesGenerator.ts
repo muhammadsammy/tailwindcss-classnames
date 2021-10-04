@@ -9,6 +9,7 @@ import {
 } from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
+import {allVariants, regularClassGroupKeys} from './constants';
 
 /**
  * Responsible for generating the types from a parsed config by ConfigScanner.
@@ -381,27 +382,10 @@ export class ClassnamesGenerator {
   private pseudoClasses = (): string[] => {
     // Initialise a pseudoclasses variable with empty array value.
     const pseudoClasses: string[] = [];
-    // prettier-ignore
-    const allVariants = [
-      'responsive', 'motion-safe', 'motion-reduce', 'first', 'last', 'odd', 'even', 'visited', 'checked',
-      'group-hover', 'group-focus', 'focus-within', 'hover', 'focus', 'focus-visible', 'active', 'disabled',
-      // Exhaustive pseudo-classess
-      'only', 'first-of-type', 'last-of-type', 'only-of-type', 'target', 'default', 'indeterminate',
-      'placeholder-shown', 'autofill', 'required', 'valid', 'invalid', 'in-range', 'out-of-range',
-      // New peer-*, selection & marker variants and before/after
-      'peer-hover', 'peer-checked', 'peer-focus', 'selection', 'marker', 'before', 'after'
-    ];
-
-    // HACK: This block is just to make accessibility object align with other types object shape
-    const variantsConfig = Object.entries(
-      _.merge(this._configParser.getVariants(), {
-        screenReaders: this._configParser.getVariants().accessibility,
-      }),
-    );
 
     // For every key-value pair in the variants section in tailwind config...
     // eslint-disable-next-line prefer-const
-    for (let [regularClassGroupKey, pseudoClassesVariantsForKey] of variantsConfig) {
+    for (const regularClassGroupKey of regularClassGroupKeys) {
       // Find all matching names from the generated regular classes with the key of the variants config
       Object.keys(this._generatedRegularClassnames).map(key => {
         // If the current key is found to be a member of the generated regular classes group...
@@ -427,13 +411,11 @@ export class ClassnamesGenerator {
           generatedClassGroup.map(classname => {
             const isDarkModeEnabled = this._darkMode !== false;
 
-            // Enable all variants
-            pseudoClassesVariantsForKey = allVariants;
             // Add 'peer' utility classname. used with peer-* classnames
             pseudoClasses.push('peer');
 
             // Generate the classname of each variant...
-            pseudoClassesVariantsForKey.map(variant => {
+            allVariants.map(variant => {
               if (variant === 'responsive') {
                 // Get the breakpoints from config
                 const [breakpoints] = this._configParser.getThemeProperty('screens');
@@ -446,7 +428,7 @@ export class ClassnamesGenerator {
                   );
 
                   // Add stackable dark and responsive pseudoclasses if the key has both variants
-                  if (pseudoClassesVariantsForKey.includes('dark') && isDarkModeEnabled) {
+                  if (isDarkModeEnabled) {
                     pseudoClasses.push(
                       breakpointVariant +
                         this._separator +

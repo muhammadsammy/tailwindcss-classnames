@@ -1,11 +1,6 @@
 import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
-import {
-  TTailwindCSSConfig,
-  TConfigVariants,
-  TConfigDarkMode,
-  TConfigPlugins,
-} from '../types/config';
+import {TTailwindCSSConfig, TConfigDarkMode, TConfigPlugins} from '../types/config';
 import {TConfigTheme, TThemeItems} from '../types/config';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
@@ -19,7 +14,6 @@ export class TailwindConfigParser {
   private readonly _darkMode: TConfigDarkMode;
   private readonly _themeConfig: TConfigTheme;
   private _evaluatedTheme: TConfigTheme | null;
-  private readonly _variantsConfig: TConfigVariants;
   private readonly _pluginsConfig: TConfigPlugins;
 
   constructor(tailwindConfig: TTailwindCSSConfig, plugins: TConfigPlugins) {
@@ -31,9 +25,6 @@ export class TailwindConfigParser {
     this._separator = _.isEmpty(tailwindConfig.separator)
       ? ':'
       : (tailwindConfig.separator as string);
-    this._variantsConfig = _.isEmpty(tailwindConfig.variants)
-      ? defaultTailwindConfig.variants // Order does matter, defaultVariants will be overridden by themeVariants.
-      : {...defaultTailwindConfig.variants, ...tailwindConfig.variants};
     this._themeConfig = {...defaultTailwindConfig.theme, ...tailwindConfig.theme};
     this._evaluatedTheme = null;
     this._pluginsConfig = plugins;
@@ -118,32 +109,6 @@ export class TailwindConfigParser {
 
     // Return the evaluated theme
     return this._evaluatedTheme;
-  };
-
-  /**
-   * Get config variants object
-   */
-  public getVariants = (): Omit<TConfigVariants, 'extend'> => {
-    // Get the `variants.extend` object
-    const variantsConfigExtend = this._variantsConfig?.extend;
-
-    // If the variants.extend exists...
-    if (!!variantsConfigExtend) {
-      // Return the result of merging the variants with extend
-      return _.mergeWith(
-        this._variantsConfig,
-        variantsConfigExtend,
-        (variantsValues, variantsExtendValues) => {
-          if (_.isArray(variantsValues)) {
-            return variantsValues.concat(variantsExtendValues);
-          }
-        },
-      );
-      // Otherwise...
-    } else {
-      // Return the variants
-      return this._variantsConfig;
-    }
   };
 
   /**
