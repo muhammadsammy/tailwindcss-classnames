@@ -77,10 +77,8 @@ export class ClassnamesGenerator {
     };
   };
 
-  private isJitModeEnabled = (): boolean => this._configParser.getMode() === 'jit';
-
   private layout = (): Layout | Record<keyof Layout | 'content', string[]> => {
-    const classnames = {
+    return {
       ...nonConfigurableClassNames.layout,
       objectPosition: Object.keys(this._theme.objectPosition).map(x => 'object-' + x),
       inset: Object.keys(this._theme.inset).flatMap(insetValue => {
@@ -93,13 +91,8 @@ export class ClassnamesGenerator {
       zIndex: Object.keys(this._theme.zIndex).flatMap(zIndexValue =>
         zIndexValue.startsWith('-') ? `-z-${zIndexValue.substring(1)}` : `z-${zIndexValue}`,
       ),
+      content: Object.keys(this._theme.content).map(x => 'content-' + x),
     };
-
-    if (this.isJitModeEnabled()) {
-      return {...classnames, content: Object.keys(this._theme.content).map(x => 'content-' + x)};
-    } else {
-      return classnames;
-    }
   };
 
   private backgrounds = (): Backgrounds => {
@@ -117,7 +110,7 @@ export class ClassnamesGenerator {
   };
 
   private borders = (): Borders | Record<keyof Borders | 'caretColor', string[]> => {
-    const classnames = {
+    return {
       // Add all non configurable classes in `borders` plugin.
       // These are utilities that their names never change e.g. border styles (dashed, solid etc.)
       ...nonConfigurableClassNames.borders,
@@ -133,7 +126,7 @@ export class ClassnamesGenerator {
         const sides = ['t', 'r', 'b', 'l'];
         return sides.map(side => `border-${side}-${width}`).concat(`border-${width}`);
       }),
-
+      caretColor: this.generateClassesWithColors('caretColor'),
       /* Dynamic divide utilities */
       divideColor: this.generateClassesWithColors('divideColor'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
@@ -154,10 +147,6 @@ export class ClassnamesGenerator {
       ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
     };
-
-    return this.isJitModeEnabled()
-      ? {...classnames, caretColor: this.generateClassesWithColors('caretColor')}
-      : classnames;
   };
 
   private tables = (): Tables => {
@@ -425,33 +414,23 @@ export class ClassnamesGenerator {
             `${key}.${regularClassGroupKey}`,
           ) as string[];
 
-          // If JIT compiler mode is enabled...
-          if (this.isJitModeEnabled()) {
-            // Duplicate classnames with an important (!) prefix
-            const generatedClassGroupWithImportantPrefix = generatedClassGroup.map(
-              cls => '!' + cls,
-            );
+          // Duplicate classnames with an important (!) prefix
+          const generatedClassGroupWithImportantPrefix = generatedClassGroup.map(cls => '!' + cls);
 
-            // Append the classnames with important prefix to the regular classnames
-            generatedClassGroup = generatedClassGroup.concat(
-              generatedClassGroupWithImportantPrefix,
-            );
+          // Append the classnames with important prefix to the regular classnames
+          generatedClassGroup = generatedClassGroup.concat(generatedClassGroupWithImportantPrefix);
 
-            // Append the classnames with important prefix to the pseudo classes array
-            generatedClassGroupWithImportantPrefix.map(cls => pseudoClasses.push(cls));
-          }
+          // Append the classnames with important prefix to the pseudo classes array
+          generatedClassGroupWithImportantPrefix.map(cls => pseudoClasses.push(cls));
 
           // For every member of the found regular classes group...
           generatedClassGroup.map(classname => {
             const isDarkModeEnabled = this._darkMode !== false;
 
-            // If JIT compiler mode is enabled...
-            if (this.isJitModeEnabled()) {
-              // Enable all variants
-              pseudoClassesVariantsForKey = allVariants;
-              // Add 'peer' utility classname. used with peer-* classnames
-              pseudoClasses.push('peer');
-            }
+            // Enable all variants
+            pseudoClassesVariantsForKey = allVariants;
+            // Add 'peer' utility classname. used with peer-* classnames
+            pseudoClasses.push('peer');
 
             // Generate the classname of each variant...
             pseudoClassesVariantsForKey.map(variant => {
@@ -535,7 +514,7 @@ export class ClassnamesGenerator {
         if (typeof colorValue === 'object' && colorValue !== null) {
           // Loop over the deep objects and return the result for each key of the object.
           return Object.keys(colorValue).flatMap(shade => {
-            if (utilName === 'border' && this.isJitModeEnabled()) {
+            if (utilName === 'border') {
               return ['', 't', 'r', 'b', 'l'].map(
                 side => `${utilName}-${side.length > 0 ? side + '-' : ''}${colorName}-${shade}`,
               );
@@ -547,7 +526,7 @@ export class ClassnamesGenerator {
         // Otherwise...
         else {
           // Return the result of merging the utility name with color value
-          if (utilName === 'border' && this.isJitModeEnabled()) {
+          if (utilName === 'border') {
             return ['', 't', 'r', 'b', 'l'].map(
               side => `${utilName}-${side.length > 0 ? side + '-' : ''}${colorName}`,
             );
@@ -562,12 +541,7 @@ export class ClassnamesGenerator {
       this._configParser.getTheme().opacity,
     ).flatMap(op => classnamesWithColors.map(cls => cls + '/' + op));
 
-    // Return the result classnames based on whether JIT mode is enabled or not
-    if (this.isJitModeEnabled()) {
-      return classnamesWithColors.concat(classnamesWithColorsAndOpacitySuffix);
-    } else {
-      return classnamesWithColors;
-    }
+    return classnamesWithColors.concat(classnamesWithColorsAndOpacitySuffix);
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
