@@ -1,3 +1,4 @@
+import {allVariants} from '../core/constants';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
 
 export type TTailwindCSSConfig = Partial<
@@ -14,4 +15,4 @@ export type TConfigPlugins = Partial<Record<'pluginTypography' | 'pluginCustomFo
 
 export type TThemeItems = typeof defaultTailwindConfig.theme;
 
-type TVariantsItems = typeof defaultTailwindConfig.variants;
+type TVariantsItems = typeof allVariants;
