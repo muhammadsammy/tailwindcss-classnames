@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.4](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.3...v2.2.4) (2021-10-07)
+
+
+### Bug Fixes
+
+* add condition when generating backdropHueRotate ([9557847](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/9557847dda6362de0e1ed01f467c56365591f17c))
+* add condition when generating borderColor ([3192ea8](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/3192ea8c135d71ab3b14dc50e1259cbd2c889c7e))
+* add condition when generating hueRotate ([89c0b2e](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/89c0b2ea44033f029bf71c24bb75ed0400232f52))
+
 ### [2.2.3](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.2...v2.2.3) (2021-07-21)
 
 
