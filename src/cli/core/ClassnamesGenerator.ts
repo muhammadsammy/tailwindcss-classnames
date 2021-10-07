@@ -249,7 +249,9 @@ export class ClassnamesGenerator {
       contrast: Object.keys(this._theme.contrast).map(x => 'contrast-' + x),
       dropShadow: Object.keys(this._theme.dropShadow).map(x => 'drop-shadow-' + x),
       grayscale: Object.keys(this._theme.grayscale).map(x => 'grayscale-' + x),
-      hueRotate: Object.keys(this._theme.hueRotate).map(x => 'hue-rotate-' + x),
+      hueRotate: Object.keys(this._theme.hueRotate).map(x =>
+        x.startsWith('-') ? '-hue-rotate-' + x.slice(1) : 'hue-rotate-' + x,
+      ),
       invert: Object.keys(this._theme.invert).map(x => 'invert-' + x),
       saturate: Object.keys(this._theme.saturate).map(x => 'saturate-' + x),
       sepia: Object.keys(this._theme.sepia).map(x => 'sepia-' + x),
