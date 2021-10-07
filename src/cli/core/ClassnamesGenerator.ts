@@ -265,8 +265,8 @@ export class ClassnamesGenerator {
       backdropGrayscale: Object.keys(this._theme.backdropGrayscale).map(
         x => 'backdrop-grayscale-' + x,
       ),
-      backdropHueRotate: Object.keys(this._theme.backdropHueRotate).map(
-        x => 'backdrop-hue-rotate-' + x,
+      backdropHueRotate: Object.keys(this._theme.backdropHueRotate).map(x =>
+        x.startsWith('-') ? '-backdrop-hue-rotate-' + x.slice(1) : 'backdrop-hue-rotate-' + x,
       ),
       backdropInvert: Object.keys(this._theme.backdropInvert).map(x => 'backdrop-invert-' + x),
       backdropOpacity: Object.keys(this._theme.backdropOpacity).map(x => 'backdrop-opacity-' + x),
