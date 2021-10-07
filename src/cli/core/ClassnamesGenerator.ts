@@ -535,7 +535,7 @@ export class ClassnamesGenerator {
           return Object.keys(colorValue).flatMap(shade => {
             if (utilName === 'border' && this.isJitModeEnabled()) {
               return ['', 't', 'r', 'b', 'l'].map(
-                side => `${utilName}-${side}-${colorName}-${shade}`,
+                side => `${utilName}-${side.length > 0 ? side + '-' : ''}${colorName}-${shade}`,
               );
             } else {
               return `${utilName}-${colorName}-${shade}`;
