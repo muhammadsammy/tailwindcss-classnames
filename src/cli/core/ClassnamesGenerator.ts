@@ -9,7 +9,8 @@ import {
 } from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
-import {allVariants, regularClassGroupKeys} from './constants';
+import {allVariants} from './constants/allVariants';
+import {regularClassGroupKeys} from './constants/regularClassGroupKeys';
 
 /**
  * Responsible for generating the types from a parsed config by ConfigScanner.
