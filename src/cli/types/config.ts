@@ -1,4 +1,4 @@
-import {allVariants} from '../core/constants';
+import {allVariants} from '../core/constants/allVariants';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
 
 export type TTailwindCSSConfig = Partial<
