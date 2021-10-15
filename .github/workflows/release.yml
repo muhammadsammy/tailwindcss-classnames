@@ -24,16 +24,16 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - run: yarn install --frozen-lockfile
         if: ${{ steps.release.outputs.release_created }}
-      - name: Generating Lib types
-        run: yarn generate
-        if: ${{ steps.release.outputs.release_created }}
-      - name: Commit yarn generated files
-        uses: stefanzweifel/git-auto-commit-action@v2.3.0
-        with:
-          commit_message: chore:generate library types
-          commit_user_name: GitHub Actions
-          commit_user_email: actions@github.com
-        if: ${{ steps.release.outputs.release_created }}
+#       - name: Generating Lib types
+#         run: yarn generate
+#         if: ${{ steps.release.outputs.release_created }}
+#       - name: Commit yarn generated files
+#         uses: stefanzweifel/git-auto-commit-action@v2.3.0
+#         with:
+#           commit_message: chore:generate library types
+#           commit_user_name: GitHub Actions
+#           commit_user_email: actions@github.com
+#         if: ${{ steps.release.outputs.release_created }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
