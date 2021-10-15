@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.5](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.4...v2.2.5) (2021-10-15)
+
+
+### Bug Fixes
+
+* stop using default config when input arg is provided ([#290](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/290)) ([#291](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/291)) ([a25a815](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/a25a815528a31b0f636c69c50e2f1f9be557eef4))
+
 ### [2.2.4](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.3...v2.2.4) (2021-10-07)
 
 
