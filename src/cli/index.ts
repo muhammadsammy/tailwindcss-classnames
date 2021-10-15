@@ -30,7 +30,7 @@ commander
     if (isConfigFileFound || !!input) {
       // Generate the types and write them to a file on disk
       return new GeneratedFileWriter({
-        configFilename: isConfigFileFound ? 'tailwind.config.js' : input,
+        configFilename: input ? input : 'tailwind.config.js',
         outputFilename: output,
         customClassesFilename: extra,
       }).write();
