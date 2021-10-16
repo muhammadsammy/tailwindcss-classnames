@@ -22,7 +22,7 @@ const textDecoration = ['underline', 'line-through', 'no-underline'];
 
 const textTransform = ['uppercase', 'lowercase', 'capitalize', 'normal-case'];
 
-const textOverflow = ['truncate', 'overflow-ellipsis', 'overflow-clip'];
+const textOverflow = ['truncate', 'text-ellipsis', 'text-clip'];
 
 const verticalAlign = [
   'align-baseline',
