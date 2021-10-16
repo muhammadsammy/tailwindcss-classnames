@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
 import {TTailwindCSSConfig, TConfigDarkMode, TConfigPlugins} from '../types/config';
 import {TConfigTheme, TThemeItems} from '../types/config';
+import {tailwindColors} from './constants/tailwindColors';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
 /**
@@ -136,7 +137,9 @@ class ThemeClosuresEvaluator {
     // If a value is a function...
     if (_.isFunction(value)) {
       // evaluate the value by running the evaluator methods in this class.
-      return value(this.makeThemePathResolver(valueSourceTheme || this.themeConfig), {
+      return value({
+        colors: tailwindColors,
+        theme: this.makeThemePathResolver(valueSourceTheme || this.themeConfig),
         negative: ThemeClosuresEvaluator.negative.bind(this),
         breakpoints: ThemeClosuresEvaluator.breakpoints.bind(this),
       });
