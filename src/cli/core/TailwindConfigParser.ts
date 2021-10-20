@@ -127,7 +127,7 @@ export class TailwindConfigParser {
     });
 
     // Add dark variant
-    if (this.getDarkMode() === 'class') {
+    if (!!this.getDarkMode() !== false) {
       variants.push('dark');
     }
 
