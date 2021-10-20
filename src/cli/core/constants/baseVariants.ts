@@ -42,5 +42,5 @@ export const baseVariants = [
   'before',
   'after',
   // dark mode utility
-  'dark', //
+  // 'dark', //
 ];
