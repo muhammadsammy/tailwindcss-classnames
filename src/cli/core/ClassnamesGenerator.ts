@@ -9,7 +9,6 @@ import {
 } from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
-import {allVariants} from './constants/allVariants';
 import {regularClassGroupKeys} from './constants/regularClassGroupKeys';
 
 /**
@@ -381,6 +380,7 @@ export class ClassnamesGenerator {
   private pseudoClasses = (): string[] => {
     // Initialise a pseudoclasses variable with empty array value.
     const pseudoClasses: string[] = [];
+    const variants = this._configParser.getVariants();
 
     // For every key-value pair in the variants section in tailwind config...
     // eslint-disable-next-line prefer-const
@@ -406,65 +406,22 @@ export class ClassnamesGenerator {
           // Append the classnames with important prefix to the pseudo classes array
           generatedClassGroupWithImportantPrefix.map(cls => pseudoClasses.push(cls));
 
+          pseudoClasses.push('peer');
+          pseudoClasses.push('group');
+          // Add 'dark' class if dark mode stategy is set to "class"
+          if (this._darkMode === 'class' && !pseudoClasses.includes('dark')) {
+            pseudoClasses.push('dark');
+          }
+
           // For every member of the found regular classes group...
           generatedClassGroup.map(classname => {
-            const isDarkModeEnabled = this._darkMode !== false;
-
-            // Add 'peer' utility classname. used with peer-* classnames
-            pseudoClasses.push('peer');
-
             // Generate the classname of each variant...
-            allVariants.map(variant => {
-              if (variant === 'responsive') {
-                // Get the breakpoints from config
-                const [breakpoints] = this._configParser.getThemeProperty('screens');
-
-                // Create the classname for each breakpoint
-                breakpoints.map((breakpointVariant: string) => {
-                  // Push the created classes to the pseudoClasses array
-                  pseudoClasses.push(
-                    breakpointVariant + this._separator + this._prefix + classname,
-                  );
-
-                  // Add stackable dark and responsive pseudoclasses if the key has both variants
-                  if (isDarkModeEnabled) {
-                    pseudoClasses.push(
-                      breakpointVariant +
-                        this._separator +
-                        'dark' +
-                        this._separator +
-                        this._prefix +
-                        classname,
-                    );
-                  }
-                });
-              }
-              // Otherwise if the variant is 'dark'
-              else if (variant === 'dark') {
-                // If the dark mode is enabled...
-                if (isDarkModeEnabled) {
-                  // Add the 'dark' prefix to the classname to create its pseudoclass
-                  pseudoClasses.push(variant + this._separator + this._prefix + classname);
-                }
-                // Otherwise, do nothing.
-              }
-              // Otherwise...
-              else {
-                // Append the variant to the classname and push to the pseudoClasses array.
-                pseudoClasses.push(variant + this._separator + this._prefix + classname);
-
-                // Add 'group' class if a the variant is group-hover, group-focus etc.
-                if (variant.startsWith('group') && !pseudoClasses.includes('group'))
-                  pseudoClasses.push('group');
-
-                // Add 'dark' class if dark mode stategy is set to "class"
-                if (this._darkMode === 'class' && !pseudoClasses.includes('dark'))
-                  pseudoClasses.push('dark');
-              }
+            variants.map(variant => {
+              // Append the variant to the classname and push to the pseudoClasses array.
+              pseudoClasses.push(variant + this._separator + this._prefix + classname);
             });
           });
         }
-        // Otherwise, skip and do nothing
       });
     }
 

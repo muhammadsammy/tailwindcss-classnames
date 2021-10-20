@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {defaultTailwindConfig} from '../lib/defaultTailwindConfig';
 import {TTailwindCSSConfig, TConfigDarkMode, TConfigPlugins} from '../types/config';
 import {TConfigTheme, TThemeItems} from '../types/config';
+import {baseVariants} from './constants/baseVariants';
 import {tailwindColors} from './constants/tailwindColors';
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 
@@ -110,6 +111,27 @@ export class TailwindConfigParser {
 
     // Return the evaluated theme
     return this._evaluatedTheme;
+  };
+
+  /**
+   * Get the pseudoclass variants based on config.
+   * @param themeProperty The theme property name
+   */
+  public getVariants = (): string[] => {
+    const variants = baseVariants;
+
+    // get responsive variants
+    const [breakpoints] = this.getThemeProperty('screens');
+    breakpoints.map((breakpointVariant: string) => {
+      variants.push(breakpointVariant);
+    });
+
+    // Add dark variant
+    if (this.getDarkMode() === 'class') {
+      variants.push('dark');
+    }
+
+    return variants;
   };
 
   /**

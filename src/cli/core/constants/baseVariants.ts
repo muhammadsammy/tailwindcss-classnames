@@ -1,5 +1,5 @@
-export const allVariants = [
-  'responsive',
+export const baseVariants = [
+  // 'responsive',
   'motion-safe',
   'motion-reduce',
   'first',
@@ -8,6 +8,7 @@ export const allVariants = [
   'even',
   'visited',
   'checked',
+  'group', //
   'group-hover',
   'group-focus',
   'focus-within',
@@ -32,6 +33,7 @@ export const allVariants = [
   'in-range',
   'out-of-range',
   // New peer-*, selection & marker variants and before/after
+  'peer', //
   'peer-hover',
   'peer-checked',
   'peer-focus',
@@ -40,5 +42,5 @@ export const allVariants = [
   'before',
   'after',
   // dark mode utility
-  'dark',
+  'dark', //
 ];
