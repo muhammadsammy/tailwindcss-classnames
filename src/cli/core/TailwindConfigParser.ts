@@ -115,7 +115,6 @@ export class TailwindConfigParser {
 
   /**
    * Get the pseudoclass variants based on config.
-   * @param themeProperty The theme property name
    */
   public getVariants = (): string[] => {
     const variants = baseVariants;
