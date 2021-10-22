@@ -120,15 +120,14 @@ export class TailwindConfigParser {
     const variants = baseVariants;
 
     // get responsive variants
-    const [breakpoints] = this.getThemeProperty('screens');
-    breakpoints.map((breakpointVariant: string) => {
-      variants.push(breakpointVariant);
-    });
+    const [mediaBreakpoints] = this.getThemeProperty('screens');
+    if (this.getDarkMode() == 'media') mediaBreakpoints.push('dark');
 
-    // Add dark variant
-    if (!!this.getDarkMode() !== false) {
-      variants.push('dark');
-    }
+    mediaBreakpoints.map((breakpoint: string) => {
+      if (!variants.includes(breakpoint)) {
+        variants.push(breakpoint);
+      }
+    });
 
     return variants;
   };
