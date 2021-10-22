@@ -380,14 +380,14 @@ export class ClassnamesGenerator {
   // and return them in a string array to be parsed and converted into a template string that
   // will be a part of the final generated file. See `FileContentGenerator` class.
   private pseudoClasses = (): string[] => {
-    // Initialise a pseudoclasses variable with empty array value.
-    const pseudoClasses: string[] = [];
+    // Initialise a pseudoClasses array with base values.
+    const pseudoClasses: string[] = ['peer', 'group'];
+    if (this._darkMode === 'class') pseudoClasses.push('dark');
+
+    // Get the variants from config
     const variants = this._configParser.getVariants();
 
-    // For every key-value pair in the variants section in tailwind config...
-    // eslint-disable-next-line prefer-const
     for (const regularClassGroupKey of regularClassGroupKeys) {
-      // Find all matching names from the generated regular classes with the key of the variants config
       Object.keys(this._generatedRegularClassnames).map(key => {
         // If the current key is found to be a member of the generated regular classes group...
         if (
@@ -401,19 +401,10 @@ export class ClassnamesGenerator {
 
           // Duplicate classnames with an important (!) prefix
           const generatedClassGroupWithImportantPrefix = generatedClassGroup.map(cls => '!' + cls);
-
           // Append the classnames with important prefix to the regular classnames
           generatedClassGroup = generatedClassGroup.concat(generatedClassGroupWithImportantPrefix);
-
           // Append the classnames with important prefix to the pseudo classes array
           generatedClassGroupWithImportantPrefix.map(cls => pseudoClasses.push(cls));
-
-          pseudoClasses.push('peer');
-          pseudoClasses.push('group');
-          // Add 'dark' class if dark mode stategy is set to "class"
-          if (this._darkMode === 'class' && !pseudoClasses.includes('dark')) {
-            pseudoClasses.push('dark');
-          }
 
           // For every member of the found regular classes group...
           generatedClassGroup.map(classname => {
