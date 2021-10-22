@@ -95,7 +95,7 @@ export class GeneratedFileWriter {
     // Create the file content from the generated classnames
     const fileContentTemplate = new FileContentGenerator(
       generatedClassnames,
-      configParser.getPrefix(),
+      configParser,
     ).generateFileContent();
 
     // Resolve the custom classes import path relative to the output file
