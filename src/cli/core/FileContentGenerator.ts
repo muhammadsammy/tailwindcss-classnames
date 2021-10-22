@@ -1,16 +1,17 @@
 import _ from 'lodash';
-import {TAllClassnames, TGeneratedClassnames} from '../types/classes';
+import {TAllClassnames} from '../types/classes';
+import {TailwindConfigParser} from './TailwindConfigParser';
 
 export class FileContentGenerator {
-  private _configPrefix: string;
-  private _generatedClassNames: TGeneratedClassnames;
+  private _configParser: TailwindConfigParser;
+  private _generatedClassNames: TAllClassnames;
 
   /**
    * Initializes a new instance of the `FileContentGenerator` class.
    * @param generatedClassnames The generated classnames to put in the template.
    */
-  constructor(generatedClassnames: TGeneratedClassnames, ConfigPrefix: string) {
-    this._configPrefix = ConfigPrefix;
+  constructor(generatedClassnames: TAllClassnames, configParser: TailwindConfigParser) {
+    this._configParser = configParser;
     this._generatedClassNames = generatedClassnames;
   }
 
@@ -21,6 +22,8 @@ export class FileContentGenerator {
       this.importStatementsTemplate() +
       '\n\n' +
       this.allClassnamesTypesTemplate() +
+      '\n\n' +
+      this.utilityFunctionsTemplate() +
       '\n\n' +
       this.mainExportStatementsTemplate()
     );
@@ -42,38 +45,56 @@ export class FileContentGenerator {
     return "import classnamesLib from 'clsx';" + '\n' + `T_CUSTOM_CLASSES_IMPORT_STATEMENT`;
   };
 
-  private allClassnamesTypesTemplate = (): string => {
-    const regularClassnames = this._generatedClassNames.regularClassnames;
-    const pseudoClassnames = this._generatedClassNames.pseudoClassnames;
+  // /**
+  //  * Generates a type for pseudoclass variants
+  //  */
+  // private variantsTypeTemplate = (): string => {
+  //   const variants = this._configParser.getVariants();
 
-    const regularClassnamesTemplate = Object.keys(regularClassnames)
-      .map(classGroup => {
+  //   return this.generateTypesTemplate(
+  //     'PseudoClassVariants',
+  //     variants.map(variant => variant + this._configParser.getSeparator()), // 'hover:', 'focus:'
+  //     undefined,
+  //     true,
+  //   );
+  // };
+
+  private allClassnamesTypesTemplate = (): string => {
+    const generatedClassnamesTemplate = Object.keys(this._generatedClassNames)
+      .map(classGroupKey => {
         return this.generateTypesGroupTemplate(
-          regularClassnames[classGroup as keyof TAllClassnames] as TAllClassnames,
-          classGroup,
+          this._generatedClassNames[classGroupKey as keyof TAllClassnames] as TAllClassnames,
+          classGroupKey,
         );
       })
       .join('\n');
 
-    const pseudoClassnamesTemplate = this.generateTypesTemplate({
-      typeName: 'PseudoClasses',
-      items: pseudoClassnames,
-    });
-
-    const allclassnamesExportTemplate = this.generateTypesTemplate({
-      typeName: 'Classes',
-      items: Object.keys(regularClassnames)
-        .concat('PseudoClasses')
-        .map(x => 'T' + x),
-    }).replace(/'/g, ''); // TODO: REFACTOR this to use generateTypesGroupTemplate.
-
-    return (
-      regularClassnamesTemplate +
-      '\n\n' +
-      pseudoClassnamesTemplate +
-      '\n\n' +
-      allclassnamesExportTemplate
+    // TODO: do not generate this template
+    const allclassnamesExportTemplate = this.generateTypesTemplate(
+      'Classes',
+      Object.keys(this._generatedClassNames).map(x => 'T' + x),
+      undefined,
+      false,
     );
+
+    return generatedClassnamesTemplate + '\n\n' + allclassnamesExportTemplate;
+  };
+
+  private utilityFunctionsTemplate = (): string => {
+    return Object.keys(this._generatedClassNames)
+      .map(categoryGroupName => {
+        const categoryType = `T${categoryGroupName}`; // TTypography
+        // const categoryPseudoClassesTypes = '`${TPseudoClassVariants}:${' + categoryType + '}`';
+
+        return (
+          `type ${categoryType}Key = ${categoryType} | TTailwindString\n` +
+          `type ${categoryType}Arg = ${categoryType} | null | undefined | {[key in ${categoryType}Key]?: boolean} | TTailwindString\n` +
+          `type ${categoryType}UtilityFunction = (...args: ${categoryType}Arg[]) => TTailwindString\n` +
+          //prettier-ignore
+          `export const ${_.lowerFirst(categoryGroupName)}: ${categoryType}UtilityFunction = classnamesLib as any\n`
+        );
+      })
+      .join('\n');
   };
 
   private mainExportStatementsTemplate = (): string => {
@@ -132,11 +153,11 @@ export class FileContentGenerator {
 
     const generateMembersStatements = (): string[] => {
       return members.map(member => {
-        return this.generateTypesTemplate({
-          typeName: member,
-          items: group[member as keyof TAllClassnames] as string[],
-          prefix: this._configPrefix,
-        });
+        return this.generateTypesTemplate(
+          member,
+          group[member as keyof TAllClassnames] as string[],
+          this._configParser.getPrefix(),
+        );
       });
     };
 
@@ -172,14 +193,22 @@ export class FileContentGenerator {
    *   | foo
    *   | bar;
    * ```
-   *
+   * or with quoutes:
+   * ```
+   * export type TBaz
+   *   | 'foo'
+   *   | 'bar';
+   * ```
    * @param typeName The name of the type (without T prefix).
    * @param items The list of the strings of items to add to the type name.
    * @param prefix The prefix to add to the beginning of each item of the string array.
+   * @param surroundWithQuotes Whether to quote the types or not (make it a string or an actual type)
    */
   private generateTypesTemplate = (
-    // prettier-ignore
-    {typeName, items, prefix}: {typeName: string; items: string[]; prefix?: string},
+    typeName: string,
+    items: string[],
+    prefix?: string,
+    surroundWithQuotes: boolean = true,
   ): string => {
     return (
       `export type T${_.upperFirst(typeName)} =` +
@@ -192,7 +221,9 @@ export class FileContentGenerator {
             const shouldKeepDefaultSuffix: boolean = item.includes(x);
             const name = shouldKeepDefaultSuffix ? item : item.replace('-DEFAULT', '');
 
-            return prefix ? `'${prefix}${name}'` : `'${name}'`;
+            const nameWithOrWithoutPrefix = `${prefix ? prefix : ''}${name}`;
+
+            return surroundWithQuotes ? `'${nameWithOrWithoutPrefix}'` : nameWithOrWithoutPrefix;
           });
         })
         .join('\n  | ')

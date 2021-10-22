@@ -5,7 +5,7 @@ import {nonConfigurableClassNames} from '../lib/non-configurable';
 import {
   TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
   Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
-  FlexBox, Grid, Spacing, Sizing, Typography, TGeneratedClassnames, Filters
+  FlexBox, Grid, Spacing, Sizing, Typography, Filters
 } from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
@@ -71,11 +71,8 @@ export class ClassnamesGenerator {
   /**
    * Get the generated classnames.
    */
-  public generate = (): TGeneratedClassnames => {
-    return {
-      regularClassnames: this._generatedRegularClassnames,
-      pseudoClassnames: this._generatedPseudoClassnames,
-    };
+  public generate = (): TAllClassnames => {
+    return this._generatedRegularClassnames;
   };
 
   private layout = (): Layout | Record<keyof Layout | 'content', string[]> => {

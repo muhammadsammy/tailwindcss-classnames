@@ -17,11 +17,6 @@ export type Transforms = Record<TTransformsCategoryItem, string[]>;
 export type TransitionsAndAnimations = Record<TTransitionsAndAnimationsCategoryItem, string[]>;
 export type Typography = Record<TTypographyCategoryItem, string[]>;
 
-export type TGeneratedClassnames = {
-  regularClassnames: TAllClassnames;
-  pseudoClassnames: string[];
-};
-
 export type TAllClassnames = {
   Accessibility: Accessibility;
   Backgrounds: Backgrounds;
