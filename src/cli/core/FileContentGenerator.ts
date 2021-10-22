@@ -21,7 +21,7 @@ export class FileContentGenerator {
       '\n\n' +
       this.importStatementsTemplate() +
       '\n\n' +
-      this.allClassnamesTypesTemplate() +
+      this.regularClassnamesTypesTemplate() +
       '\n\n' +
       this.utilityFunctionsTemplate() +
       '\n\n' +
@@ -59,7 +59,7 @@ export class FileContentGenerator {
   //   );
   // };
 
-  private allClassnamesTypesTemplate = (): string => {
+  private regularClassnamesTypesTemplate = (): string => {
     const generatedClassnamesTemplate = Object.keys(this._generatedClassNames)
       .map(classGroupKey => {
         return this.generateTypesGroupTemplate(
