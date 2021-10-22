@@ -23,6 +23,8 @@ export class FileContentGenerator {
       '\n\n' +
       this.regularClassnamesTypesTemplate() +
       '\n\n' +
+      this.pseudoClassnamesTypesTemplate() +
+      '\n\n' +
       this.utilityFunctionsTemplate() +
       '\n\n' +
       this.mainExportStatementsTemplate()
@@ -78,6 +80,45 @@ export class FileContentGenerator {
     );
 
     return generatedClassnamesTemplate + '\n\n' + allclassnamesExportTemplate;
+  };
+
+  private pseudoClassnamesTypesTemplate = (): string => {
+    let template = '';
+
+    for (const [keyOfCategory, value] of Object.entries(this._generatedClassNames)) {
+      const categoryObject = this._generatedClassNames[keyOfCategory as keyof TAllClassnames];
+
+      if (categoryObject !== undefined) {
+        const allClassnamesInCategory: string[] = Object.keys(value)
+          .map(k => {
+            return categoryObject[k as keyof typeof categoryObject];
+          })
+          .flat();
+
+        const pseudoClassnamesOfCategory = this._configParser.getVariants().flatMap(variant => {
+          return allClassnamesInCategory.map(classname => {
+            return (
+              variant +
+              this._configParser.getSeparator() +
+              this._configParser.getPrefix() +
+              classname
+            );
+          });
+        });
+
+        template =
+          template +
+          this.generateTypesTemplate(
+            `T${keyOfCategory}PseudoClassnames`,
+            pseudoClassnamesOfCategory,
+            undefined,
+            true,
+          ) +
+          '\n\n';
+      }
+    }
+
+    return template;
   };
 
   private utilityFunctionsTemplate = (): string => {
