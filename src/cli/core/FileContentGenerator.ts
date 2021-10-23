@@ -199,13 +199,9 @@ export class FileContentGenerator {
       .map(cn => {
         const subCategoryObj = this._generatedClassNames[cn as keyof TAllClassnames];
         if (subCategoryObj !== undefined) {
-          return (
-            '  ' +
-            _.camelCase(cn) +
-            `: {\n${Object.keys(subCategoryObj)
-              .map(sc => '    ' + sc)
-              .join(',\n')}\n  }`
-          );
+          return Object.keys(subCategoryObj)
+            .map(sc => '  ' + sc)
+            .join(',\n');
         }
       })
       .join(',\n');
