@@ -464,12 +464,12 @@ export class ClassnamesGenerator {
         }
       });
 
-    // Add the opacities short hand suffix `/{opacity}`: "bg-red-100/50"
-    const classnamesWithColorsAndOpacitySuffix = Object.keys(
-      this._configParser.getTheme().opacity,
-    ).flatMap(op => classnamesWithColors.map(cls => cls + '/' + op));
+    // // Add the opacities short hand suffix `/{opacity}`: "bg-red-100/50"
+    // const classnamesWithColorsAndOpacitySuffix = Object.keys(
+    //   this._configParser.getTheme().opacity,
+    // ).flatMap(op => classnamesWithColors.map(cls => cls + '/' + op));
 
-    return classnamesWithColors.concat(classnamesWithColorsAndOpacitySuffix);
+    return classnamesWithColors;
   };
 
   private getGeneratedClassesWithOpacities = (): ClassesWithOpacities => {
