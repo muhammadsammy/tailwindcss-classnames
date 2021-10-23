@@ -165,7 +165,7 @@ export class FileContentGenerator {
           `type ${categoryType}Arg = ${categoryType} | ${categoryType}PseudoClassnames | null | undefined | {[key in ${categoryType}Key]?: boolean} | TTailwindString\n` +
           `type ${categoryType}UtilityFunction = (...args: ${categoryType}Arg[]) => TTailwindString\n` +
           //prettier-ignore
-          `export const ${_.lowerFirst(categoryGroupName)}: ${categoryType}UtilityFunction = classnamesLib as any\n`
+          `export const ${_.camelCase(categoryGroupName)}: ${categoryType}UtilityFunction = classnamesLib as any\n`
         );
       })
       .join('\n');
@@ -174,7 +174,7 @@ export class FileContentGenerator {
   private mainExportStatementsTemplate = (): string => {
     return (
       `export const CN = {${Object.keys(this._generatedClassNames)
-        .map(cn => _.lowerFirst(cn))
+        .map(cn => _.camelCase(cn))
         .join(', ')}}\n` +
       'export type TTailwindString = "TAILWIND_STRING"\n' +
       '\n' +
