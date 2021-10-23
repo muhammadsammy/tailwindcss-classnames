@@ -24,8 +24,8 @@ export class FileContentGenerator {
       this.regularClassnamesTypesTemplate() +
       '\n\n' +
       this.variantsTypeTemplate() +
-      '\n\n' +
-      this.pseudoClassnamesTypesTemplate() +
+      // '\n\n' +
+      // this.pseudoClassnamesTypesTemplate() +
       '\n\n' +
       this.utilityFunctionsTemplate() +
       '\n\n' +
@@ -156,26 +156,61 @@ export class FileContentGenerator {
   };
 
   private utilityFunctionsTemplate = (): string => {
-    return Object.keys(this._generatedClassNames)
-      .map(categoryGroupName => {
-        const categoryType = `T${categoryGroupName}`; // TTypography
+    let template = '';
 
-        return (
-          `type ${categoryType}Key = ${categoryType} | ${categoryType}PseudoClassnames | TTailwindString\n` +
-          `type ${categoryType}Arg = ${categoryType} | ${categoryType}PseudoClassnames | null | undefined | {[key in ${categoryType}Key]?: boolean} | TTailwindString\n` +
-          `type ${categoryType}UtilityFunction = (...args: ${categoryType}Arg[]) => TTailwindString\n` +
-          //prettier-ignore
-          `export const ${_.camelCase(categoryGroupName)}: ${categoryType}UtilityFunction = classnamesLib as any\n`
-        );
-      })
-      .join('\n');
+    for (const [categoryKey, value] of Object.entries(this._generatedClassNames)) {
+      const subCategoriesTemplate = Object.keys(value) // sub-ctegories keys
+        .map(sc => {
+          const subCategoryType = `T${_.upperFirst(sc)}`;
+          const pseudoClassType =
+            `\`\${TPseudoClassVariants}${this._configParser.getPrefix()}` +
+            `\${T${_.upperFirst(sc)}}\``;
+
+          return (
+            // subcategory key type
+            `type ${subCategoryType}Key =\n` +
+            `  |${subCategoryType} | ${pseudoClassType} | TTailwindString\n` +
+            // subcategory arg type
+            `type ${subCategoryType}Arg =\n` +
+            `  | ${subCategoryType} | ${pseudoClassType} | null | undefined\n` +
+            `  | {[key in ${subCategoryType}Key]?: boolean} | TTailwindString\n` +
+            // utility function type
+            `type ${subCategoryType}UtilityFunction = (...args: ${subCategoryType}Arg[]) => TTailwindString\n` +
+            // utility function export statement
+            // prettier-ignore
+            `export const ${_.camelCase(sc)}: ${subCategoryType}UtilityFunction = classnamesLib as any\n`
+          );
+        })
+        .join('\n');
+
+      template =
+        template +
+        '\n' +
+        `//////////// ${categoryKey} Utility functions\n` +
+        '\n' +
+        subCategoriesTemplate;
+    }
+
+    return template;
   };
 
   private mainExportStatementsTemplate = (): string => {
+    const defaultExportTemplate = Object.keys(this._generatedClassNames)
+      .map(cn => {
+        const subCategoryObj = this._generatedClassNames[cn as keyof TAllClassnames];
+        if (subCategoryObj !== undefined) {
+          return (
+            '  ' +
+            _.camelCase(cn) +
+            `: {\n${Object.keys(subCategoryObj)
+              .map(sc => '    ' + sc)
+              .join(',\n')}\n  }`
+          );
+        }
+      })
+      .join(',\n');
+
     return (
-      `export const CN = {${Object.keys(this._generatedClassNames)
-        .map(cn => _.camelCase(cn))
-        .join(', ')}}\n` +
       'export type TTailwindString = "TAILWIND_STRING"\n' +
       '\n' +
       'export type TKey = TClasses | TTailwindStringIMPORTED_T_CUSTOM_CLASSES_KEY\n' +
@@ -191,7 +226,7 @@ export class FileContentGenerator {
       '\n' +
       'export const classnames: TTailwind = classnamesLib as any\n\n' +
       'export const tw = classnames\n\n' +
-      'export default tw\n\n'
+      `export default {\n${defaultExportTemplate}\n}\n`
     );
   };
 
