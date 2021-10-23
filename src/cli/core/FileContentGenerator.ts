@@ -61,7 +61,7 @@ export class FileContentGenerator {
   };
 
   private regularClassnamesTypesTemplate = (): string => {
-    const generatedClassnamesTemplate = Object.keys(this._generatedClassNames)
+    return Object.keys(this._generatedClassNames)
       .map(classGroupKey => {
         return this.generateTypesGroupTemplate(
           this._generatedClassNames[classGroupKey as keyof TAllClassnames] as TAllClassnames,
@@ -69,16 +69,6 @@ export class FileContentGenerator {
         );
       })
       .join('\n');
-
-    // TODO: do not generate this template
-    const allclassnamesExportTemplate = this.generateTypesTemplate(
-      'Classes',
-      Object.keys(this._generatedClassNames).map(x => 'T' + x),
-      undefined,
-      false,
-    );
-
-    return generatedClassnamesTemplate + '\n\n' + allclassnamesExportTemplate;
   };
 
   private pseudoClassnamesTypesTemplate = (): string => {
@@ -195,7 +185,7 @@ export class FileContentGenerator {
   };
 
   private mainExportStatementsTemplate = (): string => {
-    const defaultExportTemplate = Object.keys(this._generatedClassNames)
+    const utilityFunctionsObjectTemplate = Object.keys(this._generatedClassNames)
       .map(cn => {
         const subCategoryObj = this._generatedClassNames[cn as keyof TAllClassnames];
         if (subCategoryObj !== undefined) {
@@ -207,22 +197,20 @@ export class FileContentGenerator {
       .join(',\n');
 
     return (
+      `export const TW = {${utilityFunctionsObjectTemplate}\n}\n` +
+      '\n' +
       'export type TTailwindString = "TAILWIND_STRING"\n' +
       '\n' +
-      'export type TKey = TClasses | TTailwindStringIMPORTED_T_CUSTOM_CLASSES_KEY\n' +
-      '\n' +
       'export type TArg =\n' +
-      '| TClasses\n' +
       '| null\n' +
       '| undefined\n' +
-      '| {[key in TKey]?: boolean}\n' +
       '| TTailwindString\nIMPORTED_T_CUSTOM_CLASSES_ARG' +
       '\n' +
       'export type TTailwind = (...args: TArg[]) => TTailwindString\n' +
       '\n' +
-      'export const classnames: TTailwind = classnamesLib as any\n\n' +
-      'export const tw = classnames\n\n' +
-      `export default {\n${defaultExportTemplate}\n}\n`
+      'export const classnames: TTailwind = classnamesLib as any\n' +
+      '\n' +
+      'export default classnames'
     );
   };
 
