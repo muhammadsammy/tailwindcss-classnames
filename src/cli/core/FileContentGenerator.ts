@@ -109,7 +109,7 @@ export class FileContentGenerator {
         template =
           template +
           this.generateTypesTemplate(
-            `T${keyOfCategory}PseudoClassnames`,
+            `${keyOfCategory}PseudoClassnames`,
             pseudoClassnamesOfCategory,
             undefined,
             true,
@@ -128,8 +128,8 @@ export class FileContentGenerator {
         // const categoryPseudoClassesTypes = '`${TPseudoClassVariants}:${' + categoryType + '}`';
 
         return (
-          `type ${categoryType}Key = ${categoryType} | TTailwindString\n` +
-          `type ${categoryType}Arg = ${categoryType} | null | undefined | {[key in ${categoryType}Key]?: boolean} | TTailwindString\n` +
+          `type ${categoryType}Key = ${categoryType} | ${categoryType}PseudoClassnames | TTailwindString\n` +
+          `type ${categoryType}Arg = ${categoryType} | ${categoryType}PseudoClassnames | null | undefined | {[key in ${categoryType}Key]?: boolean} | TTailwindString\n` +
           `type ${categoryType}UtilityFunction = (...args: ${categoryType}Arg[]) => TTailwindString\n` +
           //prettier-ignore
           `export const ${_.lowerFirst(categoryGroupName)}: ${categoryType}UtilityFunction = classnamesLib as any\n`
