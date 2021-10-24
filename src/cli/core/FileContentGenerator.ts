@@ -146,37 +146,33 @@ export class FileContentGenerator {
   };
 
   private utilityFunctionsTemplate = (): string => {
-    let template = '';
+    let template = `//////////// Utility Function generic type
+
+type TUtilityFunction<T extends string> = (
+  ...args: Array<
+    | T
+    | \`\${TPseudoClassVariants}\${T}\`
+    | null
+    | undefined
+    | {[key in T | \`\${TPseudoClassVariants}\${T}\` | TTailwindString]?: boolean}
+    | TTailwindString
+  >
+) => TTailwindString;`;
 
     for (const [categoryKey, value] of Object.entries(this._generatedClassNames)) {
       const subCategoriesTemplate = Object.keys(value) // sub-ctegories keys
-        .map(sc => {
-          const subCategoryType = `T${_.upperFirst(sc)}`;
-          const pseudoClassType =
-            `\`\${TPseudoClassVariants}${this._configParser.getPrefix()}` +
-            `\${T${_.upperFirst(sc)}}\``;
+        .map(SubCategory => {
+          const fnName = _.camelCase(SubCategory);
+          const fnType = `TUtilityFunction<T${_.upperFirst(SubCategory)}>`;
 
-          return (
-            // subcategory key type
-            `type ${subCategoryType}Key =\n` +
-            `  |${subCategoryType} | ${pseudoClassType} | TTailwindString\n` +
-            // subcategory arg type
-            `type ${subCategoryType}Arg =\n` +
-            `  | ${subCategoryType} | ${pseudoClassType} | null | undefined\n` +
-            `  | {[key in ${subCategoryType}Key]?: boolean} | TTailwindString\n` +
-            // utility function type
-            `type ${subCategoryType}UtilityFunction = (...args: ${subCategoryType}Arg[]) => TTailwindString\n` +
-            // utility function export statement
-            // prettier-ignore
-            `export const ${_.camelCase(sc)}: ${subCategoryType}UtilityFunction = classnamesLib as any\n`
-          );
+          return `export const ${fnName}: ${fnType} = classnamesLib as any`;
         })
         .join('\n');
 
       template =
         template +
         '\n' +
-        `//////////// ${categoryKey} Utility functions\n` +
+        `\n//////////// ${categoryKey} Utility functions\n` +
         '\n' +
         subCategoriesTemplate;
     }
@@ -197,7 +193,7 @@ export class FileContentGenerator {
       .join(',\n');
 
     return (
-      `export const TW = {${utilityFunctionsObjectTemplate}\n}\n` +
+      `export const TW = {\n${utilityFunctionsObjectTemplate}\n}\n` +
       '\n' +
       'export type TTailwindString = "TAILWIND_STRING"\n' +
       '\n' +
