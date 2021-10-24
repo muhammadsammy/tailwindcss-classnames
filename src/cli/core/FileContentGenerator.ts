@@ -24,8 +24,6 @@ export class FileContentGenerator {
       this.regularClassnamesTypesTemplate() +
       '\n\n' +
       this.variantsTypeTemplate() +
-      // '\n\n' +
-      // this.pseudoClassnamesTypesTemplate() +
       '\n\n' +
       this.utilityFunctionsTemplate() +
       '\n\n' +
@@ -71,93 +69,19 @@ export class FileContentGenerator {
       .join('\n');
   };
 
-  private pseudoClassnamesTypesTemplate = (): string => {
-    /**
-     * Let TypeScript show the types on demand, by using template literal types
-     *
-     * PROS:
-     *   - better performance overall
-     *   - low disk usage  (~1.6 mb file)
-     *   - fast code generation by CLI, low RAM usage
-     *
-     * CONS:
-     *   - Typography, Borders and Backgrounds types cant be represented [ts(2590)]s
-     */
-
-    return Object.keys(this._generatedClassNames)
-      .map(categoryKey => {
-        return (
-          `export type T${_.upperFirst(categoryKey)}PseudoClassnames = ` +
-          '`${TPseudoClassVariants}' +
-          this._configParser.getSeparator() +
-          this._configParser.getPrefix() +
-          '${T' +
-          _.upperFirst(categoryKey) +
-          '}`'
-        );
-      })
-      .join('\n\n');
-
-    /**
-     * Generate the classnames and write them to disk
-     *
-     * PROS:
-     *   - no ts(2590) error, but these types does not load or take lots of time to load
-     * CONS:
-     *   - Huge file size (~90 mb)
-     *   - CLI takes a lot of time to generate the file
-     *   - CLI takes lots of RAM and often fails due to heap allocation errors
-     *   - Typography, Borders and Backgrounds are extremely slow to load, or does not load at all
-     *   - overall bad performace interacting with files importing from the file.
-     *   -
-     */
-
-    // let template = '';
-    // for (const [keyOfCategory, value] of Object.entries(this._generatedClassNames)) {
-    //   const categoryObject = this._generatedClassNames[keyOfCategory as keyof TAllClassnames];
-    //   if (categoryObject !== undefined) {
-    //     const allClassnamesInCategory: string[] = Object.keys(value)
-    //       .map(k => {
-    //         return categoryObject[k as keyof typeof categoryObject];
-    //       })
-    //       .flat();
-    //     const pseudoClassnamesOfCategory = this._configParser.getVariants().flatMap(variant => {
-    //       return allClassnamesInCategory.map(classname => {
-    //         return (
-    //           variant +
-    //           this._configParser.getSeparator() +
-    //           this._configParser.getPrefix() +
-    //           classname
-    //         );
-    //       });
-    //     });
-    //     template =
-    //       template +
-    //       this.generateTypesTemplate(
-    //         `${keyOfCategory}PseudoClassnames`,
-    //         pseudoClassnamesOfCategory,
-    //         undefined,
-    //         true,
-    //       ) +
-    //       '\n\n';
-    //   }
-    // }
-    // return template;
-  };
-
   private utilityFunctionsTemplate = (): string => {
-    let template = `//////////// Utility Function generic type
-
-type TUtilityFunction<T extends string> = (
-  ...args: Array<
-    | T
-    | \`\${TPseudoClassVariants}\${T}\`
-    | null
-    | undefined
-    | {[key in T | \`\${TPseudoClassVariants}\${T}\` | TTailwindString]?: boolean}
-    | TTailwindString
-  >
-) => TTailwindString;`;
+    let template =
+      '//////////// Utility Function generic type\n\n' +
+      'type TUtilityFunction<T extends string> = (\n' +
+      '  ...args: Array<\n' +
+      '    | T\n' +
+      '    | `${TPseudoClassVariants}${T}`\n' +
+      '    | null\n' +
+      '    | undefined\n' +
+      '    | {[key in T | `${TPseudoClassVariants}${T}` | TTailwindString]?: boolean}\n' +
+      '    | TTailwindString\n' +
+      '  >\n' +
+      ') => TTailwindString;';
 
     for (const [categoryKey, value] of Object.entries(this._generatedClassNames)) {
       const subCategoriesTemplate = Object.keys(value) // sub-ctegories keys
