@@ -4,7 +4,7 @@ import {TailwindConfigParser} from './TailwindConfigParser';
 
 export class FileContentGenerator {
   private _configParser: TailwindConfigParser;
-  private _generatedClassNames: TAllClassnames;
+  private readonly _generatedClassNames: TAllClassnames;
 
   /**
    * Initializes a new instance of the `FileContentGenerator` class.
