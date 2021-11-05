@@ -75,10 +75,12 @@ export class FileContentGenerator {
       'type TUtilityFunction<T extends string> = (\n' +
       '  ...args: Array<\n' +
       '    | T\n' +
+      '    | `!${T}`\n' +
       '    | `${TPseudoClassVariants}${T}`\n' +
+      '    | `${TPseudoClassVariants}!${T}`\n' +
       '    | null\n' +
       '    | undefined\n' +
-      '    | {[key in T | `${TPseudoClassVariants}${T}` | TTailwindString]?: boolean}\n' +
+      '    | {[key in T | `${TPseudoClassVariants}${T}` | `!${T}` | `${TPseudoClassVariants}!${T}` | TTailwindString]?: boolean}\n' +
       '    | TTailwindString\n' +
       '  >\n' +
       ') => TTailwindString;';
