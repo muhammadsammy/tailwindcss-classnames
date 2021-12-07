@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.6](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.5...v2.2.6) (2021-12-07)
+
+
+### Bug Fixes
+
+* **flexbox:** add 'justify-evenly' ([#312](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/312)) ([e2d21ed](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/e2d21ed67bce12334dadb8e121a4536402e493a5))
+
 ### [2.2.5](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.4...v2.2.5) (2021-10-15)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-classnames",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Functional typed classnames for TailwindCSS",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "contributors": [
