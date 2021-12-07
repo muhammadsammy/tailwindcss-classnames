@@ -46,6 +46,7 @@ const justifyContent = [
   'justify-end',
   'justify-between',
   'justify-around',
+  'justify-evenly',
 ];
 
 const justifyItems = [
