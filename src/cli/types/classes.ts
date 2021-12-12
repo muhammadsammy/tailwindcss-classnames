@@ -65,7 +65,10 @@ type TBordersCategoryItem =
   | 'ringOpacity'
   | 'ringOffsetColor'
   | 'ringOffsetWidth'
-  | 'ringWidth';
+  | 'ringWidth'
+  | 'outlineWidth'
+  | 'outlineOffset'
+  | 'outlineColor';
 
 type TEffectsCategoryItem =
   | 'boxShadow'

@@ -143,6 +143,9 @@ export class ClassnamesGenerator {
       ringOpacity: this.getGeneratedClassesWithOpacities().ringOpacities,
       ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
+      outlineOffset: Object.keys(this._theme.outlineOffset).map(x => 'outline-' + x),
+      outlineWidth: Object.keys(this._theme.outlineWidth).map(x => 'outline-' + x),
+      outlineColor: this.generateClassesWithColors('outlineColor'),
     };
   };
 
@@ -523,7 +526,8 @@ type ClassesWithColors =
   | 'ringColor'
   | 'ringOffsetColor'
   | 'gradientColorStops'
-  | 'boxShadowColor';
+  | 'boxShadowColor'
+  | 'outlineColor';
 
 type ClassesWithOpacities = {
   opacities: string[];

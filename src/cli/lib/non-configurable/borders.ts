@@ -14,7 +14,17 @@ const divideStyle = [
   'divide-none',
 ];
 
+const outlineStyle = [
+  'outline',
+  'outline-dashed',
+  'outline-dotted',
+  'outline-double',
+  'outline-hidden',
+  'outline-none',
+];
+
 export default {
   borderStyle,
   divideStyle,
+  outlineStyle,
 };
