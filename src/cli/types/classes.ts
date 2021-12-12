@@ -67,7 +67,12 @@ type TBordersCategoryItem =
   | 'ringOffsetWidth'
   | 'ringWidth';
 
-type TEffectsCategoryItem = 'boxShadow' | 'opacity' | 'mixBlendMode' | 'backgroundBlendMode';
+type TEffectsCategoryItem =
+  | 'boxShadow'
+  | 'boxShadowColor'
+  | 'opacity'
+  | 'mixBlendMode'
+  | 'backgroundBlendMode';
 
 type TFiltersCategoryItem =
   | 'filter'
@@ -126,10 +131,10 @@ type TGridCategoryItem =
 type TInteractivityCategoryItem =
   | 'appearance'
   | 'cursor'
-  | 'outline'
   | 'pointerEvents'
   | 'resize'
-  | 'userSelect';
+  | 'userSelect'
+  | 'caretColor';
 
 type TLayoutCategoryItem =
   | 'display'

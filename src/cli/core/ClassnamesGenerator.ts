@@ -107,7 +107,7 @@ export class ClassnamesGenerator {
     };
   };
 
-  private borders = (): Borders | Record<keyof Borders | 'caretColor', string[]> => {
+  private borders = (): Borders => {
     return {
       // Add all non configurable classes in `borders` plugin.
       // These are utilities that their names never change e.g. border styles (dashed, solid etc.)
@@ -124,7 +124,6 @@ export class ClassnamesGenerator {
         const sides = ['t', 'r', 'b', 'l'];
         return sides.map(side => `border-${side}-${width}`).concat(`border-${width}`);
       }),
-      caretColor: this.generateClassesWithColors('caretColor'),
       /* Dynamic divide utilities */
       divideColor: this.generateClassesWithColors('divideColor'),
       divideOpacity: this.getGeneratedClassesWithOpacities().divideOpacities,
@@ -155,6 +154,7 @@ export class ClassnamesGenerator {
     return {
       ...nonConfigurableClassNames.effects,
       boxShadow: Object.keys(this._theme.boxShadow).map(key => `shadow-${key}`),
+      boxShadowColor: this.generateClassesWithColors('boxShadowColor'),
       opacity: this.getGeneratedClassesWithOpacities().opacities,
     };
   };
@@ -209,7 +209,7 @@ export class ClassnamesGenerator {
     return {
       ...nonConfigurableClassNames.interactivity,
       cursor: Object.keys(this._theme.cursor).map(x => 'cursor-' + x),
-      outline: Object.keys(this._theme.outline).map(x => 'outline-' + x),
+      caretColor: this.generateClassesWithColors('caretColor'),
     };
   };
 
@@ -428,6 +428,7 @@ export class ClassnamesGenerator {
       .replace('Color', '') // gradientColorStops -> gradientStops, borderColor -> border etc.
       .replace('Stops', '') // gradientStops -> gradient
       .replace('ringOffset', 'ring-offset')
+      .replace('boxShadow', 'shadow')
       .replace('background', 'bg');
 
     const classnamesWithColors = propertyKeys
@@ -521,7 +522,8 @@ type ClassesWithColors =
   | 'borderColor'
   | 'ringColor'
   | 'ringOffsetColor'
-  | 'gradientColorStops';
+  | 'gradientColorStops'
+  | 'boxShadowColor';
 
 type ClassesWithOpacities = {
   opacities: string[];
