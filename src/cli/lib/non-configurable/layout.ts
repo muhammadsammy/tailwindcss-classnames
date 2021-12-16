@@ -66,6 +66,33 @@ const position = ['static', 'fixed', 'absolute', 'relative', 'sticky'];
 
 const visibility = ['visible', 'invisible'];
 
+const breakBefore = [
+  'break-before-auto',
+  'break-before-avoid',
+  'break-before-all',
+  'break-before-avoid-page',
+  'break-before-page',
+  'break-before-left',
+  'break-before-right',
+  'break-before-column',
+];
+const breakInside = [
+  'break-inside-auto',
+  'break-inside-avoid',
+  'break-inside-avoid-page',
+  'break-inside-avoid-column',
+];
+const breakAfter = [
+  'break-after-auto',
+  'break-after-avoid',
+  'break-after-all',
+  'break-after-avoid-page',
+  'break-after-page',
+  'break-after-left',
+  'break-after-right',
+  'break-after-column',
+];
+
 export default {
   display,
   boxDecorationBreak,
@@ -79,4 +106,7 @@ export default {
   overscrollBehavior,
   position,
   visibility,
+  breakBefore,
+  breakInside,
+  breakAfter,
 };

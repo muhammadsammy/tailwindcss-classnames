@@ -154,7 +154,12 @@ type TLayoutCategoryItem =
   | 'position'
   | 'inset'
   | 'visibility'
-  | 'zIndex';
+  | 'zIndex'
+  | 'aspectRatio'
+  | 'columns'
+  | 'breakBefore'
+  | 'breakInside'
+  | 'breakAfter';
 
 type TSizingCategoryItem = 'width' | 'minWidth' | 'maxWidth' | 'height' | 'minHeight' | 'maxHeight';
 
@@ -193,4 +198,10 @@ type TTypographyCategoryItem =
   | 'textTransform'
   | 'verticalAlign'
   | 'whitespace'
-  | 'wordBreak';
+  | 'wordBreak'
+  | 'content'
+  | 'textIndent'
+  | 'textDecorationColor'
+  | 'textDecorationStyle'
+  | 'textDecorationThickness'
+  | 'textUnderlineOffset';

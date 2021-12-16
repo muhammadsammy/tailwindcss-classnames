@@ -75,7 +75,7 @@ export class ClassnamesGenerator {
     return this._generatedRegularClassnames;
   };
 
-  private layout = (): Layout | Record<keyof Layout | 'content', string[]> => {
+  private layout = (): Layout => {
     return {
       ...nonConfigurableClassNames.layout,
       objectPosition: Object.keys(this._theme.objectPosition).map(x => 'object-' + x),
@@ -89,7 +89,8 @@ export class ClassnamesGenerator {
       zIndex: Object.keys(this._theme.zIndex).flatMap(zIndexValue =>
         zIndexValue.startsWith('-') ? `-z-${zIndexValue.substring(1)}` : `z-${zIndexValue}`,
       ),
-      content: Object.keys(this._theme.content).map(x => 'content-' + x),
+      aspectRatio: Object.keys(this._theme.aspectRatio).map(x => 'aspect-' + x),
+      columns: Object.keys(this._theme.columns).map(x => 'columns-' + x),
     };
   };
 
@@ -373,6 +374,15 @@ export class ClassnamesGenerator {
       placeholderOpacity: this.getGeneratedClassesWithOpacities().placeholderOpacities,
       textColor: this.generateClassesWithColors('textColor'),
       textOpacity: this.getGeneratedClassesWithOpacities().textOpacities,
+      content: Object.keys(this._theme.content).map(x => 'content-' + x),
+      textIndent: Object.keys(this._theme.textIndent).map(x => 'indent-' + x),
+      textDecorationColor: this.generateClassesWithColors('textDecorationColor'),
+      textDecorationThickness: Object.keys(this._theme.textDecorationThickness).map(
+        x => 'decoration-' + x,
+      ),
+      textUnderlineOffset: Object.keys(this._theme.textUnderlineOffset).map(
+        x => 'underline-offset-' + x,
+      ),
     };
   };
 
@@ -432,6 +442,7 @@ export class ClassnamesGenerator {
       .replace('Stops', '') // gradientStops -> gradient
       .replace('ringOffset', 'ring-offset')
       .replace('boxShadow', 'shadow')
+      .replace('textDecoration', 'decoration')
       .replace('background', 'bg');
 
     const classnamesWithColors = propertyKeys
@@ -527,7 +538,8 @@ type ClassesWithColors =
   | 'ringOffsetColor'
   | 'gradientColorStops'
   | 'boxShadowColor'
-  | 'outlineColor';
+  | 'outlineColor'
+  | 'textDecorationColor';
 
 type ClassesWithOpacities = {
   opacities: string[];

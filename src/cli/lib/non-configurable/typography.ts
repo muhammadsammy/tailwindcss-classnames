@@ -31,6 +31,8 @@ const verticalAlign = [
   'align-bottom',
   'align-text-top',
   'align-text-bottom',
+  'align-sub',
+  'align-super',
 ];
 
 const whitespace = [
@@ -42,6 +44,14 @@ const whitespace = [
 ];
 
 const wordBreak = ['break-normal', 'break-words', 'break-all'];
+
+const textDecorationStyle = [
+  'decoration-solid',
+  'decoration-double',
+  'decoration-dotted',
+  'decoration-dashed',
+  'decoration-wavy',
+];
 
 export default {
   fontSmoothing,
@@ -55,4 +65,5 @@ export default {
   verticalAlign,
   whitespace,
   wordBreak,
+  textDecorationStyle,
 };
