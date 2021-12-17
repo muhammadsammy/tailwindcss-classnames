@@ -29,7 +29,7 @@ npm install tailwindcss-classnames
 
 The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **370b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
 
-## **Whats New in v3**
+## **What's New in v3**
 
 - Way better performance overall (thanks to [@dylanvann](https://github.com/DylanVann)'s [idea and suggestions](https://github.com/muhammadsammy/tailwindcss-classnames/pull/281#discussion_r731682711)):
 
