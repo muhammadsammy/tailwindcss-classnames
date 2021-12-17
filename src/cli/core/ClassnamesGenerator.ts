@@ -282,8 +282,8 @@ export class ClassnamesGenerator {
     return {
       ...nonConfigurableClassNames.flexBox,
       flexBasis: Object.keys(this._theme.flexBasis).map(x => `basis-${x}`),
-      flexGrow: Object.keys(this._theme.flexGrow).map(x => `flex-grow-${x}`),
-      flexShrink: Object.keys(this._theme.flexShrink).map(x => `flex-shrink-${x}`),
+      flexGrow: Object.keys(this._theme.flexGrow).map(x => `grow-${x}`),
+      flexShrink: Object.keys(this._theme.flexShrink).map(x => `shrink-${x}`),
       order: Object.keys(this._theme.order).map(x => `order-${x}`),
     };
   };
