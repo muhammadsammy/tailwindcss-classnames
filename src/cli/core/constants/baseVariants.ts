@@ -43,6 +43,7 @@ export const baseVariants = [
   'after',
   'portrait',
   'landscape',
+  'open',
   // dark mode utility
   // 'dark', //
 ];
