@@ -142,7 +142,8 @@ type TInteractivityCategoryItem =
   | 'accentColor'
   | 'scrollSnap'
   | 'scrollMargin'
-  | 'scrollPadding';
+  | 'scrollPadding'
+  | 'scrollBehavior';
 
 type TLayoutCategoryItem =
   | 'display'
