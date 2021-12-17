@@ -26,6 +26,19 @@ const scrollSnap = [
 
 const scrollBehavior = ['scroll-auto', 'scroll-smooth'];
 
+const touchAction = [
+  'touch-auto',
+  'touch-none',
+  'touch-pan-x',
+  'touch-pan-left',
+  'touch-pan-right',
+  'touch-pan-y',
+  'touch-pan-up',
+  'touch-pan-down',
+  'touch-pinch-zoom',
+  'touch-manipulation',
+];
+
 export default {
   appearance,
   pointerEvents,
@@ -33,4 +46,5 @@ export default {
   userSelect,
   scrollSnap,
   scrollBehavior,
+  touchAction,
 };
