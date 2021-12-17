@@ -17,7 +17,7 @@ const display = [
   'hidden',
 ];
 
-const boxDecorationBreak = ['decoration-slice', 'decoration-clone'];
+const boxDecorationBreak = ['box-decoration-slice', 'box-decoration-clone'];
 
 const container = ['container'];
 
