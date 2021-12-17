@@ -138,7 +138,8 @@ type TInteractivityCategoryItem =
   | 'resize'
   | 'userSelect'
   | 'caretColor'
-  | 'willChange';
+  | 'willChange'
+  | 'accentColor';
 
 type TLayoutCategoryItem =
   | 'display'
