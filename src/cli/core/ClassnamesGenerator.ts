@@ -210,12 +210,20 @@ export class ClassnamesGenerator {
   };
 
   private interactivity = (): Interactivity => {
+    const sides = ['', 'y', 'x', 't', 'r', 'b', 'l'];
+
     return {
       ...nonConfigurableClassNames.interactivity,
       cursor: Object.keys(this._theme.cursor).map(x => 'cursor-' + x),
       caretColor: this.generateClassesWithColors('caretColor'),
       willChange: Object.keys(this._theme.willChange).map(x => 'will-change-' + x),
       accentColor: this.generateClassesWithColors('accentColor'),
+      scrollPadding: sides.flatMap(side => {
+        return Object.keys(this._theme.scrollPadding).map(value => `scroll-p${side}-${value}`);
+      }),
+      scrollMargin: sides.flatMap(side => {
+        return Object.keys(this._theme.scrollMargin).map(value => `scroll-m${side}-${value}`);
+      }),
     };
   };
 
