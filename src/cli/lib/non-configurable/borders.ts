@@ -3,6 +3,7 @@ const borderStyle = [
   'border-dashed',
   'border-dotted',
   'border-double',
+  'border-hidden',
   'border-none',
 ];
 
