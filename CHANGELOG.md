@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.6...v3.0.0) (2021-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename overflow-clip & overflow-ellipsis to text-clip & text-ellipsis
+
+### Features
+
+* add  `placeholder` variant ([866ac55](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/866ac553037e8d1a5955fe33120641b478ec3b3d)), closes [#338](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/338)
+* add `border-hidden` utility ([df94219](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/df9421930de9eb05a3407cd61511d65425f54a27)), closes [#335](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/335)
+* add `border-x` and `border-y` width and color utilities ([c702c46](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/c702c46554722b379e61c430e096e9e4b136279e)), closes [#334](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/334)
+* add `file` variant for `::file-selector-button` pseudo element ([d51fe20](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/d51fe2098e9efda2dc4cf81a4a6e17fcde7d55a4)), closes [#339](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/339)
+* add `grow-*` and `shrink-*` utilities, deprecate `flex-grow-*` and `flex-shrink-*` ([73ee65d](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/73ee65da78250866dfef4bbb1275b7737bc07ace)), closes [#333](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/333)
+* add `open` variant ([b261695](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/b261695fb46a71f3efcabb7a423ab35a44af5eb3)), closes [#341](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/341)
+* add `overflow-clip`, `overflow-x-clip` and `overflow-y-clip` utilities ([f0c23ec](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/f0c23ecec81594a746f2779188fe4f74539707ce)), closes [#336](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/336)
+* add `print` variant for targeting printed media ([0a1be3d](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/0a1be3d95ccdca5bdbf77201fd2f5846fd59f8ca)), closes [#337](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/337)
+* add `scroll-behavior` utilities ([c51e665](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/c51e66534cde1c44c90f1edd95485a2e7ef2bbef)), closes [#330](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/330)
+* add `scroll-margin` and `scroll-padding` utilities ([e3503e9](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/e3503e9618f6231166606ef8a05920ffff63239a))
+* add `scroll-snap` utilities ([e7d5070](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/e7d5070b0008fa109389e09974cb5deb7dc0990f)), closes [#329](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/329)
+* add `touch-action` utilities ([2d695e4](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/2d695e47fa3daff626e89fd0b9fe22d4aec08096)), closes [#331](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/331)
+* add classnames with important modifiers to utility functions ([02a3555](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/02a3555c7434089690dcf25c05082dbae0b35b33))
+* add colored box shadow utilities ([b92a42a](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/b92a42ada7dce1b67fc57314cec79c27abb41e55)), closes [#318](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/318)
+* add flex basis utilites (closes [#332](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/332)) ([8e900bb](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/8e900bbd2f45dbbe66e52ece6363d02dccb9435c))
+* add new layout and typography utilities ([c5e839e](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/c5e839e561c9ed813e0d19c25689b90ce8b1ef0f))
+* add new outline utilites ([07da44a](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/07da44a4a61aebae4f1a7940986b1e58b8b80775))
+* add portrait and landscape variants ([f89ec5a](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/f89ec5a9e4fddac060d1a4429aa1984a5ca37ac8)), closes [#340](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/340)
+* add pseudoclassnames to their category function ([224fb7a](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/224fb7a08dd0897cb93d218750d74f6c12ff44e1))
+* add variants to the cli as it's removed from the new config ([2bef20c](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/2bef20c57752554ee7e89e908cf7ce414f2de39a))
+* **cli:** generate per-category classnames ([805396f](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/805396ff6c149154c3860cf9b32f24f18f514f79))
+* enable jit features all the time ([84f281b](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/84f281b08d70954fdbd4523bb2a5a81f46b8f193))
+* generate utility function for all category types ( [#293](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/293)) ([1fa8a9b](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/1fa8a9b96ec543641da63a3fd0aa444310f8b6f0))
+* generate utility functions for subcategories instead of categories ([9486398](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/9486398483b5ca24b683637d93ea2031b566ce18))
+* rename  `decoration-slice` and `decoration-break` to `box-decoration-*` ([543e868](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/543e8682ab74e6ffdd3989cf6446e690cbc50180)), closes [#344](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/344)
+* rename overflow-clip & overflow-ellipsis to text-clip & text-ellipsis ([050b6e4](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/050b6e46740e56ad4f8a1d657a861c56d5813a16))
+* support  `accent-color` utilities ([b343833](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/b34383362eb67fa5bae83bd745bfd78f874e53bc)), closes [#328](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/328)
+* support `will-change` utilities ([0033a52](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/0033a52a45dc9e62c54443fef5af1c61069a856f)), closes [#343](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/343)
+* update config closure evaluator to evaluate new tailwind3 configs ([440c1ed](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/440c1ed7cc5790a6a112e267955de073f7f6b1a1))
+
+
+### Bug Fixes
+
+* disable duplicate breakpoint pseudoclass variants generation ([912519a](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/912519aae83a86fbd6b389b3aa6dd87674bffa62))
+* generate correct module exports ([3fac1c1](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/3fac1c1381a7e9d4599229ae5ab3a6c9044368d2))
+* pass the parser into the fileContentGenerator instead of prefix ([bce47a8](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/bce47a815bdab3b6c9675ae80611cf5f18235611))
+* use correct condition for adding a dark mode variant ([82cadf0](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/82cadf0a9ea693307db2789de9b0c0391175a025))
+
+
+### Performance Improvements
+
+* disable JIT opacity prefix feature ([e2d9673](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/e2d9673b119c436f669693a42a702d8dc7ce9b82))
+* use TS template literal types to generate pseudoclassess types ([e614729](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/e614729448a3b75621a6ad2f1ab84d56c671aaf2))
+
 ### [2.2.6](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.5...v2.2.6) (2021-12-07)
 
 
