@@ -37,11 +37,14 @@ const objectFit = [
 
 const overflow = [
   'overflow-auto',
+  'overflow-clip',
   'overflow-hidden',
   'overflow-visible',
   'overflow-scroll',
   'overflow-x-auto',
   'overflow-y-auto',
+  'overflow-x-clip',
+  'overflow-y-clip',
   'overflow-x-hidden',
   'overflow-y-hidden',
   'overflow-x-visible',
