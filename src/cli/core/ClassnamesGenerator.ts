@@ -214,6 +214,7 @@ export class ClassnamesGenerator {
       ...nonConfigurableClassNames.interactivity,
       cursor: Object.keys(this._theme.cursor).map(x => 'cursor-' + x),
       caretColor: this.generateClassesWithColors('caretColor'),
+      willChange: Object.keys(this._theme.willChange).map(x => 'will-change-' + x),
     };
   };
 

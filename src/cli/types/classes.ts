@@ -137,7 +137,8 @@ type TInteractivityCategoryItem =
   | 'pointerEvents'
   | 'resize'
   | 'userSelect'
-  | 'caretColor';
+  | 'caretColor'
+  | 'willChange';
 
 type TLayoutCategoryItem =
   | 'display'
