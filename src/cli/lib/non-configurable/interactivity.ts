@@ -24,10 +24,13 @@ const scrollSnap = [
   'snap-proximity',
 ];
 
+const scrollBehavior = ['scroll-auto', 'scroll-smooth'];
+
 export default {
   appearance,
   pointerEvents,
   resize,
   userSelect,
   scrollSnap,
+  scrollBehavior,
 };
