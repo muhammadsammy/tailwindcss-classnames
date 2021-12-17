@@ -44,6 +44,7 @@ export const baseVariants = [
   'portrait',
   'landscape',
   'open',
+  'file',
   // dark mode utility
   // 'dark', //
 ];
