@@ -101,6 +101,7 @@ type TFiltersCategoryItem =
   | 'backdropSepia';
 
 type TFlexBoxCategoryItem =
+  | 'flexBasis'
   | 'flexDirection'
   | 'flexWrap'
   | 'alignItems'
