@@ -139,7 +139,8 @@ type TInteractivityCategoryItem =
   | 'userSelect'
   | 'caretColor'
   | 'willChange'
-  | 'accentColor';
+  | 'accentColor'
+  | 'scrollSnap';
 
 type TLayoutCategoryItem =
   | 'display'

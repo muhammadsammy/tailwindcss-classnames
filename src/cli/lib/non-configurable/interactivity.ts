@@ -6,9 +6,28 @@ const resize = ['resize-none', 'resize', 'resize-y', 'resize-x'];
 
 const userSelect = ['select-none', 'select-text', 'select-all', 'select-auto'];
 
+const scrollSnap = [
+  // scroll snap align
+  'snap-start',
+  'snap-end',
+  'snap-center',
+  'snap-align-none',
+  // scroll snap stop
+  'snap-normal',
+  'snap-always',
+  // scroll snap type
+  'snap-none',
+  'snap-x',
+  'snap-y',
+  'snap-both',
+  'snap-mandatory',
+  'snap-proximity',
+];
+
 export default {
   appearance,
   pointerEvents,
   resize,
   userSelect,
+  scrollSnap,
 };
