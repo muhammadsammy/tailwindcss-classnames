@@ -41,6 +41,8 @@ export const baseVariants = [
   'marker',
   'before',
   'after',
+  'portrait',
+  'landscape',
   // dark mode utility
   // 'dark', //
 ];
