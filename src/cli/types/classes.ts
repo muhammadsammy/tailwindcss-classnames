@@ -143,7 +143,8 @@ type TInteractivityCategoryItem =
   | 'scrollSnap'
   | 'scrollMargin'
   | 'scrollPadding'
-  | 'scrollBehavior';
+  | 'scrollBehavior'
+  | 'touchAction';
 
 type TLayoutCategoryItem =
   | 'display'
