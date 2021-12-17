@@ -25,9 +25,36 @@ Please [follow the guide](https://tailwindcss.com/docs/installation/) to set up 
 npm install tailwindcss-classnames
 ```
 
-**⚠️ NOTE:** This project versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
+**NOTE:** This project versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
 
 The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **370b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
+
+## **Whats New in v3**
+
+- Way better performance overall (thanks to [@dylanvann](https://github.com/DylanVann)'s [idea and suggestions](https://github.com/muhammadsammy/tailwindcss-classnames/pull/281#discussion_r731682711)):
+
+  - Generated file size is reduced to be **< 200 KB** (default config). Previous version was generating a file sized about [100 MB](https://github.com/muhammadsammy/tailwindcss-classnames/issues/282).
+  - Fast autocompletion: this is due to usage of more specific utility functions and using template string types
+
+- **BREAKING**: Dropped support for JIT engine's Colors Opacity suffix feature (due to TypesScript _TS2590_ error)
+
+- **BREAKING**: Create Utility functions that accepts classnames (and pseudoclassnames) of that category. The `classnames` function won't accept or show autocompletion of all classnames anymore, but it will accept a function of these category functions [(#293)](https://github.com/muhammadsammy/tailwindcss-classnames/issues/293)
+
+  ✅ Correct
+
+  ```ts
+  classnames(
+    display('flex', 'md:block'),
+    textColor('text-black', 'hover:text-red-600'),
+    flexDirection('flex-row-reverse'),
+  );
+  ```
+
+  ❌ Incorrect
+
+  ```ts
+  classnames('flex', 'md:block', 'text-black', 'hover:text-red-600', 'flex-row-reverse');
+  ```
 
 ## Create classes
 
@@ -108,10 +135,10 @@ The types included in this package are the default tailwindcss classes, but if y
 
 ### CLI arguments
 
-- `-i`, `--input`    Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
-- `-o`, `--output`   Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
-- `-x`, `--extra`    Name or relative path of the file with the custom extra types **(optional)**
-- `-h`, `--help`     display help for command
+- `-i`, `--input` Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
+- `-o`, `--output` Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
+- `-x`, `--extra` Name or relative path of the file with the custom extra types **(optional)**
+- `-h`, `--help` display help for command
 
 ### Example of CLI usage
 
@@ -135,11 +162,10 @@ type MyCustomType =
 
 ### Known limitiations
 
-- Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) for details.
-- Only official TailwindLabs plugins are supported.
+- Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) .
 - `npx tailwindcss-classnames` won't work. Use as an npm script as mentioned above.
-- Limited support for the JIT engine ([#204](https://github.com/muhammadsammy/tailwindcss-classnames/issues/204)).
-- [Backlog](https://github.com/muhammadsammy/tailwindcss-classnames/milestone/2)
+- Only official TailwindLabs plugins are supported.
+- Some JIT features are not supported ([#204](https://github.com/muhammadsammy/tailwindcss-classnames/issues/204)).
 
 Any help with these issues is very much appreciated.
 
