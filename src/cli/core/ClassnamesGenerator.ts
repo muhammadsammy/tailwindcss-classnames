@@ -215,6 +215,7 @@ export class ClassnamesGenerator {
       cursor: Object.keys(this._theme.cursor).map(x => 'cursor-' + x),
       caretColor: this.generateClassesWithColors('caretColor'),
       willChange: Object.keys(this._theme.willChange).map(x => 'will-change-' + x),
+      accentColor: this.generateClassesWithColors('accentColor'),
     };
   };
 
@@ -540,7 +541,8 @@ type ClassesWithColors =
   | 'gradientColorStops'
   | 'boxShadowColor'
   | 'outlineColor'
-  | 'textDecorationColor';
+  | 'textDecorationColor'
+  | 'accentColor';
 
 type ClassesWithOpacities = {
   opacities: string[];
