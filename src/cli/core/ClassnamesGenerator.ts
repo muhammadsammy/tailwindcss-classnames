@@ -122,7 +122,7 @@ export class ClassnamesGenerator {
         return sides.map(side => `rounded-${side}-${radius}`).concat(`rounded-${radius}`);
       }),
       borderWidth: Object.keys(this._theme.borderWidth).flatMap(width => {
-        const sides = ['t', 'r', 'b', 'l'];
+        const sides = ['t', 'r', 'b', 'l', 'x', 'y'];
         return sides.map(side => `border-${side}-${width}`).concat(`border-${width}`);
       }),
       /* Dynamic divide utilities */
@@ -469,7 +469,7 @@ export class ClassnamesGenerator {
           // Loop over the deep objects and return the result for each key of the object.
           return Object.keys(colorValue).flatMap(shade => {
             if (utilName === 'border') {
-              return ['', 't', 'r', 'b', 'l'].map(
+              return ['', 't', 'r', 'b', 'l', 'x', 'y'].map(
                 side => `${utilName}-${side.length > 0 ? side + '-' : ''}${colorName}-${shade}`,
               );
             } else {
