@@ -56,6 +56,10 @@ The project is literally the [classnames](https://www.npmjs.com/package/classnam
   classnames('flex', 'md:block', 'text-black', 'hover:text-red-600', 'flex-row-reverse');
   ```
 
+  ## **twcn3**
+
+  To make the migrtion easier, [Ryan Goree](https://github.com/ryangoree) created [twcn3](https://www.npmjs.com/package/twcn3) which is a CLI that converts old codebase using the single `classnames` function into multiple utility functions.
+
 ## Create classes
 
 ```js
