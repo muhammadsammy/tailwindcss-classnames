@@ -47,6 +47,8 @@ export const baseVariants = [
   'file',
   'placeholder',
   'print',
+  'ltr',
+  'rtl',
   // dark mode utility
   // 'dark', //
 ];
