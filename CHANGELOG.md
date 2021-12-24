@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.0...v3.0.1) (2021-12-24)
+
+
+### Bug Fixes
+
+* add missing RTL and LTR modifiers ([5e9a353](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/5e9a353777dce6815f820c75ca55997c1900ce83))
+
 ## [3.0.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v2.2.6...v3.0.0) (2021-12-17)
 
 
