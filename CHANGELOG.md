@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.2](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.1...v3.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* generate new lib classnames ([bc47da3](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/bc47da3288e7a2784f5ed21abe2494ae7a609376))
+* pin colors package to 1.4.0 (fixes [#362](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/362)) ([e8132b4](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/e8132b40449ad85f3eee99a3c8b34d0dd4877f54))
+
 ### [3.0.1](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.0...v3.0.1) (2021-12-24)
 
 
