@@ -3190,7 +3190,14 @@ export type TRingColor =
   | 'ring-rose-800'
   | 'ring-rose-900';
 
-export type TRingWidth = 'ring-0' | 'ring-1' | 'ring-2' | 'ring-4' | 'ring-8' | 'ring' | 'inset';
+export type TRingWidth =
+  | 'ring-0'
+  | 'ring-1'
+  | 'ring-2'
+  | 'ring-4'
+  | 'ring-8'
+  | 'ring'
+  | 'ring-inset';
 
 export type TRingOpacity =
   | 'ring-opacity-0'
