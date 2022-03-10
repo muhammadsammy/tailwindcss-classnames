@@ -5,7 +5,7 @@ import {nonConfigurableClassNames} from '../lib/non-configurable';
 import {
   TAllClassnames, Backgrounds, Layout, Borders, Tables, Effects,
   Interactivity, TransitionsAndAnimations, Transforms, Accessibility, SVG,
-  FlexBox, Grid, Spacing, Sizing, Typography, Filters
+  FlexBox, Grid, Group, Peer, Spacing, Sizing, Typography, Filters
 } from '../types/classes';
 import {TConfigTheme, TConfigDarkMode} from '../types/config';
 import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
@@ -44,9 +44,11 @@ export class ClassnamesGenerator {
       Filters: this.filters(),
       FlexBox: this.flexBox(),
       Grid: this.grid(),
+      Group: this.group(),
       Spacing: this.spacing(),
       Interactivity: this.interactivity(),
       Layout: this.layout(),
+      Peer: this.peer(),
       Sizing: this.sizing(),
       SVG: this.SVG(),
       Transforms: this.transforms(),
@@ -309,6 +311,18 @@ export class ClassnamesGenerator {
           gapValue => x + gapValue,
         );
       }),
+    };
+  };
+
+  private group = (): Group => {
+    return {
+      group: ['group'],
+    };
+  };
+
+  private peer = (): Peer => {
+    return {
+      peer: ['peer'],
     };
   };
 

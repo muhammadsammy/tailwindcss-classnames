@@ -4618,6 +4618,10 @@ export type TGrid =
   | TGridRowEnd
   | TGap;
 
+export type TGroup = 'group';
+
+export type TGroup = TGroup;
+
 export type TPadding =
   | 'p-0'
   | 'p-1'
@@ -6700,6 +6704,10 @@ export type TLayout =
   | TAspectRatio
   | TColumns;
 
+export type TPeer = 'peer';
+
+export type TPeer = TPeer;
+
 export type TWidth =
   | 'w-0'
   | 'w-1'
@@ -8231,6 +8239,10 @@ export const gridRowStart: TUtilityFunction<TGridRowStart> = classnamesLib as an
 export const gridRowEnd: TUtilityFunction<TGridRowEnd> = classnamesLib as any;
 export const gap: TUtilityFunction<TGap> = classnamesLib as any;
 
+//////////// Group Utility functions
+
+export const group: TUtilityFunction<TGroup> = classnamesLib as any;
+
 //////////// Spacing Utility functions
 
 export const padding: TUtilityFunction<TPadding> = classnamesLib as any;
@@ -8275,6 +8287,10 @@ export const inset: TUtilityFunction<TInset> = classnamesLib as any;
 export const zIndex: TUtilityFunction<TZIndex> = classnamesLib as any;
 export const aspectRatio: TUtilityFunction<TAspectRatio> = classnamesLib as any;
 export const columns: TUtilityFunction<TColumns> = classnamesLib as any;
+
+//////////// Peer Utility functions
+
+export const peer: TUtilityFunction<TPeer> = classnamesLib as any;
 
 //////////// Sizing Utility functions
 
@@ -8421,6 +8437,7 @@ export const TW = {
   gridRowStart,
   gridRowEnd,
   gap,
+  group,
   padding,
   margin,
   space,
@@ -8457,6 +8474,7 @@ export const TW = {
   zIndex,
   aspectRatio,
   columns,
+  peer,
   width,
   minWidth,
   maxWidth,

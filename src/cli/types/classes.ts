@@ -7,8 +7,10 @@ export type Effects = Record<TEffectsCategoryItem, string[]>;
 export type Filters = Record<TFiltersCategoryItem, string[]>;
 export type FlexBox = Record<TFlexBoxCategoryItem, string[]>;
 export type Grid = Record<TGridCategoryItem, string[]>;
+export type Group = Record<TGroupCategoryItem, string[]>;
 export type Interactivity = Record<TInteractivityCategoryItem, string[]>;
 export type Layout = Record<TLayoutCategoryItem, string[]>;
+export type Peer = Record<TPeerCategoryItem, string[]>;
 export type Sizing = Record<TSizingCategoryItem, string[]>;
 export type Spacing = Record<TSpacingCategoryItem, string[]>;
 export type SVG = Record<TSVGCategoryItem, string[]>;
@@ -23,10 +25,12 @@ export type TAllClassnames = {
   Borders: Borders;
   Effects: Effects;
   Filters: Filters;
+  Group: Group;
   FlexBox: FlexBox;
   Grid: Grid;
   Interactivity: Interactivity;
   Layout: Layout;
+  Peer: Peer;
   Sizing: Sizing;
   Spacing: Spacing;
   SVG: SVG;
@@ -131,6 +135,10 @@ type TGridCategoryItem =
   | 'gridRowEnd'
   | 'gap'
   | 'gridAutoFlow';
+
+type TGroupCategoryItem = 'group';
+
+type TPeerCategoryItem = 'peer';
 
 type TInteractivityCategoryItem =
   | 'appearance'
