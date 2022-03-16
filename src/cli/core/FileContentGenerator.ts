@@ -91,7 +91,7 @@ export class FileContentGenerator {
           const fnName = _.camelCase(SubCategory);
           const fnArgsType = `TUtilityFunctionArgs<T${_.upperFirst(SubCategory)}>`;
 
-          return `export function ${fnName}<R = TTailwindString>(...args: ${fnArgsType}): R { return classnamesLib as any }`;
+          return `export function ${fnName}<R = typeof TW>(...args: ${fnArgsType}): R { return classnamesLib as any }`;
         })
         .join('\n');
 
