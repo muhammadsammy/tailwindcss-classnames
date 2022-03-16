@@ -72,8 +72,8 @@ export class FileContentGenerator {
   private utilityFunctionsTemplate = (): string => {
     let template =
       '//////////// Utility Function generic type\n\n' +
-      'type TUtilityFunction<T extends string> = (\n' +
-      '  ...args: Array<\n' +
+      'type TUtilityFunctionArgs<T extends string> = (\n' +
+      '  Array<\n' +
       '    | T\n' +
       '    | `!${T}`\n' +
       '    | `${TPseudoClassVariants}${T}`\n' +
@@ -83,15 +83,15 @@ export class FileContentGenerator {
       '    | {[key in T | `${TPseudoClassVariants}${T}` | `!${T}` | `${TPseudoClassVariants}!${T}` | TTailwindString]?: boolean}\n' +
       '    | TTailwindString\n' +
       '  >\n' +
-      ') => TTailwindString;';
+      ')';
 
     for (const [categoryKey, value] of Object.entries(this._generatedClassNames)) {
       const subCategoriesTemplate = Object.keys(value) // sub-ctegories keys
         .map(SubCategory => {
           const fnName = _.camelCase(SubCategory);
-          const fnType = `TUtilityFunction<T${_.upperFirst(SubCategory)}>`;
+          const fnArgsType = `TUtilityFunctionArgs<T${_.upperFirst(SubCategory)}>`;
 
-          return `export const ${fnName}: ${fnType} = classnamesLib as any`;
+          return `export function ${fnName}<R = TTailwindString>(...args: ${fnArgsType}): R { return classnamesLib as any }`;
         })
         .join('\n');
 
@@ -112,7 +112,7 @@ export class FileContentGenerator {
         const subCategoryObj = this._generatedClassNames[cn as keyof TAllClassnames];
         if (subCategoryObj !== undefined) {
           return Object.keys(subCategoryObj)
-            .map(sc => '  ' + sc)
+            .map(sc => '    ' + sc)
             .join(',\n');
         }
       })
