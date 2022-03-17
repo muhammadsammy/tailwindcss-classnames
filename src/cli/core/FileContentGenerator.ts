@@ -91,7 +91,7 @@ export class FileContentGenerator {
           const fnName = _.camelCase(SubCategory);
           const fnArgsType = `TUtilityFunctionArgs<T${_.upperFirst(SubCategory)}>`;
 
-          return `export function ${fnName}<R = typeof TW & {className: TTailwindString}>(...args: ${fnArgsType}): R { return classnamesLib(...args) as any }`;
+          return `export function ${fnName}<R = typeof TW & {className: TTailwindString} & {overrides: Record<string, string>}>(...args: ${fnArgsType}): R { return classnamesLib(...args) as any }`;
         })
         .join('\n');
 
@@ -143,8 +143,8 @@ export class FileContentGenerator {
       '\n' +
       'export const classnames: TTailwind = classnamesLib as any\n' +
       '\n' +
-      'export default classnames' +
-      '\n\n' +
+      'export default classnames\n' +
+      '\n' +
       `export type UtilityKeys = ${TwKeys}`
     );
   };
