@@ -140,7 +140,7 @@ export class ClassnamesGenerator {
       ringColor: this.generateClassesWithColors('ringColor'),
       ringWidth: Object.keys(this._theme.ringWidth)
         .map(x => 'ring-' + x)
-        .concat('inset'),
+        .concat('ring-inset'),
       ringOpacity: this.getGeneratedClassesWithOpacities().ringOpacities,
       ringOffsetColor: this.generateClassesWithColors('ringOffsetColor'),
       ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => 'ring-offset-' + x),
