@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.3](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.2...v3.0.3) (2022-03-17)
+
+
+### Bug Fixes
+
+* use correct prefix for ring-inset class ([#390](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/390)) ([22b0be9](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/22b0be9e9ad1532e09fb8cdabf0adffa30f2eaa8))
+
 ### [3.0.2](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.1...v3.0.2) (2022-01-14)
 
 
