@@ -56,6 +56,7 @@
     "dist"
   ],
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.0",
     "clsx": "^1.1.1",
     "colors": "1.4.0",
     "commander": "^7.0.0",
