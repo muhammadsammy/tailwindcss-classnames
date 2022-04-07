@@ -121,7 +121,7 @@ export class TailwindConfigParser {
 
     // get responsive variants
     const [mediaBreakpoints] = this.getThemeProperty('screens');
-    if (this.getDarkMode() == 'media') mediaBreakpoints.push('dark');
+    if (this.getDarkMode() == 'media' || this.getDarkMode() == 'class') mediaBreakpoints.push('dark');
 
     mediaBreakpoints.map((breakpoint: string) => {
       if (!variants.includes(breakpoint)) {
