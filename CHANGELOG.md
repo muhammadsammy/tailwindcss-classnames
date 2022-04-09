@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.4](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.3...v3.0.4) (2022-04-09)
+
+
+### Bug Fixes
+
+* support darkMode manual 'class' option  ([#399](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/399)) ([7cd6881](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/7cd6881a4b97980bddb72ea17427c3e8dd5b0586))
+
 ### [3.0.3](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.2...v3.0.3) (2022-03-17)
 
 
