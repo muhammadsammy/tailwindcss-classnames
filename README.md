@@ -27,7 +27,7 @@ npm install tailwindcss-classnames
 
 **NOTE:** This project versions match with TailwindCSS versions except for [semver _patch_](https://semver.org/) releases
 
-The project is literally the [classnames](https://www.npmjs.com/package/classnames) project with custom typing. That means it arrives at your browser at approximately **370b** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
+The project is literally the [clsx](https://www.npmjs.com/package/clsx) project with custom typing. That means it arrives at your browser at approximately **2.7kB** minified and gzipped ([bundlephobia](https://bundlephobia.com/result?p=tailwindcss-classnames)).
 
 ## **What's New in v3**
 
