@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.5](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.4...v3.0.5) (2022-05-10)
+
+
+### Bug Fixes
+
+* adds proper indexing when generating colors ([#412](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/412)) ([0e500b6](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/0e500b6b6b44bec35f50fd49d5dfee51fcb899fd))
+
 ### [3.0.4](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.3...v3.0.4) (2022-04-09)
 
 
