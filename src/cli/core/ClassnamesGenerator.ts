@@ -457,10 +457,11 @@ export class ClassnamesGenerator {
       .replace('background', 'bg');
 
     const classnamesWithColors = propertyKeys
-      // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
-      .filter(k => k !== 'DEFAULT')
-      // Then, for every key of the property...
+      // For every key of the property...
       .flatMap((colorName, i) => {
+        // Exclude `DEFAULT` keys from the keys collection as they do not correspond to any classname.
+        if (propertyKeys[i] === 'DEFAULT') return null;
+
         // Get the value that corresponds to that key. NOTE: It can be `string` or an `object` of shades.
         const colorValue = propertyValues[i];
 
@@ -488,7 +489,8 @@ export class ClassnamesGenerator {
             return `${utilName}-${colorName}`;
           }
         }
-      });
+      })
+      .filter(Boolean) as string[];
 
     // // Add the opacities short hand suffix `/{opacity}`: "bg-red-100/50"
     // const classnamesWithColorsAndOpacitySuffix = Object.keys(
