@@ -3,7 +3,7 @@
 import {promises as fs} from 'fs';
 import vm from 'vm';
 import path from 'path';
-import colors from 'colors';
+import colors from '@colors/colors';
 import {ClassnamesGenerator} from './ClassnamesGenerator';
 import {TailwindConfigParser} from './TailwindConfigParser';
 import {FileContentGenerator} from './FileContentGenerator';
