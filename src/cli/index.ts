@@ -2,7 +2,7 @@
 
 import commander from 'commander';
 import inquirer from 'inquirer';
-import colors from 'colors';
+import colors from '@colors/colors';
 import fs from 'fs';
 
 import {GeneratedFileWriter} from './core/GeneratedFileWriter';
