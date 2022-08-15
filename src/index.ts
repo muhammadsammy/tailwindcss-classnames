@@ -2978,7 +2978,16 @@ export type TRingColor =
   | 'ring-transparent'
   | 'ring-black'
   | 'ring-white'
-  | 'ring-slate'
+  | 'ring-slate-50'
+  | 'ring-slate-100'
+  | 'ring-slate-200'
+  | 'ring-slate-300'
+  | 'ring-slate-400'
+  | 'ring-slate-500'
+  | 'ring-slate-600'
+  | 'ring-slate-700'
+  | 'ring-slate-800'
+  | 'ring-slate-900'
   | 'ring-gray-50'
   | 'ring-gray-100'
   | 'ring-gray-200'
@@ -8338,6 +8347,71 @@ export const textDecorationThickness: TUtilityFunction<TTextDecorationThickness>
   classnamesLib as any;
 export const textUnderlineOffset: TUtilityFunction<TTextUnderlineOffset> = classnamesLib as any;
 
+//////////// Accessibility Utility functions
+
+export const accessibility: TUtilityFunction<TAccessibility> = classnamesLib as any;
+
+//////////// Backgrounds Utility functions
+
+export const backgrounds: TUtilityFunction<TBackgrounds> = classnamesLib as any;
+
+//////////// Borders Utility functions
+
+export const borders: TUtilityFunction<TBorders> = classnamesLib as any;
+
+//////////// Tables Utility functions
+
+export const tables: TUtilityFunction<TTables> = classnamesLib as any;
+
+//////////// Effects Utility functions
+
+export const effects: TUtilityFunction<TEffects> = classnamesLib as any;
+
+//////////// TransitionsAndAnimations Utility functions
+
+export const transitionsAndAnimations: TUtilityFunction<TTransitionsAndAnimations> =
+  classnamesLib as any;
+
+//////////// Filters Utility functions
+
+export const filters: TUtilityFunction<TFilters> = classnamesLib as any;
+
+//////////// FlexBox Utility functions
+
+export const flexBox: TUtilityFunction<TFlexBox> = classnamesLib as any;
+
+//////////// Grid Utility functions
+
+export const grid: TUtilityFunction<TGrid> = classnamesLib as any;
+
+//////////// Spacing Utility functions
+
+export const spacing: TUtilityFunction<TSpacing> = classnamesLib as any;
+
+//////////// Interactivity Utility functions
+
+export const interactivity: TUtilityFunction<TInteractivity> = classnamesLib as any;
+
+//////////// Layout Utility functions
+
+export const layout: TUtilityFunction<TLayout> = classnamesLib as any;
+
+//////////// Sizing Utility functions
+
+export const sizing: TUtilityFunction<TSizing> = classnamesLib as any;
+
+//////////// SVG Utility functions
+
+export const svg: TUtilityFunction<TSVG> = classnamesLib as any;
+
+//////////// Transforms Utility functions
+
+export const transforms: TUtilityFunction<TTransforms> = classnamesLib as any;
+
+//////////// Typography Utility functions
+
+export const typography: TUtilityFunction<TTypography> = classnamesLib as any;
+
 export const TW = {
   screenReaders,
   backgroundAttachment,
@@ -8507,6 +8581,29 @@ export const TW = {
   textDecorationThickness,
   textUnderlineOffset,
 };
+
+export const CN = {
+  accessibility,
+  backgrounds,
+  borders,
+  tables,
+  effects,
+  transitionsAndAnimations,
+  filters,
+  flexBox,
+  grid,
+  spacing,
+  interactivity,
+  layout,
+  sizing,
+  svg,
+  transforms,
+  typography,
+};
+
+export const mainCategoriesUtilityFunctions = CN;
+
+export const subCategoriesUtilityFunctions = TW;
 
 export type TTailwindString = 'TAILWIND_STRING';
 
