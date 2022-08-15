@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.6](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.5...v3.0.6) (2022-08-15)
+
+
+### Bug Fixes
+
+* add missing main categories utility functions ([#439](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/439)) ([b5c4d15](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/b5c4d152942ad46b74ac501cb03f6702cd94802e))
+
 ### [3.0.5](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.4...v3.0.5) (2022-05-10)
 
 
