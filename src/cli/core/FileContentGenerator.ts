@@ -85,6 +85,9 @@ export class FileContentGenerator {
       '  >\n' +
       ') => TTailwindString;';
 
+    /**
+     * Specific subcategory utility functions
+     */
     for (const [categoryKey, value] of Object.entries(this._generatedClassNames)) {
       const subCategoriesTemplate = Object.keys(value) // sub-ctegories keys
         .map(SubCategory => {
@@ -103,11 +106,27 @@ export class FileContentGenerator {
         subCategoriesTemplate;
     }
 
+    /**
+     * general category utility functions
+     */
+    const generalCategoriesTemplate = Object.keys(this._generatedClassNames)
+      .map(categorykey => {
+        const comment = '\n' + `\n//////////// ${categorykey} Utility functions\n` + '\n';
+
+        const fnName = _.camelCase(categorykey);
+        const fnType = `TUtilityFunction<T${_.upperFirst(categorykey)}>`;
+
+        return comment + `export const ${fnName}: ${fnType} = classnamesLib as any`;
+      })
+      .join('\n');
+
+    template = template + generalCategoriesTemplate;
+
     return template;
   };
 
   private mainExportStatementsTemplate = (): string => {
-    const utilityFunctionsObjectTemplate = Object.keys(this._generatedClassNames)
+    const specificUtilityFunctionsObjectTemplate = Object.keys(this._generatedClassNames)
       .map(cn => {
         const subCategoryObj = this._generatedClassNames[cn as keyof TAllClassnames];
         if (subCategoryObj !== undefined) {
@@ -118,8 +137,18 @@ export class FileContentGenerator {
       })
       .join(',\n');
 
+    const generalUtilityFunctionsObjectTemplate = Object.keys(this._generatedClassNames)
+      .map(cn => '  ' + _.camelCase(cn))
+      .join(',\n');
+
     return (
-      `export const TW = {\n${utilityFunctionsObjectTemplate}\n}\n` +
+      `export const TW = {\n${specificUtilityFunctionsObjectTemplate}\n}\n` +
+      '\n' +
+      `export const CN = {\n${generalUtilityFunctionsObjectTemplate}\n}\n` +
+      '\n' +
+      'export const mainCategoriesUtilityFunctions = CN;\n' +
+      '\n' +
+      'export const subCategoriesUtilityFunctions = TW;\n' +
       '\n' +
       'export type TTailwindString = "TAILWIND_STRING"\n' +
       '\n' +
