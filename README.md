@@ -49,6 +49,14 @@ The project is literally the [clsx](https://www.npmjs.com/package/clsx) project 
     flexDirection('flex-row-reverse'),
   );
   ```
+  OR
+
+  ```ts
+  classnames(
+    flexBox('flex', 'md:block', 'flex-row-reverse'),
+    typography('text-black', 'hover:text-red-600', 'text-3xl', 'text-center', 'italic'),
+  );
+  ```
 
   ❌ Incorrect
 
