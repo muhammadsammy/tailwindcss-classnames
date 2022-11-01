@@ -7,6 +7,7 @@ export type Effects = Record<TEffectsCategoryItem, string[]>;
 export type Filters = Record<TFiltersCategoryItem, string[]>;
 export type FlexBox = Record<TFlexBoxCategoryItem, string[]>;
 export type Grid = Record<TGridCategoryItem, string[]>;
+export type Grouping = Record<TGroupingCategoryItem, string[]>;
 export type Interactivity = Record<TInteractivityCategoryItem, string[]>;
 export type Layout = Record<TLayoutCategoryItem, string[]>;
 export type Sizing = Record<TSizingCategoryItem, string[]>;
@@ -25,6 +26,7 @@ export type TAllClassnames = {
   Filters: Filters;
   FlexBox: FlexBox;
   Grid: Grid;
+  Grouping: Grouping;
   Interactivity: Interactivity;
   Layout: Layout;
   Sizing: Sizing;
@@ -131,6 +133,8 @@ type TGridCategoryItem =
   | 'gridRowEnd'
   | 'gap'
   | 'gridAutoFlow';
+
+type TGroupingCategoryItem = 'group' | 'peer';
 
 type TInteractivityCategoryItem =
   | 'appearance'
