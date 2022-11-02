@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.7](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.6...v3.0.7) (2022-11-02)
+
+
+### Bug Fixes
+
+* add basic group and peer helpers ([#446](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/446)) ([036e5c8](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/036e5c8000ccec7febe35c28a57f34b689569b79))
+
 ### [3.0.6](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.5...v3.0.6) (2022-08-15)
 
 
