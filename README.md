@@ -49,6 +49,7 @@ The project is literally the [clsx](https://www.npmjs.com/package/clsx) project 
     flexDirection('flex-row-reverse'),
   );
   ```
+
   OR
 
   ```ts
@@ -171,6 +172,38 @@ type MyCustomType =
   | "sidebar"
   ...
 ```
+
+### How to use generated types
+
+#### Method 1
+
+import _the generated_ file (and **NOT** the actual library) into your code in order to get the customized classnames, like this:
+
+```ts
+import {classnames} from 'path/to/generated/tailwindcss-classnames';
+```
+
+#### Method 2
+
+A more elegant approach is to add the generated file to your projects tsconfig.json compilerOptions paths which should allow you to keep the import the same and use your generated version of tailwindcss-classnames instead of the node_modules one.
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "tailwindcss-classnames": ["path/to/generated/tailwindcss-classnames"]
+    }
+  }
+}
+```
+
+then:
+
+```ts
+import {classnames} from 'tailwindcss-classnames';
+```
+
+[From original comment by @andykenward](https://github.com/muhammadsammy/tailwindcss-classnames/discussions/227#discussioncomment-3101220)
 
 ### Known limitiations
 
