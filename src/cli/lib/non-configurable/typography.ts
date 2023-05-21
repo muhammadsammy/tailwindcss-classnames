@@ -16,7 +16,14 @@ const fontVariantNumeric = [
 
 const listStylePosition = ['list-inside', 'list-outside'];
 
-const textAlign = ['text-left', 'text-center', 'text-right', 'text-justify'];
+const textAlign = [
+  'text-left',
+  'text-center',
+  'text-right',
+  'text-justify',
+  'text-start',
+  'text-end',
+];
 
 const textDecoration = ['underline', 'line-through', 'no-underline'];
 
