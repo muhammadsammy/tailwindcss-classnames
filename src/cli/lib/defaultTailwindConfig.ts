@@ -1,6 +1,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
+/** @type {import('tailwindcss').Config} */
 export const defaultTailwindConfig = {
   content: [],
   presets: [],
@@ -197,6 +198,9 @@ export const defaultTailwindConfig = {
       '3xl': '1.5rem',
       full: '9999px',
     },
+    borderSpacing: ({theme}) => ({
+      ...theme('spacing'),
+    }),
     borderWidth: {
       DEFAULT: '1px',
       0: '0px',
@@ -720,7 +724,7 @@ export const defaultTailwindConfig = {
       8: '8px',
     },
     ringColor: ({theme}) => ({
-      DEFAULT: theme('colors.blue.500', '#3b82f6'),
+      DEFAULT: theme(`colors.blue.500`, '#3b82f6'),
       ...theme('colors'),
     }),
     ringOffsetColor: ({theme}) => theme('colors'),
@@ -857,8 +861,8 @@ export const defaultTailwindConfig = {
       none: 'none',
       all: 'all',
       DEFAULT:
-        'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
-      colors: 'background-color, border-color, color, fill, stroke',
+        'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
+      colors: 'color, background-color, border-color, text-decoration-color, fill, stroke',
       opacity: 'opacity',
       shadow: 'box-shadow',
       transform: 'transform',
