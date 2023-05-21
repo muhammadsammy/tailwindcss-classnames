@@ -155,6 +155,7 @@ export class FileContentGenerator {
       'export type TArg =\n' +
       '| null\n' +
       '| undefined\n' +
+      this.getDarkModeClassnameType() +
       '| TTailwindString\nIMPORTED_T_CUSTOM_CLASSES_ARG' +
       '\n' +
       'export type TTailwind = (...args: TArg[]) => TTailwindString\n' +
@@ -163,6 +164,21 @@ export class FileContentGenerator {
       '\n' +
       'export default classnames'
     );
+  };
+
+  /**
+   * Get the dark mode config custom classname type
+   * @returns the name of the classname for dark mode
+   */
+  private getDarkModeClassnameType = (): string => {
+    const darkModeConfig = this._configParser.getDarkMode();
+    if (_.isArray(darkModeConfig) && darkModeConfig[0] === 'class') {
+      return `| '${darkModeConfig[1]}'\n`;
+    } else if (_.isString(darkModeConfig) && darkModeConfig === 'class') {
+      return `| 'dark'\n`;
+    } else {
+      return '';
+    }
   };
 
   /**
