@@ -1,5 +1,5 @@
 const fs = require('fs').promises;
-const colors = require('colors');
+const colors = require('@colors/colors');
 
 // updates 'defaultTailwindConfig' in src/cli/lib/defaultTailwindConfig.ts
 // with the latest config from tailwindcss. used in npm scripts
