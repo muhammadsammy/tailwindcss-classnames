@@ -17,6 +17,8 @@ export const baseVariants = [
   'focus-visible',
   'active',
   'disabled',
+  'enabled',
+  'backdrop',
   // Exhaustive pseudo-classess
   'only',
   'first-of-type',
@@ -27,6 +29,7 @@ export const baseVariants = [
   'indeterminate',
   'placeholder-shown',
   'autofill',
+  'optional',
   'required',
   'valid',
   'invalid',
