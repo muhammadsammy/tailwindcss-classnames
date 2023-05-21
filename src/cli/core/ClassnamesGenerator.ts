@@ -160,7 +160,14 @@ export class ClassnamesGenerator {
   };
 
   private tables = (): Tables => {
-    return nonConfigurableClassNames.tables;
+    return {
+      ...nonConfigurableClassNames.tables,
+      borderSpacing: ['', '-x', '-y'].flatMap(side => {
+        return Object.keys(
+          _.isEmpty(this._theme.borderSpacing) ? this._theme.spacing : this._theme.borderSpacing,
+        ).map(value => `border-spacing${side}-${value}`);
+      }),
+    };
   };
 
   private effects = (): Effects => {
