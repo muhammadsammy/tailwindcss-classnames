@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.7...v3.1.0) (2023-05-21)
+
+
+### Features
+
+* add `backdrop`, `enabled` and `optional` variants ([a1c57e5](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/a1c57e511e0dcb38fd6ccccbe3f19473d35c53ce))
+* add `contrast-more` and `contrast-less` variants ([8720a8b](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/8720a8b62dab95de067a2c0618ed7c19256c4451))
+* add `grid-flow-dense` utility ([f70f2eb](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/f70f2eb4b9d46acc99f11ef6135fb2ad0f7dbf78))
+* add `mix-blend-plus-lighter` utility ([edcfdca](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/edcfdca123ca964e67b7611e27cbd30d137f9063))
+* add new `border-spacing` utilities ([4ab9a62](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/4ab9a62eea8db3b7b0f5e01e3e43fda27d486e39))
+* add`text-start` and `text-end` utilities ([f6955a0](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/f6955a0ee1c01f840bd3ed21867a8258b075b5f8))
+* support customizing class name when using darkMode: 'class' (fixes [#398](https://www.github.com/muhammadsammy/tailwindcss-classnames/issues/398)) ([853e7d3](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/853e7d327d3e47364ff2479341a23389f43bf778))
+
+
+### Bug Fixes
+
+* rename colors import in updateDefaultConfig script ([7de09c6](https://www.github.com/muhammadsammy/tailwindcss-classnames/commit/7de09c6efa8ca0fdbd8e67120f099d495f8c7120))
+
 ### [3.0.7](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.6...v3.0.7) (2022-11-02)
 
 
