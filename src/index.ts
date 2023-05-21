@@ -3715,7 +3715,114 @@ export type TBorderCollapse = 'border-collapse' | 'border-separate';
 
 export type TTableLayout = 'table-auto' | 'table-fixed';
 
-export type TTables = TBorderCollapse | TTableLayout;
+export type TBorderSpacing =
+  | 'border-spacing-0'
+  | 'border-spacing-1'
+  | 'border-spacing-2'
+  | 'border-spacing-3'
+  | 'border-spacing-4'
+  | 'border-spacing-5'
+  | 'border-spacing-6'
+  | 'border-spacing-7'
+  | 'border-spacing-8'
+  | 'border-spacing-9'
+  | 'border-spacing-10'
+  | 'border-spacing-11'
+  | 'border-spacing-12'
+  | 'border-spacing-14'
+  | 'border-spacing-16'
+  | 'border-spacing-20'
+  | 'border-spacing-24'
+  | 'border-spacing-28'
+  | 'border-spacing-32'
+  | 'border-spacing-36'
+  | 'border-spacing-40'
+  | 'border-spacing-44'
+  | 'border-spacing-48'
+  | 'border-spacing-52'
+  | 'border-spacing-56'
+  | 'border-spacing-60'
+  | 'border-spacing-64'
+  | 'border-spacing-72'
+  | 'border-spacing-80'
+  | 'border-spacing-96'
+  | 'border-spacing-px'
+  | 'border-spacing-0.5'
+  | 'border-spacing-1.5'
+  | 'border-spacing-2.5'
+  | 'border-spacing-3.5'
+  | 'border-spacing-x-0'
+  | 'border-spacing-x-1'
+  | 'border-spacing-x-2'
+  | 'border-spacing-x-3'
+  | 'border-spacing-x-4'
+  | 'border-spacing-x-5'
+  | 'border-spacing-x-6'
+  | 'border-spacing-x-7'
+  | 'border-spacing-x-8'
+  | 'border-spacing-x-9'
+  | 'border-spacing-x-10'
+  | 'border-spacing-x-11'
+  | 'border-spacing-x-12'
+  | 'border-spacing-x-14'
+  | 'border-spacing-x-16'
+  | 'border-spacing-x-20'
+  | 'border-spacing-x-24'
+  | 'border-spacing-x-28'
+  | 'border-spacing-x-32'
+  | 'border-spacing-x-36'
+  | 'border-spacing-x-40'
+  | 'border-spacing-x-44'
+  | 'border-spacing-x-48'
+  | 'border-spacing-x-52'
+  | 'border-spacing-x-56'
+  | 'border-spacing-x-60'
+  | 'border-spacing-x-64'
+  | 'border-spacing-x-72'
+  | 'border-spacing-x-80'
+  | 'border-spacing-x-96'
+  | 'border-spacing-x-px'
+  | 'border-spacing-x-0.5'
+  | 'border-spacing-x-1.5'
+  | 'border-spacing-x-2.5'
+  | 'border-spacing-x-3.5'
+  | 'border-spacing-y-0'
+  | 'border-spacing-y-1'
+  | 'border-spacing-y-2'
+  | 'border-spacing-y-3'
+  | 'border-spacing-y-4'
+  | 'border-spacing-y-5'
+  | 'border-spacing-y-6'
+  | 'border-spacing-y-7'
+  | 'border-spacing-y-8'
+  | 'border-spacing-y-9'
+  | 'border-spacing-y-10'
+  | 'border-spacing-y-11'
+  | 'border-spacing-y-12'
+  | 'border-spacing-y-14'
+  | 'border-spacing-y-16'
+  | 'border-spacing-y-20'
+  | 'border-spacing-y-24'
+  | 'border-spacing-y-28'
+  | 'border-spacing-y-32'
+  | 'border-spacing-y-36'
+  | 'border-spacing-y-40'
+  | 'border-spacing-y-44'
+  | 'border-spacing-y-48'
+  | 'border-spacing-y-52'
+  | 'border-spacing-y-56'
+  | 'border-spacing-y-60'
+  | 'border-spacing-y-64'
+  | 'border-spacing-y-72'
+  | 'border-spacing-y-80'
+  | 'border-spacing-y-96'
+  | 'border-spacing-y-px'
+  | 'border-spacing-y-0.5'
+  | 'border-spacing-y-1.5'
+  | 'border-spacing-y-2.5'
+  | 'border-spacing-y-3.5';
+
+export type TTables = TBorderCollapse | TTableLayout | TBorderSpacing;
 
 export type TMixBlendMode =
   | 'mix-blend-normal'
@@ -3733,7 +3840,8 @@ export type TMixBlendMode =
   | 'mix-blend-hue'
   | 'mix-blend-saturation'
   | 'mix-blend-color'
-  | 'mix-blend-luminosity';
+  | 'mix-blend-luminosity'
+  | 'mix-blend-plus-lighter';
 
 export type TBackgroundBlendMode =
   | 'bg-blend-normal'
@@ -4400,6 +4508,7 @@ export type TFlexBox =
 export type TGridAutoFlow =
   | 'grid-flow-row'
   | 'grid-flow-col'
+  | 'grid-flow-dense'
   | 'grid-flow-row-dense'
   | 'grid-flow-col-dense';
 
@@ -7171,7 +7280,13 @@ export type TFontVariantNumeric =
 
 export type TListStylePosition = 'list-inside' | 'list-outside';
 
-export type TTextAlign = 'text-left' | 'text-center' | 'text-right' | 'text-justify';
+export type TTextAlign =
+  | 'text-left'
+  | 'text-center'
+  | 'text-right'
+  | 'text-justify'
+  | 'text-start'
+  | 'text-end';
 
 export type TTextDecoration = 'underline' | 'line-through' | 'no-underline';
 
@@ -8077,6 +8192,10 @@ export type TPseudoClassVariants =
   | 'focus-visible:'
   | 'active:'
   | 'disabled:'
+  | 'enabled:'
+  | 'backdrop:'
+  | 'contrast-more:'
+  | 'contrast-less:'
   | 'only:'
   | 'first-of-type:'
   | 'last-of-type:'
@@ -8086,6 +8205,7 @@ export type TPseudoClassVariants =
   | 'indeterminate:'
   | 'placeholder-shown:'
   | 'autofill:'
+  | 'optional:'
   | 'required:'
   | 'valid:'
   | 'invalid:'
@@ -8178,6 +8298,7 @@ export const outlineColor: TUtilityFunction<TOutlineColor> = classnamesLib as an
 
 export const borderCollapse: TUtilityFunction<TBorderCollapse> = classnamesLib as any;
 export const tableLayout: TUtilityFunction<TTableLayout> = classnamesLib as any;
+export const borderSpacing: TUtilityFunction<TBorderSpacing> = classnamesLib as any;
 
 //////////// Effects Utility functions
 
@@ -8459,6 +8580,7 @@ export const TW = {
   outlineColor,
   borderCollapse,
   tableLayout,
+  borderSpacing,
   mixBlendMode,
   backgroundBlendMode,
   boxShadow,
