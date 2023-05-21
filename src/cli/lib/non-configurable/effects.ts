@@ -15,6 +15,7 @@ const mixBlendMode = [
   'mix-blend-saturation',
   'mix-blend-color',
   'mix-blend-luminosity',
+  'mix-blend-plus-lighter',
 ];
 
 const backgroundBlendMode = [
