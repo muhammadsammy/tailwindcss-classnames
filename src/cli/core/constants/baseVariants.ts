@@ -19,6 +19,8 @@ export const baseVariants = [
   'disabled',
   'enabled',
   'backdrop',
+  'contrast-more',
+  'contrast-less',
   // Exhaustive pseudo-classess
   'only',
   'first-of-type',
