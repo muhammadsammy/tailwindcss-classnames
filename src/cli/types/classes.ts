@@ -179,7 +179,7 @@ type TSpacingCategoryItem = 'padding' | 'margin' | 'space';
 
 type TSVGCategoryItem = 'fill' | 'stroke' | 'strokeWidth';
 
-type TTablesCategoryItem = 'borderCollapse' | 'tableLayout';
+type TTablesCategoryItem = 'borderCollapse' | 'tableLayout' | 'borderSpacing';
 
 type TTransformsCategoryItem = 'scale' | 'rotate' | 'translate' | 'skew' | 'transformOrigin';
 
