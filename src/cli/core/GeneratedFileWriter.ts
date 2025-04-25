@@ -42,7 +42,7 @@ export class GeneratedFileWriter {
 		// Check whether the CLI inputs are valid or not
 		try {
 			await this.validateCliOptions();
-		} catch (error) {
+		} catch (_error) {
 			return;
 		}
 
@@ -57,7 +57,7 @@ export class GeneratedFileWriter {
 					`Types has successfully been generated in ${this._outputFilename} file.`,
 				);
 			})
-			.catch(error => {
+			.catch((error: string) => {
 				this.printCliMessage("error", error);
 			});
 	};
@@ -68,7 +68,7 @@ export class GeneratedFileWriter {
 			this._configFileData = await fs.readFile(`./${this._configFilename}`, {
 				encoding: "utf-8",
 			});
-		} catch (err) {
+		} catch (_err) {
 			this.printCliMessage("error", `Error Reading: "./${this._configFilename}"`);
 		}
 

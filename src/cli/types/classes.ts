@@ -86,7 +86,6 @@ type TFiltersCategoryItem =
 	| "invert"
 	| "saturate"
 	| "sepia"
-	| "backdropFilter"
 	| "backdropBlur"
 	| "backdropBrightness"
 	| "backdropContrast"

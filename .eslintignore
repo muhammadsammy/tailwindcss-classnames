@@ -1,6 +1,0 @@
-jest.config.js
-.eslintrc.js
-rollup.config.js
-tailwind.config.js
-tailwindcss-classnames.ts
-*.js
