@@ -13,7 +13,8 @@
 		"inlineSources": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
-		"strict": true
+		"strict": true,
+		"skipLibCheck": true
 	},
 	"include": ["src"],
 	"exclude": ["node_modules", "dist", "es", "lib"]

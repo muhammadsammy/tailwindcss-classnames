@@ -402,7 +402,7 @@ export class ClassnamesGenerator {
 					let generatedClassGroup = _.get(
 						this._generatedRegularClassnames,
 						`${key}.${regularClassGroupKey}`,
-					) as string[];
+					) as unknown as string[];
 
 					// Duplicate classnames with an important (!) prefix
 					const generatedClassGroupWithImportantPrefix = generatedClassGroup.map(cls => "!" + cls);
