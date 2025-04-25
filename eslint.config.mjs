@@ -97,11 +97,11 @@ const rootConfig = {
 	},
 };
 
-const libNonConfigurableFolderConfig = {
+const nonConfigurableClassnamesFolderConfig = {
 	files: ["src/cli/lib/non-configurable/**/*.ts"],
 	rules: {
 		"import/no-default-export": "off",
 	},
 };
 
-export default defineConfig([rootConfig, libNonConfigurableFolderConfig]);
+export default defineConfig([rootConfig, nonConfigurableClassnamesFolderConfig]);
