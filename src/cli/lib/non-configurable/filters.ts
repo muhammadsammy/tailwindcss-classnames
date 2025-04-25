@@ -1,7 +1,7 @@
-const filter = ['filter', 'filter-none'];
-const backdropFilter = ['backdrop-filter', 'backdrop-filter-none'];
+const filter = ["filter", "filter-none"];
+const backdropFilter = ["backdrop-filter", "backdrop-filter-none"];
 
 export default {
-  filter,
-  backdropFilter,
+	filter,
+	backdropFilter,
 };

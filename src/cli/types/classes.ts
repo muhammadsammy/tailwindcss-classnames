@@ -1,4 +1,4 @@
-import {tailwindLabsPlugins} from '../lib/tailwindlabs-plugins';
+import { tailwindLabsPlugins } from "../lib/tailwindlabs-plugins";
 
 export type Accessibility = Record<TAccessibilityCategoryItem, string[]>;
 export type Backgrounds = Record<TBackgroundsCategoryItem, string[]>;
@@ -19,201 +19,196 @@ export type TransitionsAndAnimations = Record<TTransitionsAndAnimationsCategoryI
 export type Typography = Record<TTypographyCategoryItem, string[]>;
 
 export type TAllClassnames = {
-  Accessibility: Accessibility;
-  Backgrounds: Backgrounds;
-  Borders: Borders;
-  Effects: Effects;
-  Filters: Filters;
-  FlexBox: FlexBox;
-  Grid: Grid;
-  Grouping: Grouping;
-  Interactivity: Interactivity;
-  Layout: Layout;
-  Sizing: Sizing;
-  Spacing: Spacing;
-  SVG: SVG;
-  Tables: Tables;
-  Transforms: Transforms;
-  TransitionsAndAnimations: TransitionsAndAnimations;
-  Typography: Typography;
+	Accessibility: Accessibility;
+	Backgrounds: Backgrounds;
+	Borders: Borders;
+	Effects: Effects;
+	Filters: Filters;
+	FlexBox: FlexBox;
+	Grid: Grid;
+	Grouping: Grouping;
+	Interactivity: Interactivity;
+	Layout: Layout;
+	Sizing: Sizing;
+	Spacing: Spacing;
+	SVG: SVG;
+	Tables: Tables;
+	Transforms: Transforms;
+	TransitionsAndAnimations: TransitionsAndAnimations;
+	Typography: Typography;
 
-  TailwindLabsPlugins?: Partial<typeof tailwindLabsPlugins>;
+	TailwindLabsPlugins?: Partial<typeof tailwindLabsPlugins>;
 };
 
-type TAccessibilityCategoryItem = 'screenReaders';
+type TAccessibilityCategoryItem = "screenReaders";
 
 type TBackgroundsCategoryItem =
-  | 'backgroundAttachment'
-  | 'backgroundClip'
-  | 'backgroundColor'
-  | 'backgroundOpacity'
-  | 'backgroundPosition'
-  | 'backgroundRepeat'
-  | 'backgroundSize'
-  | 'backgroundImage'
-  | 'gradientColorStops';
+	| "backgroundAttachment"
+	| "backgroundClip"
+	| "backgroundColor"
+	| "backgroundOpacity"
+	| "backgroundPosition"
+	| "backgroundRepeat"
+	| "backgroundSize"
+	| "backgroundImage"
+	| "gradientColorStops";
 
 type TBordersCategoryItem =
-  | 'borderColor'
-  | 'borderOpacity'
-  | 'borderStyle'
-  | 'borderWidth'
-  | 'borderRadius'
-  | 'divideWidth'
-  | 'divideOpacity'
-  | 'divideColor'
-  | 'divideStyle'
-  | 'ringColor'
-  | 'ringOpacity'
-  | 'ringOffsetColor'
-  | 'ringOffsetWidth'
-  | 'ringWidth'
-  | 'outlineWidth'
-  | 'outlineOffset'
-  | 'outlineColor';
+	| "borderColor"
+	| "borderOpacity"
+	| "borderStyle"
+	| "borderWidth"
+	| "borderRadius"
+	| "divideWidth"
+	| "divideOpacity"
+	| "divideColor"
+	| "divideStyle"
+	| "ringColor"
+	| "ringOpacity"
+	| "ringOffsetColor"
+	| "ringOffsetWidth"
+	| "ringWidth"
+	| "outlineWidth"
+	| "outlineOffset"
+	| "outlineColor";
 
-type TEffectsCategoryItem =
-  | 'boxShadow'
-  | 'boxShadowColor'
-  | 'opacity'
-  | 'mixBlendMode'
-  | 'backgroundBlendMode';
+type TEffectsCategoryItem = "boxShadow" | "boxShadowColor" | "opacity" | "mixBlendMode" | "backgroundBlendMode";
 
 type TFiltersCategoryItem =
-  | 'filter'
-  | 'backdropFilter'
-  | 'blur'
-  | 'brightness'
-  | 'contrast'
-  | 'dropShadow'
-  | 'grayscale'
-  | 'hueRotate'
-  | 'invert'
-  | 'saturate'
-  | 'sepia'
-  | 'backdropFilter'
-  | 'backdropBlur'
-  | 'backdropBrightness'
-  | 'backdropContrast'
-  | 'backdropGrayscale'
-  | 'backdropHueRotate'
-  | 'backdropInvert'
-  | 'backdropOpacity'
-  | 'backdropSaturate'
-  | 'backdropSepia';
+	| "filter"
+	| "backdropFilter"
+	| "blur"
+	| "brightness"
+	| "contrast"
+	| "dropShadow"
+	| "grayscale"
+	| "hueRotate"
+	| "invert"
+	| "saturate"
+	| "sepia"
+	| "backdropFilter"
+	| "backdropBlur"
+	| "backdropBrightness"
+	| "backdropContrast"
+	| "backdropGrayscale"
+	| "backdropHueRotate"
+	| "backdropInvert"
+	| "backdropOpacity"
+	| "backdropSaturate"
+	| "backdropSepia";
 
 type TFlexBoxCategoryItem =
-  | 'flexBasis'
-  | 'flexDirection'
-  | 'flexWrap'
-  | 'alignItems'
-  | 'alignContent'
-  | 'alignSelf'
-  | 'placeContent'
-  | 'placeItems'
-  | 'placeSelf'
-  | 'justifyContent'
-  | 'justifyItems'
-  | 'justifySelf'
-  | 'flex'
-  | 'flexGrow'
-  | 'flexShrink'
-  | 'order';
+	| "flexBasis"
+	| "flexDirection"
+	| "flexWrap"
+	| "alignItems"
+	| "alignContent"
+	| "alignSelf"
+	| "placeContent"
+	| "placeItems"
+	| "placeSelf"
+	| "justifyContent"
+	| "justifyItems"
+	| "justifySelf"
+	| "flex"
+	| "flexGrow"
+	| "flexShrink"
+	| "order";
 
 type TGridCategoryItem =
-  | 'gridTemplateColumns'
-  | 'gridAutoColumns'
-  | 'gridColumn'
-  | 'gridColumnStart'
-  | 'gridColumnEnd'
-  | 'gridTemplateRows'
-  | 'gridAutoRows'
-  | 'gridRow'
-  | 'gridRowStart'
-  | 'gridRowEnd'
-  | 'gap'
-  | 'gridAutoFlow';
+	| "gridTemplateColumns"
+	| "gridAutoColumns"
+	| "gridColumn"
+	| "gridColumnStart"
+	| "gridColumnEnd"
+	| "gridTemplateRows"
+	| "gridAutoRows"
+	| "gridRow"
+	| "gridRowStart"
+	| "gridRowEnd"
+	| "gap"
+	| "gridAutoFlow";
 
-type TGroupingCategoryItem = 'group' | 'peer';
+type TGroupingCategoryItem = "group" | "peer";
 
 type TInteractivityCategoryItem =
-  | 'appearance'
-  | 'cursor'
-  | 'pointerEvents'
-  | 'resize'
-  | 'userSelect'
-  | 'caretColor'
-  | 'willChange'
-  | 'accentColor'
-  | 'scrollSnap'
-  | 'scrollMargin'
-  | 'scrollPadding'
-  | 'scrollBehavior'
-  | 'touchAction';
+	| "appearance"
+	| "cursor"
+	| "pointerEvents"
+	| "resize"
+	| "userSelect"
+	| "caretColor"
+	| "willChange"
+	| "accentColor"
+	| "scrollSnap"
+	| "scrollMargin"
+	| "scrollPadding"
+	| "scrollBehavior"
+	| "touchAction";
 
 type TLayoutCategoryItem =
-  | 'display'
-  | 'boxDecorationBreak'
-  | 'boxSizing'
-  | 'container'
-  | 'float'
-  | 'clear'
-  | 'isolation'
-  | 'objectFit'
-  | 'objectPosition'
-  | 'overflow'
-  | 'overscrollBehavior'
-  | 'position'
-  | 'inset'
-  | 'visibility'
-  | 'zIndex'
-  | 'aspectRatio'
-  | 'columns'
-  | 'breakBefore'
-  | 'breakInside'
-  | 'breakAfter';
+	| "display"
+	| "boxDecorationBreak"
+	| "boxSizing"
+	| "container"
+	| "float"
+	| "clear"
+	| "isolation"
+	| "objectFit"
+	| "objectPosition"
+	| "overflow"
+	| "overscrollBehavior"
+	| "position"
+	| "inset"
+	| "visibility"
+	| "zIndex"
+	| "aspectRatio"
+	| "columns"
+	| "breakBefore"
+	| "breakInside"
+	| "breakAfter";
 
-type TSizingCategoryItem = 'width' | 'minWidth' | 'maxWidth' | 'height' | 'minHeight' | 'maxHeight';
+type TSizingCategoryItem = "width" | "minWidth" | "maxWidth" | "height" | "minHeight" | "maxHeight";
 
-type TSpacingCategoryItem = 'padding' | 'margin' | 'space';
+type TSpacingCategoryItem = "padding" | "margin" | "space";
 
-type TSVGCategoryItem = 'fill' | 'stroke' | 'strokeWidth';
+type TSVGCategoryItem = "fill" | "stroke" | "strokeWidth";
 
-type TTablesCategoryItem = 'borderCollapse' | 'tableLayout' | 'borderSpacing';
+type TTablesCategoryItem = "borderCollapse" | "tableLayout" | "borderSpacing";
 
-type TTransformsCategoryItem = 'scale' | 'rotate' | 'translate' | 'skew' | 'transformOrigin';
+type TTransformsCategoryItem = "scale" | "rotate" | "translate" | "skew" | "transformOrigin";
 
 type TTransitionsAndAnimationsCategoryItem =
-  | 'transitionProperty'
-  | 'transitionDuration'
-  | 'transitionTimingFunction'
-  | 'transitionDelay'
-  | 'animation';
+	| "transitionProperty"
+	| "transitionDuration"
+	| "transitionTimingFunction"
+	| "transitionDelay"
+	| "animation";
 
 type TTypographyCategoryItem =
-  | 'fontFamily'
-  | 'fontSize'
-  | 'fontSmoothing'
-  | 'fontStyle'
-  | 'fontWeight'
-  | 'fontVariantNumeric'
-  | 'letterSpacing'
-  | 'lineHeight'
-  | 'listStyleType'
-  | 'listStylePosition'
-  | 'placeholderColor'
-  | 'placeholderOpacity'
-  | 'textAlign'
-  | 'textColor'
-  | 'textDecoration'
-  | 'textOpacity'
-  | 'textTransform'
-  | 'verticalAlign'
-  | 'whitespace'
-  | 'wordBreak'
-  | 'content'
-  | 'textIndent'
-  | 'textDecorationColor'
-  | 'textDecorationStyle'
-  | 'textDecorationThickness'
-  | 'textUnderlineOffset';
+	| "fontFamily"
+	| "fontSize"
+	| "fontSmoothing"
+	| "fontStyle"
+	| "fontWeight"
+	| "fontVariantNumeric"
+	| "letterSpacing"
+	| "lineHeight"
+	| "listStyleType"
+	| "listStylePosition"
+	| "placeholderColor"
+	| "placeholderOpacity"
+	| "textAlign"
+	| "textColor"
+	| "textDecoration"
+	| "textOpacity"
+	| "textTransform"
+	| "verticalAlign"
+	| "whitespace"
+	| "wordBreak"
+	| "content"
+	| "textIndent"
+	| "textDecorationColor"
+	| "textDecorationStyle"
+	| "textDecorationThickness"
+	| "textUnderlineOffset";
