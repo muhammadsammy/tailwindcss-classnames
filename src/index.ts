@@ -3441,7 +3441,17 @@ export type TRingOffsetWidth = "ring-offset-0" | "ring-offset-1" | "ring-offset-
 
 export type TOutlineOffset = "outline-0" | "outline-1" | "outline-2" | "outline-4" | "outline-8";
 
-export type TOutlineWidth = "outline-0" | "outline-1" | "outline-2" | "outline-4" | "outline-8";
+export type TOutlineWidth =
+	| "outline-0"
+	| "-outline-0"
+	| "outline-1"
+	| "-outline-1"
+	| "outline-2"
+	| "-outline-2"
+	| "outline-4"
+	| "-outline-4"
+	| "outline-8"
+	| "-outline-8";
 
 export type TOutlineColor =
 	| "outline-inherit"
@@ -4298,7 +4308,13 @@ export type TFlexWrap = "flex-nowrap" | "flex-wrap" | "flex-wrap-reverse";
 
 export type TAlignItems = "items-stretch" | "items-start" | "items-center" | "items-end" | "items-baseline";
 
-export type TAlignContent = "content-start" | "content-center" | "content-end" | "content-between" | "content-around";
+export type TAlignContent =
+	| "content-start"
+	| "content-center"
+	| "content-end"
+	| "content-between"
+	| "content-around"
+	| "content-baseline";
 
 export type TAlignSelf = "self-auto" | "self-start" | "self-center" | "self-end" | "self-stretch" | "self-baseline";
 
@@ -4309,14 +4325,16 @@ export type TPlaceContent =
 	| "place-content-between"
 	| "place-content-around"
 	| "place-content-evenly"
-	| "place-content-stretch";
+	| "place-content-stretch"
+	| "place-content-baseline";
 
 export type TPlaceItems =
 	| "place-items-auto"
 	| "place-items-start"
 	| "place-items-center"
 	| "place-items-end"
-	| "place-items-stretch";
+	| "place-items-stretch"
+	| "place-items-baseline";
 
 export type TPlaceSelf =
 	| "place-self-auto"
@@ -6370,7 +6388,7 @@ export type TOverscrollBehavior =
 
 export type TPosition = "static" | "fixed" | "absolute" | "relative" | "sticky";
 
-export type TVisibility = "visible" | "invisible";
+export type TVisibility = "visible" | "invisible" | "collapse";
 
 export type TBreakBefore =
 	| "break-before-auto"
@@ -6967,6 +6985,7 @@ export type TMaxHeight =
 export type TSizing = TWidth | TMinWidth | TMaxWidth | THeight | TMinHeight | TMaxHeight;
 
 export type TFill =
+	| "fill-none"
 	| "fill-inherit"
 	| "fill-current"
 	| "fill-transparent"
@@ -6996,6 +7015,7 @@ export type TFill =
 	| "fill-rose";
 
 export type TStroke =
+	| "stroke-none"
 	| "stroke-inherit"
 	| "stroke-current"
 	| "stroke-transparent"
@@ -7228,7 +7248,7 @@ export type TWhitespace =
 	| "whitespace-pre-line"
 	| "whitespace-pre-wrap";
 
-export type TWordBreak = "break-normal" | "break-words" | "break-all";
+export type TWordBreak = "break-normal" | "break-words" | "break-all" | "break-keep";
 
 export type TTextDecorationStyle =
 	| "decoration-solid"
@@ -8149,7 +8169,15 @@ export type TPseudoClassVariants =
 	| "lg:"
 	| "xl:"
 	| "2xl:"
-	| "dark:";
+	| "dark:"
+	| "aria-checked:"
+	| "aria-disabled:"
+	| "aria-expanded:"
+	| "aria-hidden:"
+	| "aria-pressed:"
+	| "aria-readonly:"
+	| "aria-required:"
+	| "aria-selected:";
 
 //////////// Utility Function generic type
 

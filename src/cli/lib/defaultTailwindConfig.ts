@@ -115,6 +115,16 @@ export const defaultTailwindConfig = {
 			pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
 			bounce: "bounce 1s infinite",
 		},
+		aria: {
+			checked: 'checked="true"',
+			disabled: 'disabled="true"',
+			expanded: 'expanded="true"',
+			hidden: 'hidden="true"',
+			pressed: 'pressed="true"',
+			readonly: 'readonly="true"',
+			required: 'required="true"',
+			selected: 'selected="true"',
+		},
 		aspectRatio: {
 			auto: "auto",
 			square: "1 / 1",
@@ -287,7 +297,10 @@ export const defaultTailwindConfig = {
 			"2xl": "0 25px 25px rgb(0 0 0 / 0.15)",
 			none: "0 0 #0000",
 		},
-		fill: ({ theme }) => theme("colors"),
+		fill: ({ theme }) => ({
+			none: "none",
+			...theme("colors"),
+		}),
 		grayscale: {
 			0: "0",
 			DEFAULT: "100%",
@@ -724,7 +737,7 @@ export const defaultTailwindConfig = {
 			8: "8px",
 		},
 		ringColor: ({ theme }) => ({
-			DEFAULT: theme(`colors.blue.500`, "#3b82f6"),
+			DEFAULT: theme("colors.blue.500", "#3b82f6"),
 			...theme("colors"),
 		}),
 		ringOffsetColor: ({ theme }) => theme("colors"),
@@ -796,7 +809,10 @@ export const defaultTailwindConfig = {
 		space: ({ theme }) => ({
 			...theme("spacing"),
 		}),
-		stroke: ({ theme }) => theme("colors"),
+		stroke: ({ theme }) => ({
+			none: "none",
+			...theme("colors"),
+		}),
 		strokeWidth: {
 			0: "0",
 			1: "1",

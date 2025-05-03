@@ -131,6 +131,14 @@ export class TailwindConfigParser {
 			}
 		});
 
+		// get aria variants
+		const [aria] = this.getThemeProperty("aria");
+		aria.map(a => {
+			if (!variants.includes("aria-" + a)) {
+				variants.push("aria-" + a);
+			}
+		});
+
 		return variants;
 	};
 

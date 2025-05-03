@@ -61,7 +61,7 @@ const overscrollBehavior = [
 
 const position = ["static", "fixed", "absolute", "relative", "sticky"];
 
-const visibility = ["visible", "invisible"];
+const visibility = ["visible", "invisible", "collapse"];
 
 const breakBefore = [
 	"break-before-auto",

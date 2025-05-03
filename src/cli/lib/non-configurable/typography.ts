@@ -43,7 +43,7 @@ const whitespace = [
 	"whitespace-pre-wrap",
 ];
 
-const wordBreak = ["break-normal", "break-words", "break-all"];
+const wordBreak = ["break-normal", "break-words", "break-all", "break-keep"];
 
 const textDecorationStyle = [
 	"decoration-solid",

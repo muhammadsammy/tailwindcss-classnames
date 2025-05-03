@@ -4,7 +4,14 @@ const flexWrap = ["flex-nowrap", "flex-wrap", "flex-wrap-reverse"];
 
 const alignItems = ["items-stretch", "items-start", "items-center", "items-end", "items-baseline"];
 
-const alignContent = ["content-start", "content-center", "content-end", "content-between", "content-around"];
+const alignContent = [
+	"content-start",
+	"content-center",
+	"content-end",
+	"content-between",
+	"content-around",
+	"content-baseline",
+];
 
 const alignSelf = ["self-auto", "self-start", "self-center", "self-end", "self-stretch", "self-baseline"];
 
@@ -16,6 +23,7 @@ const placeContent = [
 	"place-content-around",
 	"place-content-evenly",
 	"place-content-stretch",
+	"place-content-baseline",
 ];
 
 const placeItems = [
@@ -24,6 +32,7 @@ const placeItems = [
 	"place-items-center",
 	"place-items-end",
 	"place-items-stretch",
+	"place-items-baseline",
 ];
 
 const placeSelf = ["place-self-auto", "place-self-start", "place-self-center", "place-self-end", "place-self-stretch"];

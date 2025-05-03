@@ -146,7 +146,9 @@ export class ClassnamesGenerator {
 			ringOffsetColor: this.generateClassesWithColors("ringOffsetColor"),
 			ringOffsetWidth: Object.keys(this._theme.ringOffsetWidth).map(x => "ring-offset-" + x),
 			outlineOffset: Object.keys(this._theme.outlineOffset).map(x => "outline-" + x),
-			outlineWidth: Object.keys(this._theme.outlineWidth).map(x => "outline-" + x),
+			outlineWidth: Object.keys(this._theme.outlineWidth).flatMap(width =>
+				["", "-"].map(direction => direction + "outline-" + width),
+			),
 			outlineColor: this.generateClassesWithColors("outlineColor"),
 		};
 	};
