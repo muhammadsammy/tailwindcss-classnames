@@ -1,40 +1,37 @@
 on:
-  push:
-    branches:
-      - 'master'
-name: release-please
-jobs:
-  release-please:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Release to Github
-        uses: GoogleCloudPlatform/release-please-action@v2
-        id: release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
-          package-name: tailwindcss-classnames
+    push:
+        branches:
+            - master
 
-      - uses: actions/checkout@v2
-        if: ${{ steps.release.outputs.release_created }}
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-          registry-url: 'https://registry.npmjs.org'
-        if: ${{ steps.release.outputs.release_created }}
-      - run: yarn install --frozen-lockfile
-        if: ${{ steps.release.outputs.release_created }}
-#       - name: Generating Lib types
-#         run: yarn generate
-#         if: ${{ steps.release.outputs.release_created }}
-#       - name: Commit yarn generated files
-#         uses: stefanzweifel/git-auto-commit-action@v2.3.0
-#         with:
-#           commit_message: chore:generate library types
-#           commit_user_name: GitHub Actions
-#           commit_user_email: actions@github.com
-#         if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.release_created }}
+permissions:
+    contents: write
+    pull-requests: write
+
+name: release-please
+
+jobs:
+    release-please:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: googleapis/release-please-action@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  release-type: node
+                  package-name: tailwindcss-classnames
+
+            - uses: actions/checkout@v4
+              if: ${{ steps.release.outputs.release_created }}
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 14
+                  registry-url: "https://registry.npmjs.org"
+              if: ${{ steps.release.outputs.release_created }}
+
+            - run: npm ci
+              if: ${{ steps.release.outputs.release_created }}
+
+            - run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+              if: ${{ steps.release.outputs.release_created }}
