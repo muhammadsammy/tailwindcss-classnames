@@ -103,8 +103,8 @@ typings/
 
 # End of https://www.gitignore.io/api/node,visualstudiocode,macos
 
-# npm lock file
-package-lock.json
+# yarn lock file
+yarn.lock
 
 # project specific
 tailwind.config.js

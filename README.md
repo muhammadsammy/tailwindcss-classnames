@@ -8,10 +8,10 @@ Functional typed classnames for TailwindCSS
 
 TailwindCSS is based on strings and with some nice tooling on top like [TailwindCSS VSCode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) you get a pretty descent experience. That said, there are limitations to a purely declarative approach of strings. When using **tailwindcss-classnames** you will get additional power in the form of:
 
-- **Validation of classnames**: You can not write the wrong classname, cause the API only allows you to insert valid classnames
-- **Functional approach**: Since we are working in Typescript we get more freedom in using functional powers like composition and dynamic composition
-- **Defining by variables**: Even though it is nice to write TailwindCSS inline with your elements, it does not scale. You want to move definitions outside of the component for reusability and composition
-- **Support for all editors and IDEs**: Because it's just TypeScript types, you get these powers in all editors and IDEs that support TypeScript.
+-   **Validation of classnames**: You can not write the wrong classname, cause the API only allows you to insert valid classnames
+-   **Functional approach**: Since we are working in Typescript we get more freedom in using functional powers like composition and dynamic composition
+-   **Defining by variables**: Even though it is nice to write TailwindCSS inline with your elements, it does not scale. You want to move definitions outside of the component for reusability and composition
+-   **Support for all editors and IDEs**: Because it's just TypeScript types, you get these powers in all editors and IDEs that support TypeScript.
 
 You can not get this experience using pure TailwindCSS and the VSCode extension, but you do get it with **tailwindcss-classnames**.
 
@@ -31,50 +31,50 @@ The project is literally the [clsx](https://www.npmjs.com/package/clsx) project 
 
 ## **What's New in v3**
 
-- Way better performance overall (thanks to [@dylanvann](https://github.com/DylanVann)'s [idea and suggestions](https://github.com/muhammadsammy/tailwindcss-classnames/pull/281#discussion_r731682711)):
+-   Way better performance overall (thanks to [@dylanvann](https://github.com/DylanVann)'s [idea and suggestions](https://github.com/muhammadsammy/tailwindcss-classnames/pull/281#discussion_r731682711)):
 
-  - Generated file size is reduced to be **< 200 KB** (default config). Previous version was generating a file sized about [100 MB](https://github.com/muhammadsammy/tailwindcss-classnames/issues/282).
-  - Fast autocompletion: this is due to usage of more specific utility functions and using template string types
+    -   Generated file size is reduced to be **< 200 KB** (default config). Previous version was generating a file sized about [100 MB](https://github.com/muhammadsammy/tailwindcss-classnames/issues/282).
+    -   Fast autocompletion: this is due to usage of more specific utility functions and using template string types
 
-- **BREAKING**: Dropped support for JIT engine's Colors Opacity suffix feature (due to TypesScript _TS2590_ error)
+-   **BREAKING**: Dropped support for JIT engine's Colors Opacity suffix feature (due to TypesScript _TS2590_ error)
 
-- **BREAKING**: Create Utility functions that accepts classnames (and pseudoclassnames) of that category. The `classnames` function won't accept or show autocompletion of all classnames anymore, but it will accept a function of these category functions [(#293)](https://github.com/muhammadsammy/tailwindcss-classnames/issues/293)
+-   **BREAKING**: Create Utility functions that accepts classnames (and pseudoclassnames) of that category. The `classnames` function won't accept or show autocompletion of all classnames anymore, but it will accept a function of these category functions [(#293)](https://github.com/muhammadsammy/tailwindcss-classnames/issues/293)
 
-  ✅ Correct
+    ✅ Correct
 
-  ```ts
-  classnames(
-    display('flex', 'md:block'),
-    textColor('text-black', 'hover:text-red-600'),
-    flexDirection('flex-row-reverse'),
-  );
-  ```
+    ```ts
+    classnames(
+    	display("flex", "md:block"),
+    	textColor("text-black", "hover:text-red-600"),
+    	flexDirection("flex-row-reverse"),
+    );
+    ```
 
-  OR
+    OR
 
-  ```ts
-  classnames(
-    flexBox('flex', 'md:block', 'flex-row-reverse'),
-    typography('text-black', 'hover:text-red-600', 'text-3xl', 'text-center', 'italic'),
-  );
-  ```
+    ```ts
+    classnames(
+    	flexBox("flex", "md:block", "flex-row-reverse"),
+    	typography("text-black", "hover:text-red-600", "text-3xl", "text-center", "italic"),
+    );
+    ```
 
-  ❌ Incorrect
+    ❌ Incorrect
 
-  ```ts
-  classnames('flex', 'md:block', 'text-black', 'hover:text-red-600', 'flex-row-reverse');
-  ```
+    ```ts
+    classnames("flex", "md:block", "text-black", "hover:text-red-600", "flex-row-reverse");
+    ```
 
-  ## **twcn3**
+    ## **twcn3**
 
-  To make the migrtion easier, [Ryan Goree](https://github.com/ryangoree) created [twcn3](https://www.npmjs.com/package/twcn3) which is a CLI that converts old codebase using the single `classnames` function into multiple utility functions.
+    To make the migrtion easier, [Ryan Goree](https://github.com/ryangoree) created [twcn3](https://www.npmjs.com/package/twcn3) which is a CLI that converts old codebase using the single `classnames` function into multiple utility functions.
 
 ## Create classes
 
 ```js
-import {classnames} from 'tailwindcss-classnames';
+import { classnames } from "tailwindcss-classnames";
 
-classnames('border-none', 'rounded-sm');
+classnames("border-none", "rounded-sm");
 ```
 
 The arguments passed to **classnames** is typed, which means you get discoverability. You can even search for the supported classes:
@@ -86,10 +86,10 @@ The arguments passed to **classnames** is typed, which means you get discoverabi
 Since we are using **classnames** you can also add your classes dynamically:
 
 ```js
-import {classnames} from 'tailwindcss-classnames';
+import { classnames } from "tailwindcss-classnames";
 
-classnames('border-none', 'rounded-sm', {
-  ['bg-gray-200']: true,
+classnames("border-none", "rounded-sm", {
+	["bg-gray-200"]: true,
 });
 ```
 
@@ -98,11 +98,11 @@ classnames('border-none', 'rounded-sm', {
 Even though **classnames** just returns a string, it is a special typed string that you can compose into other definitions.
 
 ```js
-import {classnames} from 'tailwindcss-classnames';
+import { classnames } from "tailwindcss-classnames";
 
-export const button = classnames('border-none', 'rounded-sm');
+export const button = classnames("border-none", "rounded-sm");
 
-export const redButton = classnames(button, 'bg-red-100');
+export const redButton = classnames(button, "bg-red-100");
 ```
 
 ## Using with React
@@ -111,34 +111,34 @@ Since React has excellent typing support I want to give an example of how you co
 
 ```tsx
 // styles.ts
-import {classnames} from 'tailwindcss-classnames';
+import { classnames } from "tailwindcss-classnames";
 
-export const form = classnames('container', 'w-full');
+export const form = classnames("container", "w-full");
 
-export const button = classnames('border-none', 'rounded-sm');
+export const button = classnames("border-none", "rounded-sm");
 
-export const alertButton = classnames(button, 'bg-red-100');
+export const alertButton = classnames(button, "bg-red-100");
 
-export const disabled = classnames('opacity-25', 'bg-gray-100');
+export const disabled = classnames("opacity-25", "bg-gray-100");
 
 export const submitButton = (disabled: boolean) =>
-  classnames(styles.button, {
-    [styles.disabled]: disabled,
-  });
+	classnames(styles.button, {
+		[styles.disabled]: disabled,
+	});
 
 // App.tsx
-import * as React from 'react';
-import * as styles from './styles';
+import * as React from "react";
+import * as styles from "./styles";
 
-export const App: React.FC<{disabled}> = ({disabled}) => {
-  return (
-    <form className={styles.form}>
-      <button type="submit" className={styles.submitButton(disabled)}>
-        Submit
-      </button>
-      <button className={styles.alertButton}>Cancel</button>
-    </form>
-  );
+export const App: React.FC<{ disabled }> = ({ disabled }) => {
+	return (
+		<form className={styles.form}>
+			<button type="submit" className={styles.submitButton(disabled)}>
+				Submit
+			</button>
+			<button className={styles.alertButton}>Cancel</button>
+		</form>
+	);
 };
 ```
 
@@ -148,10 +148,10 @@ The types included in this package are the default tailwindcss classes, but if y
 
 ### CLI arguments
 
-- `-i`, `--input` Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
-- `-o`, `--output` Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
-- `-x`, `--extra` Name or relative path of the file with the custom extra types **(optional)**
-- `-h`, `--help` display help for command
+-   `-i`, `--input` Name or relative path of the TailwindCSS config file **(if not provided, tries to find 'tailwind.config.js')**
+-   `-o`, `--output` Name or relative path of the generated types file **(optional, default: "tailwindcss-classnames.ts")**
+-   `-x`, `--extra` Name or relative path of the file with the custom extra types **(optional)**
+-   `-h`, `--help` display help for command
 
 ### Example of CLI usage
 
@@ -180,7 +180,7 @@ type MyCustomType =
 import _the generated_ file (and **NOT** the actual library) into your code in order to get the customized classnames, like this:
 
 ```ts
-import {classnames} from 'path/to/generated/tailwindcss-classnames';
+import { classnames } from "path/to/generated/tailwindcss-classnames";
 ```
 
 #### Method 2
@@ -189,28 +189,28 @@ A more elegant approach is to add the generated file to your projects tsconfig.j
 
 ```json
 {
-  "compilerOptions": {
-    "paths": {
-      "tailwindcss-classnames": ["path/to/generated/tailwindcss-classnames"]
-    }
-  }
+	"compilerOptions": {
+		"paths": {
+			"tailwindcss-classnames": ["path/to/generated/tailwindcss-classnames"]
+		}
+	}
 }
 ```
 
 then:
 
 ```ts
-import {classnames} from 'tailwindcss-classnames';
+import { classnames } from "tailwindcss-classnames";
 ```
 
 [From original comment by @andykenward](https://github.com/muhammadsammy/tailwindcss-classnames/discussions/227#discussioncomment-3101220)
 
 ### Known limitiations
 
-- Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) .
-- `npx tailwindcss-classnames` won't work. Use as an npm script as mentioned above.
-- Only official TailwindLabs plugins are supported.
-- Some JIT features are not supported ([#204](https://github.com/muhammadsammy/tailwindcss-classnames/issues/204)).
+-   Relative imports inside the config does not work. use `__dirname` instead. See [#120](https://github.com/muhammadsammy/tailwindcss-classnames/issues/120) .
+-   `npx tailwindcss-classnames` won't work. Use as an npm script as mentioned above.
+-   Only official TailwindLabs plugins are supported.
+-   Some JIT features are not supported ([#204](https://github.com/muhammadsammy/tailwindcss-classnames/issues/204)).
 
 Any help with these issues is very much appreciated.
 

@@ -1,14 +1,14 @@
 ---
 name: Bug report
 about: Something is not working correctly.
-labels: 'bug'
+labels: "bug"
 ---
 
 ## Environment:
 
-- `TailwindCSS` version:
-- `tailwindcss-classnames` version:
-- `Node.js` version:
+-   `TailwindCSS` version:
+-   `tailwindcss-classnames` version:
+-   `Node.js` version:
 
 ## Current Behavior
 
@@ -22,5 +22,5 @@ labels: 'bug'
 
 ## Additional Questions
 
-- [ ] I've searched the issues list and this is not a duplicate
-- [ ] I'm willing to fix this error <!-- Not obligatory -->
+-   [ ] I've searched the issues list and this is not a duplicate
+-   [ ] I'm willing to fix this error <!-- Not obligatory -->

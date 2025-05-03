@@ -1,5 +1,5 @@
-const hardwareAcceleration = ['transform-gpu'];
+const hardwareAcceleration = ["transform-gpu"];
 
 export default {
-  hardwareAcceleration,
+	hardwareAcceleration,
 };

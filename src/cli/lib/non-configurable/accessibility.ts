@@ -1,5 +1,5 @@
-const screenReaders = ['sr-only', 'not-sr-only'];
+const screenReaders = ["sr-only", "not-sr-only"];
 
 export default {
-  screenReaders,
+	screenReaders,
 };
