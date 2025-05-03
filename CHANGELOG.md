@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/muhammadsammy/tailwindcss-classnames/compare/v3.1.0...v3.2.0) (2025-05-03)
+
+
+### Features
+
+* add aria, layout, flexblox & typography classnames ([f95730a](https://github.com/muhammadsammy/tailwindcss-classnames/commit/f95730aaa2a7fbea1fe4754dc34f7a0bb3993593))
+
+
+### Bug Fixes
+
+* linting errors ([cfbae92](https://github.com/muhammadsammy/tailwindcss-classnames/commit/cfbae922c359418c66d24f6b63e015ca1f466304))
+
 ## [3.1.0](https://www.github.com/muhammadsammy/tailwindcss-classnames/compare/v3.0.7...v3.1.0) (2023-05-21)
 
 ### Features
