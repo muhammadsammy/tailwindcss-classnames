@@ -14,6 +14,7 @@ jobs:
               with:
                   node-version: 22
                   registry-url: "https://registry.npmjs.org"
+            - run: npm i -g dts-bundle
             - run: npm install
             - run: npm publish
               env:
