@@ -86,7 +86,7 @@
 		"lint-staged": "^10.5.4",
 		"pascal-case": "^3.1.2",
 		"postcss": "^8.5.3",
-		"prettier": "^2.8.8",
+		"prettier": "^3.6.2",
 		"rimraf": "^3.0.2",
 		"rollup": "^2.79.2",
 		"rollup-plugin-commonjs": "^10.1.0",
